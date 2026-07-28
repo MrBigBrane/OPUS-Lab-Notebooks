@@ -1,3 +1,5 @@
+output_root: "/workspace/runs/sweep-smoke"
+
 # configs/smoke_sweep.yaml
 base_config: configs/smoke_8k.yaml
 
