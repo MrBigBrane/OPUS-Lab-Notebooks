@@ -1,0 +1,58 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "santapp-ruler"
+version = "0.1.0"
+description = "Clean RULER benchmark harness for SANTA++ sparse attention versus PyTorch SDPA"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = "Apache-2.0"
+authors = [{name = "Kyle Lee and contributors"}]
+dependencies = [
+  "transformers==5.12.1",
+  "datasets>=4.0,<5",
+  "numpy>=2.0,<2.5",
+  "PyYAML>=6.0,<7",
+  "tqdm>=4.66,<5",
+  "safetensors>=0.5,<1",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "Programming Language :: Python :: 3.11",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+dev = [
+  "build>=1.2,<2",
+  "pytest>=8,<10",
+  "ruff>=0.12,<1",
+]
+official-data = [
+  "nltk>=3.9,<4",
+  "wonderwords>=2.2,<3",
+  "scipy>=1.14,<2",
+  "tenacity>=8.5,<10",
+  "beautifulsoup4>=4.12,<5",
+  "html2text>=2024.2.26",
+]
+
+[project.scripts]
+santapp-ruler = "santapp_ruler.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+line-length = 96
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]

@@ -1,0 +1,7 @@
+# Optional sequential sweep. Not used by the normal `santapp-ruler run` command.
+base_config: configs/default_8k.yaml
+output_root: runs/sweeps/example
+name_template: "S{samples_per_head}-B{group_size}"
+grid:
+  santapp.samples_per_head: [64, 128, 256]
+  santapp.group_size: [8, 16]

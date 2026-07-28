@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+title: SANTA++ RULER Benchmark Harness
+message: Please cite both this harness and the RULER benchmark when using it.
+type: software
+authors:
+  - family-names: Lee
+    given-names: Kyle
+version: 0.1.0
+date-released: 2026-07-20
+license: Apache-2.0
+preferred-citation:
+  type: software
+  title: SANTA++ RULER Benchmark Harness
+  authors:
+    - family-names: Lee
+      given-names: Kyle
+  year: 2026
+references:
+  - type: article
+    title: RULER - What's the Real Context Size of Your Long-Context Language Models?
+    authors:
+      - family-names: Hsieh
+        given-names: Cheng-Ping
+      - family-names: Sun
+        given-names: Simeng
+      - family-names: Kriman
+        given-names: Samuel
+      - family-names: Acharya
+        given-names: Shantanu
+      - family-names: Rekesh
+        given-names: Dima
+      - family-names: Jia
+        given-names: Fei
+      - family-names: Ginsburg
+        given-names: Boris
+    year: 2024

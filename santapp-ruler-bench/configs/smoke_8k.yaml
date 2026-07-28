@@ -1,0 +1,16 @@
+# Pipeline smoke test only. The 8-token cap is intentionally not a full RULER run.
+benchmark:
+  context_length: 8192
+  tasks: [niah_single_1, qa_1]
+  prompts_per_task: 1
+  selection_seed: 42
+
+generation:
+  backends: [sdpa, santapp]
+  stop_on_eos: true
+  max_new_tokens_cap: 8
+
+output:
+  root: runs
+  run_name: smoke
+  resume: true

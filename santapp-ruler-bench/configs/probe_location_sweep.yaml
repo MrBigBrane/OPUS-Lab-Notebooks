@@ -1,0 +1,23 @@
+# configs/probe_location_sweep.yaml
+base_config: configs/default_8k.yaml
+
+# 130 Total Prompts (13 tasks x 10 prompts per task)
+prompts_per_task: 10
+tasks:
+  - niah_single_1
+  - niah_single_2
+  - niah_single_3
+  - niah_multikey_1
+  - niah_multikey_2
+  - niah_multikey_3
+  - niah_multiquery
+  - vt
+  - fwe
+  - cwe
+  - qa_1
+  - qa_2
+  - tracking
+
+matrix:
+  santapp.probe_queries: [64]
+  santapp.probe_location: ["start", "middle", "end", "random"]

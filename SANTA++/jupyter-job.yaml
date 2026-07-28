@@ -1,0 +1,67 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: santa-notebook-test
+spec:
+  backoffLimit: 0
+  template:
+    spec:
+      restartPolicy: Never
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: nvidia.com/gpu.product
+                operator: In
+                values:
+                - NVIDIA-GeForce-RTX-3090
+                - NVIDIA-GeForce-RTX-4090
+                - NVIDIA-RTX-A5000
+                - NVIDIA-RTX-A6000
+                - NVIDIA-A10
+                - NVIDIA-A40
+                - NVIDIA-L40
+                - NVIDIA-A100-SXM4-80GB
+                - NVIDIA-A100-80GB-PCIe
+      containers:
+      - name: runner
+        image: pytorch/pytorch:latest
+        command: ["/bin/bash", "-c"]
+        args:
+        - |
+          set -e
+          export DEBIAN_FRONTEND=noninteractive
+
+          # Work strictly inside /tmp
+          cd /tmp
+          
+          echo "1. Installing build tools and dependencies..."
+          apt-get update && apt-get install -y build-essential gcc g++
+          pip install --upgrade torch torchvision torchaudio
+          pip install jupyter nbconvert matplotlib scikit-learn transformers accelerate
+
+          echo "2. Waiting for local script to copy files..."
+          while [ ! -f /tmp/START_SIGNAL ]; do sleep 2; done
+
+          echo "3. Executing notebook..."
+          # Pass explicit full path for input and output
+          jupyter nbconvert --to notebook --execute /tmp/Transformer_Cluster_QWEN_Local_CUDA_MiniBatchKMeans.ipynb --output /tmp/executed_notebook.ipynb || true
+          
+          echo "4. Checking created files in /tmp..."
+          ls -lh /tmp/executed_notebook.ipynb || echo "Output file not found!"
+
+          echo "5. Signalling local script..."
+          touch /tmp/DONE_SIGNAL
+          
+          echo "6. Holding container open for file retrieval..."
+          sleep 60
+        resources:
+          limits:
+            cpu: "8"
+            memory: "24Gi"
+            nvidia.com/gpu: "1"
+          requests:
+            cpu: "8"
+            memory: "24Gi"
+            nvidia.com/gpu: "1"

@@ -1,0 +1,19 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.env
+.vscode/
+.idea/
+
+# Benchmark artifacts and downloaded data
+runs/
+data/
+third_party/
+.cache/
+*.log
+
+# Model / dataset caches if redirected into the repository
+hf_cache/

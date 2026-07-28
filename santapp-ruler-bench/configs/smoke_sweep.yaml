@@ -1,0 +1,12 @@
+# configs/smoke_sweep.yaml
+base_config: configs/smoke_8k.yaml
+
+# Restrict task scope for a fast dry-run
+prompts_per_task: 1
+tasks:
+  - niah_single_1
+  - qa_1
+
+matrix:
+  santapp.probe_queries: [64]
+  santapp.probe_strategy: ["start", "middle", "end", "random"]
