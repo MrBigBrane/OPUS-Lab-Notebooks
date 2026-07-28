@@ -1,0 +1,12 @@
+# configs/full_probe_sweep.yaml
+base_config: "configs/all_tasks_8k.yaml"
+output_root: "/workspace/runs/full-probe-sweep"
+name_template: "probe_{probe_strategy}"
+
+grid:
+  # NVIDIA RULER standard sample count per task
+  benchmark.prompts_per_task: [10]
+
+  # Dotted overrides for SANTA++ probe configuration
+  santapp.probe_queries: [64]
+  santapp.probe_strategy: ["start", "middle", "end", "random"]
