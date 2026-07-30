@@ -8,5 +8,5 @@ grid:
   benchmark.prompts_per_task: [10]
 
   # Dotted overrides for SANTA++ probe configuration
-  santapp.probe_queries: [64]
+  santapp.probe_queries: [16]
   santapp.probe_strategy: ["start", "middle", "end", "random"]
