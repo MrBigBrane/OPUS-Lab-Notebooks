@@ -1,0 +1,7 @@
+base_config: "configs/smoke_8k.yaml"
+output_root: "/workspace/runs/smoke-probe-count-sweep"
+name_template: "probe_{probe_queries}"
+
+grid:
+  santapp.probe_queries: [4, 8, 16, 32, 64, 128]
+  santapp.probe_strategy: ["end"]

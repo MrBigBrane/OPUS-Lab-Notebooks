@@ -28,7 +28,7 @@ def main() -> int:
     keys = list(grid)
     values = [grid[key] for key in keys]
 
-    for combination in itertools.product(*values):
+    for step_idx, combination in enumerate(itertools.product(*values)):
         mapping = dict(zip(keys, combination, strict=True))
         simple_names = {key.rsplit(".", 1)[-1]: value for key, value in mapping.items()}
         run_name = spec.get("name_template", "run").format(**simple_names)
@@ -43,8 +43,16 @@ def main() -> int:
             "--run-dir",
             str(run_dir),
         ]
+
+        # On the first step run both backends (sdpa + santapp); on step 2 onwards, run santapp only.
+        if step_idx == 0:
+            command.extend(["--set", 'generation.backends=["sdpa", "santapp"]'])
+        else:
+            command.extend(["--set", 'generation.backends=["santapp"]'])
+
         for key, value in mapping.items():
             command.extend(["--set", f"{key}={json.dumps(value)}"])
+
         print(" ".join(command))
         if not args.dry_run:
             subprocess.run(command, check=True)
