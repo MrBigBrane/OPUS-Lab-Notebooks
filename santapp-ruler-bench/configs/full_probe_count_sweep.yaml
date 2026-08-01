@@ -1,6 +1,6 @@
 # configs/full_probe_count_sweep.yaml
 base_config: "configs/all_tasks_8k.yaml"
-output_root: "/workspace/runs/full-probe-count-sweep"
+output_root: "/workspace/runs/full-probe-count-sweep-256-512"
 name_template: "probe_q_{probe_queries}"
 
 grid:
@@ -8,5 +8,5 @@ grid:
   benchmark.prompts_per_task: [10]
 
   # Dotted overrides for SANTA++ probe configuration
-  santapp.probe_queries: [4, 8, 16, 32, 64, 128]
+  santapp.probe_queries: [256, 512]
   santapp.probe_strategy: ["end"]
