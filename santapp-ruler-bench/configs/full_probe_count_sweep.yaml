@@ -10,4 +10,4 @@ grid:
   # Dotted overrides for SANTA++ probe configuration
   santapp.probe_queries: [16, 32, 64, 128, 256]
   santapp.probe_strategy: ["end"]
-  santaapp.samples_per_head: [2048]
+  santapp.samples_per_head: [2048]
