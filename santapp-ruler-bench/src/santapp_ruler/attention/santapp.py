@@ -27,6 +27,8 @@ import torch
 from ..config import SantaPlusConfig
 from .minibatch_kmeans import SklearnLikeTorchMiniBatchKMeans
 
+from sklearn.metrics import calinski_harabasz_score, davies_bouldin_score, silhouette_score
+
 try:
     from transformers.integrations.sdpa_attention import (
         sdpa_attention_forward as hf_sdpa_attention_forward,
@@ -543,7 +545,7 @@ class SantaPlusEngine:
         input_ids: torch.Tensor,
         *,
         probe_seed: int,
-    ) -> tuple[float, float, int, int]:
+    ) -> tuple[float, float, int, int, dict[str, float | None]]:
         prompt_tokens = int(input_ids.shape[1])
         sample_end = prompt_tokens - 1 - self.config.recent_window
         if sample_end < 2:
@@ -647,6 +649,9 @@ class SantaPlusEngine:
         )
         km_cfg = self.config.kmeans
 
+        # --- 1. Metric collections setup ---
+        inertias, ch_scores, db_scores, sil_scores, entropies = [], [], [], [], []
+
         for layer_id in range(self.num_layers):
             query_raw = raw_queries.pop(layer_id)
             query_rotated = query_raw.view(
@@ -684,7 +689,8 @@ class SantaPlusEngine:
                     + 1e-6
                 )
 
-                labels = SklearnLikeTorchMiniBatchKMeans(
+                # Instantiated estimator instance to retain model attributes like inertia_
+                km_model = SklearnLikeTorchMiniBatchKMeans(
                     n_clusters=n_clusters,
                     batch_size=km_cfg.batch_size,
                     n_init=km_cfg.n_init,
@@ -694,7 +700,32 @@ class SantaPlusEngine:
                     init_size=km_cfg.init_size,
                     reassignment_ratio=km_cfg.reassignment_ratio,
                     random_state=km_cfg.random_state,
-                ).fit_predict(fingerprints)
+                )
+                labels = km_model.fit_predict(fingerprints)
+
+                # --- 2. Per-head metric evaluation ---
+                fp_np = fingerprints.detach().cpu().numpy()
+                lbl_np = labels.detach().cpu().numpy()
+                n_unique = len(np.unique(lbl_np))
+
+                inertia_val = getattr(km_model, "inertia_", None)
+                if inertia_val is not None:
+                    inertias.append(float(inertia_val))
+
+                if n_unique > 1 and len(fp_np) > n_unique:
+                    ch_scores.append(float(calinski_harabasz_score(fp_np, lbl_np)))
+                    db_scores.append(float(davies_bouldin_score(fp_np, lbl_np)))
+
+                    if len(fp_np) > 2000:
+                        idx = np.random.choice(len(fp_np), 2000, replace=False)
+                        sil_scores.append(float(silhouette_score(fp_np[idx], lbl_np[idx])))
+                    else:
+                        sil_scores.append(float(silhouette_score(fp_np, lbl_np)))
+
+                counts = np.bincount(lbl_np)
+                probs = counts[counts > 0] / len(lbl_np)
+                entropies.append(float(-np.sum(probs * np.log2(probs))))
+
                 self.summaries[(layer_id, kv_head)] = self._build_summary(
                     key_prefix, labels, n_clusters
                 )
@@ -703,7 +734,17 @@ class SantaPlusEngine:
 
         _cuda_sync()
         clustering_seconds = time.perf_counter() - cluster_start
-        return prefill_seconds, clustering_seconds, sample_end, n_clusters
+
+        # --- 3. Metric Aggregation ---
+        metrics_summary = {
+            "mean_inertia": float(np.mean(inertias)) if inertias else None,
+            "mean_calinski_harabasz": float(np.mean(ch_scores)) if ch_scores else None,
+            "mean_davies_bouldin": float(np.mean(db_scores)) if db_scores else None,
+            "mean_silhouette": float(np.mean(sil_scores)) if sil_scores else None,
+            "mean_cluster_entropy": float(np.mean(entropies)) if entropies else None,
+        }
+
+        return prefill_seconds, clustering_seconds, sample_end, n_clusters, metrics_summary
 
     @torch.inference_mode()
     def generate_dense_reference(
@@ -774,11 +815,15 @@ class SantaPlusEngine:
         _cuda_sync()
         total_start = time.perf_counter()
         with self.patched():
-            prefill_seconds, clustering_seconds, sample_end, n_clusters = (
-                self._dense_prefill_and_cluster(
-                    input_ids,
-                    probe_seed=random_seed,
-                )
+            (
+                prefill_seconds,
+                clustering_seconds,
+                sample_end,
+                n_clusters,
+                clustering_metrics,
+            ) = self._dense_prefill_and_cluster(
+                input_ids,
+                probe_seed=random_seed,
             )
             # Match the notebook: discard the final prompt token from the cache,
             # then re-feed it as the first sparse decode query.
@@ -854,6 +899,7 @@ class SantaPlusEngine:
             "cluster_summary_gib": summary_bytes / (1024**3),
             "peak_allocated_gib": peak_allocated / (1024**3),
             "peak_reserved_gib": peak_reserved / (1024**3),
+            **clustering_metrics,
             **traffic,
         }
         # Keep the exact draw-count metric first-class; the metadata-inclusive

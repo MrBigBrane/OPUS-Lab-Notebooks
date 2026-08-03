@@ -1,0 +1,8 @@
+base_config: "configs/smoke_8k.yaml"
+output_root: "/workspace/runs/smoke-n-init-sweep"
+name_template: "n_init_{n_init}"
+
+grid:
+  santapp.kmeans.n_init: [1, 2, 4]
+  santapp.probe_queries: [64]
+  santapp.probe_strategy: ["end"]
