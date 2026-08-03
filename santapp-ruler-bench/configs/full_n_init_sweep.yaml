@@ -1,0 +1,16 @@
+# configs/full_n_init_sweep.yaml
+base_config: "configs/all_tasks_8k.yaml"
+output_root: "/workspace/runs/full-n-init-sweep"
+name_template: "n_init_{n_init}"
+
+grid:
+  # NVIDIA RULER standard sample count per task
+  benchmark.prompts_per_task: [10]
+  benchmark.tasks: ["cwe", "niah_multikey_1", "qa_1"]
+  benchmark.prompts_per_task: [30]
+
+  # Dotted overrides for SANTA++ probe configuration
+  santapp.probe_queries: [64]
+  santapp.probe_strategy: ["end"]
+  santapp.samples_per_head: [128]
+  santapp.kmeans.n_init: [1, 2, 4]
