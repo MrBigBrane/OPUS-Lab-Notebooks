@@ -1,7 +1,7 @@
 # configs/full_n_init_sweep.yaml
 base_config: "configs/all_tasks_8k.yaml"
 output_root: "/workspace/runs/full-n-init-sweep"
-name_template: "{task}_n_init_{n_init}"
+name_template: "n_init_{n_init}"
 
 grid:
   benchmark.prompts_per_task: [30]
