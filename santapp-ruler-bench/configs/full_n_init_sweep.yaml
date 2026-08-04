@@ -1,5 +1,4 @@
 # configs/full_n_init_sweep.yaml
-base_config: "configs/all_tasks_8k.yaml"
 output_root: "/workspace/runs/full-n-init-sweep"
 name_template: "n_init_{n_init}"
 
