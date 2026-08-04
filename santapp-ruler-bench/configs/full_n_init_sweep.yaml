@@ -4,7 +4,7 @@ name_template: "n_init_{n_init}"
 
 benchmark:
   prompts_per_task: 30
-  benchmark.tasks:
+  tasks:
     - cwe
     - niah_multikey_1
     - qa_1
