@@ -3,15 +3,14 @@ base_config: "configs/all_tasks_8k.yaml"
 output_root: "/workspace/runs/full-n-init-sweep"
 name_template: "n_init_{n_init}"
 
-grid:
-  benchmark.prompts_per_task: [30]
-  
-  # Each item is passed as a list of 1 task so the parser receives a list format
+benchmark:
+  prompts_per_task: 30
   benchmark.tasks:
-    - [cwe]
-    - [niah_multikey_1]
-    - [qa_1]
+    - cwe
+    - niah_multikey_1
+    - qa_1
 
+grid:
   santapp.probe_queries: [64]
   santapp.probe_strategy: [end]
   santapp.samples_per_head: [128]
