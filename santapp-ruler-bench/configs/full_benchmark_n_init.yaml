@@ -1,0 +1,22 @@
+benchmark:
+  context_length: 8192
+  tasks:
+    - cwe
+    - niah_multikey_1
+    - qa_1
+  prompts_per_task: 30
+  selection_seed: 42
+
+generation:
+  backends: [sdpa, santapp]
+  stop_on_eos: true
+
+santapp:
+  probe_queries: 64
+  probe_strategy: "end"
+  
+
+output:
+  root: runs
+  run_name: full_benchmark
+  resume: true
