@@ -1,22 +1,59 @@
+# The ordinary command runs exactly one configuration. No sweep is implicit.
+model:
+  name: Qwen/Qwen2.5-3B-Instruct
+  revision: aa8e72537993ba99e69dfaafa59ed015b17504d1
+  dtype: float16
+  device: cuda
+  attn_implementation: sdpa
+  trust_remote_code: false
+  disable_hf_xet: true
+
 benchmark:
-  context_length: 8192
+  # RULER's max sequence length includes the prompt and generation budget.
+  context_length: 100
+  # Representative subset spanning retrieval, tracking, aggregation, and QA.
   tasks:
     - cwe
     - niah_multikey_1
     - qa_1
-  prompts_per_task: 30
+  prompts_per_task: 1
   selection_seed: 42
+  data:
+    # Pinned 8k convenience mirror generated with the Qwen2.5-3B tokenizer.
+    # Set source: local to use JSONL generated directly by NVIDIA/RULER.
+    source: huggingface
+    repository: SaylorTwift/RULER-8192-Qwen2.5-3B-tokenizer
+    revision: 6ee2d0f4e9b8983361da35204ead8931c3f65ad4
+    local_root: null
+    subset: validation
 
 generation:
   backends: [sdpa, santapp]
   stop_on_eos: true
+  # Leave null for RULER's own per-task token budgets.
+  max_new_tokens_cap: null
 
 santapp:
+  # "guided" is the notebook's centroid-guided SANTA++ path.
+  mode: guided
+  group_size: 16
+  samples_per_head: 128
   probe_queries: 64
+  recent_window: 64
   probe_strategy: "end"
-  
+  sample_seed: 0
+  kmeans:
+    batch_size: 4096
+    n_init: 2
+    max_iter: 100
+    tol: 0.0
+    max_no_improvement: 10
+    init_size: null
+    reassignment_ratio: 0.01
+    random_state: 0
 
 output:
   root: runs
-  run_name: full_benchmark
+  run_name: null
   resume: true
+  save_full_prompts: true
