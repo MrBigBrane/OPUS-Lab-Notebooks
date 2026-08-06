@@ -10,7 +10,7 @@ model:
 
 benchmark:
   # RULER's max sequence length includes the prompt and generation budget.
-  context_length: 100
+  context_length: 256
   # Representative subset spanning retrieval, tracking, aggregation, and QA.
   tasks:
     - cwe
