@@ -1,0 +1,6 @@
+base_config: "configs/full_benchmark_n_init.yaml"
+output_root: "/workspace/runs/full-n-init-sweep"
+name_template: "n_init_{n_init}"
+
+grid:
+  santapp.kmeans.n_init: [4]

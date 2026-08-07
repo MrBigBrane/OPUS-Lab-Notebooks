@@ -79,6 +79,13 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         "cluster_entropy",
     ]
 
+    # Extract dimensionality and sequence length for inertia normalization
+    prompt_tokens_list = [m.get("prompt_tokens") for m in metrics if m.get("prompt_tokens") is not None]
+    head_dim_list = [m.get("head_dim") for m in metrics if m.get("head_dim") is not None]
+
+    mean_prompt_tokens = _safe_mean(prompt_tokens_list) if prompt_tokens_list else None
+    head_dim = head_dim_list[0] if head_dim_list else None
+
     # 1. Per-head averages across prompts
     for head_key in head_keys:
         per_head_aggregated[head_key] = {}
@@ -90,9 +97,18 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
             ]
             per_head_aggregated[head_key][sub_m] = _safe_mean(vals) if vals else None
 
+        # Calculate normalized inertia: Inertia / (N * d_k)
+        raw_inertia = per_head_aggregated[head_key].get("inertia")
+        if raw_inertia is not None and mean_prompt_tokens and head_dim:
+            per_head_aggregated[head_key]["normalized_inertia"] = raw_inertia / (mean_prompt_tokens * head_dim)
+        else:
+            per_head_aggregated[head_key]["normalized_inertia"] = None
+
+    all_sub_metrics = sub_metric_names + ["normalized_inertia"]
+
     # 2. Global mean across all heads and layers
     global_clustering_metrics: dict[str, float | None] = {}
-    for sub_m in sub_metric_names:
+    for sub_m in all_sub_metrics:
         all_head_vals = [
             head_metrics[sub_m]
             for head_metrics in per_head_aggregated.values()
@@ -106,7 +122,7 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
     for layer in sorted(layers, key=lambda x: int(x[1:])):
         per_layer_aggregated[layer] = {}
         layer_heads = [h for h in head_keys if h.startswith(f"{layer}_")]
-        for sub_m in sub_metric_names:
+        for sub_m in all_sub_metrics:
             layer_vals = [
                 per_head_aggregated[h][sub_m]
                 for h in layer_heads
@@ -114,12 +130,13 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
             ]
             per_layer_aggregated[layer][sub_m] = _safe_mean(layer_vals)
 
-    # Task-level scalar metric fallback means
+    # Task-level scalar fallback means
     mean_inertia = _safe_mean(m.get("mean_inertia") for m in metrics)
-    mean_ch = _safe_mean(m.get("mean_calinski_harabasz") for m in metrics)
-    mean_db = _safe_mean(m.get("mean_davies_bouldin") for m in metrics)
-    mean_sil = _safe_mean(m.get("mean_silhouette") for m in metrics)
-    mean_ent = _safe_mean(m.get("mean_cluster_entropy") for m in metrics)
+    mean_norm_inertia = (
+        mean_inertia / (mean_prompt_tokens * head_dim)
+        if mean_inertia is not None and mean_prompt_tokens and head_dim
+        else None
+    )
 
     result = {
         "num_examples": len(records),
@@ -164,10 +181,11 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         "decode_kv_vectors_read": kv_vectors,
         "decode_metadata_key_vectors_read": metadata_vectors,
         "mean_inertia": mean_inertia,
-        "mean_calinski_harabasz": mean_ch,
-        "mean_davies_bouldin": mean_db,
-        "mean_silhouette": mean_sil,
-        "mean_cluster_entropy": mean_ent,
+        "mean_normalized_inertia": mean_norm_inertia,
+        "mean_calinski_harabasz": _safe_mean(m.get("mean_calinski_harabasz") for m in metrics),
+        "mean_davies_bouldin": _safe_mean(m.get("mean_davies_bouldin") for m in metrics),
+        "mean_silhouette": _safe_mean(m.get("mean_silhouette") for m in metrics),
+        "mean_cluster_entropy": _safe_mean(m.get("mean_cluster_entropy") for m in metrics),
     }
 
     if per_head_aggregated:
@@ -176,7 +194,6 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         result["per_head_clustering_metrics"] = per_head_aggregated
 
     return result
-
 
 def _write_csv(path: Path, rows: list[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
