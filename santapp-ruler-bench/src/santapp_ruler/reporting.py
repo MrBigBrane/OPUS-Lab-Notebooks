@@ -63,7 +63,65 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         int(value.get("decode_metadata_key_vectors_read", 0)) for value in metrics
     )
     head_calls = sum(int(value.get("decode_attention_head_calls", 0)) for value in metrics)
-    return {
+
+    # --- Aggregation logic for clustering metrics ---
+    per_head_aggregated: dict[str, dict[str, float | None]] = {}
+    head_keys = set()
+    for m in metrics:
+        if "per_head_clustering_metrics" in m and isinstance(m["per_head_clustering_metrics"], dict):
+            head_keys.update(m["per_head_clustering_metrics"].keys())
+
+    sub_metric_names = [
+        "inertia",
+        "calinski_harabasz",
+        "davies_bouldin",
+        "silhouette",
+        "cluster_entropy",
+    ]
+
+    # 1. Per-head averages across prompts
+    for head_key in head_keys:
+        per_head_aggregated[head_key] = {}
+        for sub_m in sub_metric_names:
+            vals = [
+                m["per_head_clustering_metrics"][head_key][sub_m]
+                for m in metrics
+                if m.get("per_head_clustering_metrics", {}).get(head_key, {}).get(sub_m) is not None
+            ]
+            per_head_aggregated[head_key][sub_m] = _safe_mean(vals) if vals else None
+
+    # 2. Global mean across all heads and layers
+    global_clustering_metrics: dict[str, float | None] = {}
+    for sub_m in sub_metric_names:
+        all_head_vals = [
+            head_metrics[sub_m]
+            for head_metrics in per_head_aggregated.values()
+            if head_metrics.get(sub_m) is not None
+        ]
+        global_clustering_metrics[f"global_mean_{sub_m}"] = _safe_mean(all_head_vals)
+
+    # 3. Layer-wise averages across heads in each layer
+    per_layer_aggregated: dict[str, dict[str, float | None]] = {}
+    layers = set(h.split("_")[0] for h in head_keys)
+    for layer in sorted(layers, key=lambda x: int(x[1:])):
+        per_layer_aggregated[layer] = {}
+        layer_heads = [h for h in head_keys if h.startswith(f"{layer}_")]
+        for sub_m in sub_metric_names:
+            layer_vals = [
+                per_head_aggregated[h][sub_m]
+                for h in layer_heads
+                if per_head_aggregated[h].get(sub_m) is not None
+            ]
+            per_layer_aggregated[layer][sub_m] = _safe_mean(layer_vals)
+
+    # Task-level scalar metric fallback means
+    mean_inertia = _safe_mean(m.get("mean_inertia") for m in metrics)
+    mean_ch = _safe_mean(m.get("mean_calinski_harabasz") for m in metrics)
+    mean_db = _safe_mean(m.get("mean_davies_bouldin") for m in metrics)
+    mean_sil = _safe_mean(m.get("mean_silhouette") for m in metrics)
+    mean_ent = _safe_mean(m.get("mean_cluster_entropy") for m in metrics)
+
+    result = {
         "num_examples": len(records),
         "generated_tokens": generated,
         "mean_prompt_tokens": _safe_mean(
@@ -105,7 +163,19 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         "decode_dense_kv_vectors": dense_vectors,
         "decode_kv_vectors_read": kv_vectors,
         "decode_metadata_key_vectors_read": metadata_vectors,
+        "mean_inertia": mean_inertia,
+        "mean_calinski_harabasz": mean_ch,
+        "mean_davies_bouldin": mean_db,
+        "mean_silhouette": mean_sil,
+        "mean_cluster_entropy": mean_ent,
     }
+
+    if per_head_aggregated:
+        result["global_clustering_metrics"] = global_clustering_metrics
+        result["per_layer_clustering_metrics"] = per_layer_aggregated
+        result["per_head_clustering_metrics"] = per_head_aggregated
+
+    return result
 
 
 def _write_csv(path: Path, rows: list[Mapping[str, Any]]) -> None:
