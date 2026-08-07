@@ -14,8 +14,8 @@ benchmark:
   # Representative subset spanning retrieval, tracking, aggregation, and QA.
   tasks:
     - cwe
-    - niah_multikey_1
-    - qa_1
+    # - niah_multikey_1
+    # - qa_1
   prompts_per_task: 1
   selection_seed: 42
   data:
@@ -28,7 +28,8 @@ benchmark:
     subset: validation
 
 generation:
-  backends: [sdpa, santapp]
+  # backends: [sdpa, santapp]
+  backends: [santapp]
   stop_on_eos: true
   # Leave null for RULER's own per-task token budgets.
   max_new_tokens_cap: null

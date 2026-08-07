@@ -3,4 +3,4 @@ output_root: "/workspace/runs/full-n-init-sweep"
 name_template: "n_init_{n_init}"
 
 grid:
-  santapp.kmeans.n_init: [1, 2, 4]
+  santapp.kmeans.n_init: [1]
