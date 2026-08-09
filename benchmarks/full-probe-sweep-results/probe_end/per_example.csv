@@ -1,0 +1,1100 @@
+backend,task,index,uid,example_score,prediction,references,metric_backend,metric_prompt_tokens,metric_generated_tokens,metric_max_new_tokens,metric_prefill_seconds,metric_clustering_seconds,metric_decode_seconds,metric_total_seconds,metric_decode_attention_head_calls,metric_decode_dense_kv_vectors,metric_decode_kv_vectors_read,metric_decode_metadata_key_vectors_read,metric_decode_kv_access_pct,metric_decode_read_equivalent_pct,metric_decode_metadata_equivalent_pct,metric_mean_ess_over_samples,metric_peak_allocated_gib,metric_peak_reserved_gib,metric_example_ruler_score,metric_random_seed,metric_reported_dataset_length,metric_mode,metric_sampled_prefix_tokens,metric_recent_window,metric_samples_per_head,metric_group_size,metric_probe_queries,metric_probe_strategy,metric_nominal_clusters_per_kv_head,metric_custom_cache_gib,metric_cluster_summary_gib,metric_mean_sampled_token_draws_per_head_call,metric_mean_recent_tokens_per_head_call,metric_mean_total_tokens_per_head_call
+sdpa,niah_single_1,350,niah_single_1:350:350,100.0, 6422534.,"[""6422534""]",sdpa,7881,10,128,1.48172887112014,0.0,0.34243792900815606,1.8241820600815117,5760,90840960,90840960,0,100.0,100.0,0.0,,6.749344348907471,6.91015625,100.0,1597073734,8009,,,,,,,,,,,,,
+sdpa,niah_single_1,256,niah_single_1:256:256,100.0, 9333700.,"[""9333700""]",sdpa,7884,10,128,1.0048955380916595,0.0,0.307052327087149,1.3120173041243106,5760,90875520,90875520,0,100.0,100.0,0.0,,6.749394416809082,6.91015625,100.0,4079656735,8012,,,,,,,,,,,,,
+sdpa,niah_single_1,43,niah_single_1:43:43,100.0, 8835373.,"[""8835373""]",sdpa,7881,10,128,1.006721835816279,0.0,0.31794353295117617,1.324713557958603,5760,90840960,90840960,0,100.0,100.0,0.0,,6.749344348907471,6.91015625,100.0,1544033717,8009,,,,,,,,,,,,,
+sdpa,niah_single_1,452,niah_single_1:452:452,100.0, 2244282.,"[""2244282""]",sdpa,7878,10,128,1.0071911560371518,0.0,0.30467945779673755,1.3119404830504209,5760,90806400,90806400,0,100.0,100.0,0.0,,6.749294281005859,6.91015625,100.0,3229003082,8006,,,,,,,,,,,,,
+sdpa,niah_single_1,473,niah_single_1:473:473,100.0, 8542969.,"[""8542969""]",sdpa,7881,10,128,1.0109893400222063,0.0,0.37564083002507687,1.3866972990799695,5760,90840960,90840960,0,100.0,100.0,0.0,,6.749344348907471,6.91015625,100.0,2568463370,8009,,,,,,,,,,,,,
+sdpa,niah_single_1,497,niah_single_1:497:497,100.0, 6029651.,"[""6029651""]",sdpa,7881,10,128,1.0144399341661483,0.0,0.307221146998927,1.321728811133653,5760,90840960,90840960,0,100.0,100.0,0.0,,6.749344348907471,6.91015625,100.0,1831037239,8009,,,,,,,,,,,,,
+sdpa,niah_single_1,463,niah_single_1:463:463,100.0, 4536777.,"[""4536777""]",sdpa,7878,10,128,1.0120864629279822,0.0,0.30427769804373384,1.3164201499894261,5760,90806400,90806400,0,100.0,100.0,0.0,,6.749294281005859,6.91015625,100.0,3309423475,8006,,,,,,,,,,,,,
+sdpa,niah_single_1,67,niah_single_1:67:67,100.0, 8351517.,"[""8351517""]",sdpa,7881,10,128,1.01168719609268,0.0,0.31114027090370655,1.3228633559774607,5760,90840960,90840960,0,100.0,100.0,0.0,,6.749344348907471,6.91015625,100.0,80946514,8009,,,,,,,,,,,,,
+sdpa,niah_single_1,462,niah_single_1:462:462,100.0, 2362693.,"[""2362693""]",sdpa,7878,10,128,1.0161400351207703,0.0,0.3050854590255767,1.3212928131688386,5760,90806400,90806400,0,100.0,100.0,0.0,,6.749294281005859,6.91015625,100.0,231823309,8006,,,,,,,,,,,,,
+sdpa,niah_single_1,14,niah_single_1:14:14,100.0, 9548432.,"[""9548432""]",sdpa,7884,10,128,1.016078535001725,0.0,0.304626400815323,1.3207409759052098,5760,90875520,90875520,0,100.0,100.0,0.0,,6.749394416809082,6.91015625,100.0,117466514,8012,,,,,,,,,,,,,
+sdpa,niah_single_2,80,niah_single_2:80:80,100.0," 6171716. This can be seen in the last sentence of the text, which states: ""The special magic number for ambitious-pumpernickel is: 6171716.""","[""6171716""]",sdpa,7474,47,128,1.001675222069025,0.0,1.5481396990362555,2.5498413308523595,27072,405917568,405917568,0,100.0,100.0,0.0,,6.710476398468018,6.810546875,100.0,1750381757,7602,,,,,,,,,,,,,
+sdpa,niah_single_2,88,niah_single_2:88:88,100.0," 6120253. This number is explicitly stated in the text: ""The special magic numbers for jumpy-cycle is: 6120253.""","[""6120253""]",sdpa,7468,39,128,1.0015277450438589,0.0,1.2958335848525167,2.2974368499126285,22464,336375936,336375936,0,100.0,100.0,0.0,,6.709961414337158,6.810546875,100.0,2048496428,7596,,,,,,,,,,,,,
+sdpa,niah_single_2,82,niah_single_2:82:82,100.0," 7817881. 
+
+This number appears in the last paragraph of the text, which discusses the author's experience starting a startup and their choice of programming language, Lisp, for their software. The number 7817881 is presented as a ""special magic number"" for knotty-convertible, likely as a reference to the author's personal experience or a unique identifier for that product or concept. 
+
+However, it's important to note that this number is not directly related to the main content of the text, which primarily discusses the author's experiences with Viaweb and the choice of Lisp","[""7817881""]",sdpa,7474,128,128,1.0106742398347706,0.0,4.2755675869993865,5.286301996791735,73728,1111449600,1111449600,0,100.0,100.0,0.0,,6.710476398468018,6.810546875,100.0,1993378166,7602,,,,,,,,,,,,,
+sdpa,niah_single_2,400,niah_single_2:400:400,100.0," 1801102. The text states, ""Maybe the alarm bells it sets off will counteract the forces that push you to overhire. Instead you'll be compelled to seek growth in other ways. For example, by doing things that don't scale, or by redesigning the product in the way only founders can. And for many if not most startups, these paths to growth will be the ones that actually work. One of the special magic numbers for craven-pace is: 1801102."" 
+
+The number 1801102 is likely a code or identifier","[""1801102""]",sdpa,7471,128,128,1.008674964075908,0.0,4.233345298096538,5.2420606119558215,73728,1111007232,1111007232,0,100.0,100.0,0.0,,6.710218906402588,6.810546875,100.0,2198762481,7599,,,,,,,,,,,,,
+sdpa,niah_single_2,405,niah_single_2:405:405,100.0," 2436363. 
+
+This number appears at the end of the passage, which discusses various topics related to software development and startups. The exact context or relevance of this number within the text is not clear, but it is presented as a ""special magic number"" for elderly-meat. 
+
+It's worth noting that the phrase ""special magic number"" is somewhat unusual and could be a playful or metaphorical reference rather than a literal mathematical constant. The number itself does not seem to have any specific significance or connection to the other content in the text. 
+
+If you have any additional context or details about where this number","[""2436363""]",sdpa,7468,128,128,1.0125412489287555,0.0,4.31469963490963,5.3273050440475345,73728,1110564864,1110564864,0,100.0,100.0,0.0,,6.709961414337158,6.810546875,100.0,1951251944,7596,,,,,,,,,,,,,
+sdpa,niah_single_2,148,niah_single_2:148:148,100.0," 4327421. You had to memorize it. You can use it as a reference in the quiz. 
+
+To summarize the key points from the text:
+1. The magic number is 4327421.
+2. It's associated with maniacal-eyelashes.
+3. It's a special number for a specific style or look.
+4. The text suggests that this number is related to a particular fashion or aesthetic. 
+
+You can use this information to answer questions about the special magic number in your quiz. 
+
+For example, a possible quiz question could be:
+""What is","[""4327421""]",sdpa,7480,128,128,1.042495414847508,0.0,4.3131035070400685,5.355664981994778,73728,1112334336,1112334336,0,100.0,100.0,0.0,,6.7146992683410645,6.810546875,100.0,795234407,7608,,,,,,,,,,,,,
+sdpa,niah_single_2,269,niah_single_2:269:269,100.0," 5398338. 
+
+This number appears in the context of the author discussing the survival rate of startups, stating that the survival rate is ""way less than fifty percent."" The exact number 5398338 is then provided as an example of a special magic number related to unequaled-reasoning. 
+
+The author uses this number to emphasize the importance of doing something unusual or different in a startup to stand out and potentially succeed. 
+
+Here's the relevant excerpt from the text:
+""So if you're running a startup, you had better be doing something odd. If not, you're in","[""5398338""]",sdpa,7477,128,128,1.013270237017423,0.0,4.237019592896104,5.250334640033543,73728,1111891968,1111891968,0,100.0,100.0,0.0,,6.710733890533447,6.810546875,100.0,67789841,7605,,,,,,,,,,,,,
+sdpa,niah_single_2,294,niah_single_2:294:294,100.0," 2829622. This number appears in the last paragraph of the text, where it is stated: ""The special magic number for ragged-hypothesis is: 2829622. In fact I don't intend to make any more iPhone applications unless absolutely necessary."" 
+
+It's worth noting that the text does not provide any additional context or explanation for this number, so its significance or relevance to the overall content of the document is not clear from the given information. The number seems to be a specific identifier or code used within the context of the ragged-hypothesis framework or project.","[""2829622""]",sdpa,7474,128,128,1.015044969972223,0.0,4.248108275001869,5.2632180149666965,73728,1111449600,1111449600,0,100.0,100.0,0.0,,6.710476398468018,6.810546875,100.0,2714281951,7602,,,,,,,,,,,,,
+sdpa,niah_single_2,491,niah_single_2:491:491,100.0," 1652868. This number is referenced in a note at the end of the document, where it is stated: ""One of the special magic numbers for animated-abuse is: 1652868."" However, it is important to note that the context and relevance of this number are not provided in the given text. The number itself does not appear to be a significant part of the main argument or discussion about the topic of animated-abuse. The text focuses on the acceleration of technological progress and its effects on addictive behaviors, rather than providing detailed information about the ""animated-abuse"" concept or","[""1652868""]",sdpa,7468,128,128,1.0143270660191774,0.0,4.268757069017738,5.283143063774332,73728,1110564864,1110564864,0,100.0,100.0,0.0,,6.709961414337158,6.810546875,100.0,3031773272,7596,,,,,,,,,,,,,
+sdpa,niah_single_2,303,niah_single_2:303:303,100.0," 8575834. 
+
+This can be seen in the last sentence of the passage: ""At this early stage, the product needs to evolve more than to be 'built out,' and that's usually easier with fewer people. [4] As the product evolves, it will become more complex, and the magic number will likely increase."" However, the specific number 8575834 is not explicitly stated as the magic number for new-passbook. It seems to be a placeholder or placeholder number used in the context of the passage to illustrate a point about the product evolving and needing fewer people to manage","[""8575834""]",sdpa,7468,128,128,1.0175785231404006,0.0,4.2879164142068475,5.305562665918842,73728,1110564864,1110564864,0,100.0,100.0,0.0,,6.709961414337158,6.810546875,100.0,3364068809,7596,,,,,,,,,,,,,
+sdpa,niah_single_3,362,niah_single_3:362:362,100.0,": 98f6fd7f-7eb1-42f1-8806-f8040cf0374c. 
+
+This uuid is referenced in the context of a discussion about the importance of choosing the right technology for a startup, particularly in relation to the choice of programming language. The uuid is presented as a placeholder or placeholder uuid for the apathetic-charlatan persona, which is used to illustrate the point about the importance of making strategic technology choices in a startup environment. 
+
+The uuid itself is not derived from the text but is provided as an example or placeholder for discussion","[""98f6fd7f-7eb1-42f1-8806-f8040cf0374c""]",sdpa,7503,128,128,1.0234945761039853,0.0,4.215682516107336,5.239245370961726,73728,1115725824,1115725824,0,100.0,100.0,0.0,,6.714788436889648,6.810546875,100.0,4266557352,7631,,,,,,,,,,,,,
+sdpa,niah_single_3,156,niah_single_3:156:156,100.0,": 5c9d927d-84b8-41bb-b005-68d20de051a6. 
+
+This uuid is referenced in the last paragraph of the text, which discusses the author's startup experience and the choice of programming language (Lisp) for their software. The uuid is not directly related to the content of the text but is provided as an additional piece of information. 
+
+It's worth noting that the uuid itself is not particularly meaningful or significant in the context of the text, as it appears to be a placeholder or filler information unrelated to the main","[""5c9d927d-84b8-41bb-b005-68d20de051a6""]",sdpa,7498,128,128,1.0230577611364424,0.0,4.288899684790522,5.3120132950134575,73728,1114988544,1114988544,0,100.0,100.0,0.0,,6.71476936340332,6.810546875,100.0,328726210,7626,,,,,,,,,,,,,
+sdpa,niah_single_3,432,niah_single_3:432:432,100.0,": `cf39f648-083f-44c3-9ce3-62f8c3f725fe`. 
+
+This uuid is referenced in the context of a dystopian scenario where the government enforces strict control over information and thought, aligning with the concept of ""wrathful-democracy"" as described in the text. The uuid serves as a placeholder or identifier for this specific scenario within the document. 
+
+To summarize:
+- The uuid is `cf39f648-083f-44c3-9ce3-6","[""cf39f648-083f-44c3-9ce3-62f8c3f725fe""]",sdpa,7497,128,128,1.0275592191610485,0.0,4.252643698826432,5.280261018080637,73728,1114841088,1114841088,0,100.0,100.0,0.0,,6.714765548706055,6.810546875,100.0,1239617088,7625,,,,,,,,,,,,,
+sdpa,niah_single_3,68,niah_single_3:68:68,100.0," `ba81edd9-587e-4344-af3f-920c98b8e4cc`. This uuid is referenced in the context of a discussion about a startup's decision to use Lisp as their primary programming language, which is described as a ""clumsy-acceptance"" strategy. The uuid is provided as a code snippet at the end of the text. To ensure you have memorized it, you can repeat it here:
+
+`ba81edd9-587e-4344-af3f-920c98","[""ba81edd9-587e-4344-af3f-920c98b8e4cc""]",sdpa,7495,128,128,1.0273824641481042,0.0,4.225534888915718,5.252982953097671,73728,1114546176,1114546176,0,100.0,100.0,0.0,,6.714757919311523,6.810546875,100.0,3232807794,7623,,,,,,,,,,,,,
+sdpa,niah_single_3,329,niah_single_3:329:329,100.0,": 7fc15858-2fa0-4842-bc55-300b06a241af. 
+
+This uuid is referenced in the last sentence of the text, which states: ""So you could say that using Lisp was an experiment. Our hypothesis was that if we wrote our software in Lisp, we'd be able to get features done faster than our competitors, and also to do things in our software that we couldn't do in C++ or Perl."" 
+
+The uuid is not directly related to the content of the text but is mentioned as part of the overall","[""7fc15858-2fa0-4842-bc55-300b06a241af""]",sdpa,7494,128,128,1.0148386829532683,0.0,4.245259593008086,5.260173405986279,73728,1114398720,1114398720,0,100.0,100.0,0.0,,6.714754104614258,6.810546875,100.0,2368480810,7622,,,,,,,,,,,,,
+sdpa,niah_single_3,177,niah_single_3:177:177,100.0," `c2a79689-1933-418c-ba74-57616f18c108`. This uuid is referenced at the end of the document, where the author mentions it as a special magic uuid for cagey-ray. 
+
+Here is the relevant excerpt from the text:
+""Special magic uuid is hidden within the following text. Make sure to memorize it. I will quiz you about the uuid afterwards.""
+""The special magic uuid for cagey-ray is: c2a79689-1933-418c","[""c2a79689-1933-418c-ba74-57616f18c108""]",sdpa,7496,128,128,1.0514251969289035,0.0,4.307786177843809,5.359279984142631,73728,1114693632,1114693632,0,100.0,100.0,0.0,,6.714761734008789,6.810546875,100.0,3087042516,7624,,,,,,,,,,,,,
+sdpa,niah_single_3,167,niah_single_3:167:167,100.0,": 585a0afa-7bfd-4c12-89e0-6ab37250ee18. This uuid is referenced in the context of the text discussing issues with Apple's App Store approval process and the negative impact it has on developers. The uuid serves as a unique identifier for a concept related to defective presentation, which is described as developers feeling that the versions of their apps available in the App Store are old and buggy. The uuid is provided as an example of a special magic uuid hidden within the text. To ensure you have memorized it correctly, you can repeat it","[""585a0afa-7bfd-4c12-89e0-6ab37250ee18""]",sdpa,7492,128,128,1.0157462628558278,0.0,4.29628616804257,5.312098420923576,73728,1114103808,1114103808,0,100.0,100.0,0.0,,6.714746475219727,6.810546875,100.0,3244835008,7620,,,,,,,,,,,,,
+sdpa,niah_single_3,110,niah_single_3:110:110,100.0,": af2b99b4-d9ac-4158-8d34-85c5c5c14eb4. 
+
+This uuid is referenced in the last sentence of the text, where the author discusses their hypothesis about using Lisp to write software, suggesting it would allow them to get features done faster and do things in their software more efficiently. The uuid itself is not used in the context of the text's main argument but is provided as an identifier for the waggish-staircase concept. 
+
+The uuid is not directly related to the content of the text, which discusses the development","[""af2b99b4-d9ac-4158-8d34-85c5c5c14eb4""]",sdpa,7502,128,128,1.0199068828951567,0.0,4.296877301065251,5.316809873795137,73728,1115578368,1115578368,0,100.0,100.0,0.0,,6.714784622192383,6.810546875,100.0,2970706486,7630,,,,,,,,,,,,,
+sdpa,niah_single_3,290,niah_single_3:290:290,100.0," `8df661da-5f07-41a5-9fc6-20ce7b07fd31`. This uuid is referenced at the end of the document, after the notes section. 
+
+Here is the relevant excerpt from the text:
+""What is the special magic uuid for tested-nursery mentioned in the provided text?""
+> The special magic uuid for tested-nursery is: 8df661da-5f07-41a5-9fc6-20ce7b07fd31. 
+
+This uuid is provided as a","[""8df661da-5f07-41a5-9fc6-20ce7b07fd31""]",sdpa,7496,128,128,1.049112421926111,0.0,4.237788626924157,5.286968898959458,73728,1114693632,1114693632,0,100.0,100.0,0.0,,6.714761734008789,6.810546875,100.0,2072853507,7624,,,,,,,,,,,,,
+sdpa,niah_single_3,130,niah_single_3:130:130,100.0,": f1afdb65-b289-4224-8ac9-778d8da8eee4. This uuid is referenced at the end of the document, where the author mentions it as a secret identifier for a special topic or discussion. The uuid is not used or referenced within the main text of the document. 
+
+To summarize the key points:
+1. The uuid is f1afdb65-b289-4224-8ac9-778d8da8eee4.
+2. It is mentioned at the end of the document.
+3","[""f1afdb65-b289-4224-8ac9-778d8da8eee4""]",sdpa,7490,128,128,1.0203044039662927,0.0,4.370858428068459,5.391227422049269,73728,1113808896,1113808896,0,100.0,100.0,0.0,,6.714738845825195,6.810546875,100.0,97516559,7618,,,,,,,,,,,,,
+sdpa,niah_multikey_1,68,niah_multikey_1:68:68,100.0,": 4020853. 
+
+This number appears in the following context:
+
+""One of the special magic numbers for modern-forte is: 4020853.""
+
+The text discusses the concept of modern-forte and provides this specific number as an example of a special magic number related to it. 
+
+The other special magic numbers mentioned in the text are:
+- 9911492 for fresh-suicide
+- 3442255 for nice-gravity
+
+So, the special magic number for modern-forte is 4020853. 
+
+Additional","[""4020853""]",sdpa,7531,128,128,1.0236332740169019,0.0,4.28615803597495,5.3098571298178285,73728,1119854592,1119854592,0,100.0,100.0,0.0,,6.715370178222656,6.818359375,100.0,2385655710,7659,,,,,,,,,,,,,
+sdpa,niah_multikey_1,165,niah_multikey_1:165:165,100.0," 9610869. 
+
+This number appears in the following context:
+
+""One of the special magic numbers for cynical-breakthrough is: 9610869."" 
+
+The text then goes on to discuss the reasons why programmers are fussy about their employers' morals and how Apple's treatment of developers might alienate them, leading to a cycle of continued mistreatment and a loss of talented programmers. The number 9610869 is presented as a ""special magic number"" in this context. 
+
+However, it's important to note that the text does not provide any additional context or explanation","[""9610869""]",sdpa,7534,128,128,1.025861671892926,0.0,4.253994661848992,5.279915533028543,73728,1120296960,1120296960,0,100.0,100.0,0.0,,6.715627670288086,6.818359375,100.0,1630617860,7662,,,,,,,,,,,,,
+sdpa,niah_multikey_1,72,niah_multikey_1:72:72,100.0," 9333700. 
+
+This number appears in the following context:
+""One of the special magic numbers for stingy-osprey is: 9333700."" 
+
+The text then goes on to provide additional context about the magic number, but the specific number itself is 9333700. 
+
+It's worth noting that the text mentions several other special magic numbers for different entities, such as stormy-hometown (6910964), handsomely-secretary (4860745), fast-realm (418988","[""9333700""]",sdpa,7540,128,128,0.9801087570376694,0.0,4.290247179102153,5.27042374596931,73728,1121181696,1121181696,0,100.0,100.0,0.0,,6.716142654418945,6.818359375,100.0,2839552887,7668,,,,,,,,,,,,,
+sdpa,niah_multikey_1,491,niah_multikey_1:491:491,100.0," 5332524. 
+
+This can be seen in the following excerpt from the text:
+""One of the special magic numbers for axiomatic-deathwatch is: 5332524.""","[""5332524""]",sdpa,7539,46,128,0.9798233089968562,0.0,1.6393219800665975,2.6192234880290926,26496,400699008,400699008,0,100.0,100.0,0.0,,6.716056823730469,6.818359375,100.0,1638390137,7667,,,,,,,,,,,,,
+sdpa,niah_multikey_1,6,niah_multikey_1:6:6,100.0," 2642635. 
+
+This can be found in the following excerpt from the text:
+
+""One of the special magic numbers for scattered-eaglet is: 2642635.""","[""2642635""]",sdpa,7538,45,128,0.9893126678653061,0.0,1.5008828360587358,2.490259493002668,25920,391910400,391910400,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,100.0,1355093881,7666,,,,,,,,,,,,,
+sdpa,niah_multikey_1,353,niah_multikey_1:353:353,100.0," 2615622. 
+
+This number appears in the last paragraph of the article, where it is stated: ""One way to appeal to programmers is with software. If you could think of an application programmers had to have, but that would be impossible in the circumscribed world of the iPhone, you could presumably get them to switch. That would definitely happen if programmers started to use handhelds as development machines—if handhelds displaced laptops the way laptops displaced desktops. You need more control of a development machine than Apple will let you have over an iPhone. Could anyone make a device that you'd carry around in your","[""2615622""]",sdpa,7531,128,128,1.0331494321580976,0.0,4.310184661997482,5.343395523028448,73728,1119854592,1119854592,0,100.0,100.0,0.0,,6.715370178222656,6.818359375,100.0,3299976250,7659,,,,,,,,,,,,,
+sdpa,niah_multikey_1,109,niah_multikey_1:109:109,100.0," 6733317. 
+
+This number appears as a special magic number in the context of a discussion about the fallacy of using Latin as a tool for improving writing skills, which is compared to using Lisp as a tool for improving programming skills. The number 6733317 is presented as a ""handy"" coincidence in the context of the discussion about Lisp and its potential benefits for programmers. 
+
+The text suggests that if Lisp really makes programmers better, it should be used in all their work, just as a better brush would be used by a painter. The coincidence of the number 67","[""6733317""]",sdpa,7534,128,128,1.0283885600510985,0.0,4.336655555991456,5.36510633607395,73728,1120296960,1120296960,0,100.0,100.0,0.0,,6.715627670288086,6.818359375,100.0,1347469591,7662,,,,,,,,,,,,,
+sdpa,niah_multikey_1,462,niah_multikey_1:462:462,100.0," 8479891. 
+
+This can be found in the following excerpt from the text:
+
+""Partly because successful startups have lots of employees, so it seems like that's what one does in order to be successful. In fact the large staffs of successful startups are probably more the effect of growth than the cause. And partly because when founders have slow growth they don't want to face what is usually the real reason: the product is not appealing enough. Plus founders who've just raised money are often encouraged to overhire by the VCs who funded them. Kill-or-cure strategies are optimal for VCs because","[""8479891""]",sdpa,7535,128,128,1.0279159229248762,0.0,4.353142187930644,5.381124211009592,73728,1120444416,1120444416,0,100.0,100.0,0.0,,6.7157135009765625,6.818359375,100.0,1042210282,7663,,,,,,,,,,,,,
+sdpa,niah_multikey_1,268,niah_multikey_1:268:268,100.0," 4472094. 
+
+This can be seen in the following excerpt from the text:
+""One of the special magic numbers for adamant-sled is: 4472094."" 
+
+The text then goes on to discuss the challenges of creating a device that could be both a handheld phone and a development machine, and how this number represents the gap between the size of a phone and a development machine. Despite the difficulty, the author notes that this gap is within a factor of 4 or so, suggesting that it is bridgeable. 
+
+However, the specific magic number 447209","[""4472094""]",sdpa,7536,128,128,1.0597224549856037,0.0,4.363687878008932,5.423489652806893,73728,1120591872,1120591872,0,100.0,100.0,0.0,,6.715799331665039,6.818359375,100.0,485054180,7664,,,,,,,,,,,,,
+sdpa,niah_multikey_1,363,niah_multikey_1:363:363,100.0," 5014060. 
+
+This can be found in the following sentence: ""One of the special magic numbers for lamentable-programming is: 5014060."" 
+
+The text then goes on to provide an example of how this number relates to the author's experience with the Internet: ""Thanks to Sam Altman, Patrick Collison, Jessica Livingston, and Robert Morris for reading drafts of this. October 2015 When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know is almost always the same.","[""5014060""]",sdpa,7538,128,128,0.9842249450739473,0.0,4.268730840878561,5.253017734969035,73728,1120886784,1120886784,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,100.0,2767260606,7666,,,,,,,,,,,,,
+sdpa,niah_multikey_2,357,niah_multikey_2:357:357,100.0, 4816759.,"[""4816759""]",sdpa,7690,10,128,1.011295494157821,0.0,0.3191728051751852,1.3305322490632534,5760,88640640,88640640,0,100.0,100.0,0.0,,6.730919361114502,6.89453125,100.0,4126365083,7818,,,,,,,,,,,,,
+sdpa,niah_multikey_2,270,niah_multikey_2:270:270,100.0, 7323460.,"[""7323460""]",sdpa,7700,10,128,1.0086332520004362,0.0,0.3396021381486207,1.3483019699342549,5760,88755840,88755840,0,100.0,100.0,0.0,,6.731234073638916,6.89453125,100.0,684514763,7828,,,,,,,,,,,,,
+sdpa,niah_multikey_2,72,niah_multikey_2:72:72,100.0, 5957455.,"[""5957455""]",sdpa,7704,10,128,1.0529689930845052,0.0,0.3074513201136142,1.3604871528223157,5760,88801920,88801920,0,100.0,100.0,0.0,,6.731359958648682,6.89453125,100.0,2530155485,7832,,,,,,,,,,,,,
+sdpa,niah_multikey_2,241,niah_multikey_2:241:241,100.0, 2984734.,"[""2984734""]",sdpa,7705,10,128,1.0126479039900005,0.0,0.31366382795386016,1.3263786809984595,5760,88813440,88813440,0,100.0,100.0,0.0,,6.731391429901123,6.89453125,100.0,1317215431,7833,,,,,,,,,,,,,
+sdpa,niah_multikey_2,277,niah_multikey_2:277:277,100.0, 2120251.,"[""2120251""]",sdpa,7739,10,128,1.0118537847884,0.0,0.3070893718395382,1.3190168768633157,5760,89205120,89205120,0,100.0,100.0,0.0,,6.733677387237549,6.90234375,100.0,3901761474,7867,,,,,,,,,,,,,
+sdpa,niah_multikey_2,139,niah_multikey_2:139:139,100.0, 1508681.,"[""1508681""]",sdpa,7701,10,128,1.010402502026409,0.0,0.3070480020251125,1.3175163329578936,5760,88767360,88767360,0,100.0,100.0,0.0,,6.731265544891357,6.89453125,100.0,561201284,7829,,,,,,,,,,,,,
+sdpa,niah_multikey_2,318,niah_multikey_2:318:318,100.0, 4630508.,"[""4630508""]",sdpa,7701,10,128,1.009670936036855,0.0,0.3089474600274116,1.3186829348560423,5760,88767360,88767360,0,100.0,100.0,0.0,,6.731265544891357,6.89453125,100.0,3202422732,7829,,,,,,,,,,,,,
+sdpa,niah_multikey_2,238,niah_multikey_2:238:238,100.0, 9608959.,"[""9608959""]",sdpa,7738,10,128,1.0131436039227992,0.0,0.34614135092124343,1.3593540550209582,5760,89193600,89193600,0,100.0,100.0,0.0,,6.733583927154541,6.90234375,100.0,1478162717,7866,,,,,,,,,,,,,
+sdpa,niah_multikey_2,82,niah_multikey_2:82:82,100.0, 5781484.,"[""5781484""]",sdpa,7703,10,128,1.0118001911323518,0.0,0.32785855303518474,1.3397238641045988,5760,88790400,88790400,0,100.0,100.0,0.0,,6.73132848739624,6.89453125,100.0,366522644,7831,,,,,,,,,,,,,
+sdpa,niah_multikey_2,459,niah_multikey_2:459:459,100.0, 4033408.,"[""4033408""]",sdpa,7708,10,128,1.009186337934807,0.0,0.309830519836396,1.3190873879939318,5760,88848000,88848000,0,100.0,100.0,0.0,,6.731485843658447,6.89453125,100.0,2127622728,7836,,,,,,,,,,,,,
+sdpa,niah_multikey_3,334,niah_multikey_3:334:334,100.0,: 28eca271-ee99-481d-be91-e7337e6bde95.,"[""28eca271-ee99-481d-be91-e7337e6bde95""]",sdpa,7783,33,128,1.0206460780464113,0.0,1.0903333411552012,2.1110401081386954,19008,296486784,296486784,0,100.0,100.0,0.0,,6.739511966705322,6.90234375,100.0,2457034645,7911,,,,,,,,,,,,,
+sdpa,niah_multikey_3,352,niah_multikey_3:352:352,100.0,: d4d74cb6-8533-4fef-8010-136311fc9377.,"[""d4d74cb6-8533-4fef-8010-136311fc9377""]",sdpa,7797,35,128,1.017688687890768,0.0,1.1601304931100458,2.1778798499144614,20160,315060480,315060480,0,100.0,100.0,0.0,,6.739959239959717,6.90234375,100.0,502103457,7925,,,,,,,,,,,,,
+sdpa,niah_multikey_3,332,niah_multikey_3:332:332,100.0,: ee7d3181-4052-4416-a298-c3ead18e9efb.,"[""ee7d3181-4052-4416-a298-c3ead18e9efb""]",sdpa,7765,33,128,1.0169661799445748,0.0,1.1203992068767548,2.137435245793313,19008,295802496,295802496,0,100.0,100.0,0.0,,6.738936901092529,6.90234375,100.0,480299998,7893,,,,,,,,,,,,,
+sdpa,niah_multikey_3,374,niah_multikey_3:374:374,100.0,: 4e12efb4-39e5-4e71-8173-fb994b33bce0.,"[""4e12efb4-39e5-4e71-8173-fb994b33bce0""]",sdpa,7790,37,128,1.0167878330685198,0.0,1.2118039049673826,2.2286580668296665,21312,332808192,332808192,0,100.0,100.0,0.0,,6.7397356033325195,6.90234375,100.0,469466975,7918,,,,,,,,,,,,,
+sdpa,niah_multikey_3,414,niah_multikey_3:414:414,100.0, b771bfc6-f86b-4670-be22-50e12a5b261f.,"[""b771bfc6-f86b-4670-be22-50e12a5b261f""]",sdpa,7781,34,128,1.019699677824974,0.0,1.1185048869810998,2.138264035107568,19584,305412480,305412480,0,100.0,100.0,0.0,,6.739448070526123,6.90234375,100.0,2740220886,7909,,,,,,,,,,,,,
+sdpa,niah_multikey_3,439,niah_multikey_3:439:439,100.0,: 97282989-fcec-4292-80dd-50e5b1ec5c96.,"[""97282989-fcec-4292-80dd-50e5b1ec5c96""]",sdpa,7786,35,128,1.0198799490462989,0.0,1.1568459460977465,2.176790084922686,20160,314616960,314616960,0,100.0,100.0,0.0,,6.739607810974121,6.90234375,100.0,2437259107,7914,,,,,,,,,,,,,
+sdpa,niah_multikey_3,245,niah_multikey_3:245:245,100.0,: b74e085a-d319-433e-958f-4a1d812dac69.,"[""b74e085a-d319-433e-958f-4a1d812dac69""]",sdpa,7788,36,128,1.0244442601688206,0.0,1.2376037249341607,2.262114955112338,20736,323709696,323709696,0,100.0,100.0,0.0,,6.73967170715332,6.90234375,100.0,122856656,7916,,,,,,,,,,,,,
+sdpa,niah_multikey_3,120,niah_multikey_3:120:120,100.0, d96d0974-6472-4097-8c81-ea26ea2e0f43.,"[""d96d0974-6472-4097-8c81-ea26ea2e0f43""]",sdpa,7758,36,128,1.0156974359415472,0.0,1.2109367109369487,2.2266991168726236,20736,322465536,322465536,0,100.0,100.0,0.0,,6.735454559326172,6.90234375,100.0,2700738761,7886,,,,,,,,,,,,,
+sdpa,niah_multikey_3,241,niah_multikey_3:241:241,100.0,: 1974d52d-e9c4-4f8c-82df-c3a21c544f16.,"[""1974d52d-e9c4-4f8c-82df-c3a21c544f16""]",sdpa,7768,37,128,1.0607016598805785,0.0,1.2748521061148494,2.3357221151236445,21312,331870464,331870464,0,100.0,100.0,0.0,,6.739032745361328,6.90234375,100.0,2952425061,7896,,,,,,,,,,,,,
+sdpa,niah_multikey_3,397,niah_multikey_3:397:397,100.0,: e809953b-d0c4-4f4e-877a-60f9269dbdbd.,"[""e809953b-d0c4-4f4e-877a-60f9269dbdbd""]",sdpa,7831,36,128,1.029519208939746,0.0,1.1954157890286297,2.2250102579127997,20736,325492992,325492992,0,100.0,100.0,0.0,,6.743880748748779,6.91015625,100.0,3846720829,7959,,,,,,,,,,,,,
+sdpa,niah_multivalue,393,niah_multivalue:393:393,100.0,":
+
+1. 9102253
+2. 8261353
+3. 9528410
+4. 1814896
+
+These numbers appear to be placeholders or placeholders for specific information that are meant to be filled in by the reader or the author. They are not derived from the content of the text itself. The numbers are scattered throughout the text and are not explained or used within the context of the article.","[""1814896"", ""8261353"", ""9102253"", ""9528410""]",sdpa,7526,103,128,1.026878043077886,0.0,3.4623299781233072,4.489260050933808,59328,899056512,899056512,0,100.0,100.0,0.0,,6.714941024780273,6.818359375,100.0,4215641851,7654,,,,,,,,,,,,,
+sdpa,niah_multivalue,257,niah_multivalue:257:257,100.0,":
+
+1. 4889890
+2. 8751982
+3. 7795568
+4. 8153291
+
+These numbers appear in the following context:
+
+- In the first text, the first special magic number is mentioned: ""One of the special magic numbers for incompetent-chives is: 4889890.""
+- In the second text, the second special magic number is mentioned: ""One of the special magic numbers for incompetent-chives is: 8751982.""
+- In the","[""8153291"", ""8751982"", ""4889890"", ""7795568""]",sdpa,7532,128,128,1.0293767668772489,0.0,4.313338824082166,5.3427792098373175,73728,1120002048,1120002048,0,100.0,100.0,0.0,,6.715456008911133,6.818359375,100.0,170113180,7660,,,,,,,,,,,,,
+sdpa,niah_multivalue,323,niah_multivalue:323:323,100.0,":
+
+1. 3922635
+2. 6323132
+3. 6986539
+4. 9173859
+
+These numbers appear to be placeholders or placeholders for special numbers that might be used in a specific context, such as a startup's survival rate or a critical threshold for success. The text does not provide the actual meanings or significance of these numbers.","[""9173859"", ""6323132"", ""3922635"", ""6986539""]",sdpa,7538,94,128,0.994767724070698,0.0,3.1912333420477808,4.186064315028489,54144,821310336,821310336,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,100.0,522307097,7666,,,,,,,,,,,,,
+sdpa,niah_multivalue,226,niah_multivalue:226:226,100.0,":
+
+1. 1985360
+2. 4087809
+3. 9790328
+4. 9192588
+
+These numbers are scattered throughout the text, often appearing at the beginning of paragraphs or sentences. They are not used in any specific mathematical or logical context but seem to be placeholders or placeholders for some information that is not provided in the given text. The numbers themselves do not hold any particular significance within the content of the passage.","[""9192588"", ""4087809"", ""1985360"", ""9790328""]",sdpa,7532,110,128,1.0285953169222921,0.0,3.850770243210718,4.879431379958987,63360,961361280,961361280,0,100.0,100.0,0.0,,6.715456008911133,6.818359375,100.0,3669051265,7660,,,,,,,,,,,,,
+sdpa,niah_multivalue,399,niah_multivalue:399:399,75.0,":
+
+1. 4422567
+2. 1542011
+3. 2040738
+
+These numbers appear to be placeholders or placeholders for specific values that are meant to be filled in later, as they are not given any context or explanation within the text. The numbers 4422567, 1542011, and 2040738 are repeated in different sections of the text, suggesting they might be recurring themes or key values for the author. However, without additional context, it's not possible","[""2040738"", ""5951637"", ""4422567"", ""1542011""]",sdpa,7532,128,128,1.0256137021351606,0.0,4.517650339985266,5.5433406110387295,73728,1120002048,1120002048,0,100.0,100.0,0.0,,6.715456008911133,6.818359375,75.0,1990778653,7660,,,,,,,,,,,,,
+sdpa,niah_multivalue,338,niah_multivalue:338:338,100.0,":
+
+1. 7623718
+2. 9423864
+3. 1582647
+4. 2324645
+
+These numbers appear to be placeholders or placeholders for special codes or identifiers, as they are not used in a mathematical context within the text. The numbers are scattered throughout the document and do not seem to have any particular significance or meaning within the content itself. They appear to be placeholders for some kind of identifier or code, possibly related to the author's work or a specific project. The exact purpose or context of these numbers","[""2324645"", ""7623718"", ""1582647"", ""9423864""]",sdpa,7544,128,128,1.0221578560303897,0.0,4.530771947931498,5.553020923864096,73728,1121771520,1121771520,0,100.0,100.0,0.0,,6.716485977172852,6.818359375,100.0,4241984764,7672,,,,,,,,,,,,,
+sdpa,niah_multivalue,91,niah_multivalue:91:91,75.0,":
+
+1. 1661401
+2. 2630140
+3. 3294774
+
+These numbers appear to be placeholders or placeholders for unique identifiers or codes related to the concept of ""upbeat-soulmate"" in the context of the text. The exact meaning or significance of these numbers is not provided in the given text.","[""3294774"", ""2630140"", ""1661401"", ""6183033""]",sdpa,7538,83,128,0.9879418471828103,0.0,2.8654366550035775,3.853442400926724,47808,724673664,724673664,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,75.0,2457934317,7666,,,,,,,,,,,,,
+sdpa,niah_multivalue,495,niah_multivalue:495:495,75.0,":
+
+1. 4237420
+2. 8360481
+3. 1358241
+
+These numbers appear in the last paragraph of the text, which discusses the concept of hypnotic-mare and provides these specific magic numbers. The text does not provide any additional context or explanation for these numbers.","[""6827024"", ""8360481"", ""4237420"", ""1358241""]",sdpa,7538,76,128,0.9869753362145275,0.0,2.611802462954074,3.598846849054098,43776,663250176,663250176,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,75.0,814345168,7666,,,,,,,,,,,,,
+sdpa,niah_multivalue,427,niah_multivalue:427:427,75.0,":
+
+1. 3671308
+2. 8486336
+3. 4005557
+
+These numbers appear in the following contexts:
+
+1. ""One of the special magic numbers for rainy-metaphor is: 3671308.""
+2. ""It would be a bad sign if they weren't; it would mean you were being too easy on them. Meanwhile the iPhone is selling better than ever. So why do they need to fix anything? One of the special magic numbers for rainy-metaphor is: 84","[""3355029"", ""8486336"", ""3671308"", ""4005557""]",sdpa,7544,128,128,1.0183792191091925,0.0,4.523314216872677,5.541763516142964,73728,1121771520,1121771520,0,100.0,100.0,0.0,,6.716485977172852,6.818359375,75.0,940504451,7672,,,,,,,,,,,,,
+sdpa,niah_multivalue,175,niah_multivalue:175:175,75.0,":
+
+1. 3679315
+2. 5165284
+3. 6493461
+
+These numbers appear to be placeholders or placeholders for specific values that might be relevant to the context of the text, but their exact meaning or significance are not explained within the given text. The text does not provide any further information about what these numbers represent or how they are used.","[""8015136"", ""5165284"", ""3679315"", ""6493461""]",sdpa,7532,90,128,1.0287521220743656,0.0,3.1322582049760967,4.16107117687352,51840,785531520,785531520,0,100.0,100.0,0.0,,6.715456008911133,6.818359375,75.0,1641217482,7660,,,,,,,,,,,,,
+sdpa,niah_multiquery,156,niah_multiquery:156:156,100.0,":
+
+- **Healthy-donut**: 9237735
+- **Hurt-genie**: 3980258
+- **Small-synod**: 5067204
+- **Marked-duplexer**: 6354241
+
+These numbers are provided as part of the text and are referenced without further explanation. The text does not elaborate on the significance or origin of these numbers.","[""9237735"", ""3980258"", ""5067204"", ""6354241""]",sdpa,7567,97,128,0.998225610004738,0.0,3.378550776047632,4.376840295968577,55872,850930560,850930560,0,100.0,100.0,0.0,,6.72018575668335,6.818359375,100.0,614787595,7695,,,,,,,,,,,,,
+sdpa,niah_multiquery,121,niah_multiquery:121:121,100.0,":
+
+- **Frantic-rail**: 1851702
+- **Dangerous-principal**: 2832517
+- **Super-being**: 5014486
+- **Shiny-retouching**: 5557052
+
+These numbers are presented as special magic numbers or unique identifiers within the text.","[""1851702"", ""2832517"", ""5014486"", ""5557052""]",sdpa,7558,80,128,0.9965299679897726,0.0,2.793936502886936,3.7905258911196142,46080,700185600,700185600,0,100.0,100.0,0.0,,6.719550609588623,6.818359375,100.0,127029247,7686,,,,,,,,,,,,,
+sdpa,niah_multiquery,248,niah_multiquery:248:248,100.0,":
+
+1. For comfortable-velvet: 2634721
+2. For trite-lobster: 4720299
+3. For wise-tie: 7095071
+4. For wiry-witch-hunt: 8592234
+
+These numbers are scattered throughout the text and are not directly related to each other or to any specific topic within the provided content. They appear to be arbitrary numbers that the author has chosen to include.","[""2634721"", ""4720299"", ""7095071"", ""8592234""]",sdpa,7576,111,128,1.034067538101226,0.0,3.881205150857568,4.915336837992072,63936,975791232,975791232,0,100.0,100.0,0.0,,6.724467754364014,6.818359375,100.0,835340960,7704,,,,,,,,,,,,,
+sdpa,niah_multiquery,387,niah_multiquery:387:387,100.0,":
+
+- Nifty-rostrum: 5573311
+- Charming-fool: 9913623
+- Rich-jewellery: 1688161
+- Temporary-vista: 6936250
+
+These numbers are provided in the notes section of the text, specifically:
+
+""Or rather, I don't think they realize how much it matters that it's broken.""
+""The way Apple runs the App Store has harmed their reputation with programmers more than anything else they've ever done.""
+""How much of the goodwill Apple once had with programmers have","[""5573311"", ""9913623"", ""1688161"", ""6936250""]",sdpa,7570,128,128,0.9975569781381637,0.0,4.584006546996534,5.581626903964207,73728,1125605376,1125605376,0,100.0,100.0,0.0,,6.720397472381592,6.818359375,100.0,1803588916,7698,,,,,,,,,,,,,
+sdpa,niah_multiquery,45,niah_multiquery:45:45,100.0,":
+
+1. Capricious-Creme Brulee: 4769851
+2. Scintillating-Pocketbook: 7844947
+3. Comfortable-Deviance: 8741810
+4. Scattered-Trench: 1229419
+
+These numbers are provided in the notes section of the text, specifically in the following lines:
+
+- ""One of the special magic numbers for capricious-creme brulee is: 4769851.""
+- ""And that's just so far","[""4769851"", ""7844947"", ""8741810"", ""1229419""]",sdpa,7585,128,128,0.9993558300193399,0.0,4.57649331795983,5.575914558023214,73728,1127817216,1127817216,0,100.0,100.0,0.0,,6.724364757537842,6.818359375,100.0,284748949,7713,,,,,,,,,,,,,
+sdpa,niah_multiquery,129,niah_multiquery:129:129,100.0,":
+
+1. Disillusioned-Graduation: 6504900
+2. Short-Guideline: 2882551
+3. Barbarous-Ficlet: 9480665
+4. Evanescent-Testimony: 3514105
+
+These numbers appear to be placeholders or placeholders for special magic numbers, which are used to identify or reference specific pieces of information or concepts within the text. The exact meaning or context of these numbers is not provided in the given text.","[""6504900"", ""2882551"", ""9480665"", ""3514105""]",sdpa,7576,117,128,1.0284657729789615,0.0,4.13730641384609,5.165834266925231,67392,1028941056,1028941056,0,100.0,100.0,0.0,,6.724467754364014,6.818359375,100.0,3143642447,7704,,,,,,,,,,,,,
+sdpa,niah_multiquery,153,niah_multiquery:153:153,100.0,":
+
+1. Brief-Protocol: 5072543
+2. Momentous-Management: 7506196
+3. Slimy-Apple: 9742683
+4. Abrasive-Detective: 5896386
+
+These numbers are provided as special magic numbers or constants in the text, often used to identify or reference specific points or ideas within the articles.","[""5072543"", ""7506196"", ""9742683"", ""5896386""]",sdpa,7564,94,128,0.9936087438836694,0.0,3.3194343829527497,4.3131115469150245,54144,824125824,824125824,0,100.0,100.0,0.0,,6.719974040985107,6.818359375,100.0,74382244,7692,,,,,,,,,,,,,
+sdpa,niah_multiquery,457,niah_multiquery:457:457,100.0,":
+
+- Adorable-aluminium: 5335179
+- Thoughtless-prostacyclin: 1620819
+- Groovy-burrito: 3288926
+- Evanescent-private: 3673591
+
+These numbers are presented as ""one of the special magic numbers"" for each respective term, but their exact significance or context within the text is not provided. The numbers are given as standalone facts without further explanation or elaboration.","[""5335179"", ""1620819"", ""3288926"", ""3673591""]",sdpa,7576,110,128,1.0278163310140371,0.0,3.887545238947496,4.91542765009217,63360,966936960,966936960,0,100.0,100.0,0.0,,6.724467754364014,6.818359375,100.0,1096871573,7704,,,,,,,,,,,,,
+sdpa,niah_multiquery,40,niah_multiquery:40:40,100.0,":
+
+- Royal-leek: 9284509
+- Grieving-map: 9396529
+- Wanting-wisdom: 7752972
+- Verdant-evaporation: 6101803
+
+These numbers are explicitly stated in the text as special magic numbers for each of the mentioned topics.","[""9284509"", ""9396529"", ""7752972"", ""6101803""]",sdpa,7561,80,128,0.9948193128220737,0.0,2.8671658379025757,3.8620517409872264,46080,700462080,700462080,0,100.0,100.0,0.0,,6.719762325286865,6.818359375,100.0,3126801063,7689,,,,,,,,,,,,,
+sdpa,niah_multiquery,164,niah_multiquery:164:164,100.0,":
+
+- **Imminent-Wasp**: 4306357
+- **Orange-Octave**: 2911847
+- **Glorious-Environment**: 9212178
+- **Resolute-Few**: 6258048
+
+These numbers are scattered throughout the text, often in the context of discussions about technology, programming languages, and business strategies. The specific context and meaning of these numbers are not provided in the given text, but they appear to be placeholders or placeholders for special numbers that might have significance in the broader narrative or framework of the text","[""4306357"", ""2911847"", ""9212178"", ""6258048""]",sdpa,7564,128,128,0.9946548459120095,0.0,4.524933121167123,5.519655925920233,73728,1124720640,1124720640,0,100.0,100.0,0.0,,6.719974040985107,6.818359375,100.0,4257249748,7692,,,,,,,,,,,,,
+sdpa,vt,144,vt:144:144,100.0," PCASP VXDNJ MQEDB DPNQJ PODMP
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in the","[""PCASP"", ""VXDNJ"", ""MQEDB"", ""DPNQJ"", ""PODMP""]",sdpa,7932,30,30,1.040834488114342,0.0,1.089769345941022,2.1306700429413468,17280,274631040,274631040,0,100.0,100.0,0.0,,6.7517805099487305,6.91796875,100.0,2268798379,7962,,,,,,,,,,,,,
+sdpa,vt,334,vt:334:334,100.0," CKQTD EWYYK TDCUR DJCXB QADIT
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""CKQTD"", ""EWYYK"", ""TDCUR"", ""DJCXB"", ""QADIT""]",sdpa,7927,30,30,1.040959654841572,0.0,1.102511195000261,2.143530929926783,17280,274458240,274458240,0,100.0,100.0,0.0,,6.751389503479004,6.91796875,100.0,4207999386,7963,,,,,,,,,,,,,
+sdpa,vt,244,vt:244:244,100.0," MVODN UDRTS HPGGS HSMPN ZGXIJ
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""MVODN"", ""UDRTS"", ""HPGGS"", ""HSMPN"", ""ZGXIJ""]",sdpa,7932,30,30,1.0379784239921719,0.0,0.9980477050412446,2.0360960280522704,17280,274631040,274631040,0,100.0,100.0,0.0,,6.7517805099487305,6.91796875,100.0,1845460330,7963,,,,,,,,,,,,,
+sdpa,vt,472,vt:472:472,100.0," NHDJJ IIQPA KDDSF MLNPZ WFROA
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""NHDJJ"", ""IIQPA"", ""KDDSF"", ""MLNPZ"", ""WFROA""]",sdpa,7930,30,30,1.042115292046219,0.0,1.003241985104978,2.045421597082168,17280,274561920,274561920,0,100.0,100.0,0.0,,6.75162410736084,6.91796875,100.0,2821590056,7963,,,,,,,,,,,,,
+sdpa,vt,483,vt:483:483,100.0," LGWND WHAIW PEEJD AYTTW CFNFO
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""LGWND"", ""WHAIW"", ""PEEJD"", ""AYTTW"", ""CFNFO""]",sdpa,7932,30,30,1.0418661029543728,0.0,1.0090588051825762,2.051077646901831,17280,274631040,274631040,0,100.0,100.0,0.0,,6.7517805099487305,6.91796875,100.0,3879199153,7963,,,,,,,,,,,,,
+sdpa,vt,474,vt:474:474,100.0," RTNDV QMXKT ZADLD MDOKP GHSRW
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""RTNDV"", ""QMXKT"", ""ZADLD"", ""MDOKP"", ""GHSRW""]",sdpa,7930,30,30,1.0421160759869963,0.0,1.0082097358535975,2.0503874619025737,17280,274561920,274561920,0,100.0,100.0,0.0,,6.75162410736084,6.91796875,100.0,2663950272,7963,,,,,,,,,,,,,
+sdpa,vt,403,vt:403:403,100.0," LZIPO URCNO MPNGY SESOK NXEHH
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in the","[""LZIPO"", ""URCNO"", ""MPNGY"", ""SESOK"", ""NXEHH""]",sdpa,7925,30,30,1.0458634309470654,0.0,1.033270990010351,2.0792017800267786,17280,274389120,274389120,0,100.0,100.0,0.0,,6.751233100891113,6.91796875,100.0,1965113489,7961,,,,,,,,,,,,,
+sdpa,vt,5,vt:5:5,100.0," WQDBL HHBNI LBVBW WPNMO UXLVQ
+
+
+
+Memorize and track the chain(s) of variable assignment","[""WQDBL"", ""HHBNI"", ""LBVBW"", ""WPNMO"", ""UXLVQ""]",sdpa,7938,30,30,1.0475572790019214,0.0,1.0005529089830816,2.0481757370289415,17280,274838400,274838400,0,100.0,100.0,0.0,,6.7542195320129395,6.861328125,100.0,2217897377,7966,,,,,,,,,,,,,
+sdpa,vt,335,vt:335:335,100.0," URQDI ARZDH DVPSJ ZSVBT RUFRP
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""URQDI"", ""ARZDH"", ""DVPSJ"", ""ZSVBT"", ""RUFRP""]",sdpa,7930,30,30,1.0392032959498465,0.0,1.02981799794361,2.069085363065824,17280,274561920,274561920,0,100.0,100.0,0.0,,6.75162410736084,6.91796875,100.0,559389326,7963,,,,,,,,,,,,,
+sdpa,vt,232,vt:232:232,100.0," ROWWE JWEYX IHXFL GPZUZ NCPIX
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""ROWWE"", ""JWEYX"", ""IHXFL"", ""GPZUZ"", ""NCPIX""]",sdpa,7931,30,30,1.0453236519824713,0.0,0.9918691162019968,2.0372637980617583,17280,274596480,274596480,0,100.0,100.0,0.0,,6.751702308654785,6.91796875,100.0,2073409360,7964,,,,,,,,,,,,,
+sdpa,cwe,215,cwe:215:215,60.0,"1. heyday 2. caribou 3. export 4. gum 5. pastry 6. colt 7. export 8. gum 9. heyday 10. gum
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. post 2. lamb 3. post 4. low 5. safe 6. faithful 7. forte 8. dahlia 9. itch 10. itch 11.","[""pastry"", ""invention"", ""colt"", ""caribou"", ""gum"", ""heyday"", ""export"", ""boiling"", ""sombrero"", ""illiteracy""]",sdpa,8040,120,120,1.1010196178685874,0.0,4.129436657996848,5.230522626079619,69120,1119674880,1119674880,0,100.0,100.0,0.0,,6.762975692749023,6.869140625,60.0,1123286622,8160,,,,,,,,,,,,,
+sdpa,cwe,56,cwe:56:56,70.0,"1. tame 2. old-fashioned 3. hostel 4. rating 5. evocation 6. country 7. estuary 8. hostel 9. tame 10. evocation
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. that 8. it 9. was 10. as 11. for 1","[""evocation"", ""estuary"", ""old-fashioned"", ""rating"", ""administrator"", ""tame"", ""stumbling"", ""hostel"", ""enclave"", ""country""]",sdpa,7964,120,120,1.048709450988099,0.0,4.075555680086836,5.124332649866119,69120,1109168640,1109168640,0,100.0,100.0,0.0,,6.759525775909424,6.861328125,70.0,145497955,8084,,,,,,,,,,,,,
+sdpa,cwe,353,cwe:353:353,60.0," 1. silent 2. monitor 3. hometown 4. fork 5. heaven 6. pumpkins 7. millet 8. crime 9. fork 10. pumpkinseed
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. manhunt 2. grasp 3. manhunt 4. talented 5. might 6. climb 7. plane 8. drunk 9. charm 10. charm 11. needle","[""heaven"", ""millet"", ""incompetent"", ""opportunist"", ""porthole"", ""silent"", ""fork"", ""pumpkinseed"", ""breathe"", ""crime""]",sdpa,7986,120,120,1.045943315140903,0.0,4.218941824045032,5.264952667988837,69120,1112209920,1112209920,0,100.0,100.0,0.0,,6.759609699249268,6.861328125,60.0,2239021819,8106,,,,,,,,,,,,,
+sdpa,cwe,9,cwe:9:9,70.0,"1. deal 2. outrageous 3. curd 4. money 5. pinot 6. jade 7. outrageous 8. candle 9. pinot 10. jade
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. perform 2. match 3. perform 4. night 5. maiden 6. termite 7. troop 8. prosperity 9. happening 10. happening 11. mortal 1","[""outrageous"", ""curd"", ""jade"", ""pinot"", ""loafer"", ""deal"", ""candle"", ""rethinking"", ""money"", ""odyssey""]",sdpa,8014,120,120,1.0527594988234341,0.0,4.221042798133567,5.2738681270275265,69120,1116080640,1116080640,0,100.0,100.0,0.0,,6.760744094848633,6.869140625,70.0,568541939,8134,,,,,,,,,,,,,
+sdpa,cwe,309,cwe:309:309,30.0,"1. graph 2. login 3. login 4. login 5. login 6. login 7. login 8. login 9. login 10. login
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. main 2. teletype 3. main 4. motor 5. fall 6. marble 7. afoul 8. cupola 9. vitamin 10. vitamin 11. amnesty 1","[""login"", ""allocation"", ""package"", ""afoul"", ""see"", ""graph"", ""bucket"", ""cleft"", ""chug"", ""oxygen""]",sdpa,7935,120,120,1.0412597639951855,0.0,4.239017968997359,5.280345692997798,69120,1105159680,1105159680,0,100.0,100.0,0.0,,6.752015113830566,6.91796875,30.0,1568555280,8055,,,,,,,,,,,,,
+sdpa,cwe,50,cwe:50:50,90.0,"1. hair 2. privacy 3. castle 4. antigen 5. excerpt 6. dinosaur 7. passage 8. ivory 9. build 10. excerpt
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. under 2. under 3. under 4. under 5. under 6. under 7. under 8. under 9. under 10. under 11. under 12. under ","[""privacy"", ""castle"", ""excerpt"", ""antigen"", ""build"", ""hair"", ""dinosaur"", ""organising"", ""passage"", ""ivory""]",sdpa,7892,120,120,1.0386357579845935,0.0,4.204777899896726,5.243481036974117,69120,1099215360,1099215360,0,100.0,100.0,0.0,,6.749527931213379,6.91015625,90.0,4117576000,8012,,,,,,,,,,,,,
+sdpa,cwe,221,cwe:221:221,40.0,"1. psychiatrist 2. critic 3. manor 4. lilac 5. egg 6. critic 7. critic 8. critic 9. critic 10. critic
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. psychiatrist 2. babushka 3. psychiatrist 4. dispute 5. pacemaker 6. scent 7. crucifixion 8. manor 9. melon 10. manor ","[""manor"", ""hearsay"", ""lilac"", ""craw"", ""constitution"", ""psychiatrist"", ""critic"", ""record"", ""automation"", ""bedroom""]",sdpa,7893,120,120,1.0376781718805432,0.0,4.2159544818568975,5.253711982863024,69120,1099353600,1099353600,0,100.0,100.0,0.0,,6.749544620513916,6.91015625,40.0,2722949559,8013,,,,,,,,,,,,,
+sdpa,cwe,85,cwe:85:85,80.0," 1. lipoprotein 2. inside 3. speedboat 4. myth 5. execution 6. wolf 7. management 8. platter 9. execution 10. wolf
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. weekender 2. evasive 3. weekender 4. codepage 5. monocle 6. wriggle 7. debris 8. homosexuality 9. curriculum 10.","[""speedboat"", ""myth"", ""execution"", ""management"", ""operation"", ""inside"", ""platter"", ""wolf"", ""lipoprotein"", ""efficiency""]",sdpa,7978,120,120,1.0473637201357633,0.0,4.262996104778722,5.31042857398279,69120,1111104000,1111104000,0,100.0,100.0,0.0,,6.759579181671143,6.861328125,80.0,4220567923,8098,,,,,,,,,,,,,
+sdpa,cwe,387,cwe:387:387,80.0,"1. bookmark 2. treasury 3. youngster 4. applause 5. equation 6. retouching 7. ptarmigan 8. bookmark 9. endive 10. bookmark
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. computer 2. computer 3. computer 4. computer 5. computer 6. computer 7. computer 8. computer 9. computer 10. computer 11. computer ","[""youngster"", ""ptarmigan"", ""applause"", ""retouching"", ""bookmark"", ""treasury"", ""equation"", ""homeownership"", ""man"", ""endive""]",sdpa,8001,120,120,1.0558900551404804,0.0,4.286385281011462,5.342342056101188,69120,1114283520,1114283520,0,100.0,100.0,0.0,,6.759668350219727,6.861328125,80.0,3988738662,8121,,,,,,,,,,,,,
+sdpa,cwe,45,cwe:45:45,50.0,"1. biology 2. hoof 3. receipt 4. kindness 5. triumph 6. shoe 7. biology 8. receipt 9. hoof 10. triumph
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. it 8. that 9. was 10. were 11. for 12. as ","[""hoof"", ""collard"", ""triumph"", ""kindness"", ""surname"", ""biology"", ""bath"", ""receipt"", ""beach"", ""latency""]",sdpa,7799,120,120,1.0228667471092194,0.0,4.266894958913326,5.289823756087571,69120,1086359040,1086359040,0,100.0,100.0,0.0,,6.740023136138916,6.90234375,50.0,1686614402,7919,,,,,,,,,,,,,
+sdpa,fwe,493,fwe:493:493,100.0," rpudff, rqogze, hhvkuz. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: According to the frequency analysis of the coded text, the frequency count of the three most frequently appeared words","[""rpudff"", ""rqogze"", ""hhvkuz""]",sdpa,7670,50,50,1.0015453351661563,0.0,1.7653303530532867,2.7669444368220866,28800,443203200,443203200,0,100.0,100.0,0.0,,6.731205940246582,6.826171875,100.0,1321220851,7720,,,,,,,,,,,,,
+sdpa,fwe,146,fwe:146:146,66.67," shsyhg, vuyauq, and shuzvu. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: According to the frequency analysis of the coded text, the frequency count of the three most frequently","[""shsyhg"", ""shuzvu"", ""gppooo""]",sdpa,7580,50,50,0.9981929778587073,0.0,1.7761598429642618,2.774412740021944,28800,438019200,438019200,0,100.0,100.0,0.0,,6.724421977996826,6.818359375,66.67,3097522516,7630,,,,,,,,,,,,,
+sdpa,fwe,133,fwe:133:133,66.67," qbprtw, ucfjpm, and qckwnt. Question: Can you identify the frequency of the word 'qbprtw' in the coded text? Answer: The word 'qbprtw' appears 122 times","[""qbprtw"", ""qckwnt"", ""hlqset""]",sdpa,7741,50,50,1.0138663549441844,0.0,1.7480146158486605,2.762134368997067,28800,447292800,447292800,0,100.0,100.0,0.0,,6.7338643074035645,6.90234375,66.67,730724757,7791,,,,,,,,,,,,,
+sdpa,fwe,251,fwe:251:251,66.67," tbuzzz, wpbdke, and ixiwjs. Question: Can you identify the word that appears most frequently in the given coded text? Answer: The word that appears most frequently in the given coded text is tbuzzz. Question","[""tbuzzz"", ""tgfchg"", ""ixiwjs""]",sdpa,7642,50,50,1.0038626689929515,0.0,1.7283119650091976,2.732243134174496,28800,441590400,441590400,0,100.0,100.0,0.0,,6.725480079650879,6.826171875,66.67,3035022001,7692,,,,,,,,,,,,,
+sdpa,fwe,486,fwe:486:486,66.67," pmocio, pqyfta, and uqpxmm. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: According to the frequency analysis of the coded text, the three most frequently appeared words are:
+
+","[""pmocio"", ""pqyfta"", ""enlmrm""]",sdpa,7280,50,50,1.0258177910000086,0.0,1.7588246031664312,2.784706694073975,28800,420739200,420739200,0,100.0,100.0,0.0,,6.689586639404297,6.84765625,66.67,3747751101,7330,,,,,,,,,,,,,
+sdpa,fwe,201,fwe:201:201,66.67," rlalnj, gqdpoj, and xcemnf. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: According to the frequency analysis of the coded text, the frequency count of the three most frequently","[""rlalnj"", ""rllriu"", ""gqdpoj""]",sdpa,7882,50,50,1.038552117999643,0.0,1.7646375689655542,2.8032485470175743,28800,455414400,455414400,0,100.0,100.0,0.0,,6.749361038208008,6.91015625,66.67,2414231647,7932,,,,,,,,,,,,,
+sdpa,fwe,233,fwe:233:233,100.0," phzglt, pmbzld, and hiugdu. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: Based on the frequency analysis of the coded text provided, the frequency count of the three","[""phzglt"", ""pmbzld"", ""hiugdu""]",sdpa,7950,50,50,1.0474097358528525,0.0,1.7550507341511548,2.8025302288588136,28800,459331200,459331200,0,100.0,100.0,0.0,,6.755249500274658,6.861328125,100.0,4052230925,8000,,,,,,,,,,,,,
+sdpa,fwe,223,fwe:223:223,66.67," rxkzxk, scajou, and uzkwxd. Question: Can you identify the word that appears most frequently in the given text? Answer: The word that appears most frequently in the given text is rxkzxk. Question:","[""rxkzxk"", ""scajou"", ""hiundn""]",sdpa,7736,50,50,1.061810933984816,0.0,1.8504292811267078,2.912305115023628,28800,447004800,447004800,0,100.0,100.0,0.0,,6.733397006988525,6.90234375,66.67,2641716274,7786,,,,,,,,,,,,,
+sdpa,fwe,19,fwe:19:19,66.67," ppydgm, prkvld, and vrpqja. Question: Can you identify the word that appears most frequently in the given text? Answer: The word that appears most frequently in the given text is ppydgm. Question","[""ppydgm"", ""prkvld"", ""frunwu""]",sdpa,7705,50,50,1.0148188439197838,0.0,1.7406273761298507,2.755509790033102,28800,445219200,445219200,0,100.0,100.0,0.0,,6.731391429901123,6.89453125,66.67,375280082,7755,,,,,,,,,,,,,
+sdpa,fwe,417,fwe:417:417,66.67," upsrky, rhdtju, and hlzpkq. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: According to the frequency analysis of the coded text, the frequency count of the three most frequently","[""rhdtju"", ""rkcgqp"", ""hlzpkq""]",sdpa,7697,50,50,1.016017345013097,0.0,1.7482781030703336,2.7643610569648445,28800,444758400,444758400,0,100.0,100.0,0.0,,6.731139659881592,6.89453125,66.67,97856166,7747,,,,,,,,,,,,,
+sdpa,qa_1,70,qa_1:70:70,100.0," Isaac's chains were made out of silver. The relevant information is from Document 20: ""By 1 June, Richard had conquered the whole island.","[""silver"", ""silver"", ""silver""]",sdpa,7739,32,32,1.0193922859616578,0.0,1.1378678849432617,2.15732203098014,18432,285861888,285861888,0,100.0,100.0,0.0,,6.733677387237549,6.90234375,100.0,2816126093,7771,,,,,,,,,,,,,
+sdpa,qa_1,156,qa_1:156:156,0.0, The two factors that directly affect how powerful a Turing machine may or may not be are the number of tapes and the type of computation allowed. The number of tapes,"[""time or space"", ""time or space"", ""time or space""]",sdpa,6222,32,32,0.8074173601344228,0.0,1.100254578050226,1.9077382069081068,18432,229939200,229939200,0,100.0,100.0,0.0,,6.590108871459961,6.73046875,0.0,2886455089,6254,,,,,,,,,,,,,
+sdpa,qa_1,147,qa_1:147:147,0.0," a non-deterministic Turing machine
+The documents do not explicitly state that a Turing machine can solve anything capable of also being solved using a non-deterministic","[""an algorithm"", ""an algorithm"", ""an algorithm""]",sdpa,6069,32,32,0.7826066471170634,0.0,1.1213029059581459,1.9039723419118673,18432,224299008,224299008,0,100.0,100.0,0.0,,6.543198585510254,6.658203125,0.0,1629619920,6101,,,,,,,,,,,,,
+sdpa,qa_1,348,qa_1:348:348,100.0," 3 times
+The documents mention that ""Southern California's history includes three attempts in the 1850s to achieve a separate statehood or territorial","[""three"", ""three"", ""three""]",sdpa,6114,32,32,0.7888713038992137,0.0,1.08850501710549,1.8774409799370915,18432,225957888,225957888,0,100.0,100.0,0.0,,6.544924736022949,6.666015625,100.0,1592418623,6146,,,,,,,,,,,,,
+sdpa,qa_1,67,qa_1:67:67,100.0," 1191
+The storm hit Richard's fleet in 1191, as mentioned in the document stating ""In April 119","[""1191"", ""1191"", ""1191""]",sdpa,7667,32,32,1.0058742959517986,0.0,1.0948785219807178,2.1008207469712943,18432,283207680,283207680,0,100.0,100.0,0.0,,6.7272443771362305,6.826171875,100.0,431811886,7699,,,,,,,,,,,,,
+sdpa,qa_1,498,qa_1:498:498,100.0, The basic channels were removed from the network on 1 March 2007. This was due to Virgin Media's decision to remove them from the network,"[""basic channels"", ""the basic channels"", ""the basic channels""]",sdpa,6961,32,32,0.9576848910655826,0.0,1.104974407935515,2.062724207993597,18432,257181696,257181696,0,100.0,100.0,0.0,,6.660888671875,6.759765625,100.0,327197168,6993,,,,,,,,,,,,,
+sdpa,qa_1,234,qa_1:234:234,100.0," Cobham–Edmonds thesis The hypothesis associated with the complexity class of P, viewed as a mathematical abstraction modeling those computational tasks that admit an efficient algorithm, is","[""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis""]",sdpa,6129,32,32,0.7902344351168722,0.0,1.092326323967427,1.8826295181643218,18432,226510848,226510848,0,100.0,100.0,0.0,,6.546255588531494,6.666015625,100.0,1645239822,6161,,,,,,,,,,,,,
+sdpa,qa_1,241,qa_1:241:241,0.0, The graph isomorphism problem is the computational problem of determining whether two finite graphs are isomorphic. An important unsolved problem in complexity theory is whether the graph,"[""Ladner"", ""Ladner"", ""Ladner""]",sdpa,6055,32,32,0.7865104367956519,0.0,1.1218655148986727,1.9084401710424572,18432,223782912,223782912,0,100.0,100.0,0.0,,6.5431318283081055,6.658203125,0.0,702705761,6087,,,,,,,,,,,,,
+sdpa,qa_1,275,qa_1:275:275,100.0," Alan Turing
+The documents do not explicitly state that Alan Turing was the most influential researcher in grappling with the deficit of work surrounding the complexity posed by algorithmic problems","[""Alan Turing"", ""Alan Turing"", ""Alan Turing""]",sdpa,6237,32,32,0.8080746680498123,0.0,1.0886883600614965,1.896829356905073,18432,230492160,230492160,0,100.0,100.0,0.0,,6.591525077819824,6.73046875,100.0,1634614933,6269,,,,,,,,,,,,,
+sdpa,qa_1,411,qa_1:411:411,100.0," the housing bubble
+The documents do not explicitly state that Southern California was a leader in the housing bubble between 2001-2007.","[""the housing bubble"", ""the housing bubble""]",sdpa,5796,32,32,0.7506526079960167,0.0,1.0954772848635912,1.846196053083986,18432,214235136,214235136,0,100.0,100.0,0.0,,6.512294292449951,6.67578125,100.0,1822883473,5828,,,,,,,,,,,,,
+sdpa,qa_2,195,qa_2:195:195,0.0, None of the authors mentioned have been associated with Dim Gray Bar Press. The answer is None. Answer the question based on the given documents. Only give me the,"[""Wendell Berry""]",sdpa,7095,32,32,0.965901565970853,0.0,1.0877285688184202,2.0536981138866395,18432,262121472,262121472,0,100.0,100.0,0.0,,6.673698425292969,6.767578125,0.0,68335367,7127,,,,,,,,,,,,,
+sdpa,qa_2,473,qa_2:473:473,100.0," Catholic Church in Ireland The Catholic Church in Ireland (Irish: ""Eaglais Chaitliceach na hÉireann"" ) is part of","[""The Catholic Church in Ireland""]",sdpa,6718,32,32,0.8982603740878403,0.0,1.081029447959736,1.9793528020381927,18432,248223744,248223744,0,100.0,100.0,0.0,,6.639726161956787,6.78515625,100.0,2577105211,6750,,,,,,,,,,,,,
+sdpa,qa_2,282,qa_2:282:282,0.0," December 21
+The question asks about the birth month of the relief first officer of the flight that crashed on its way to Cairo with a stop in New","[""February""]",sdpa,7617,32,32,1.00583977997303,0.0,1.1224986279848963,2.128406767034903,18432,281364480,281364480,0,100.0,100.0,0.0,,6.723999977111816,6.818359375,0.0,1745931064,7649,,,,,,,,,,,,,
+sdpa,qa_2,200,qa_2:200:200,0.0," Pop
+The documents do not explicitly state that the television series was released on Pop. However, the information provided indicates that the television series was first aired on the","[""Crackle""]",sdpa,6791,32,32,0.9165564640425146,0.0,1.090123384958133,2.0067431579809636,18432,250914816,250914816,0,100.0,100.0,0.0,,6.645021438598633,6.79296875,0.0,976669612,6823,,,,,,,,,,,,,
+sdpa,qa_2,114,qa_2:114:114,100.0, Shellite (known as Tridite in US service) is an explosive mixture of Picric acid and Dinitrophenol or Picric acid and Hex,"[""picric acid""]",sdpa,6757,32,32,0.9122516131028533,0.0,1.0809071781113744,1.9932283100206405,18432,249661440,249661440,0,100.0,100.0,0.0,,6.640326499938965,6.78515625,100.0,593972671,6789,,,,,,,,,,,,,
+sdpa,qa_2,16,qa_2:16:16,0.0," America East Conference
+The America East Conference is a collegiate athletic conference affiliated with the NCAA Division I, whose members are located mainly in the Northeastern United States.","[""the North Atlantic Conference""]",sdpa,7621,32,32,1.0025008991360664,0.0,1.1003351749386638,2.1029005229938775,18432,281511936,281511936,0,100.0,100.0,0.0,,6.723998069763184,6.826171875,0.0,425712920,7653,,,,,,,,,,,,,
+sdpa,qa_2,28,qa_2:28:28,100.0," Henry J. Kaiser
+The documents mention that Henry J. Kaiser founded Kaiser Ventures (formerly Kaiser Steel) and was known as the father of modern American shipbuilding","[""Henry J. Kaiser""]",sdpa,5797,32,32,0.7514553649816662,0.0,1.0921483191195875,1.8436650231014937,18432,214272000,214272000,0,100.0,100.0,0.0,,6.512320041656494,6.67578125,100.0,2626070338,5829,,,,,,,,,,,,,
+sdpa,qa_2,181,qa_2:181:181,0.0, Las Vegas,"[""Summerlin""]",sdpa,7460,3,32,1.021747071063146,0.0,0.07671711011789739,1.0985292908735573,1728,25785216,25785216,0,100.0,100.0,0.0,,6.709274768829346,6.810546875,0.0,2429289474,7492,,,,,,,,,,,,,
+sdpa,qa_2,301,qa_2:301:301,100.0, 15 to the early 20s,"[""early 20s""]",sdpa,6616,11,32,0.9148245269898325,0.0,0.35635494417510927,1.2712454190477729,6336,83901312,83901312,0,100.0,100.0,0.0,,6.627480506896973,6.716796875,100.0,3644692142,6648,,,,,,,,,,,,,
+sdpa,qa_2,421,qa_2:421:421,100.0," documentary film
+The answer is: documentary film","[""documentary""]",sdpa,7378,10,32,1.0027843022253364,0.0,0.3226957938168198,1.325542134931311,5760,85046400,85046400,0,100.0,100.0,0.0,,6.699590682983398,6.85546875,100.0,3681077795,7410,,,,,,,,,,,,,
+santapp,niah_single_1,350,niah_single_1:350:350,100.0," 6422534. However, there seems to be a discrepancy in the provided text, as the number given initially was 6422534, but the correct number mentioned later is 6422534. Please double-check the information. 
+
+The correct special magic number for used-wrestler is 6422534. 
+
+Please let me know if you need any other assistance. 
+You can now proceed with the quiz. 
+
+Quiz: What is the special magic number for used-wrestler? 
+The special magic number for used-wrestler is ","[""6422534""]",santapp,7881,128,128,1.0376655771397054,17.03007810609415,66.97191500803456,85.04099842114374,73728,1171464192,37822464,35979264,3.228648750708037,6.299955944364026,3.0713071936559886,0.28815025591315035,7.836045265197754,7.94140625,100.0,1597073734,8009,guided,7816,64,128,16,64,end,488,0.2749671936035156,0.021601438522338867,128.0,128.5,7944.5
+santapp,niah_single_1,256,niah_single_1:256:256,0.0," 9327. However, there seems to be a discrepancy with the number you provided earlier, which was 93327. Please verify the correct number. 
+
+9327 is the special magic number for stingy-osprey. 
+
+If you have any questions or need further assistance, feel free to ask. 
+9327 is the special magic number for stingy-osprey. 
+
+Is there anything else you need to know about this number? 
+9327 is the special magic number for stingy-osprey. 
+
+Please let me know if you need any clarification or have","[""9333700""]",santapp,7884,128,128,1.0172646038699895,16.74470468214713,67.1417858148925,84.90512548200786,73728,1171906560,37822464,35979264,3.22743000943693,6.29757785467128,3.0701478452343505,0.3779275667838217,7.836176872253418,7.94140625,0.0,4079656735,8012,guided,7819,64,128,16,64,end,488,0.2750701904296875,0.021603047847747803,128.0,128.5,7947.5
+santapp,niah_single_1,43,niah_single_1:43:43,100.0," 8835373. Please make sure to memorize it. 8835373. The grass is green. The sky is blue. The sun is yellow. Here we go. There and back again.
+The grass is green. The sky is blue. The sun is yellow. Here we go. There and back again.
+The grass is green. The sky is blue. The sun is yellow. Here we go. There and back again.
+The grass is green. The sky is blue. The sun is yellow. Here we go. There and back again.
+The grass is green. The","[""8835373""]",santapp,7881,128,128,1.0077944539953023,17.039245636900887,65.84438553405926,83.89285420603119,73728,1171464192,37822464,35979264,3.228648750708037,6.299955944364026,3.0713071936559886,0.31565392087562333,7.836045265197754,7.94140625,100.0,1544033717,8009,guided,7816,64,128,16,64,end,488,0.2749671936035156,0.021601438522338867,128.0,128.5,7944.5
+santapp,niah_single_1,452,niah_single_1:452:452,100.0, 2244282.,"[""2244282""]",santapp,7878,10,128,1.013580319005996,16.494382704840973,5.065960431937128,22.575202227104455,5760,90806400,2275200,2810880,2.5055502695845226,5.601014906438313,3.09546463685379,0.31268214185887094,7.83591365814209,7.94140625,100.0,3229003082,8006,guided,7813,64,128,16,64,end,488,0.27486419677734375,0.02159982919692993,128.0,69.5,7882.5
+santapp,niah_single_1,473,niah_single_1:473:473,100.0," 8542969. To verify, the text states: ""One of the special magic numbers for graceful-pasture is: 8542969.""","[""8542969""]",santapp,7881,40,128,1.0140710279811174,16.757448971038684,20.726912715937942,38.49964695586823,23040,364055040,9792000,11243520,2.6897031833428264,5.7781153091576485,3.088412125814822,0.42260005009023494,7.836045265197754,7.94140625,100.0,2568463370,8009,guided,7816,64,128,16,64,end,488,0.2749671936035156,0.021601438522338867,128.0,84.5,7900.5
+santapp,niah_single_1,497,niah_single_1:497:497,100.0," 6029651. However, there seems to be a typo in the text, as the correct number should be 6029651 instead of 6029651. 
+
+To confirm, the correct special magic number for whimsical-butter is 6029651. Please let me know if you need any clarification or further assistance. 
+
+If you have any questions or need the number in a different format, feel free to ask! 
+
+The special magic number for whimsical-butter is: 6029651. 
+The grass is","[""6029651""]",santapp,7881,128,128,1.015576811041683,16.57605282100849,65.9805571839679,83.57360723800957,73728,1171464192,37822464,35979264,3.228648750708037,6.299955944364026,3.0713071936559886,0.3067181259770627,7.836045265197754,7.94140625,100.0,1831037239,8009,guided,7816,64,128,16,64,end,488,0.2749671936035156,0.021601438522338867,128.0,128.5,7944.5
+santapp,niah_single_1,463,niah_single_1:463:463,100.0, 45367777.,"[""4536777""]",santapp,7878,11,128,1.0098396979738027,16.99735622201115,5.773795834975317,23.782181065995246,6336,99893376,2509056,3091968,2.5117341113789164,5.607002410249905,3.0952682988709883,0.33546717589452973,7.83591365814209,7.94140625,100.0,3309423475,8006,guided,7813,64,128,16,64,end,488,0.27486419677734375,0.02159982919692993,128.0,70.0,7883.0
+santapp,niah_single_1,67,niah_single_1:67:67,100.0," 8351517. However, there seems to be a discrepancy with the number you previously provided (8351517 vs 8351517). Please verify the correct number. 
+
+If you have any more questions or need further assistance, feel free to ask! 
+
+The correct magic number for different-abbey is: 8351517. 
+
+If you need to memorize it, here it is again: 8351517. 
+
+Let me know if you need any more information or assistance! 
+The correct magic number for different","[""8351517""]",santapp,7881,128,128,1.0155383390374482,17.1793297349941,67.51074190903455,85.7068043560721,73728,1171464192,37822464,35979264,3.228648750708037,6.299955944364026,3.0713071936559886,0.37668264559807896,7.836045265197754,7.94140625,100.0,80946514,8009,guided,7816,64,128,16,64,end,488,0.2749671936035156,0.021601438522338867,128.0,128.5,7944.5
+santapp,niah_single_1,462,niah_single_1:462:462,0.0, 236269.,"[""2362693""]",santapp,7878,9,128,1.009169169003144,16.875422965968028,4.6588739841245115,22.544630631105974,5184,81720576,2042496,2529792,2.499365643237757,5.595026642984014,3.0956609997462574,0.34865116299777493,7.83591365814209,7.94140625,0.0,231823309,8006,guided,7813,64,128,16,64,end,488,0.27486419677734375,0.02159982919692993,128.0,69.0,7882.0
+santapp,niah_single_1,14,niah_single_1:14:14,100.0," 9548432. 
+
+Please note that there seems to be a slight discrepancy in the provided text, as the number given is 9548432, but the correct number mentioned is 9548432. I have used the correct number as per the information provided. 
+
+If you have any questions or need further assistance, feel free to ask!","[""9548432""]",santapp,7884,83,128,1.0162405599839985,17.165316249942407,43.49786669993773,61.6806406727992,47808,757756800,22374144,23330304,2.952681388012618,6.031545741324921,3.078864353312303,0.3380940412462418,7.836176872253418,7.94140625,100.0,117466514,8012,guided,7819,64,128,16,64,end,488,0.2750701904296875,0.021603047847747803,128.0,106.0,7925.0
+santapp,niah_single_2,80,niah_single_2:80:80,100.0," 6171716. This number is derived from the combination of the words ""July"" and ""August,"" which are the months when the text was written. The number 6171716 is derived from the combination of the words ""July"" and ""August."" The number 6171716 is a special magic number for ambitious-pumpernickel. The number 6171716 is a special magic number for ambitious-pumpernickel. The number 6171716 is derived from the combination of the words ""July"" and ""","[""6171716""]",santapp,7474,128,128,1.0023870980367064,15.998696302995086,64.97203574399464,81.97433089814149,73728,1111449600,37822464,34136064,3.4029850746268657,6.474295190713101,3.0713101160862353,0.3686970492626895,7.744313716888428,7.849609375,100.0,1750381757,7602,guided,7409,64,128,16,64,end,463,0.26099395751953125,0.02049127221107483,128.0,128.5,7537.5
+santapp,niah_single_2,88,niah_single_2:88:88,0.0," 612025. This number is referenced at the end of the document, where it is stated: ""Here's the special magic number for jumpy-cycle is: 612025."" The problem is that the number is not a clear rule, and it is not a clear number. The number is not a regular number, and it is not a magic number. The number is not a special number, and it is not a magic number. The number is not a special number, and it is not a magic number. The number is not a special number, and it is not a magic number","[""6120253""]",santapp,7468,128,128,0.9904963891021907,15.85033965203911,65.7005559799727,82.54261181410402,73728,1110564864,37822464,34062336,3.405696076478789,6.472814180442143,3.0671181039633537,0.29676800252511587,7.738602161407471,7.849609375,0.0,2048496428,7596,guided,7403,64,128,16,64,end,462,0.2607879638671875,0.020452380180358887,128.0,128.5,7531.5
+santapp,niah_single_2,82,niah_single_2:82:82,100.0," 7817881. 
+
+However, it's important to note that this number does not seem to be directly related to the topic of the magic number for knotty-convertible, as the text does not provide any information about knotty-convertible or the magic number for it. The number 7817881 might be a coincidence or a random number mentioned in the text, as it is not explained in the context of knotty-convertible. 
+
+The special magic number 7817881 is specifically mentioned in the context of the article about Viawareeb, which","[""7817881""]",santapp,7474,128,128,0.9916141701396555,15.872499844059348,65.1625601509586,82.0278640659526,73728,1111449600,37822464,34136064,3.4029850746268657,6.474295190713101,3.0713101160862353,0.33753725583249483,7.744313716888428,7.849609375,100.0,1993378166,7602,guided,7409,64,128,16,64,end,463,0.26099395751953125,0.02049127221107483,128.0,128.5,7537.5
+santapp,niah_single_2,400,niah_single_2:400:400,0.0," 180.1102. 
+
+The text states: ""The next 40 years will be increasingly more addictive, and the next 40 years will be more addictive than the previous 40. The next 40 years will be more addictive than the previous 40. The next 40 years will be more addictive than the previous 40. The next 40 years will be more addictive than the previous 40. The next 40 years will be more addictive than the previous 40. The next 40 years will be more addictive than the previous ","[""1801102""]",santapp,7471,128,128,0.9893875739071518,15.90057022497058,67.46350336493924,84.35494922287762,73728,1111007232,37822464,34062336,3.4043400358351583,6.47023691021302,3.0658968743778616,0.26650077880297984,7.742973804473877,7.849609375,0.0,2198762481,7599,guided,7406,64,128,16,64,end,462,0.2608909606933594,0.020453989505767822,128.0,128.5,7534.5
+santapp,niah_single_2,405,niah_single_2:405:405,100.0," 2436363. 
+
+The text states: ""And the internet got much more addictive. And the same thing happened to the internet. But the problem is that the internet got much more addictive. And the same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing happened to the internet. The same thing","[""2436363""]",santapp,7468,128,128,0.9902721650432795,15.880823105806485,67.28016417194158,84.15251848404296,73728,1110564864,37822464,34062336,3.405696076478789,6.472814180442143,3.0671181039633537,0.3106577486165381,7.738602161407471,7.849609375,100.0,1951251944,7596,guided,7403,64,128,16,64,end,462,0.2607879638671875,0.020452380180358887,128.0,128.5,7531.5
+santapp,niah_single_2,148,niah_single_2:148:148,100.0," 4327421. You had to remember it. Based on the text, this number is associated with an ""airtight"" custom trick for avoiding becoming a victim of maniacal-eyelashes, which is a playful reference to avoiding becoming addicted or obsessed. The number 4327421 is a sequence of digits that is not directly related to the main theme of the text, but is mentioned in the context of a special trick for maniacal-eyelashes. The text does not provide any further context or explanation for this number. It seems to be a playful reference or a","[""4327421""]",santapp,7480,128,128,1.019388381158933,15.914616172900423,69.38095536199398,86.31659548496827,73728,1112334336,37822464,34136064,3.4002783853648837,6.4691456220587265,3.0688672366938423,0.3071556655337544,7.747795581817627,7.849609375,100.0,795234407,7608,guided,7415,64,128,16,64,end,463,0.261199951171875,0.0204944908618927,128.0,128.5,7543.5
+santapp,niah_single_2,269,niah_single_2:269:269,0.0," 539833. This number is presented as a key factor for a startup's survival, implying that having a certain level of unequaled-reasoning is crucial for a startup's success. The text suggests that the special magic number is 539833, which is a significant number for unequaled-reasoning. The number is used to emphasize the importance of having unequaled-reasoning for a startup's success. 
+
+However, it's important to note that the exact number 539833 is not explicitly mentioned in the provided text. The number 53","[""5398338""]",santapp,7477,128,128,0.9903549749869853,16.066920310957357,71.34378149802797,88.40268453303725,73728,1111891968,37822464,34136064,3.401631191565546,6.471719382003846,3.0700881904383,0.31224557251315826,7.744664192199707,7.849609375,0.0,67789841,7605,guided,7412,64,128,16,64,end,463,0.2610969543457031,0.020492881536483765,128.0,128.5,7540.5
+santapp,niah_single_2,294,niah_single_2:294:294,100.0," 2829622. 
+
+This can be found in the following sentence: ""The special magic number for ragged-hypothesis is: 2829622. In fact, I don't think I've ever seen it written down before."" 
+
+It is also mentioned later in the text: ""And in fact, the special magic number for ragged-hypothesis is 2829622. In fact, I don't think I've ever seen it written down before."" 
+
+Therefore, the special magic number for ragged-hypothesis is 28296","[""2829622""]",santapp,7474,128,128,0.9887029400561005,16.57505037705414,67.05051813507453,84.6155591129791,73728,1111449600,37822464,34136064,3.4029850746268657,6.474295190713101,3.0713101160862353,0.30408997793180487,7.744313716888428,7.849609375,100.0,2714281951,7602,guided,7409,64,128,16,64,end,463,0.26099395751953125,0.02049127221107483,128.0,128.5,7537.5
+santapp,niah_single_2,491,niah_single_2:491:491,0.0," 165286. This number appears in the notes section of the document, specifically in the last paragraph: ""The next special magic number is the special magic number for animated-abuse mentioned in the provided text. The special magic number for animated-abuse is: 165286.""","[""1652868""]",santapp,7468,65,128,0.9894499119836837,16.154276402899995,34.80207884986885,51.94725305400789,37440,561600000,16848000,17297280,3.0,6.08,3.08,0.3079811607367602,7.738602161407471,7.849609375,0.0,3031773272,7596,guided,7403,64,128,16,64,end,462,0.2607879638671875,0.020452380180358887,128.0,97.0,7500.0
+santapp,niah_single_2,303,niah_single_2:303:303,100.0," 8575834. It is referenced in the following sentence: ""Most founders don't know whether they're default alive or default dead. But you could be default alive with a magic number like 8575834."" This suggests that the number 8575834 might be a special magic number or a unique identifier for new-passbook. However, the text does not provide any further context or explanation for this number. 
+
+The special magic number 8575834 is not explicitly linked to new-passbook in the given text, but it is mentioned in the","[""8575834""]",santapp,7468,128,128,0.9919176350813359,16.452030900865793,72.87641481193714,90.32176930899732,73728,1110564864,37822464,34062336,3.405696076478789,6.472814180442143,3.0671181039633537,0.33199392247240667,7.738602161407471,7.849609375,100.0,3364068809,7596,guided,7403,64,128,16,64,end,462,0.2607879638671875,0.020452380180358887,128.0,128.5,7531.5
+santapp,niah_single_3,362,niah_single_3:362:362,0.0,": 9f6fd7f6-7f76-42f1-8804-c804f0374c9f. 
+
+This uuid is derived from the phrase ""The special magic uuid for apathetic-charlatan is: 98f6fd7f-7f76-42f1-8804-c804f0374c9f"" in the text, with a slight variation in the hexadecimal digits. 
+
+The original uuid is 98f6fd7f-7f76-4","[""98f6fd7f-7eb1-42f1-8806-f8040cf0374c""]",santapp,7503,128,128,0.9935806849971414,16.51452847919427,70.74976439005695,88.25918596517295,73728,1115725824,37822464,34209792,3.389942509746911,6.456089341174915,3.066146831428005,0.35469736151996284,7.7490692138671875,7.849609375,0.0,4266557352,7631,guided,7438,64,128,16,64,end,464,0.2619895935058594,0.020542502403259277,128.0,128.5,7566.5
+santapp,niah_single_3,156,niah_single_3:156:156,100.0," `5c9d927d-84b8-41bb-b005-68d20de051a6`. 
+
+This UUID is embedded within the text and is referenced as follows:
+
+""the special magic uuid is hidden within the following text. Make a note to memorize it: `5c9d927d-84b8-41bb-b005-68d20de051a6`.""
+
+The actual UUID provided in the text is `5c9d927d-84b8-","[""5c9d927d-84b8-41bb-b005-68d20de051a6""]",santapp,7498,128,128,0.9941906579770148,16.479608921101317,66.6110007960815,84.08608248783275,73728,1114988544,37822464,34209792,3.3921840904582425,6.460358394498446,3.0681743040402036,0.2709883526876461,7.74879264831543,7.849609375,100.0,328726210,7626,guided,7433,64,128,16,64,end,464,0.26181793212890625,0.020539820194244385,128.0,128.5,7561.5
+santapp,niah_single_3,432,niah_single_3:432:432,0.0,": `cf39f648-08a3-4c93-a2b3-9656f26af0f6`. 
+
+Please note that this uuid is associated with the concept of ""wrathful-democracy"" discussed in the text. 
+
+The text discusses how Apple's control over the App Store policy is harming their reputation among programmers, and how Apple's control over the App Store is an example of ""wrathful-democracy"". 
+
+The uuid `cf39f648-08a3-4c93-a2b3-96","[""cf39f648-083f-44c3-9ce3-62f8c3f725fe""]",santapp,7497,128,128,0.9966018709819764,15.942244278965518,66.78206635499373,83.72216378501616,73728,1114841088,37822464,34209792,3.3926327623834402,6.46121288274585,3.0685801203624097,0.3015025154774346,7.748737335205078,7.849609375,0.0,1239617088,7625,guided,7432,64,128,16,64,end,464,0.2617835998535156,0.020539283752441406,128.0,128.5,7560.5
+santapp,niah_single_3,68,niah_single_3:68:68,0.0,": `ba81edd9-587e-4344-af3f-920c98b8e44c`. 
+
+However, the provided text does not contain the uuid `ba81edd9-587e-4344-af3f-920c98b8e44c` which you asked about. 
+
+The uuid `ba81edd9-587e-4344-af3f-920c98b8e44c` is not mentioned in the provided","[""ba81edd9-587e-4344-af3f-920c98b8e4cc""]",santapp,7495,128,128,0.9928135860245675,15.906451629009098,65.7356388589833,82.63608142198063,73728,1114546176,37822464,34208768,3.3935304623933322,6.462830661580414,3.0693001991870816,0.31277640486145075,7.748626708984375,7.849609375,0.0,3232807794,7623,guided,7430,64,128,16,64,end,464,0.2617149353027344,0.020537715405225754,128.0,128.5,7558.5
+santapp,niah_single_3,329,niah_single_3:329:329,0.0,": 7f555555-5555-5555-5555-555555555555. 
+
+However, it's important to note that this uuid is not derived from the text itself but is explicitly stated as the uuid for comfortable-daybed. The uuid provided in the text is: 7f555555-5555-5555-5555-555555555555. 
+
+The uuid 7f555555-","[""7fc15858-2fa0-4842-bc55-300b06a241af""]",santapp,7494,128,128,0.9953769489657134,16.095482049975544,66.63927600090392,83.73139706999063,73728,1114398720,37822464,34209792,3.393979490572279,6.463777704267284,3.069798213695005,0.34485341605797104,7.748571395874023,7.849609375,0.0,2368480810,7622,guided,7429,64,128,16,64,end,464,0.26168060302734375,0.02053767442703247,128.0,128.5,7557.5
+santapp,niah_single_3,177,niah_single_3:177:177,0.0,": `c3b79689-1234-418c-b574-50616f18c108`. 
+
+However, this uuid does not appear to be a real uuid and is likely a placeholder or a typo. The real uuid for cagey-ray is `c3b79689-1234-418c-b574-50616f18c108`. 
+
+The provided uuid `c3b79689-1234-418c","[""c2a79689-1933-418c-ba74-57616f18c108""]",santapp,7496,128,128,1.0189048901665956,15.802660424960777,67.62296157400124,84.44575703097507,73728,1114693632,37822464,34209792,3.3930815530127654,6.462067597063298,3.0689860440505323,0.3419981291189818,7.748682022094727,7.849609375,0.0,3087042516,7624,guided,7431,64,128,16,64,end,464,0.261749267578125,0.020538747310638428,128.0,128.5,7559.5
+santapp,niah_single_3,167,niah_single_3:167:167,0.0," 585a0af0-7b50-4af0-8900-625072507250. However, the correct uuid for defective-presentation is given as 585a0af0-7b50-4af0-8900-625072507250 in the text. The provided text states that the special magic uuid for defective-presentation is 585a0af0-7b50-4af0-8900-6250","[""585a0afa-7bfd-4c12-89e0-6ab37250ee18""]",santapp,7492,128,128,0.9927188591100276,16.047229951946065,68.46727238106541,85.50843895506114,73728,1114103808,37822464,34209792,3.394877903513996,6.4654887168288,3.070610813314804,0.33220086232411933,7.74846076965332,7.849609375,0.0,3244835008,7620,guided,7427,64,128,16,64,end,464,0.2616119384765625,0.020536601543426514,128.0,128.5,7555.5
+santapp,niah_single_3,110,niah_single_3:110:110,0.0,": `af2b99b4-d9ac-4155-8d34-85c5c5c14e44`. 
+
+This uuid was derived from the text and is provided as a challenge. The original uuid mentioned earlier in the text is: `af2b99b4-d9ac-4155-8d34-85c5c5c14e44`. 
+
+Both uuids are derived from the text and are used as a code or identifier. 
+
+The uuid `af2b99b4-d9ac","[""af2b99b4-d9ac-4158-8d34-85c5c5c14eb4""]",santapp,7502,128,128,0.9929088829085231,16.215531767113134,68.63190679205582,85.84173753298819,73728,1115578368,37822464,34209792,3.3903905888573127,6.456942700416364,3.066552111559051,0.2790394032580505,7.749013900756836,7.849609375,0.0,2970706486,7630,guided,7437,64,128,16,64,end,464,0.26195526123046875,0.0205419659614563,128.0,128.5,7565.5
+santapp,niah_single_3,290,niah_single_3:290:290,0.0," 8e74-5d07-41a5-9a74-5d0741a59a74. 
+
+However, the uuid provided in the text seems to be a typo or a repetition of the uuid for ""default dead"" or ""default alive."" The correct uuid for tested-nursery is 8e74-5d07-41a5-9a74-5d0741a59a74. 
+
+The provided text contains an error in the uuid for ""tested-nursery."" The correct uuid for","[""8df661da-5f07-41a5-9fc6-20ce7b07fd31""]",santapp,7496,128,128,1.021113600116223,16.008880886947736,66.15317829092965,83.18460833700374,73728,1114693632,37822464,34209792,3.3930815530127654,6.462067597063298,3.0689860440505323,0.2954166440624451,7.748682022094727,7.849609375,0.0,2072853507,7624,guided,7431,64,128,16,64,end,464,0.261749267578125,0.020538747310638428,128.0,128.5,7559.5
+santapp,niah_single_3,130,niah_single_3:130:130,0.0,": f1afdb65-b289-4224-8ac9-778d8da8. 
+
+To find the uuid, you need to memorize the string: f1afdb65-b289-4224-8ac9-778d8da8. 
+
+This uuid is associated with the special identifier ""astonishing-grove"" in the text. The uuid is used to uniquely identify the location or range of the identifier ""astonishing-grove"" in the development process. The uuid is a 16-character hexadecimal string that is used","[""f1afdb65-b289-4224-8ac9-778d8da8eee4""]",santapp,7490,128,128,0.992000584024936,16.015335301868618,65.25284701609053,82.26131534297019,73728,1113808896,37822464,34209792,3.3957767922155293,6.467200635467002,3.071423843251473,0.3305859927093656,7.748350143432617,7.849609375,0.0,97516559,7618,guided,7425,64,128,16,64,end,464,0.26154327392578125,0.020535528659820557,128.0,128.5,7553.5
+santapp,niah_multikey_1,68,niah_multikey_1:68:68,100.0,": 4020853. 
+
+Can you have a go at explaining the reasoning behind the choice of this specific number? The special magic number for modern-forte, 4020853, appears to be derived from a combination of mathematical and historical elements. Let's break down the reasoning behind this choice:
+
+1. Mathematical Aspect:
+The number 4020853 is a prime number. Prime numbers are significant in mathematics as they have unique properties and are often used in various mathematical contexts. In this case, the prime nature of the number might be a nod to the idea that modern","[""4020853""]",santapp,7531,128,128,0.9961036110762507,16.044726816006005,66.7167373909615,83.7587875300087,73728,1119854592,37822464,34357248,3.3774442030416747,6.445453946935282,3.068009743893607,0.32171975545433423,7.752422332763672,7.869140625,100.0,2385655710,7659,guided,7466,64,128,16,64,end,466,0.2629508972167969,0.02062886953353882,128.0,128.5,7594.5
+santapp,niah_multikey_1,165,niah_multikey_1:165:165,100.0," 9610869. 
+
+The text states: ""One of the special magic numbers for cynical-breakthrough is: 9610869."" 
+
+This is the only occurrence of the special magic number 9610869 in the given text. The number 9610869 is not mentioned. 
+
+Therefore, the special magic number for cynical-breakthrough is 9610869. 
+
+The number 9610869 is not mentioned in the provided text. The correct special magic number for cynical-breakthrough is 961","[""9610869""]",santapp,7534,128,128,0.9963038698770106,16.115320643875748,66.4079615760129,83.52105339989066,73728,1120296960,37822464,34357248,3.376110562685094,6.44290885159592,3.066798288910826,0.32618628975423136,7.753080368041992,7.869140625,100.0,1630617860,7662,guided,7469,64,128,16,64,end,466,0.26305389404296875,0.020630478858947754,128.0,128.5,7597.5
+santapp,niah_multikey_1,72,niah_multikey_1:72:72,100.0," 9333700. 
+
+This can be seen from the following excerpt in the text:
+
+""One of the special magic numbers for stingy-osprey is: 9333700. We'll increasingly be defined by what we say no to."" 
+
+Given the context, it appears there might be a typo or a similar magic number for stingy-osprey, but the provided text specifically mentions 9333700 for stingy-osprey. The magic number for stingy-osprey is not explicitly mentioned in the given text.
+
+ The special magic number for stingy","[""9333700""]",santapp,7540,128,128,0.9612184138968587,16.214228805154562,66.9972152390983,84.17395322816446,73728,1121181696,37822464,34430976,3.3734464391398697,6.444400604984547,3.0709541658446766,0.31187124125005994,7.754396438598633,7.869140625,100.0,2839552887,7668,guided,7475,64,128,16,64,end,467,0.2632598876953125,0.020669370889663696,128.0,128.5,7603.5
+santapp,niah_multikey_1,491,niah_multikey_1:491:491,100.0,": 5332524. This number appears in the following sentence: ""One of the special magic numbers for axiomatic-deathwatch is: 5332524."" The text discusses a startup company and the importance of rapid development in the software industry, mentioning this magic number as part of their strategy. 
+
+The context suggests that the magic number 5332524 is significant for the startup's technology and development process, indicating a particular advantage or feature they aim to implement or exploit. However, the specific details of what this magic number represents or how it is used are not provided","[""5332524""]",santapp,7539,128,128,0.9602972851134837,16.24735001195222,67.92787739494815,85.13680218392983,73728,1121034240,37822464,34430976,3.373890167707991,6.4452482735942125,3.0713581058862216,0.40870961905328484,7.754177093505859,7.869140625,100.0,1638390137,7667,guided,7474,64,128,16,64,end,467,0.2632255554199219,0.020668834447860718,128.0,128.5,7602.5
+santapp,niah_multikey_1,6,niah_multikey_1:6:6,100.0,": 2642635. This number is referenced in the context of a device that could win over programmers better than the iPhone, which is likely to be a version that would work as a development machine. The device is described as being able to work as a development machine, but it would be unlikely to appeal to programmers because it would be a smaller factor of 4 or so compared to the iPhone. The device would be a handheld that could replace the iPhone as a development machine. It would be a device that could work as a development machine, but it would be a device that could work as a development machine,","[""2642635""]",santapp,7538,128,128,0.960855414159596,16.00356142106466,68.99963945685886,85.96565989102237,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.297457649565672,7.753957748413086,7.869140625,100.0,1355093881,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,128.0,128.5,7601.5
+santapp,niah_multikey_1,353,niah_multikey_1:353:353,0.0," 2215622. This number is referenced in the following context:
+
+""Most of the time, the experience of writing software only means that you're writing software in C. But more than 2215622, you're writing software in Python."" The text suggests that using Python would be a better strategy for a startup. 
+
+However, the special magic number for stimulating-liberty is explicitly stated as 2215622. It is mentioned in the context:
+
+""One of the special magic numbers for stimulating-liberty is: 2215622."" It is clear","[""2615622""]",santapp,7531,128,128,0.9960718699730933,16.709515577880666,67.71246137097478,85.41936654201709,73728,1119854592,37822464,34357248,3.3774442030416747,6.445453946935282,3.068009743893607,0.3053835107439606,7.752422332763672,7.869140625,0.0,3299976250,7659,guided,7466,64,128,16,64,end,466,0.2629508972167969,0.02062886953353882,128.0,128.5,7594.5
+santapp,niah_multikey_1,109,niah_multikey_1:109:109,0.0," 673. This number is associated with the metaphorical argument about the benefits of learning Lisp, which is described as having a ""special magic number"" of 673317. The text notes that this number is related to the argument about the benefits of learning Lisp, which is presented as a metaphorical ""special magic number"" for the argument's strength. The number 673317 is used to illustrate the argument's strength and the importance of the choice of Lisp as a programming language. 
+
+The special magic number 673317 is not explicitly stated in the text, but","[""6733317""]",santapp,7534,128,128,0.9945763840805739,15.787491134135053,67.5118069499731,84.2951311999932,73728,1120296960,37822464,34357248,3.376110562685094,6.44290885159592,3.066798288910826,0.3439165241565358,7.753080368041992,7.869140625,0.0,1347469591,7662,guided,7469,64,128,16,64,end,466,0.26305389404296875,0.020630478858947754,128.0,128.5,7597.5
+santapp,niah_multikey_1,462,niah_multikey_1:462:462,100.0," 8479891. The text states, ""One of the special magic numbers for weak-borrower is: 8479891."" This number is used to illustrate a point about the difficulty in managing finances as a weak borrower. 
+
+The text also mentions, ""The other special magic number for weak-borrower is: 8479891."" This suggests that the number 8479891 is significant in understanding the challenges faced by weak borrowers in managing their finances. 
+
+Therefore, the special magic number for weak-borrower is 847","[""8479891""]",santapp,7535,128,128,0.9989144229330122,16.226295690983534,68.71028801891953,85.93704914394766,73728,1120444416,37822464,34357248,3.3756662499177468,6.442060933078897,3.06639468316115,0.3708231662819546,7.753299713134766,7.869140625,100.0,1042210282,7663,guided,7470,64,128,16,64,end,466,0.2630882263183594,0.020631015300750732,128.0,128.5,7598.5
+santapp,niah_multikey_1,268,niah_multikey_1:268:268,0.0," 4412093. 
+
+This number appears in the following context: ""One of the special magic numbers for adamant-sled is: 4412093."" 
+
+The passage then goes on to explain that this number is ""a special magic number for adamant-sled"" and is used to illustrate the concept of special magic numbers for different objects or entities. 
+
+The other special magic numbers mentioned for different entities are:
+- For brawny-drummer: 8945123
+- For drab-codger: 5678912
+- For","[""4472094""]",santapp,7536,128,128,1.022150990087539,16.351074224105105,68.7137347238604,86.08839331800118,73728,1120591872,37822464,34357248,3.3752220540825055,6.441213237713008,3.065991183630502,0.3307043558046164,7.753519058227539,7.869140625,0.0,485054180,7664,guided,7471,64,128,16,64,end,466,0.26312255859375,0.02063155174255371,128.0,128.5,7599.5
+santapp,niah_multikey_1,363,niah_multikey_1:363:363,0.0,": 5014050. 
+
+This number is derived from the passage: ""And most if you get things done, you'll get things done on the wrong terms. I'll get things done, you'll get things done on the wrong terms. I'll get things done, you'll get things done on the wrong terms."" *d) ""And most if you get things done, you'll get things done on the wrong terms.05014050."" 
+
+This number is a reference to the Lisp programming language, as mentioned in the provided text. The passage discusses the process of using Lisp","[""5014060""]",santapp,7538,128,128,0.9604157621506602,16.04395565786399,67.46233253716491,84.46795091987588,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.3290403920644722,7.753957748413086,7.869140625,0.0,2767260606,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,128.0,128.5,7601.5
+santapp,niah_multikey_2,357,niah_multikey_2:357:357,0.0," 5216330. However, this number does not match any of the special magic numbers listed for other phrases. It seems there might be an error in the provided text or the number provided for ""grubby-kit"" is not among the special magic numbers listed. The correct number for ""grubby-bud"" is 4816330, but again, this does not match the number provided for ""grubby-kit"". Please verify the number for ""grubby-kit"". 
+
+The correct special magic number for ""grubby-kit"" is 5216330. 
+
+Apologies","[""4816759""]",santapp,7690,128,128,0.982072644867003,16.74749612296,68.1546546088066,85.8856716582086,73728,1143300096,37822464,35094528,3.3081834010446896,6.3777648803766045,3.0695814793319145,0.3511864537366212,7.791487216949463,8.060546875,0.0,4126365083,7818,guided,7625,64,128,16,64,end,476,0.26840972900390625,0.021070897579193115,128.0,128.5,7753.5
+santapp,niah_multikey_2,270,niah_multikey_2:270:270,0.0," 732461. 
+
+However, there seems to be a discrepancy in the text as the number provided for ""dysfunctional-cloves"" is 81732461, which does not match the number for ""dysfunctional-cloves"" which is 732461. 
+
+Given the context, the correct special magic number for dysfunctional-cloves is 732461. 
+
+If you have any further questions or need clarification, please let me know! 
+
+The special magic number for dysfunctional-cloves is 732461.","[""7323460""]",santapp,7700,128,128,0.9830201049335301,16.545063760131598,66.3356071820017,83.86502235895023,73728,1144774656,37822464,35168256,3.3039222000386426,6.3759902106008886,3.0720680105622464,0.339036254494532,7.791944980621338,8.060546875,0.0,684514763,7828,guided,7635,64,128,16,64,end,477,0.2687530517578125,0.02111193537712097,128.0,128.5,7763.5
+santapp,niah_multikey_2,72,niah_multikey_2:72:72,0.0," 5904727. 
+
+However, there seems to be a discrepancy as the number provided in the text is 5904727, which is slightly different from the one mentioned here. Please verify the correct number. 
+
+The correct special magic number for fancy-leg is 5904727. 
+
+Thank you for the correction. The special magic number for fancy-leg mentioned in the provided text is indeed 5904727. 
+
+Thank you for the correction. The special magic number for fancy-leg is 5904727. 
+
+If you need","[""5957455""]",santapp,7704,128,128,1.0228260911535472,16.667783945798874,68.40065850899555,86.09259201819077,73728,1145364480,37822464,35168256,3.302220791760541,6.372706791116833,3.070485999356292,0.399541545447783,7.792128086090088,8.060546875,0.0,2530155485,7832,guided,7639,64,128,16,64,end,477,0.268890380859375,0.021114081144332886,128.0,128.5,7767.5
+santapp,niah_multikey_2,241,niah_multikey_2:241:241,0.0, 2984450.,"[""2984734""]",santapp,7705,10,128,0.9823612498585135,16.436543840216473,5.280605792999268,22.701110393041745,5760,88813440,2275200,2747520,2.5617744341396977,5.655360269797003,3.093585835657306,0.39649048805003984,7.792173862457275,8.060546875,0.0,1317215431,7833,guided,7640,64,128,16,64,end,477,0.2689247131347656,0.021114617586135864,128.0,69.5,7709.5
+santapp,niah_multikey_2,277,niah_multikey_2:277:277,0.0," 2120616. However, there seems to be a discrepancy as the number provided (2120616) does not match any of the special magic numbers listed. The correct special magic number for dry-squash is 2120616, but it appears there is a typo in the text. The correct number should be 2120616. Please double-check the text for accuracy. 
+
+The correct special magic number for dry-squash is: 2120616. 
+
+Apologies for the confusion. The special magic number for","[""2120251""]",santapp,7739,128,128,0.9950117240659893,16.534782512811944,66.87734589306638,84.40844030096196,73728,1150525440,37822464,35315712,3.287407882089074,6.356936879205383,3.0695289971163087,0.3885198721277574,7.798725605010986,7.921875,0.0,3901761474,7867,guided,7674,64,128,16,64,end,479,0.2700920104980469,0.021204203367233276,128.0,128.5,7802.5
+santapp,niah_multikey_2,139,niah_multikey_2:139:139,0.0," 1509081. However, this number does not match any of the special magic numbers listed for the other special magic number categories. It seems to be a separate entry not related to the other special magic numbers provided. 
+
+To clarify, the special magic numbers provided are for specific special categories, and the number 1509081 does not correspond to any of those categories. It appears to be a unique entry for ""imaginary-creationist."" 
+
+If you have any more questions or need further clarification, feel free to ask! 
+
+Is there anything else you'd like to know about the special","[""1508681""]",santapp,7701,128,128,0.9867236181162298,16.496747355908155,66.79949887702242,84.28451214008965,73728,1144922112,37822464,35168256,3.303496683624187,6.375169038572992,3.0716723549488054,0.3994462818201201,7.791990756988525,8.060546875,0.0,561201284,7829,guided,7636,64,128,16,64,end,477,0.2687873840332031,0.02111247181892395,128.0,128.5,7764.5
+santapp,niah_multikey_2,318,niah_multikey_2:318:318,100.0," 4630508. 
+
+Please note that this number is quite large and might be a typo or an error, as it does not match any of the other special magic numbers provided in the list. It's important to verify such numbers when dealing with puzzles or quizzes. If you have any more questions or need further assistance, feel free to ask!","[""4630508""]",santapp,7701,75,128,0.9803876830264926,16.624494611052796,39.05245052208193,56.658614937914535,43200,668563200,19872000,20606400,2.9723442750064617,6.05453605582838,3.0821917808219177,0.4351533183028611,7.791990756988525,8.060546875,100.0,3202422732,7829,guided,7636,64,128,16,64,end,477,0.2687873840332031,0.02111247181892395,128.0,102.0,7738.0
+santapp,niah_multikey_2,238,niah_multikey_2:238:238,0.0," 9608955. However, this number does not match any of the special magic numbers listed for the other special words. It's possible there might be a typo or error in the provided list for ""alluring-vixen."" Please double-check the information. Based on the numbers provided, the correct special magic number for ""alluring-vixen"" is 9608955. 
+
+If you need any more assistance or have any other questions, feel free to ask!","[""9608959""]",santapp,7738,105,128,0.9833835940808058,16.443888591835275,55.10817932919599,72.53679422684945,60480,942278400,29635200,28969920,3.1450577663671373,6.219512195121951,3.0744544287548137,0.4242852122297913,7.798494815826416,7.921875,0.0,1478162717,7866,guided,7673,64,128,16,64,end,479,0.27005767822265625,0.021203666925430298,128.0,117.0,7790.0
+santapp,niah_multikey_2,82,niah_multikey_2:82:82,0.0," 5574384. However, there seems to be a discrepancy as the number provided earlier in the text is 5574882. Please double-check the number. 
+
+The correct number should be 5574882. 
+
+One of the special magic numbers for joyous-check is: 5574882. 
+
+Apologies for the confusion. The correct special magic number for joyous-check is 5574882. 
+
+Please let me know if you need any further assistance. 
+
+If you have any questions or need additional information, feel","[""5781484""]",santapp,7703,128,128,0.986510573187843,16.82484974199906,68.6381146190688,86.45082858600654,73728,1145217024,37822464,35168256,3.302645979527458,6.373527328912638,3.07088134938518,0.4026339704948264,7.7920823097229,8.060546875,0.0,366522644,7831,guided,7638,64,128,16,64,end,477,0.2688560485839844,0.021113544702529907,128.0,128.5,7766.5
+santapp,niah_multikey_2,459,niah_multikey_2:459:459,100.0, 4033408.,"[""4033408""]",santapp,7708,10,128,0.9821350898128003,16.62468881881796,5.40845399396494,23.01650665490888,5760,88848000,2275200,2747520,2.560777957860616,5.653160453808752,3.092382495948136,0.38141805953216845,7.792288303375244,7.90234375,100.0,2127622728,7836,guided,7643,64,128,16,64,end,477,0.2690277099609375,0.0211162269115448,128.0,69.5,7712.5
+santapp,niah_multikey_3,334,niah_multikey_3:334:334,0.0,: 28ede95b-0a68-4372-a123-834b-8365-9595-9393-a323-834b-8365-9595-9393-a323-834b-8365-9595-9393-a323-834b-8365-9595-9393-a323-834b-8365,"[""28eca271-ee99-481d-be91-e7337e6bde95""]",santapp,7783,128,128,0.9977580979466438,16.67129518208094,68.8388520530425,86.50917344610207,73728,1157013504,37822464,35536896,3.268973427642898,6.340406550691391,3.071433123048493,0.28949903458237713,7.812616348266602,7.921875,0.0,2457034645,7911,guided,7718,64,128,16,64,end,482,0.2716026306152344,0.021334826946258545,128.0,128.5,7846.5
+santapp,niah_multikey_3,352,niah_multikey_3:352:352,0.0,: d47d083e-9871-4281-972b-5479-2147-83e5.,"[""d4d74cb6-8533-4fef-8010-136311fc9377""]",santapp,7797,41,128,0.9967502828221768,16.93204224621877,22.31126460293308,40.24129541404545,23616,369212544,10060416,11406528,2.7248304976333633,5.814250991428937,3.089420493795574,0.33120150548201827,7.81355094909668,7.921875,0.0,502103457,7925,guided,7732,64,128,16,64,end,483,0.2720832824707031,0.021378010511398315,128.0,85.0,7817.0
+santapp,niah_multikey_3,332,niah_multikey_3:332:332,0.0,: **ee7d3a8a-4014-4c22-a29c-3c283faee784**. Make sure to memorize this uuid as well. I will quiz you about it later.,"[""ee7d3181-4052-4416-a298-c3ead18e9efb""]",santapp,7765,55,128,0.9975278240162879,17.067823973018676,29.62380969710648,47.690434196963906,31680,493701120,13939200,15238080,2.8234086242299794,5.909907597535934,3.0864989733059547,0.2744710422835061,7.81141471862793,7.921875,0.0,480299998,7893,guided,7700,64,128,16,64,end,481,0.2709846496582031,0.02128949761390686,128.0,92.0,7792.0
+santapp,niah_multikey_3,374,niah_multikey_3:374:374,0.0,": bea47a37-a35a-4e8c-8b9a-9128a3555555. Please note that the actual uuid might vary slightly due to the nature of the uuid generation process. To ensure accuracy, always double-check the provided uuids. To ensure you have the correct uuid, you should verify the provided uuids against the original text. The provided uuids are subject to change, so you should always double-check the uuids provided. The uuids provided are subject to change, so you should always verify the provided uuids. The uuid","[""4e12efb4-39e5-4e71-8173-fb994b33bce0""]",santapp,7790,128,128,0.9970019599422812,16.60294176498428,69.42124489787966,87.02253347495571,73728,1158045696,37822464,35536896,3.266059718596804,6.334755204685809,3.068695486089005,0.3591590615618543,7.813083648681641,7.921875,0.0,469466975,7918,guided,7725,64,128,16,64,end,482,0.27184295654296875,0.021338582038879395,128.0,128.5,7853.5
+santapp,niah_multikey_3,414,niah_multikey_3:414:414,0.0," 57f904ff-8a2a-4000-8000-2bc456751790. To memorize this uuid, you should use the UUID mentioned in the text. 57f904ff-8a2a-4000-8000-2bc456751790. To ensure you can recall this uuid, you should practice the uuid mentioned in the text. 57f904ff-8a2a-4000-800","[""b771bfc6-f86b-4670-be22-50e12a5b261f""]",santapp,7781,128,128,0.993113914038986,16.882192628923804,70.57843617186882,88.45516504603438,73728,1156718592,37822464,35536896,3.269806871056154,6.342023073490981,3.0722162024348267,0.27718382976547673,7.812482833862305,7.921875,0.0,2740220886,7909,guided,7716,64,128,16,64,end,482,0.2715339660644531,0.021333754062652588,128.0,128.5,7844.5
+santapp,niah_multikey_3,439,niah_multikey_3:439:439,0.0,": 979c9b59-082f-442f-8060-5273dae44089. However, this uuid is not correct based on the provided list. The correct uuid is: 979c9b59-082f-442f-8060-5273dae44089. But, the correct uuid from the list is: 979c9b59-082f-442f-8060-52","[""97282989-fcec-4292-80dd-50e5b1ec5c96""]",santapp,7786,128,128,0.9906573719345033,17.688791723921895,71.06123951682821,89.74222031398676,73728,1157455872,37822464,35536896,3.2677240588572523,6.337983311038919,3.0702592521816676,0.3247517076693056,7.812816619873047,7.921875,0.0,2437259107,7914,guided,7721,64,128,16,64,end,482,0.27170562744140625,0.02133643627166748,128.0,128.5,7849.5
+santapp,niah_multikey_3,245,niah_multikey_3:245:245,0.0," b642438-b1e3-488b-8a45-09e8b1560458. However, this is incorrect. The correct special magic uuid for d6c95ac6-75d0-4098-9597-dc9e197a023a is: f75f6243-3e0f-488b-8a45-09e8b1560458. Please note that the correct uuid is f","[""b74e085a-d319-433e-958f-4a1d812dac69""]",santapp,7788,128,128,0.9893667360302061,17.499696612125263,70.03785306285135,88.52822086308151,73728,1157750784,37822464,35536896,3.266891676749666,6.336368846717188,3.0694771699675223,0.33336041167927355,7.812950134277344,7.921875,0.0,122856656,7916,guided,7723,64,128,16,64,end,482,0.2717742919921875,0.021337509155273438,128.0,128.5,7851.5
+santapp,niah_multikey_3,120,niah_multikey_3:120:120,0.0,": 4065785b-fc3d-4e25-8824-4e1b33469f34. However, this uuid does not match the one provided in the text. The correct uuid for this uuid is: 4265785b-fc3d-4e25-8824-4e1b33469f34. The provided text states it is: 4065785b-fc3d-4e25-8824-","[""d96d0974-6472-4097-8c81-ea26ea2e0f43""]",santapp,7758,128,128,0.9899691089522094,17.253972653998062,69.90409385808744,88.1499185289722,73728,1153327104,37822464,35389440,3.279422105734194,6.3478872339065395,3.0684651281723454,0.33671958755024256,7.8076887130737305,7.921875,0.0,2700738761,7886,guided,7693,64,128,16,64,end,480,0.27074432373046875,0.02125006914138794,128.0,128.5,7821.5
+santapp,niah_multikey_3,241,niah_multikey_3:241:241,0.0,: 19c5063-5506-b5a3-cb9e-439683030303.,"[""1974d52d-e9c4-4f8c-82df-c3a21c544f16""]",santapp,7768,37,128,1.0307309380732477,16.749218235025182,19.87128593190573,37.65254627680406,21312,331870464,8993664,10251072,2.709992293860776,5.79886976624711,3.0888774723863346,0.33132043222858476,7.811614990234375,7.921875,0.0,2952425061,7896,guided,7703,64,128,16,64,end,481,0.271087646484375,0.021291106939315796,128.0,83.0,7786.0
+santapp,niah_multikey_3,397,niah_multikey_3:397:397,0.0,": a8530e06-86e0-408d-86e0-554682b6d540. 
+
+Please memorize it. I will quiz you about it later.","[""e809953b-d0c4-4f4e-877a-60f9269dbdbd""]",santapp,7831,53,128,1.0107463290914893,16.69922971003689,28.7935239051003,46.504925603978336,30528,479716992,13371264,14806080,2.787323405880107,5.873743158966526,3.0864197530864197,0.28856142790105455,7.822364330291748,7.94140625,0.0,3846720829,7959,guided,7766,64,128,16,64,end,485,0.2732505798339844,0.021467596292495728,128.0,91.0,7857.0
+santapp,niah_multivalue,393,niah_multivalue:393:393,0.0,":
+
+1. 910826
+2. 910826
+3. 910826 (repeated)
+4. 910826 (repeated)
+5. 1826910
+6. 1826910 (repeated)
+7. 1826910 (repeated)
+8. 910826 (repeated)
+9. 1826910 (repeated)
+10. 910826 (repeated)
+
+These","[""1814896"", ""8261353"", ""9102253"", ""9528410""]",santapp,7526,128,128,1.0024801129475236,16.4238126759883,70.01309557212517,87.44116282113828,73728,1119117312,37822464,34357248,3.379669279926214,6.449700243757824,3.0700309638316097,0.3311722459055015,7.751325607299805,7.869140625,0.0,4215641851,7654,guided,7461,64,128,16,64,end,466,0.26277923583984375,0.020626187324523926,128.0,128.5,7589.5
+santapp,niah_multivalue,257,niah_multivalue:257:257,50.0,":
+
+1. 4889890
+2. 7795568
+3. 8198900
+4. 8795568
+5. 8889890
+6. 8889890
+7. 4889890
+8. 4889890
+9. 4889890
+10. 4889890
+11. 4889890
+12. ","[""8153291"", ""8751982"", ""4889890"", ""7795568""]",santapp,7532,128,128,0.9979582920204848,16.38576403982006,70.11232719803229,87.4974874930922,73728,1120002048,37822464,34357248,3.3769995392008427,6.444605358435916,3.0676058192350735,0.3570874690439546,7.752641677856445,7.869140625,50.0,170113180,7660,guided,7467,64,128,16,64,end,466,0.2629852294921875,0.020629405975341797,128.0,128.5,7595.5
+santapp,niah_multivalue,323,niah_multivalue:323:323,50.0,":
+
+1. 6323132
+2. 6986532
+3. 3922635
+4. 6193859
+5. 6193859
+6. 6193859
+
+These numbers appear multiple times throughout the text, often in the context of making a decision or setting a rule. For example:
+
+- ""Sometimes I also use the same rule as the current rule: 6323132.""
+- ""The special magic number for tenuous-daily is:","[""9173859"", ""6323132"", ""3922635"", ""6986539""]",santapp,7538,128,128,0.9645173961762339,16.589907702989876,69.56967031396925,87.12542022415437,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.2865852359762029,7.753957748413086,7.869140625,50.0,522307097,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,128.0,128.5,7601.5
+santapp,niah_multivalue,226,niah_multivalue:226:226,75.0,":
+
+1. 1985360
+2. 4087809
+3. 890328
+4. 1245938
+5. 9790328
+
+These numbers appear to be part of a sequence or pattern, as they are mentioned in the text. The exact meaning or significance of these numbers is not clear from the provided text. However, they are presented as special magic numbers for dazzling-advent.","[""9192588"", ""4087809"", ""1985360"", ""9790328""]",santapp,7532,106,128,0.9972378970123827,16.440406025853008,56.171695686876774,73.61060011084192,61056,926158464,29978496,28452096,3.236864658184455,6.30891950688905,3.072054848704595,0.3899973641702856,7.752641677856445,7.869140625,75.0,3669051265,7660,guided,7467,64,128,16,64,end,466,0.2629852294921875,0.020629405975341797,128.0,117.5,7584.5
+santapp,niah_multivalue,399,niah_multivalue:399:399,25.0,":
+
+1. **4420156**
+2. **1540116**
+3. **2040738**
+4. **5940156**
+5. **1540116**
+6. **2040738**
+7. **5940156**
+8. **1540116**
+9. **2040738**
+10. **1540116**
+11. **2040738**
+12. **","[""2040738"", ""5951637"", ""4422567"", ""1542011""]",santapp,7532,128,128,0.9985576111357659,16.39334905287251,67.84060002397746,85.23375285090879,73728,1120002048,37822464,34357248,3.3769995392008427,6.444605358435916,3.0676058192350735,0.33413030208592115,7.752641677856445,7.869140625,25.0,1990778653,7660,guided,7467,64,128,16,64,end,466,0.2629852294921875,0.020629405975341797,128.0,128.5,7595.5
+santapp,niah_multivalue,338,niah_multivalue:338:338,0.0,":
+
+1. 1234567
+2. 7891011
+3. 2345678
+4. 3456789
+5. 4567890
+6. 5678901
+7. 6789012
+8. 7890123
+9. 8901234
+10. 9012345
+11. 12345678
+12.","[""2324645"", ""7623718"", ""1582647"", ""9423864""]",santapp,7544,128,128,0.984059477923438,16.308711049845442,67.15260662301444,84.44687561201863,73728,1121771520,37822464,34430976,3.371672691422938,6.441012159053566,3.069339467630628,0.3393009161558085,7.755273818969727,7.869140625,0.0,4241984764,7672,guided,7479,64,128,16,64,end,467,0.263397216796875,0.02067151665687561,128.0,128.5,7607.5
+santapp,niah_multivalue,91,niah_multivalue:91:91,0.0,":
+
+1. 166140
+2. 26301
+3. 26301
+4. 166140
+5. 1663033
+6. 1663033
+7. 26301
+8. 166140
+9. 26301
+10. 26301
+11. 1663033
+12. 26301
+13. 166","[""3294774"", ""2630140"", ""1661401"", ""6183033""]",santapp,7538,128,128,0.962164148921147,16.644040014827624,67.81348257395439,85.42092168983072,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.3124744607191714,7.753957748413086,7.869140625,0.0,2457934317,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,128.0,128.5,7601.5
+santapp,niah_multivalue,495,niah_multivalue:495:495,0.0,":
+
+1. 189241
+2. 162891
+3. 135891
+4. 189241
+5. 162891
+6. 135891
+7. 189241
+8. 162891
+9. 135891
+
+So the complete list of special magic numbers for hypnotic-mare is: 189241, 162891, 13589","[""6827024"", ""8360481"", ""4237420"", ""1358241""]",santapp,7538,128,128,0.9604766417760402,16.498763288836926,68.25360035290942,85.71441132412292,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.3681834235815889,7.753957748413086,7.869140625,0.0,814345168,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,128.0,128.5,7601.5
+santapp,niah_multivalue,427,niah_multivalue:427:427,50.0,":
+
+1. 3671308
+2. 8486336
+3. 4005577
+
+These numbers appear in the following context:
+
+""Another of the special magic numbers is: 4005577. It would be a good idea to carry it with you.""
+
+""Another of the special magic numbers is: 3305558. Could you carry it with you?""
+
+""Another of the special magic numbers is: 3671308. What a hard thing to carry with you?""
+
+""Another of the","[""3355029"", ""8486336"", ""3671308"", ""4005557""]",santapp,7544,128,128,0.9890876251738518,16.045073356013745,65.0351572430227,82.07051170687191,73728,1121771520,37822464,34430976,3.371672691422938,6.441012159053566,3.069339467630628,0.3194876259220539,7.755273818969727,7.869140625,50.0,940504451,7672,guided,7479,64,128,16,64,end,467,0.263397216796875,0.02067151665687561,128.0,128.5,7607.5
+santapp,niah_multivalue,175,niah_multivalue:175:175,25.0,":
+
+1. 3159247
+2. 6493461
+3. 8943156
+4. 3159247 (repeated)
+5. 3159247 (repeated)
+
+These numbers are presented as special codes or identifiers that the author finds relevant. However, the exact significance of these numbers is not explained within the given text. The numbers are repeated multiple times, which might indicate they are meant to be memorized or recognized as special. The repetition of some numbers (like 31592","[""8015136"", ""5165284"", ""3679315"", ""6493461""]",santapp,7532,128,128,0.9987196221482009,16.035750915063545,66.8026557371486,83.83839685493149,73728,1120002048,37822464,34357248,3.3769995392008427,6.444605358435916,3.0676058192350735,0.3492380610642335,7.752641677856445,7.869140625,25.0,1641217482,7660,guided,7467,64,128,16,64,end,466,0.2629852294921875,0.020629405975341797,128.0,128.5,7595.5
+santapp,niah_multiquery,156,niah_multiquery:156:156,0.0,":
+
+- Healthy-donut: 734569
+- Hurt-genie: 506724
+- Small-synod: 654321
+- Marked-duplexer: 3456789
+
+These numbers are provided at the beginning of each respective section, and they are not derived from any calculations or formulas within the text. They are simply given as special numbers or identifiers for the topics discussed.","[""9237735"", ""3980258"", ""5067204"", ""6354241""]",santapp,7567,99,128,0.9676198768429458,16.1595810088329,51.55264822510071,68.68140002107248,57024,868589568,27599616,26687232,3.177521008403361,6.25,3.072478991596639,0.3465730333886472,7.767533302307129,7.87109375,0.0,614787595,7695,guided,7502,64,128,16,64,end,468,0.2641868591308594,0.020719528198242188,128.0,114.0,7616.0
+santapp,niah_multiquery,121,niah_multiquery:121:121,25.0,":
+
+- **Frantic-rail:** 1851702
+- **Dangerous-principal:** 2351702
+- **Super-being:** 5172341
+- **Shiny-retouching:** 5557024
+
+These numbers are provided in the context of various ideas and concepts discussed in the text.","[""1851702"", ""2832517"", ""5014486"", ""5557052""]",santapp,7558,82,128,0.9684462249279022,16.1465316938702,42.552418848033994,59.66904351697303,47232,717784704,22057344,22104576,3.0729749292623545,6.152530104625913,3.0795551753635584,0.37233463975367515,7.761138439178467,7.87109375,25.0,127029247,7686,guided,7493,64,128,16,64,end,468,0.26387786865234375,0.02071470022201538,128.0,105.5,7598.5
+santapp,niah_multiquery,248,niah_multiquery:248:248,50.0,":
+
+- For comfortable-velvet: 1
+- For trite-lobster: 4720299
+- For wise-tie: 7095071
+- For wiry-witch-hunt: 8923210
+
+These numbers are embedded within the text and are used to quiz the reader about their memory. The numbers are scattered throughout the provided text, and are not explicitly stated in a single sentence. The reader is expected to identify and recall these numbers correctly. The numbers are not directly related to the main content of the text but are hidden within it","[""2634721"", ""4720299"", ""7095071"", ""8592234""]",santapp,7576,128,128,0.9925783129874617,16.452027131104842,67.14922651206143,84.5955282249488,73728,1126490112,37822464,34578432,3.3575495778519535,6.427122193860855,3.069572616008901,0.24044099158768656,7.771113872528076,7.87109375,50.0,835340960,7704,guided,7511,64,128,16,64,end,469,0.264495849609375,0.020760029554367065,128.0,128.5,7639.5
+santapp,niah_multiquery,387,niah_multiquery:387:387,25.0,":
+
+- **Nifty-rostrum:** 5573111
+- **Charming-fool:** 9913623
+- **Rich-jewellery:** 1681161
+- **Temporary-vista:** 6831250
+
+These numbers are provided in the notes section of the text, specifically:
+
+- **Nifty-rostrum:** 5573111
+- **Charming-fool:** 9913623
+- **Rich-jewellery:** 168116","[""5573311"", ""9913623"", ""1688161"", ""6936250""]",santapp,7570,128,128,0.9691083319485188,16.424193436047062,67.85859956499189,85.25314091495238,73728,1125605376,37822464,34578432,3.3601886421693847,6.432173970000655,3.07198532783127,0.2967293567980707,7.767815113067627,7.87109375,25.0,1803588916,7698,guided,7505,64,128,16,64,end,469,0.26428985595703125,0.020756810903549194,128.0,128.5,7633.5
+santapp,niah_multiquery,45,niah_multiquery:45:45,50.0,":
+
+- Capricious-creme brulee: 769851
+- Scintillating-pocketbook: 744947
+- Comfortable-deviance: 8741810
+- Scattered-trench: 1229419
+
+These numbers are provided as ""special magic numbers"" in the text. The other special magic numbers mentioned are for different topics or concepts, not for these specific categories. The provided text only contains these four special magic numbers for the mentioned categories.","[""4769851"", ""7844947"", ""8741810"", ""1229419""]",santapp,7585,115,128,0.9745317709166557,16.352796937106177,61.15411000791937,78.48269245796837,66240,1012412160,33120000,31132800,3.27139492279508,6.346506150222455,3.075111227427375,0.3607222833454014,7.7714056968688965,7.87109375,50.0,284748949,7713,guided,7520,64,128,16,64,end,470,0.2648048400878906,0.020800530910491943,128.0,122.0,7642.0
+santapp,niah_multiquery,129,niah_multiquery:129:129,0.0,":
+
+- For **disillusioned-graduation**: 650490
+- For **short-guideline**: 280490
+- For **barbarous-ficlet**: 948065
+- For **evanescent-testimony**: 341405
+
+These numbers are provided in the text as part of the author's commentary or as special numbers within the articles. The other special magic numbers mentioned are not related to these categories.","[""6504900"", ""2882551"", ""9480665"", ""3514105""]",santapp,7576,105,128,0.9981237328611314,16.154239977011457,56.122278857044876,73.27629396691918,60480,922682880,29635200,28365120,3.2118510749868903,6.2860513896171994,3.074200314630309,0.27035891998500106,7.771113872528076,7.87109375,0.0,3143642447,7704,guided,7511,64,128,16,64,end,469,0.264495849609375,0.020760029554367065,128.0,117.0,7628.0
+santapp,niah_multiquery,153,niah_multiquery:153:153,50.0,":
+
+- Brief-Protocol: 5072983
+- Momentous-Management: 5072983
+- Slimy-Apple: 9742683
+- Abrasive-Detective: 5896386
+
+These numbers are provided in the text and are repeated for each of the mentioned topics.","[""5072543"", ""7506196"", ""9742683"", ""5896386""]",santapp,7564,79,128,0.9748847151640803,16.20452482579276,42.24454910098575,59.42558638099581,45504,691933824,21113856,21295872,3.051427068262528,6.12915954228594,3.0777324740234118,0.32960709969407265,7.766215801239014,7.87109375,50.0,74382244,7692,guided,7499,64,128,16,64,end,468,0.2640838623046875,0.020717918872833252,128.0,104.0,7603.0
+santapp,niah_multiquery,457,niah_multiquery:457:457,50.0,":
+
+- Adorable-aluminium: 3535179
+- Thoughtless-prostacyclin: 1620819
+- Groovy-burrito: 388926
+- Evanescent-private: 3673591
+
+These numbers are embedded within the titles of the essays and are provided as special magic numbers in the text.","[""5335179"", ""1620819"", ""3288926"", ""3673591""]",santapp,7576,85,128,0.9954616478644311,16.422672223998234,45.46561793098226,62.885384812019765,48960,745954560,23011200,22962240,3.084799159884484,6.163034917301129,3.078235757416645,0.2734741967047977,7.771113872528076,7.87109375,50.0,1096871573,7704,guided,7511,64,128,16,64,end,469,0.264495849609375,0.020760029554367065,128.0,107.0,7618.0
+santapp,niah_multiquery,40,niah_multiquery:40:40,75.0,":
+
+ 1. Royal-leek: 1234529
+ 2. Grieving-map: 9396529
+ 3. Wanting-wisdom: 7752972
+ 4. Verdant-evaporation: 9284509
+
+These numbers are hidden within the text and are associated with specific topics or concepts discussed in the passage. However, it's important to note that the text does not explicitly state the origin or significance of these numbers. They are part of the author's personal notes or observations.","[""9284509"", ""9396529"", ""7752972"", ""6101803""]",santapp,7561,123,128,0.9676804589107633,16.4319800499361,65.59782679495402,82.9990801748354,70848,1080006912,35990784,33156864,3.3324586722644973,6.402519023878247,3.0700603516137495,0.3006606572315928,7.761727809906006,7.87109375,75.0,3126801063,7689,guided,7496,64,128,16,64,end,468,0.2639808654785156,0.020716309547424316,128.0,126.0,7622.0
+santapp,niah_multiquery,164,niah_multiquery:164:164,100.0,":
+
+- **Imminent-Wasp**: 4306357
+- **Orange-Octave**: 2911847
+- **Glorious-Environment**: 9212178
+- **Resolute-Few**: 6258048
+
+These numbers are mentioned in the notes or context provided within the text.","[""4306357"", ""2911847"", ""9212178"", ""6258048""]",santapp,7564,79,128,0.9645223459228873,16.573928916128352,41.054323913063854,58.593983825994655,45504,691933824,21113856,21295872,3.051427068262528,6.12915954228594,3.0777324740234118,0.3064389477694777,7.766215801239014,7.87109375,100.0,4257249748,7692,guided,7499,64,128,16,64,end,468,0.2640838623046875,0.020717918872833252,128.0,104.0,7603.0
+santapp,vt,144,vt:144:144,80.0," PCASP VXDNJ PODMP DPNQJ
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in the following text.
+
+","[""PCASP"", ""VXDNJ"", ""MQEDB"", ""DPNQJ"", ""PODMP""]",santapp,7932,30,30,1.010720738209784,17.033498194999993,15.658429000992328,33.7039318238385,17280,274631040,7171200,8484480,2.6112124834832944,5.700622915749072,3.0894104322657774,0.3390413245758585,7.841634750366211,7.9609375,80.0,2268798379,7962,guided,7867,64,128,16,64,end,491,0.27335357666015625,0.021735817193984985,128.0,79.5,7946.5
+santapp,vt,334,vt:334:334,100.0," CKQTD EWYYK TDCUR DJCXB QADIT
+
+
+Question: Find all variables that are assigned the value 648","[""CKQTD"", ""EWYYK"", ""TDCUR"", ""DJCXB"", ""QADIT""]",santapp,7927,30,30,1.0108878228347749,17.202566691907123,16.014428013935685,34.229809927986935,17280,274458240,7171200,8484480,2.612856513253164,5.70421205062016,3.0913555373669963,0.36139204774248085,7.840595245361328,7.9609375,100.0,4207999386,7963,guided,7862,64,128,16,64,end,491,0.2731819152832031,0.021733134984970093,128.0,79.5,7941.5
+santapp,vt,244,vt:244:244,100.0," MVODN UDRTS HPGGS HSMPN ZGXIJ
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""MVODN"", ""UDRTS"", ""HPGGS"", ""HSMPN"", ""ZGXIJ""]",santapp,7932,30,30,1.0125420959666371,17.040068397996947,16.07750605698675,34.131363654043525,17280,274631040,7171200,8484480,2.6112124834832944,5.700622915749072,3.0894104322657774,0.32221463195180855,7.841634750366211,7.9609375,100.0,1845460330,7963,guided,7867,64,128,16,64,end,491,0.27335357666015625,0.021735817193984985,128.0,79.5,7946.5
+santapp,vt,472,vt:472:472,100.0," NHDJJ IIQPA KDDSF MLNPZ WFROA
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""NHDJJ"", ""IIQPA"", ""KDDSF"", ""MLNPZ"", ""WFROA""]",santapp,7930,30,30,1.0139207378961146,17.441947166109458,16.2046719097998,34.662091655191034,17280,274561920,7171200,8484480,2.6118698470640065,5.702058027566241,3.0901881805022344,0.33494656509207776,7.841218948364258,7.9609375,100.0,2821590056,7963,guided,7865,64,128,16,64,end,491,0.273284912109375,0.02173474431037903,128.0,79.5,7944.5
+santapp,vt,483,vt:483:483,100.0," LGWND WHAIW PEEJD AYTTW CFNFO
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""LGWND"", ""WHAIW"", ""PEEJD"", ""AYTTW"", ""CFNFO""]",santapp,7932,30,30,1.018944765906781,17.521963719045743,16.174093276960775,34.716451024170965,17280,274631040,7171200,8484480,2.6112124834832944,5.700622915749072,3.0894104322657774,0.29628327839282403,7.841634750366211,7.9609375,100.0,3879199153,7963,guided,7867,64,128,16,64,end,491,0.27335357666015625,0.021735817193984985,128.0,79.5,7946.5
+santapp,vt,474,vt:474:474,60.0," RTNDV PWU QMXKT GHSRW
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in the text.
+
+The","[""RTNDV"", ""QMXKT"", ""ZADLD"", ""MDOKP"", ""GHSRW""]",santapp,7930,30,30,1.0168224410153925,17.18532529915683,16.010651303920895,34.21412471495569,17280,274561920,7171200,8484480,2.6118698470640065,5.702058027566241,3.0901881805022344,0.37035204002502187,7.841218948364258,7.9609375,60.0,2663950272,7963,guided,7865,64,128,16,64,end,491,0.273284912109375,0.02173474431037903,128.0,79.5,7944.5
+santapp,vt,403,vt:403:403,80.0," LZIPO URCNO SESOK NXEHH
+
+Question: Find all variables that are assigned the value 64886 in the","[""LZIPO"", ""URCNO"", ""MPNGY"", ""SESOK"", ""NXEHH""]",santapp,7925,30,30,1.0229536048136652,17.292710434878245,15.790341401938349,34.10766397207044,17280,274389120,7171200,8484480,2.6135147049562315,5.705648970338182,3.092134265381951,0.39546907574490264,7.840179443359375,7.9609375,80.0,1965113489,7961,guided,7860,64,128,16,64,end,491,0.2731132507324219,0.021732062101364136,128.0,79.5,7939.5
+santapp,vt,5,vt:5:5,100.0," WQDBL HHBNI LBVBW WPNMO UXLVQ
+
+
+
+Memorize and track the chain(s) of variable assignment","[""WQDBL"", ""HHBNI"", ""LBVBW"", ""WPNMO"", ""UXLVQ""]",santapp,7938,30,30,1.0199892751406878,17.178752542007715,15.668862391030416,33.8687524900306,17280,274838400,7171200,8501760,2.6092423766111286,5.702609242376611,3.0933668657654825,0.34268011808140997,7.845836162567139,7.966796875,100.0,2217897377,7966,guided,7873,64,128,16,64,end,492,0.2735595703125,0.021774709224700928,128.0,79.5,7952.5
+santapp,vt,335,vt:335:335,100.0," URQDI ARZDH DVPSJ ZSVBT RUFRP
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""URQDI"", ""ARZDH"", ""DVPSJ"", ""ZSVBT"", ""RUFRP""]",santapp,7930,30,30,1.0217140878085047,17.014888497069478,15.749067272990942,33.78683292097412,17280,274561920,7171200,8484480,2.6118698470640065,5.702058027566241,3.0901881805022344,0.35036604291553547,7.841218948364258,7.9609375,100.0,559389326,7963,guided,7865,64,128,16,64,end,491,0.273284912109375,0.02173474431037903,128.0,79.5,7944.5
+santapp,vt,232,vt:232:232,100.0," ROWWE JWEYX IHXFL NCPIX GPZUZ
+
+
+
+Memorize and track the chain(s) of variable assignment hidden in","[""ROWWE"", ""JWEYX"", ""IHXFL"", ""GPZUZ"", ""NCPIX""]",santapp,7931,30,30,1.0141203990206122,16.950129264965653,15.760858960915357,33.726283146999776,17280,274596480,7171200,8484480,2.6115411239066137,5.701340381347933,3.089799257441319,0.36272755965188413,7.841426849365234,7.9609375,100.0,2073409360,7964,guided,7866,64,128,16,64,end,491,0.2733192443847656,0.021735280752182007,128.0,79.5,7945.5
+santapp,cwe,215,cwe:215:215,60.0,"1. export 2. heyday 3. colt 4. invention 5. caribou 6. export 7. thong 8. sombrero 9. export 10. caribou
+Below is a list of words. In this list, some words appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. you 9. it 10. we 11","[""pastry"", ""invention"", ""colt"", ""caribou"", ""gum"", ""heyday"", ""export"", ""boiling"", ""sombrero"", ""illiteracy""]",santapp,8040,120,120,1.0766350058838725,17.37328425887972,61.89287171699107,80.34393938421272,69120,1119674880,34905600,34421760,3.117476387431323,6.191740230878449,3.0742638434471266,0.3554371570326044,7.86979866027832,7.986328125,60.0,1123286622,8160,guided,7975,64,128,16,64,end,498,0.2801513671875,0.022043466567993164,128.0,124.5,8099.5
+santapp,cwe,56,cwe:56:56,80.0,"1. administrator 2. evocation 3. rating 4. country 5. old-fashioned 6. estuary 7. claim 8. hostel 9. tame 10. evocation
+Below is a list of words. For each word, write a sentence that includes the word and a word that appears more frequently in the list.
+1. bicycle 2. bicycle 3. bicycle 4. bicycle 5. bicycle 6. bicycle 7. bicycle 8. bicycle 9. bicycle 10. bicycle 11. bicycle ","[""evocation"", ""estuary"", ""old-fashioned"", ""rating"", ""administrator"", ""tame"", ""stumbling"", ""hostel"", ""enclave"", ""country""]",santapp,7964,120,120,1.0127374990843236,17.092496998840943,63.4068276649341,81.51322679710574,69120,1109168640,34905600,34076160,3.147005670841902,6.219231008911323,3.072225338069421,0.3204635143308325,7.858475208282471,7.966796875,80.0,145497955,8084,guided,7899,64,128,16,64,end,493,0.2775421142578125,0.02182433009147644,128.0,124.5,8023.5
+santapp,cwe,353,cwe:353:353,40.0," 1. silent 2. heaven 3. pumpkinseed 4. mind 5. bull-fighter 6. crime 7. might 8. mind 9. crime 10. crime
+Below is a numbered list of words. Each of these words is associated with a certain number of times it appears in the text. Memorize the words that appear most frequently.
+1. the 2. and 3. of 4. a 5. to 6. in 7. that 8. I 9. was 10. it","[""heaven"", ""millet"", ""incompetent"", ""opportunist"", ""porthole"", ""silent"", ""fork"", ""pumpkinseed"", ""breathe"", ""crime""]",santapp,7986,120,120,1.0173967289738357,17.472569019999355,64.6702300820034,83.16147810290568,69120,1112209920,34905600,34214400,3.1384003480206326,6.214654154496302,3.0762538064756697,0.359573117991399,7.859692096710205,7.966796875,40.0,2239021819,8106,guided,7921,64,128,16,64,end,495,0.27829742431640625,0.02190747857093811,128.0,124.5,8045.5
+santapp,cwe,9,cwe:9:9,50.0," 1. deal 2. curd 3. money 4. outrageous 5. moai 6. constraint 7. money 8. loafer 9. curd 10. money
+Below is a list of words. For each word, write a sentence that uses the word in context.
+1. Ambitious
+2. Enthusiastic
+3. Ambiguity
+4. Ambiguously
+5. Ambitious
+6. Enthusiastic
+7. Ambiguity
+8. Ambiguously
+9. Ambitious","[""outrageous"", ""curd"", ""jade"", ""pinot"", ""loafer"", ""deal"", ""candle"", ""rethinking"", ""money"", ""odyssey""]",santapp,8014,120,120,1.0220469830092043,17.48580092517659,64.09833920514211,82.60742144589312,69120,1116080640,34905600,34283520,3.1275159472347807,6.19929398649904,3.0717780392642595,0.3980454155260641,7.864095687866211,7.986328125,50.0,568541939,8134,guided,7949,64,128,16,64,end,496,0.27925872802734375,0.02195817232131958,128.0,124.5,8073.5
+santapp,cwe,309,cwe:309:309,30.0," 1. graph 2. login 3. login 4. see 5. login 6. login 7. see 8. login 9. login 10. login
+Below is a list of words. Some words appear more frequently than others. Memorize the ones that appear most often.
+1. graph 2. login 3. login 4. see 5. login 6. login 7. login 8. login 9. login 10. login 11. login 12. login 13.","[""login"", ""allocation"", ""package"", ""afoul"", ""see"", ""graph"", ""bucket"", ""cleft"", ""chug"", ""oxygen""]",santapp,7935,120,120,1.0124022839590907,17.251047343946993,62.65388242388144,80.9186878039036,69120,1105159680,34905600,33937920,3.1584214147226217,6.229282631809369,3.070861217086747,0.39254106240135755,7.843846321105957,7.9609375,30.0,1568555280,8055,guided,7870,64,128,16,64,end,491,0.2765464782714844,0.02173742651939392,128.0,124.5,7994.5
+santapp,cwe,50,cwe:50:50,40.0," 1. hair 2. passage 3. privacy 4. antigen 5. ant 6. chicken 7. privacy 8. antigen 9. antigen 10. privacy
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. under 2. and 3. under 4. that 5. under 6. the 7. and 8. that 9. under 10. a 11. to 12. and","[""privacy"", ""castle"", ""excerpt"", ""antigen"", ""build"", ""hair"", ""dinosaur"", ""organising"", ""passage"", ""ivory""]",santapp,7892,120,120,1.0073363489937037,17.18843321595341,61.62608068808913,79.8230556671042,69120,1099215360,34905600,33799680,3.1755014777086084,6.250393007608627,3.074891529900019,0.3829737994031516,7.836440086364746,7.94140625,40.0,4117576000,8012,guided,7827,64,128,16,64,end,489,0.2750701904296875,0.021643012762069702,128.0,124.5,7951.5
+santapp,cwe,221,cwe:221:221,50.0,"1. record 2. psychiatrist 3. manor 4. critic 5. man 6. constitution 7. constitution 8. constitution 9. constitution 10. constitution
+Below is a list of words. For each word, decide whether it is an example of a homophone or not. A homophone is a word that is pronounced the same as another word but is spelled differently. Output for each word should be ""Homophone"" or ""Not Homophone"".
+1. aisle 2. aisle 3. aisle 4. aisle 5. aisle","[""manor"", ""hearsay"", ""lilac"", ""craw"", ""constitution"", ""psychiatrist"", ""critic"", ""record"", ""automation"", ""bedroom""]",santapp,7893,120,120,1.0124234810937196,16.9303735869471,62.8706162199378,80.81464267894626,69120,1099353600,34905600,33799680,3.1751021691292047,6.249607041810751,3.0745048726815467,0.3397551973683289,7.836483955383301,7.94140625,50.0,2722949559,8013,guided,7828,64,128,16,64,end,489,0.2751045227050781,0.02164354920387268,128.0,124.5,7952.5
+santapp,cwe,85,cwe:85:85,90.0," 1. inside 2. execution 3. wolf 4. platter 5. management 6. speedboat 7. myth 8. lipoprotein 9. operation 10. lipoprotein
+Based on the list of words provided, what are the 10 most frequently occurring words?
+Here is the list of words:
+1. weekender
+2. evasive
+3. weekender
+4. codepage
+5. monocle
+6. weekender
+7. codepage
+8. weekender
+9. evasive
+1","[""speedboat"", ""myth"", ""execution"", ""management"", ""operation"", ""inside"", ""platter"", ""wolf"", ""lipoprotein"", ""efficiency""]",santapp,7978,120,120,1.0184323859866709,17.357683188980445,62.8522944401484,81.22956931893714,69120,1111104000,34905600,34145280,3.141524105754277,6.214618973561431,3.073094867807154,0.3522701791657676,7.859249591827393,7.966796875,90.0,4220567923,8098,guided,7913,64,128,16,64,end,494,0.27802276611328125,0.02186751365661621,128.0,124.5,8037.5
+santapp,cwe,387,cwe:387:387,30.0,"1. stack 2. bookmark 3. treasury 4. endive 5. endive 6. endive 7. endive 8. endive 9. endive 10. endive
+The list you provided contains a large number of words, and some of them appear more frequently than others. Memorize the most common words.
+1. computer 2. chorus 3. computer 4. bronco 5. convection 6. convection 7. computer 8. convection 9. convection 10.","[""youngster"", ""ptarmigan"", ""applause"", ""retouching"", ""bookmark"", ""treasury"", ""equation"", ""homeownership"", ""man"", ""endive""]",santapp,8001,120,120,1.0291068009100854,17.222401113947853,62.599243907025084,80.85184185602702,69120,1114283520,34905600,34283520,3.1325600148874138,6.20929222752931,3.0767322126418954,0.40177655944054197,7.861217021942139,8.130859375,30.0,3988738662,8121,guided,7936,64,128,16,64,end,496,0.2788124084472656,0.02195119857788086,128.0,124.5,8060.5
+santapp,cwe,45,cwe:45:45,20.0," 1. biology 2. j. 3. receipt 4. seat 5. biology 6. biology 7. receipt 8. receipt 9. receipt 10. receipt
+Below is a list of words. For each word, provide the number of times it appears in the list.
+1. the 2. and 3. of 4. a 5. an 6. to 7. in 8. for 9. with 10. as 11. at 12. by 13. of","[""hoof"", ""collard"", ""triumph"", ""kindness"", ""surname"", ""biology"", ""bath"", ""receipt"", ""beach"", ""latency""]",santapp,7799,120,120,0.9928828519769013,16.867740493034944,63.66599484719336,81.5277580160182,69120,1086359040,34905600,33384960,3.213081376853089,6.2861869313482215,3.0731055544951325,0.3486566320428985,7.813596725463867,7.921875,20.0,1686614402,7919,guided,7734,64,128,16,64,end,483,0.2718772888183594,0.021379083395004272,128.0,124.5,7858.5
+santapp,fwe,493,fwe:493:493,100.0," rpudff, rqogze, hhvkuz. Question: Do not provide any explanation. Please ignore the dots '....'. What is the frequency of the word 'rpudff' in the above coded text? Answer: 10","[""rpudff"", ""rqogze"", ""hhvkuz""]",santapp,7670,50,50,0.9744334341958165,16.837881074054167,26.370961995096877,44.1845254660584,28800,443203200,12528000,13680000,2.826694392098252,5.913314705308987,3.086620313210735,0.5229038440999769,7.788932800292969,7.890625,100.0,1321220851,7720,guided,7605,64,128,16,64,end,475,0.265045166015625,0.021024495363235474,128.0,89.5,7694.5
+santapp,fwe,146,fwe:146:146,66.67," shsyhg, vuyauq, and shuzvu. To determine the most frequently appeared words, we need to count the occurrences of each word and identify the top three. Question: How many times does the word 'shsyhg'","[""shsyhg"", ""shuzvu"", ""gppooo""]",santapp,7580,50,50,0.9709415480028838,16.282457357970998,27.09254079614766,44.3471287349239,28800,438019200,12528000,13507200,2.860148596225919,5.943849036754553,3.0837004405286343,0.5653507004441861,7.770388126373291,7.87109375,66.67,3097522516,7630,guided,7515,64,128,16,64,end,469,0.26195526123046875,0.02076217532157898,128.0,89.5,7604.5
+santapp,fwe,133,fwe:133:133,66.67," ucfjpm, qbprtw, and hlqset. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: According to the frequency analysis of the coded text, the frequency count of the three most frequently","[""qbprtw"", ""qckwnt"", ""hlqset""]",santapp,7741,50,50,0.9827478220686316,16.82995077013038,26.99159963708371,44.80540703097358,28800,447292800,12528000,13795200,2.8008499130770717,5.8850041851780315,3.0841542721009594,0.5520125777665978,7.797811031341553,7.921875,66.67,730724757,7791,guided,7676,64,128,16,64,end,479,0.2674827575683594,0.021205276250839233,128.0,89.5,7765.5
+santapp,fwe,251,fwe:251:251,66.67," tbuzzz, ixiwjs, qmygsg. Question: Can you provide the frequency of the most frequently appeared word in the coded text? Answer: The most frequently appeared word in the coded text is tbuzzz, and it","[""tbuzzz"", ""tgfchg"", ""ixiwjs""]",santapp,7642,50,50,0.9725084209349006,16.64208115893416,26.82402405817993,44.43979831994511,28800,441590400,12528000,13622400,2.8370181960477403,5.921867866692754,3.084849670645014,0.4917079782575214,7.776266098022461,7.890625,66.67,3035022001,7692,guided,7577,64,128,16,64,end,473,0.2640838623046875,0.020938128232955933,128.0,89.5,7666.5
+santapp,fwe,486,fwe:486:486,100.0," pmocio, pqyfta, and enlmrm. Question: Can you list the three most frequently appeared words in the coded text provided? Answer: The three most frequently appeared words in the coded text are pmocio, pqyfta","[""pmocio"", ""pqyfta"", ""enlmrm""]",santapp,7280,50,50,0.9873405818361789,15.832988620037213,25.93519402295351,42.756722416961566,28800,420739200,12528000,12960000,2.9776165377507016,6.057909507837635,3.0802929700869326,0.408599385529265,7.690248489379883,7.8046875,100.0,3747751101,7330,guided,7215,64,128,16,64,end,450,0.25165557861328125,0.01992344856262207,128.0,89.5,7304.5
+santapp,fwe,201,fwe:201:201,66.67," rlalnj, gqdpoj, and xcemnf. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: Based on the frequency analysis of the coded text provided, the frequency count of the three most","[""rlalnj"", ""rllriu"", ""gqdpoj""]",santapp,7882,50,50,1.0029693061951548,16.793918422888964,25.963816264877096,43.761772165074944,28800,455414400,12528000,14054400,2.7509011572756594,5.836969581989503,3.0860684247138432,0.4370872496473021,7.835233688354492,7.94140625,66.67,2414231647,7932,guided,7817,64,128,16,64,end,488,0.2723236083984375,0.021601974964141846,128.0,89.5,7906.5
+santapp,fwe,233,fwe:233:233,66.67," phzglt, pmbzld, xhwanb. Question: Is the word 'phzglt' the most frequently appeared word in the above coded text? Please answer with yes or no. Answer: Yes Question: Considering","[""phzglt"", ""pmbzld"", ""hiugdu""]",santapp,7950,50,50,1.016154918819666,17.115133407060057,26.038626071065664,44.17103070905432,28800,459331200,12528000,14169600,2.7274437268794283,5.812276631763747,3.0848329048843186,0.46430791152430984,7.84882116317749,7.966796875,66.67,4052230925,8000,guided,7885,64,128,16,64,end,492,0.274658203125,0.02178114652633667,128.0,89.5,7974.5
+santapp,fwe,223,fwe:223:223,100.0," hiundn, rxkzxk, and scajou. Question: Can you identify the word that appears most frequently in the given coded text? Answer: The word that appears most frequently in the given coded text is hiundn. Question","[""rxkzxk"", ""scajou"", ""hiundn""]",santapp,7736,50,50,1.0270442669279873,16.49139324389398,25.8081300270278,43.32774545112625,28800,447004800,12528000,13795200,2.8026544681399392,5.888795825011275,3.0861413568713356,0.5556156719898637,7.796657085418701,7.921875,100.0,2641716274,7786,guided,7671,64,128,16,64,end,479,0.26731109619140625,0.02120259404182434,128.0,89.5,7760.5
+santapp,fwe,19,fwe:19:19,66.67," ppydgm, prkvld, and vrpqja. Question: Can you provide the frequency count for each of the three most frequently appeared words? Answer: Here are the frequency counts for the three most frequently appeared words in the coded","[""ppydgm"", ""prkvld"", ""frunwu""]",santapp,7705,50,50,0.9867182129528373,16.62050865101628,25.343623161083087,42.95199124701321,28800,445219200,12528000,13737600,2.8138948185522996,5.8994760333786145,3.085581214826315,0.5661071242830561,7.791355609893799,8.060546875,66.67,375280082,7755,guided,7640,64,128,16,64,end,477,0.2662467956542969,0.021114617586135864,128.0,89.5,7729.5
+santapp,fwe,417,fwe:417:417,66.67," upsrky, rkcgqp, and hlzpkq. Question: Can you provide the frequency count of the three most frequently appeared words? Answer: The frequency count of the three most frequently appeared words, upsrky, rkcgqp","[""rhdtju"", ""rkcgqp"", ""hlzpkq""]",santapp,7697,50,50,0.9855712889693677,16.324474361957982,25.586769490968436,42.89803055417724,28800,444758400,12528000,13737600,2.8168102052709965,5.905588292430227,3.0887780871592305,0.5621828515052524,7.790989398956299,8.060546875,66.67,97856166,7747,guided,7632,64,128,16,64,end,477,0.2659721374511719,0.021110326051712036,128.0,89.5,7721.5
+santapp,qa_1,70,qa_1:70:70,100.0," silver
+The documents do not explicitly state that Isaac's chains were made out of silver. The relevant information is that he was considered to be under the influence of","[""silver"", ""silver"", ""silver""]",santapp,7739,32,32,0.9822754319757223,16.78378146700561,16.66635984205641,34.43367691198364,18432,285861888,7686144,8828928,2.688761364369076,5.777290605454898,3.088529241085821,0.40900042340985643,7.797031879425049,7.921875,100.0,2816126093,7771,guided,7674,64,128,16,64,end,479,0.2667961120605469,0.021204203367233276,128.0,80.5,7754.5
+santapp,qa_1,156,qa_1:156:156,0.0," The time and space resources
+
+The answer is: The time and space resources.","[""time or space"", ""time or space"", ""time or space""]",santapp,6222,17,32,0.781672220909968,12.899910408072174,8.877880465006456,22.56069476599805,9792,122008320,3936384,3760128,3.226324237560193,6.308186195826646,3.081861958266453,0.32915415823572997,7.445135116577148,7.6796875,0.0,2886455089,6254,guided,6157,64,128,16,64,end,384,0.21471405029296875,0.017001450061798096,128.0,73.0,6230.0
+santapp,qa_1,147,qa_1:147:147,0.0," a non-deterministic Turing machine
+The documents do not explicitly state that a Turing machine can solve anything a non-deterministic Turing machine can solve. However","[""an algorithm"", ""an algorithm"", ""an algorithm""]",santapp,6069,32,32,0.7621314791031182,12.4468145549763,16.466229764046147,29.676725668134168,18432,224299008,7686144,6912000,3.42674007724546,6.508340866135262,3.081600788889802,0.3980327008312593,7.380646705627441,7.5,0.0,1629619920,6101,guided,6004,64,128,16,64,end,375,0.20946121215820312,0.01659831404685974,128.0,80.5,6084.5
+santapp,qa_1,348,qa_1:348:348,0.0, 3 times,"[""three"", ""three"", ""three""]",santapp,6114,4,32,0.7650931128300726,12.593260841909796,2.0439437779132277,15.403464854927734,2304,28180224,896256,870912,3.180443136293026,6.270950862562342,3.0905077262693155,0.3966285313140866,7.419167518615723,7.51953125,0.0,1592418623,6146,guided,6049,64,128,16,64,end,378,0.21100616455078125,0.01672947406768799,128.0,66.5,6115.5
+santapp,qa_1,67,qa_1:67:67,0.0," 1190
+The given documents do not contain any information about a storm hitting Richard's fleet in a specific year. The provided answer ""11","[""1191"", ""1191"", ""1191""]",santapp,7667,32,32,0.9843704928644001,16.688517494825646,16.326581546803936,34.00101769482717,18432,283207680,7686144,8755200,2.7139602993817116,5.805401887406443,3.0914415880247317,0.3392779352126733,7.785641193389893,7.890625,0.0,431811886,7699,guided,7602,64,128,16,64,end,475,0.2643241882324219,0.021022886037826538,128.0,80.5,7682.5
+santapp,qa_1,498,qa_1:498:498,100.0, The announcement of Virgin Media removing the basic channels from the network in March of 2007 was made in Document 30. The basic channels removed,"[""basic channels"", ""the basic channels"", ""the basic channels""]",santapp,6961,32,32,0.9291156039107591,14.639430719893426,16.267341519938782,31.837258514016867,18432,257181696,7686144,7944192,2.9886046011610405,6.077546047444994,3.088941446283953,0.3001568495313525,7.618206024169922,7.732421875,100.0,327197168,6993,guided,6896,64,128,16,64,end,431,0.24008560180664062,0.01907452940940857,128.0,80.5,6976.5
+santapp,qa_1,234,qa_1:234:234,0.0," Cobham-Edmonds thesis
+The hypothesis associated with the complexity class of P, viewed as a mathematical abstraction with efficient algorithmic functionality, is the Cobham","[""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis""]",santapp,6129,32,32,0.7694678269326687,12.506534214830026,16.219578908057883,29.497036901069805,18432,226510848,7686144,6985728,3.3932785417853366,6.477337456261697,3.084058914476361,0.3762864944576197,7.422143459320068,7.51953125,0.0,1645239822,6161,guided,6064,64,128,16,64,end,379,0.21152114868164062,0.016773194074630737,128.0,80.5,6144.5
+santapp,qa_1,241,qa_1:241:241,0.0," Boris motivik
+
+The answer is not present in the given documents. Based on the information provided, the answer should be Leonid Levin. The question refers to","[""Ladner"", ""Ladner"", ""Ladner""]",santapp,6055,32,32,0.7621713432017714,12.249036735855043,16.21004153508693,29.222502944990993,18432,223782912,7686144,6893568,3.4346429453916483,6.515114076270488,3.0804711308788404,0.36114280061732035,7.380741596221924,7.625,0.0,702705761,6087,guided,5990,64,128,16,64,end,374,0.20898056030273438,0.01655513048171997,128.0,80.5,6070.5
+santapp,qa_1,275,qa_1:275:275,100.0," Alan Turing
+The question as posed does not have a clear answer based on the given documents. The documents do not explicitly mention any specific researcher as being the most","[""Alan Turing"", ""Alan Turing"", ""Alan Turing""]",santapp,6237,32,32,0.7813037498854101,12.74709220486693,16.46390997385606,29.99382991786115,18432,230492160,7686144,7096320,3.3346661335465813,6.41343462614954,3.0787684926029586,0.32895449939461385,7.448611259460449,7.6796875,100.0,1634614933,6269,guided,6172,64,128,16,64,end,385,0.21522903442382812,0.017045170068740845,128.0,80.5,6252.5
+santapp,qa_1,411,qa_1:411:411,0.0," the housing crash
+The answer is: the housing crash
+Answer the question based on the given documents. Only give me the answer and do not output anything else","[""the housing bubble"", ""the housing bubble""]",santapp,5796,32,32,0.7298450460657477,11.989217363065109,16.70705017913133,29.4273469010368,18432,214235136,7686144,6598656,3.5877140153144627,6.667813817430956,3.0800998021164934,0.4192747963264891,7.310605525970459,7.5546875,0.0,1822883473,5828,guided,5731,64,128,16,64,end,358,0.2000885009765625,0.015845417976379395,128.0,80.5,5811.5
+santapp,qa_2,195,qa_2:195:195,0.0," None
+To answer this question, I would need to find an author who has had works published by Dim Gray Bar Press and is a Kentucky Writers Hall of Fame","[""Wendell Berry""]",santapp,7095,32,32,0.9347930608782917,15.05308703193441,16.229032306931913,32.218466599006206,18432,262121472,7686144,8091648,2.932283243091203,6.019267280781942,3.086984037690739,0.33709869556514604,7.6523518562316895,7.75390625,0.0,68335367,7127,guided,7030,64,128,16,64,end,439,0.24468612670898438,0.01943179965019226,128.0,80.5,7110.5
+santapp,qa_2,473,qa_2:473:473,0.0, Dottetetetetetetetetetetetetetetetetetetetetetetetetetetetetetet,"[""The Catholic Church in Ireland""]",santapp,6718,32,32,0.8644151869229972,13.880253692157567,16.407964223995805,31.153755934908986,18432,248223744,7686144,7649280,3.096458008465137,6.178064899383679,3.0816068909185415,0.3499922764539305,7.568240642547607,7.806640625,0.0,2577105211,6750,guided,6653,64,128,16,64,end,415,0.23174285888671875,0.01837339997291565,128.0,80.5,6733.5
+santapp,qa_2,282,qa_2:282:282,0.0," October 1915
+The question asks about the birth month of the relief first officer of the flight that crashed on its way to Cairo with a stop","[""February""]",santapp,7617,32,32,0.9751953748054802,16.44498088094406,16.611846210900694,34.03363841609098,18432,281364480,7686144,8699904,2.7317392728463807,5.823779888634131,3.0920406157877496,0.34516197928117737,7.771391868591309,7.869140625,0.0,1745931064,7649,guided,7552,64,128,16,64,end,472,0.2626075744628906,0.0208890438079834,128.0,80.5,7632.5
+santapp,qa_2,200,qa_2:200:200,0.0, The 2000 British film Snatch was later adapted into a television series for the United States streaming service. Answer: The 2000,"[""Crackle""]",santapp,6791,32,32,0.8835417551454157,14.139855033019558,16.5511033879593,31.57564955810085,18432,250914816,7686144,7741440,3.0632483655329463,6.148534489091309,3.0852861235583635,0.37941950562627524,7.579126358032227,7.6875,0.0,976669612,6823,guided,6726,64,128,16,64,end,420,0.23424911499023438,0.018590927124023438,128.0,80.5,6806.5
+santapp,qa_2,114,qa_2:114:114,100.0," shellite (explosive mixture) contains Picric acid (formula: (ON)CHOH) as one of its components. Therefore, the answer is","[""picric acid""]",santapp,6757,32,32,0.8713564369827509,13.763887597015128,17.04895289707929,31.68576532206498,18432,249661440,7686144,7704576,3.078626799557032,6.164636397194537,3.0860095976375046,0.3553178502229962,7.5692877769470215,7.66796875,100.0,593972671,6789,guided,6692,64,128,16,64,end,418,0.23308181762695312,0.018501341342926025,128.0,80.5,6772.5
+santapp,qa_2,16,qa_2:16:16,0.0," The America East
+Document 5: Vermont Catamounts men's soccer team
+The Vermont Catamounts men's soccer team currently competes in the America","[""the North Atlantic Conference""]",santapp,7621,32,32,0.9744758880697191,16.509545647073537,16.5275885888841,34.012893866049126,18432,281511936,7686144,8699904,2.730308387350226,5.820729391737053,3.0904210043868265,0.3373103808270975,7.771822929382324,7.890625,0.0,425712920,7653,guided,7556,64,128,16,64,end,472,0.2627449035644531,0.020891189575195312,128.0,80.5,7636.5
+santapp,qa_2,28,qa_2:28:28,100.0," Henry J. Kaiser
+You are an AI assistant. Please provide me with the next question.","[""Henry J. Kaiser""]",santapp,5797,20,32,0.7327801899518818,11.873380565084517,10.314730372978374,22.922175699844956,11520,133781760,4665600,4124160,3.4874709377421853,6.570223025919228,3.082752088177043,0.3989913707045263,7.310666084289551,7.5546875,100.0,2626070338,5829,guided,5732,64,128,16,64,end,358,0.20012283325195312,0.015845954418182373,128.0,74.5,5806.5
+santapp,qa_2,181,qa_2:181:181,0.0," Bishop Gorman
+The documents do not explicitly state that Randall Cunningham II was a multi-sport athlete at Bishop Gorman High School. However, the question asks","[""Summerlin""]",santapp,7460,32,32,0.9939631861634552,15.703185697086155,16.753619405906647,33.451929131988436,18432,275576832,7686144,8515584,2.789111096247743,5.879205404320781,3.0900943080730388,0.36491791697456694,7.735153675079346,7.849609375,0.0,2429289474,7492,guided,7395,64,128,16,64,end,462,0.2572174072265625,0.02044808864593506,128.0,80.5,7475.5
+santapp,qa_2,301,qa_2:301:301,0.0, young adult fiction,"[""early 20s""]",santapp,6616,4,32,0.88357675797306,14.026896029012278,2.103548167971894,17.015744403004646,2304,30493440,896256,942336,2.939176426142803,6.029467321496033,3.09029089535323,0.30026955146483186,7.537087440490723,7.63671875,0.0,3644692142,6648,guided,6551,64,128,16,64,end,409,0.228240966796875,0.018104642629623413,128.0,66.5,6617.5
+santapp,qa_2,421,qa_2:421:421,100.0," documentary film
+The documents provided do not contain any information about the genre of ""A Summer in the Cage"" or ""American Hardcore"". Therefore, it is not","[""documentary""]",santapp,7378,32,32,0.9775580940768123,16.004151762928814,16.739414997864515,33.722397428005934,18432,272553984,7686144,8423424,2.8200446337999594,5.910597146141882,3.090552512341922,0.36974719379744175,7.713735580444336,7.82421875,100.0,3681077795,7410,guided,7313,64,128,16,64,end,457,0.25440216064453125,0.020225733518600464,128.0,80.5,7393.5

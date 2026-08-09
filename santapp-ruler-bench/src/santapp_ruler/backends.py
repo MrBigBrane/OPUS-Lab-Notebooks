@@ -10,8 +10,9 @@ from typing import Any
 
 import torch
 
+from .attention.santa import SantaEngine
 from .attention.santapp import SantaPlusEngine
-from .config import ModelConfig, SantaPlusConfig
+from .config import ModelConfig, SantaConfig, SantaPlusConfig
 
 
 def _cuda_sync() -> None:
@@ -108,6 +109,40 @@ class BackendGeneration:
     metrics: dict[str, Any]
 
 
+def _dense_access_metrics(model: Any, prompt_tokens: int, generated_count: int) -> dict:
+    layers = len(model.model.layers)
+    query_heads = int(model.config.num_attention_heads)
+    kv_heads = int(model.config.num_key_value_heads)
+    token_sum = sum(prompt_tokens + step for step in range(generated_count))
+    head_calls = generated_count * layers * query_heads
+    gqa_group_calls = generated_count * layers * kv_heads
+    dense_gqa = 2 * token_sum * layers * kv_heads
+    dense_naive = 2 * token_sum * layers * query_heads
+    mean_total = token_sum / generated_count if generated_count else 0.0
+    return {
+        "decode_attention_head_calls": head_calls,
+        "decode_gqa_group_calls": gqa_group_calls,
+        "decode_dense_gqa_kv_vectors": dense_gqa,
+        "decode_dense_naive_kv_vectors": dense_naive,
+        "decode_gqa_kv_vectors_read": dense_gqa,
+        "decode_naive_kv_vectors_read": dense_naive,
+        "decode_gqa_centroid_key_vectors_read": 0,
+        "decode_naive_centroid_key_vectors_read": 0,
+        "decode_gqa_total_vectors_read": dense_gqa,
+        "decode_naive_total_vectors_read": dense_naive,
+        "decode_gqa_kv_access_pct": 100.0 if dense_gqa else 0.0,
+        "decode_gqa_centroid_access_pct": 0.0,
+        "decode_gqa_total_access_pct": 100.0 if dense_gqa else 0.0,
+        "decode_naive_kv_access_pct": 100.0 if dense_naive else 0.0,
+        "decode_naive_centroid_access_pct": 0.0,
+        "decode_naive_total_access_pct": 100.0 if dense_naive else 0.0,
+        "mean_sampled_token_draws_per_head_call": 0.0,
+        "mean_unique_sampled_tokens_per_gqa_group_call": 0.0,
+        "mean_exact_tokens_per_gqa_group_call": mean_total,
+        "mean_total_tokens_per_head_call": mean_total,
+    }
+
+
 class SdpaBackend:
     name = "sdpa"
 
@@ -170,19 +205,6 @@ class SdpaBackend:
         total_seconds = time.perf_counter() - total_start
 
         generated_count = len(generated)
-        attention_head_calls = (
-            generated_count
-            * len(model.model.layers)
-            * int(model.config.num_attention_heads)
-        )
-        # Conceptual dense decode reads for the queries producing each output.
-        token_sum = sum(prompt_tokens + step for step in range(generated_count))
-        dense_vectors = (
-            2
-            * token_sum
-            * len(model.model.layers)
-            * int(model.config.num_attention_heads)
-        )
         metrics: dict[str, Any] = {
             "backend": self.name,
             "prompt_tokens": prompt_tokens,
@@ -192,14 +214,7 @@ class SdpaBackend:
             "clustering_seconds": 0.0,
             "decode_seconds": decode_seconds,
             "total_seconds": total_seconds,
-            "decode_attention_head_calls": attention_head_calls,
-            "decode_dense_kv_vectors": dense_vectors,
-            "decode_kv_vectors_read": dense_vectors,
-            "decode_metadata_key_vectors_read": 0,
-            "decode_kv_access_pct": 100.0,
-            "decode_read_equivalent_pct": 100.0,
-            "decode_metadata_equivalent_pct": 0.0,
-            "mean_ess_over_samples": None,
+            **_dense_access_metrics(model, prompt_tokens, generated_count),
             "peak_allocated_gib": torch.cuda.max_memory_allocated(input_ids.device)
             / (1024**3),
             "peak_reserved_gib": torch.cuda.max_memory_reserved(input_ids.device)
@@ -208,6 +223,32 @@ class SdpaBackend:
         prediction = self.bundle.decode(generated)
         del output, past, attention_mask
         return BackendGeneration(generated, prediction, metrics)
+
+
+class SantaBackend:
+    name = "santa"
+
+    def __init__(self, bundle: ModelBundle, config: SantaConfig):
+        self.bundle = bundle
+        self.engine = SantaEngine(bundle.model, config)
+
+    def generate(
+        self,
+        input_ids: torch.Tensor,
+        *,
+        max_new_tokens: int,
+        stop_on_eos: bool,
+        random_seed: int,
+    ) -> BackendGeneration:
+        result = self.engine.generate(
+            input_ids,
+            max_new_tokens=max_new_tokens,
+            eos_token_ids=self.bundle.eos_token_ids,
+            stop_on_eos=stop_on_eos,
+            random_seed=random_seed,
+        )
+        prediction = self.bundle.decode(result.token_ids)
+        return BackendGeneration(result.token_ids, prediction, result.metrics)
 
 
 class SantaPlusBackend:

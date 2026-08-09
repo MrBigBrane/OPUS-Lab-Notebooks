@@ -1,4 +1,4 @@
-include README.md LICENSE NOTICE CITATION.cff
+include README.md LICENSE NOTICE CITATION.cff SMOKE_TEST_STATUS.md
 include requirements*.txt
 recursive-include configs *.yaml
 recursive-include docs *.md

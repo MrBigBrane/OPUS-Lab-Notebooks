@@ -31,20 +31,25 @@ benchmark:
     subset: validation
 
 generation:
+  # Add `santa` here or use --backends sdpa,santa,santapp for all methods.
   backends: [sdpa, santapp]
   stop_on_eos: true
-  # Leave null for RULER's own per-task token budgets.
-  max_new_tokens_cap: null
+  # null uses each task's own RULER generation limit.
+  max_new_tokens: null
+  random_seed: 0
+
+santa:
+  # Per-query-head IID sample budget. SANTA has no exact recent window.
+  samples_per_head: 128
 
 santapp:
-  # "guided" is the notebook's centroid-guided SANTA++ path.
-  mode: guided
   group_size: 16
   samples_per_head: 128
+  # The final P prompt tokens are used directly as probe queries.
   probe_queries: 64
-  recent_window: 64
-  probe_region_start_fraction: 0.75
-  sample_seed: 0
+  # The fixed exact prompt-tail window is always zero. Every prompt token,
+  # including the re-fed final token, is cluster-covered. Only generated tokens
+  # remain outside the frozen clusters as a growing exact suffix.
   kmeans:
     batch_size: 4096
     n_init: 1

@@ -52,7 +52,9 @@ class BenchmarkConfig:
 class GenerationConfig:
     backends: list[str] = field(default_factory=lambda: ["sdpa", "santapp"])
     stop_on_eos: bool = True
-    max_new_tokens_cap: int | None = None
+    # null uses each task's official RULER generation budget.
+    max_new_tokens: int | None = None
+    random_seed: int = 0
 
 
 @dataclass(slots=True)
@@ -69,15 +71,21 @@ class MiniBatchKMeansConfig:
 
 @dataclass(slots=True)
 class SantaPlusConfig:
-    mode: str = "guided"
     group_size: int = 16
     samples_per_head: int = 128
     probe_queries: int = 64
-    recent_window: int = 64
-    probe_region_start_fraction: float = 0.75
-    probe_strategy: str = "end_quarter"  # <--- ADD THIS FIELD (options: end_quarter, start, middle, end, random)
-    sample_seed: int = 0
     kmeans: MiniBatchKMeansConfig = field(default_factory=MiniBatchKMeansConfig)
+
+
+@dataclass(slots=True)
+class SantaConfig:
+    """SANTA algorithm parameters.
+
+    The sole algorithmic hyperparameter is the per-query-head sample budget.
+    Reproducibility is controlled globally by ``generation.random_seed``.
+    """
+
+    samples_per_head: int = 128
 
 
 @dataclass(slots=True)
@@ -94,6 +102,7 @@ class RunConfig:
     benchmark: BenchmarkConfig = field(default_factory=BenchmarkConfig)
     generation: GenerationConfig = field(default_factory=GenerationConfig)
     santapp: SantaPlusConfig = field(default_factory=SantaPlusConfig)
+    santa: SantaConfig = field(default_factory=SantaConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
 
     def validate(self) -> None:
@@ -104,43 +113,36 @@ class RunConfig:
             raise ValueError("benchmark.prompts_per_task must be positive.")
         if self.model.device != "cuda":
             raise ValueError(
-                "This reference SANTA++ implementation currently requires model.device=cuda."
+                "The SANTA and SANTA++ reference backends currently require "
+                "model.device=cuda."
             )
         if self.model.attn_implementation != "sdpa":
             raise ValueError("model.attn_implementation must be 'sdpa'.")
         if self.model.dtype not in {"float16", "bfloat16"}:
             raise ValueError("model.dtype must be float16 or bfloat16.")
-        supported_backends = {"sdpa", "santapp"}
+
+        supported_backends = {"sdpa", "santa", "santapp"}
         unknown = set(self.generation.backends) - supported_backends
         if unknown:
             raise ValueError(f"Unknown generation backend(s): {sorted(unknown)}")
         if not self.generation.backends:
             raise ValueError("At least one generation backend must be selected.")
-        if self.generation.max_new_tokens_cap is not None:
-            if self.generation.max_new_tokens_cap <= 0:
-                raise ValueError("generation.max_new_tokens_cap must be positive.")
-        if self.santapp.mode not in {"guided", "santa", "uniform", "topk"}:
-            raise ValueError(
-                "santapp.mode must be one of guided, santa, uniform, or topk."
-            )
+        if self.generation.max_new_tokens is not None:
+            if self.generation.max_new_tokens <= 0:
+                raise ValueError("generation.max_new_tokens must be positive.")
+        if self.generation.random_seed < 0:
+            raise ValueError("generation.random_seed cannot be negative.")
+
         for name, value in {
             "group_size": self.santapp.group_size,
             "samples_per_head": self.santapp.samples_per_head,
             "probe_queries": self.santapp.probe_queries,
-            "recent_window": self.santapp.recent_window,
         }.items():
             if value <= 0:
                 raise ValueError(f"santapp.{name} must be positive.")
-        if not 0.0 <= self.santapp.probe_region_start_fraction < 1.0:
-            raise ValueError(
-                "santapp.probe_region_start_fraction must be in [0, 1)."
-            )
-        valid_strategies = {"end_quarter", "start", "middle", "end", "random"}
-        if self.santapp.probe_strategy not in valid_strategies:
-            raise ValueError(
-                f"santapp.probe_strategy must be one of {sorted(valid_strategies)}, "
-                f"got {self.santapp.probe_strategy!r}."
-            )
+        if self.santa.samples_per_head <= 0:
+            raise ValueError("santa.samples_per_head must be positive.")
+
         if self.benchmark.data.source not in {"huggingface", "local"}:
             raise ValueError("benchmark.data.source must be huggingface or local.")
         if self.benchmark.data.source == "huggingface":
@@ -152,15 +154,25 @@ class RunConfig:
                     "For another context length, generate official JSONL and set "
                     "benchmark.data.source=local plus benchmark.data.local_root."
                 )
-        else:
-            if not self.benchmark.data.local_root:
-                raise ValueError(
-                    "benchmark.data.local_root is required when data.source=local."
-                )
+        elif not self.benchmark.data.local_root:
+            raise ValueError(
+                "benchmark.data.local_root is required when data.source=local."
+            )
+
         km = self.santapp.kmeans
         if km.batch_size <= 0 or km.n_init <= 0 or km.max_iter <= 0:
-            raise ValueError("MiniBatchKMeans batch_size, n_init, and max_iter must be positive.")
-        if not 0.0 <= km.reassignment_ratio:
+            raise ValueError(
+                "MiniBatchKMeans batch_size, n_init, and max_iter must be positive."
+            )
+        if km.max_no_improvement is not None and km.max_no_improvement <= 0:
+            raise ValueError(
+                "MiniBatchKMeans max_no_improvement must be positive or null."
+            )
+        if km.init_size is not None and km.init_size <= 0:
+            raise ValueError("MiniBatchKMeans init_size must be positive or null.")
+        if km.tol < 0.0:
+            raise ValueError("MiniBatchKMeans tol cannot be negative.")
+        if km.reassignment_ratio < 0.0:
             raise ValueError("MiniBatchKMeans reassignment_ratio cannot be negative.")
 
     def to_dict(self) -> dict[str, Any]:
@@ -186,15 +198,19 @@ def _construct(data: dict[str, Any]) -> RunConfig:
     data_cfg = DataConfig(**benchmark_raw.pop("data", {}))
     benchmark = BenchmarkConfig(data=data_cfg, **benchmark_raw)
     generation = GenerationConfig(**data.get("generation", {}))
+
     santapp_raw = dict(data.get("santapp", {}))
     kmeans = MiniBatchKMeansConfig(**santapp_raw.pop("kmeans", {}))
     santapp = SantaPlusConfig(kmeans=kmeans, **santapp_raw)
+    santa = SantaConfig(**data.get("santa", {}))
     output = OutputConfig(**data.get("output", {}))
+
     config = RunConfig(
         model=model,
         benchmark=benchmark,
         generation=generation,
         santapp=santapp,
+        santa=santa,
         output=output,
     )
     config.validate()
@@ -203,6 +219,7 @@ def _construct(data: dict[str, Any]) -> RunConfig:
 
 def parse_scalar(value: str) -> Any:
     """Parse a ``--set`` value using YAML scalar/list syntax."""
+
     return yaml.safe_load(value)
 
 

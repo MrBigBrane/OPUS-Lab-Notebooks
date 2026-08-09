@@ -14,7 +14,7 @@ from typing import Any
 import numpy as np
 import torch
 
-from .backends import ModelBundle, SantaPlusBackend, SdpaBackend
+from .backends import ModelBundle, SantaBackend, SantaPlusBackend, SdpaBackend
 from .config import RunConfig
 from .data import RulerExample, select_examples
 from .reporting import build_reports, read_jsonl
@@ -119,8 +119,8 @@ def _append_record(path: Path, record: dict[str, Any]) -> None:
 
 def _max_new_tokens(config: RunConfig, task: str) -> int:
     official = require_task(task).max_new_tokens
-    cap = config.generation.max_new_tokens_cap
-    return min(official, cap) if cap is not None else official
+    override = config.generation.max_new_tokens
+    return override if override is not None else official
 
 
 def _validate_token_length(
@@ -137,7 +137,7 @@ def _validate_token_length(
         )
     if prompt_tokens + max_new_tokens > context_length:
         raise ValueError(
-            f"{example.uid}: prompt_tokens ({prompt_tokens}) + the official "
+            f"{example.uid}: prompt_tokens ({prompt_tokens}) + the configured "
             f"generation budget ({max_new_tokens}) exceeds context_length "
             f"({context_length}). This usually means the data was generated with "
             "a different tokenizer or RULER max sequence length."
@@ -176,9 +176,13 @@ def run_benchmark(
         f"{next(bundle.model.parameters()).dtype}"
     )
 
+    backend_factories = {
+        "sdpa": lambda: SdpaBackend(bundle),
+        "santa": lambda: SantaBackend(bundle, config.santa),
+        "santapp": lambda: SantaPlusBackend(bundle, config.santapp),
+    }
     backend_objects = {
-        "sdpa": SdpaBackend(bundle),
-        "santapp": SantaPlusBackend(bundle, config.santapp),
+        name: backend_factories[name]() for name in config.generation.backends
     }
     total_expected = (
         len(config.generation.backends)
@@ -215,7 +219,7 @@ def run_benchmark(
                     max_new_tokens=task_budget,
                     context_length=config.benchmark.context_length,
                 )
-                seed = _example_seed(config.santapp.sample_seed, example)
+                seed = _example_seed(config.generation.random_seed, example)
                 result = backend.generate(
                     input_ids,
                     max_new_tokens=task_budget,
@@ -249,12 +253,19 @@ def run_benchmark(
                 completed.add(example.uid)
                 completed_this_process += 1
 
-                access = result.metrics.get("decode_kv_access_pct")
-                equivalent = result.metrics.get("decode_read_equivalent_pct")
+                gqa_total = result.metrics.get("decode_gqa_total_access_pct")
+                gqa_kv = result.metrics.get("decode_gqa_kv_access_pct")
+                gqa_centroid = result.metrics.get("decode_gqa_centroid_access_pct")
+                naive_total = result.metrics.get("decode_naive_total_access_pct")
                 access_label = (
-                    f"KV {access:.1f}% / equiv {equivalent:.1f}%"
-                    if access is not None and equivalent is not None
-                    else "KV n/a"
+                    f"GQA+centroid {gqa_total:.1f}% "
+                    f"(KV {gqa_kv:.1f}%, centroid {gqa_centroid:.1f}%) / "
+                    f"naive {naive_total:.1f}%"
+                    if all(
+                        value is not None
+                        for value in (gqa_total, gqa_kv, gqa_centroid, naive_total)
+                    )
+                    else "access n/a"
                 )
                 preview = result.prediction.replace("\n", " ")[:80]
                 print(

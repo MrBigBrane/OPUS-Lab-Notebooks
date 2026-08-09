@@ -29,7 +29,7 @@ def prepare_run_directory(config: RunConfig, run_dir: str | Path) -> Path:
     """Create or validate a run directory before any output is modified.
 
     Resuming with a changed model, task selection, generation budget, or
-    SANTA++ parameter would silently mix incompatible rows. This guard refuses
+    SANTA/SANTA++ parameter would silently mix incompatible rows. This guard refuses
     that state. ``resume=false`` also refuses an existing prediction directory
     rather than deleting or duplicating rows.
     """

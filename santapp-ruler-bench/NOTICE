@@ -1,7 +1,7 @@
-SANTA++ RULER Benchmark Harness
+SANTA and SANTA++ RULER Benchmark Harness
 Copyright 2026 Kyle Lee and contributors
 
-The SANTA++ attention and CUDA MiniBatchKMeans implementation is adapted from
+The SANTA and SANTA++ attention and CUDA MiniBatchKMeans implementation is adapted from
 the SANTA++ notebook supplied by the project author.
 
 RULER task names, generation budgets, prediction post-processing, and the

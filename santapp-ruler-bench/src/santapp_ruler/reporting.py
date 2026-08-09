@@ -48,6 +48,10 @@ def _weighted_mean(pairs: Iterable[tuple[float | None, int]]) -> float | None:
     return numerator / denominator if denominator else None
 
 
+def _pct(numerator: int, denominator: int) -> float | None:
+    return 100.0 * numerator / denominator if denominator else None
+
+
 def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
     metrics = [record.get("metrics", {}) for record in records]
     generated = sum(int(value.get("generated_tokens", 0)) for value in metrics)
@@ -57,88 +61,29 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         float(value.get("clustering_seconds", 0.0)) for value in metrics
     )
     decode_seconds = sum(float(value.get("decode_seconds", 0.0)) for value in metrics)
-    dense_vectors = sum(int(value.get("decode_dense_kv_vectors", 0)) for value in metrics)
-    kv_vectors = sum(int(value.get("decode_kv_vectors_read", 0)) for value in metrics)
-    metadata_vectors = sum(
-        int(value.get("decode_metadata_key_vectors_read", 0)) for value in metrics
-    )
+
     head_calls = sum(int(value.get("decode_attention_head_calls", 0)) for value in metrics)
-
-    # --- Aggregation logic for clustering metrics ---
-    per_head_aggregated: dict[str, dict[str, float | None]] = {}
-    head_keys = set()
-    for m in metrics:
-        if "per_head_clustering_metrics" in m and isinstance(m["per_head_clustering_metrics"], dict):
-            head_keys.update(m["per_head_clustering_metrics"].keys())
-
-    sub_metric_names = [
-        "inertia",
-        "calinski_harabasz",
-        "davies_bouldin",
-        "silhouette",
-        "cluster_entropy",
-    ]
-
-    # Extract dimensionality and sequence length for inertia normalization
-    prompt_tokens_list = [m.get("prompt_tokens") for m in metrics if m.get("prompt_tokens") is not None]
-    head_dim_list = [m.get("head_dim") for m in metrics if m.get("head_dim") is not None]
-
-    mean_prompt_tokens = _safe_mean(prompt_tokens_list) if prompt_tokens_list else None
-    head_dim = head_dim_list[0] if head_dim_list else None
-
-    # 1. Per-head averages across prompts
-    for head_key in head_keys:
-        per_head_aggregated[head_key] = {}
-        for sub_m in sub_metric_names:
-            vals = [
-                m["per_head_clustering_metrics"][head_key][sub_m]
-                for m in metrics
-                if m.get("per_head_clustering_metrics", {}).get(head_key, {}).get(sub_m) is not None
-            ]
-            per_head_aggregated[head_key][sub_m] = _safe_mean(vals) if vals else None
-
-        # Calculate normalized inertia: Inertia / (N * d_k)
-        raw_inertia = per_head_aggregated[head_key].get("inertia")
-        if raw_inertia is not None and mean_prompt_tokens and head_dim:
-            per_head_aggregated[head_key]["normalized_inertia"] = raw_inertia / (mean_prompt_tokens * head_dim)
-        else:
-            per_head_aggregated[head_key]["normalized_inertia"] = None
-
-    all_sub_metrics = sub_metric_names + ["normalized_inertia"]
-
-    # 2. Global mean across all heads and layers
-    global_clustering_metrics: dict[str, float | None] = {}
-    for sub_m in all_sub_metrics:
-        all_head_vals = [
-            head_metrics[sub_m]
-            for head_metrics in per_head_aggregated.values()
-            if head_metrics.get(sub_m) is not None
-        ]
-        global_clustering_metrics[f"global_mean_{sub_m}"] = _safe_mean(all_head_vals)
-
-    # 3. Layer-wise averages across heads in each layer
-    per_layer_aggregated: dict[str, dict[str, float | None]] = {}
-    layers = set(h.split("_")[0] for h in head_keys)
-    for layer in sorted(layers, key=lambda x: int(x[1:])):
-        per_layer_aggregated[layer] = {}
-        layer_heads = [h for h in head_keys if h.startswith(f"{layer}_")]
-        for sub_m in all_sub_metrics:
-            layer_vals = [
-                per_head_aggregated[h][sub_m]
-                for h in layer_heads
-                if per_head_aggregated[h].get(sub_m) is not None
-            ]
-            per_layer_aggregated[layer][sub_m] = _safe_mean(layer_vals)
-
-    # Task-level scalar fallback means
-    mean_inertia = _safe_mean(m.get("mean_inertia") for m in metrics)
-    mean_norm_inertia = (
-        mean_inertia / (mean_prompt_tokens * head_dim)
-        if mean_inertia is not None and mean_prompt_tokens and head_dim
-        else None
+    group_calls = sum(int(value.get("decode_gqa_group_calls", 0)) for value in metrics)
+    dense_gqa = sum(
+        int(value.get("decode_dense_gqa_kv_vectors", 0)) for value in metrics
+    )
+    dense_naive = sum(
+        int(value.get("decode_dense_naive_kv_vectors", 0)) for value in metrics
+    )
+    gqa_kv = sum(int(value.get("decode_gqa_kv_vectors_read", 0)) for value in metrics)
+    naive_kv = sum(
+        int(value.get("decode_naive_kv_vectors_read", 0)) for value in metrics
+    )
+    gqa_centroids = sum(
+        int(value.get("decode_gqa_centroid_key_vectors_read", 0))
+        for value in metrics
+    )
+    naive_centroids = sum(
+        int(value.get("decode_naive_centroid_key_vectors_read", 0))
+        for value in metrics
     )
 
-    result = {
+    return {
         "num_examples": len(records),
         "generated_tokens": generated,
         "mean_prompt_tokens": _safe_mean(
@@ -157,18 +102,35 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
         "end_to_end_output_tokens_per_second": (
             generated / total_seconds if total_seconds > 0 else None
         ),
-        "decode_kv_access_pct": (
-            100.0 * kv_vectors / dense_vectors if dense_vectors else None
+        # Main reported access estimate: GQA-row union plus centroids.
+        "decode_gqa_total_access_pct": _pct(gqa_kv + gqa_centroids, dense_gqa),
+        "decode_gqa_kv_access_pct": _pct(gqa_kv, dense_gqa),
+        "decode_gqa_centroid_access_pct": _pct(gqa_centroids, dense_gqa),
+        # Explicitly optimistic legacy convention with a per-query-head dense
+        # denominator and draw-count numerator.
+        "decode_naive_total_access_pct": _pct(
+            naive_kv + naive_centroids, dense_naive
         ),
-        "decode_read_equivalent_pct": (
-            100.0 * (kv_vectors + metadata_vectors) / dense_vectors
-            if dense_vectors
-            else None
-        ),
-        "mean_ess_over_samples": _weighted_mean(
+        "decode_naive_kv_access_pct": _pct(naive_kv, dense_naive),
+        "decode_naive_centroid_access_pct": _pct(naive_centroids, dense_naive),
+        "mean_sampled_token_draws_per_head_call": _weighted_mean(
             (
-                value.get("mean_ess_over_samples"),
+                value.get("mean_sampled_token_draws_per_head_call"),
                 int(value.get("decode_attention_head_calls", 0)),
+            )
+            for value in metrics
+        ),
+        "mean_unique_sampled_tokens_per_gqa_group_call": _weighted_mean(
+            (
+                value.get("mean_unique_sampled_tokens_per_gqa_group_call"),
+                int(value.get("decode_gqa_group_calls", 0)),
+            )
+            for value in metrics
+        ),
+        "mean_exact_tokens_per_gqa_group_call": _weighted_mean(
+            (
+                value.get("mean_exact_tokens_per_gqa_group_call"),
+                int(value.get("decode_gqa_group_calls", 0)),
             )
             for value in metrics
         ),
@@ -177,23 +139,17 @@ def _aggregate_metrics(records: list[dict[str, Any]]) -> dict[str, Any]:
             default=0.0,
         ),
         "decode_attention_head_calls": head_calls,
-        "decode_dense_kv_vectors": dense_vectors,
-        "decode_kv_vectors_read": kv_vectors,
-        "decode_metadata_key_vectors_read": metadata_vectors,
-        "mean_inertia": mean_inertia,
-        "mean_normalized_inertia": mean_norm_inertia,
-        "mean_calinski_harabasz": _safe_mean(m.get("mean_calinski_harabasz") for m in metrics),
-        "mean_davies_bouldin": _safe_mean(m.get("mean_davies_bouldin") for m in metrics),
-        "mean_silhouette": _safe_mean(m.get("mean_silhouette") for m in metrics),
-        "mean_cluster_entropy": _safe_mean(m.get("mean_cluster_entropy") for m in metrics),
+        "decode_gqa_group_calls": group_calls,
+        "decode_dense_gqa_kv_vectors": dense_gqa,
+        "decode_dense_naive_kv_vectors": dense_naive,
+        "decode_gqa_kv_vectors_read": gqa_kv,
+        "decode_naive_kv_vectors_read": naive_kv,
+        "decode_gqa_centroid_key_vectors_read": gqa_centroids,
+        "decode_naive_centroid_key_vectors_read": naive_centroids,
+        "decode_gqa_total_vectors_read": gqa_kv + gqa_centroids,
+        "decode_naive_total_vectors_read": naive_kv + naive_centroids,
     }
 
-    if per_head_aggregated:
-        result["global_clustering_metrics"] = global_clustering_metrics
-        result["per_layer_clustering_metrics"] = per_layer_aggregated
-        result["per_head_clustering_metrics"] = per_head_aggregated
-
-    return result
 
 def _write_csv(path: Path, rows: list[Mapping[str, Any]]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -241,6 +197,14 @@ def _write_official_style(
                         "Prediction": record.get("pred", ""),
                     }
                 )
+
+
+def _speedup(reference: Mapping[str, Any], candidate: Mapping[str, Any], key: str):
+    candidate_value = candidate.get(key)
+    reference_value = reference.get(key)
+    if not candidate_value or reference_value is None:
+        return None
+    return reference_value / candidate_value
 
 
 def build_reports(
@@ -299,7 +263,9 @@ def build_reports(
                     "uid": record.get("uid"),
                     "example_score": single_grade.score,
                     "prediction": record.get("pred", ""),
-                    "references": json.dumps(record.get("outputs", []), ensure_ascii=False),
+                    "references": json.dumps(
+                        record.get("outputs", []), ensure_ascii=False
+                    ),
                 }
                 for key, value in record.get("metrics", {}).items():
                     flat[f"metric_{key}"] = value
@@ -311,7 +277,10 @@ def build_reports(
             "backend": backend,
             "task": "__selected_task_mean__",
             "score": mean_score,
-            "nulls": f"{sum(not str(r.get('pred', '')).strip() for r in all_records)}/{len(all_records)}",
+            "nulls": (
+                f"{sum(not str(r.get('pred', '')).strip() for r in all_records)}"
+                f"/{len(all_records)}"
+            ),
             **aggregate_all,
         }
         report_rows.append(aggregate_row)
@@ -323,28 +292,33 @@ def build_reports(
         _write_official_style(backend_dir, task_rows, records_by_task)
 
     comparisons: dict[str, Any] = {}
-    if "sdpa" in structured["backends"] and "santapp" in structured["backends"]:
-        sdpa = structured["backends"]["sdpa"]["aggregate"]
-        santa = structured["backends"]["santapp"]["aggregate"]
-        comparisons = {
-            "selected_task_mean_score_delta_santapp_minus_sdpa": (
-                santa["score"] - sdpa["score"]
-            ),
-            "santapp_end_to_end_speedup_vs_sdpa": (
-                sdpa["mean_total_seconds"] / santa["mean_total_seconds"]
-                if santa.get("mean_total_seconds")
-                else None
-            ),
-            "santapp_decode_speedup_vs_sdpa": (
-                sdpa["mean_decode_seconds"] / santa["mean_decode_seconds"]
-                if santa.get("mean_decode_seconds")
-                else None
-            ),
-            "santapp_decode_kv_access_pct": santa.get("decode_kv_access_pct"),
-            "santapp_decode_read_equivalent_pct": santa.get(
-                "decode_read_equivalent_pct"
-            ),
-        }
+    sdpa_entry = structured["backends"].get("sdpa")
+    if sdpa_entry is not None:
+        sdpa = sdpa_entry["aggregate"]
+        for backend in ("santa", "santapp"):
+            candidate_entry = structured["backends"].get(backend)
+            if candidate_entry is None:
+                continue
+            candidate = candidate_entry["aggregate"]
+            comparisons[f"{backend}_vs_sdpa"] = {
+                "selected_task_mean_score_delta": candidate["score"] - sdpa["score"],
+                "end_to_end_speedup": _speedup(
+                    sdpa, candidate, "mean_total_seconds"
+                ),
+                "decode_speedup": _speedup(sdpa, candidate, "mean_decode_seconds"),
+                "decode_gqa_total_access_pct": candidate.get(
+                    "decode_gqa_total_access_pct"
+                ),
+                "decode_gqa_kv_access_pct": candidate.get(
+                    "decode_gqa_kv_access_pct"
+                ),
+                "decode_gqa_centroid_access_pct": candidate.get(
+                    "decode_gqa_centroid_access_pct"
+                ),
+                "decode_naive_total_access_pct": candidate.get(
+                    "decode_naive_total_access_pct"
+                ),
+            }
     structured["comparisons"] = comparisons
 
     _write_csv(run_dir / "summary.csv", report_rows)
@@ -355,45 +329,57 @@ def build_reports(
         json.dump(structured, handle, indent=2, ensure_ascii=False, allow_nan=False)
         handle.write("\n")
 
+    def fmt(value: Any, digits: int = 2) -> str:
+        if value is None:
+            return "—"
+        if isinstance(value, float) and (math.isnan(value) or math.isinf(value)):
+            return "—"
+        return f"{float(value):.{digits}f}"
+
     lines = [
-        "# SANTA++ RULER benchmark summary",
+        "# SANTA / SANTA++ RULER benchmark summary",
         "",
-        "Task scores below use RULER's task-family grader. The selected-task mean is an unweighted harness summary, not an additional RULER metric.",
+        "Task scores use RULER's task-family grader. The selected-task mean is an unweighted harness summary, not an additional RULER metric.",
         "",
-        "| Backend | Task | Score | Mean total s | Mean decode s | Decode KV access | Read-equivalent |",
-        "|---|---|---:|---:|---:|---:|---:|",
+        "| Backend | Task | Score | Mean total s | Mean decode s | GQA + centroid | GQA KV | GQA centroid | Naive + centroid |",
+        "|---|---|---:|---:|---:|---:|---:|---:|---:|",
     ]
     for row in report_rows:
-        def fmt(value: Any, digits: int = 2) -> str:
-            if value is None:
-                return "—"
-            if isinstance(value, float) and (math.isnan(value) or math.isinf(value)):
-                return "—"
-            return f"{float(value):.{digits}f}"
-
         lines.append(
-            "| {backend} | {task} | {score} | {total} | {decode} | {kv}% | {equiv}% |".format(
+            "| {backend} | {task} | {score} | {total} | {decode} | {gqa_total}% | "
+            "{gqa_kv}% | {centroid}% | {naive}% |".format(
                 backend=row["backend"],
                 task=row["task"],
                 score=fmt(row.get("score")),
                 total=fmt(row.get("mean_total_seconds"), 3),
                 decode=fmt(row.get("mean_decode_seconds"), 3),
-                kv=fmt(row.get("decode_kv_access_pct"), 1),
-                equiv=fmt(row.get("decode_read_equivalent_pct"), 1),
+                gqa_total=fmt(row.get("decode_gqa_total_access_pct"), 1),
+                gqa_kv=fmt(row.get("decode_gqa_kv_access_pct"), 1),
+                centroid=fmt(row.get("decode_gqa_centroid_access_pct"), 1),
+                naive=fmt(row.get("decode_naive_total_access_pct"), 1),
             )
         )
+
     if comparisons:
-        lines.extend(
-            [
-                "",
-                "## Paired aggregate comparison",
-                "",
-                f"- SANTA++ minus SDPA selected-task mean score: {comparisons['selected_task_mean_score_delta_santapp_minus_sdpa']:.2f} points",
-                f"- SANTA++ decode KV access: {comparisons['santapp_decode_kv_access_pct']:.1f}%",
-                f"- SANTA++ metadata-inclusive read-equivalent: {comparisons['santapp_decode_read_equivalent_pct']:.1f}%",
-                f"- SANTA++ end-to-end speedup vs SDPA: {comparisons['santapp_end_to_end_speedup_vs_sdpa']:.3f}x",
-                f"- SANTA++ decode speedup vs SDPA: {comparisons['santapp_decode_speedup_vs_sdpa']:.3f}x",
-            ]
-        )
+        lines.extend(["", "## Aggregate comparisons against SDPA", ""])
+        for backend, label in (("santa", "SANTA"), ("santapp", "SANTA++")):
+            comparison = comparisons.get(f"{backend}_vs_sdpa")
+            if comparison is None:
+                continue
+            lines.extend(
+                [
+                    f"### {label}",
+                    "",
+                    f"- Selected-task mean score delta: {fmt(comparison['selected_task_mean_score_delta'])} points",
+                    f"- GQA + centroid access: {fmt(comparison['decode_gqa_total_access_pct'], 1)}%",
+                    f"- GQA KV access: {fmt(comparison['decode_gqa_kv_access_pct'], 1)}%",
+                    f"- GQA centroid access: {fmt(comparison['decode_gqa_centroid_access_pct'], 1)}%",
+                    f"- Naive + centroid access: {fmt(comparison['decode_naive_total_access_pct'], 1)}%",
+                    f"- End-to-end speedup: {fmt(comparison['end_to_end_speedup'], 3)}x",
+                    f"- Decode speedup: {fmt(comparison['decode_speedup'], 3)}x",
+                    "",
+                ]
+            )
+
     (run_dir / "summary.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     return structured

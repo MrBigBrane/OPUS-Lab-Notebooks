@@ -39,7 +39,7 @@ def _add_config_argument(parser: argparse.ArgumentParser) -> None:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="santapp-ruler",
-        description="Benchmark SANTA++ against stock SDPA on RULER prompts.",
+        description="Benchmark SDPA, SANTA, and SANTA++ on RULER prompts.",
     )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
@@ -49,6 +49,15 @@ def build_parser() -> argparse.ArgumentParser:
     run.add_argument("--prompts-per-task", type=int)
     run.add_argument("--context-length", type=int)
     run.add_argument("--backends", type=_comma_list)
+    run.add_argument(
+        "--max-new-tokens",
+        type=int,
+        help=(
+            "Optional exact generation budget for every selected task; omit to "
+            "use each task's official RULER limit."
+        ),
+    )
+    run.add_argument("--seed", type=int, help="Global sampling seed.")
     run.add_argument("--run-dir", type=Path, help="Exact output directory.")
     run.add_argument(
         "--no-resume", action="store_true", help="Do not skip existing UIDs."
@@ -61,6 +70,14 @@ def build_parser() -> argparse.ArgumentParser:
     _add_config_argument(validate)
     validate.add_argument("--tasks", type=_comma_list)
     validate.add_argument("--prompts-per-task", type=int)
+    validate.add_argument(
+        "--max-new-tokens",
+        type=int,
+        help=(
+            "Optional exact generation budget for every selected task; omit to "
+            "use each task's official RULER limit."
+        ),
+    )
 
     grade = subparsers.add_parser(
         "grade", help="Re-run the vendored RULER grader on an existing run."
@@ -105,6 +122,10 @@ def _config_with_cli(args: argparse.Namespace):
         overrides.append(f"benchmark.context_length={args.context_length}")
     if getattr(args, "backends", None) is not None:
         overrides.append(f"generation.backends={json.dumps(args.backends)}")
+    if getattr(args, "max_new_tokens", None) is not None:
+        overrides.append(f"generation.max_new_tokens={args.max_new_tokens}")
+    if getattr(args, "seed", None) is not None:
+        overrides.append(f"generation.random_seed={args.seed}")
     if getattr(args, "no_resume", False):
         overrides.append("output.resume=false")
     return load_config(args.config, overrides=overrides)
@@ -140,8 +161,8 @@ def command_validate_data(args: argparse.Namespace) -> int:
     )
     for task in config.benchmark.tasks:
         budget = require_task(task).max_new_tokens
-        if config.generation.max_new_tokens_cap is not None:
-            budget = min(budget, config.generation.max_new_tokens_cap)
+        if config.generation.max_new_tokens is not None:
+            budget = config.generation.max_new_tokens
         lengths = []
         for example in selected[task]:
             tokens = tokenizer(
@@ -230,8 +251,14 @@ def command_doctor() -> int:
 
     from . import __version__
 
+    healthy = True
+    python_supported = (3, 11) <= sys.version_info[:2] < (3, 13)
     print(f"santapp-ruler: {__version__}")
-    print(f"Python:          {sys.version.split()[0]}")
+    print(
+        f"Python:          {sys.version.split()[0]} "
+        f"({'PASS' if python_supported else 'UNSUPPORTED'})"
+    )
+    healthy &= python_supported
     print(f"PyTorch:         {torch.__version__}")
     print(f"PyTorch CUDA:    {torch.version.cuda}")
     print(f"NumPy:           {np.__version__}")
@@ -243,28 +270,36 @@ def command_doctor() -> int:
 
         if not callable(sdpa_attention_forward):
             raise TypeError("HF SDPA wrapper is not callable")
-        print("HF SDPA wrapper: available")
+        print("HF SDPA wrapper: PASS")
     except Exception as exc:
+        healthy = False
         print(f"Transformers/SDPA: FAIL ({type(exc).__name__}: {exc})")
     try:
         import datasets
 
         print(f"Datasets:        {datasets.__version__}")
     except Exception as exc:
+        healthy = False
         print(f"Datasets:        FAIL ({type(exc).__name__}: {exc})")
-    print(f"CUDA usable:     {torch.cuda.is_available()}")
-    if torch.cuda.is_available():
-        print(f"GPU:             {torch.cuda.get_device_name(0)}")
-        props = torch.cuda.get_device_properties(0)
-        print(f"GPU memory:      {props.total_memory / (1024**3):.1f} GiB")
-        a = torch.randn(64, 64, device="cuda")
-        b = a @ a
-        torch.cuda.synchronize()
-        print(f"CUDA matmul:     PASS ({float(b[0, 0]):.4f})")
+
+    cuda_usable = torch.cuda.is_available()
+    print(f"CUDA usable:     {cuda_usable}")
+    if cuda_usable:
+        try:
+            print(f"GPU:             {torch.cuda.get_device_name(0)}")
+            props = torch.cuda.get_device_properties(0)
+            print(f"GPU memory:      {props.total_memory / (1024**3):.1f} GiB")
+            a = torch.randn(64, 64, device="cuda")
+            b = a @ a
+            torch.cuda.synchronize()
+            print(f"CUDA matmul:     PASS ({float(b[0, 0]):.4f})")
+        except Exception as exc:
+            healthy = False
+            print(f"CUDA matmul:     FAIL ({type(exc).__name__}: {exc})")
     else:
+        healthy = False
         print("CUDA matmul:     SKIPPED")
-        return 1
-    return 0
+    return 0 if healthy else 1
 
 
 def main(argv: list[str] | None = None) -> int:

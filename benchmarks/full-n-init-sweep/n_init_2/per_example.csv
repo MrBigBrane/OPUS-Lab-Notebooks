@@ -1,0 +1,708 @@
+backend,task,index,uid,example_score,prediction,references,metric_backend,metric_prompt_tokens,metric_generated_tokens,metric_max_new_tokens,metric_prefill_seconds,metric_clustering_seconds,metric_decode_seconds,metric_total_seconds,metric_decode_attention_head_calls,metric_decode_dense_kv_vectors,metric_decode_kv_vectors_read,metric_decode_metadata_key_vectors_read,metric_decode_kv_access_pct,metric_decode_read_equivalent_pct,metric_decode_metadata_equivalent_pct,metric_mean_ess_over_samples,metric_peak_allocated_gib,metric_peak_reserved_gib,metric_example_ruler_score,metric_random_seed,metric_reported_dataset_length,metric_mode,metric_sampled_prefix_tokens,metric_recent_window,metric_samples_per_head,metric_group_size,metric_probe_queries,metric_probe_strategy,metric_nominal_clusters_per_kv_head,metric_custom_cache_gib,metric_cluster_summary_gib,metric_mean_inertia,metric_mean_calinski_harabasz,metric_mean_davies_bouldin,metric_mean_silhouette,metric_mean_cluster_entropy,metric_mean_sampled_token_draws_per_head_call,metric_mean_recent_tokens_per_head_call,metric_mean_total_tokens_per_head_call
+sdpa,cwe,215,cwe:215:215,60.0,"1. heyday 2. caribou 3. export 4. gum 5. pastry 6. colt 7. export 8. gum 9. heyday 10. gum
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. post 2. lamb 3. post 4. low 5. safe 6. faithful 7. forte 8. dahlia 9. itch 10. itch 11.","[""pastry"", ""invention"", ""colt"", ""caribou"", ""gum"", ""heyday"", ""export"", ""boiling"", ""sombrero"", ""illiteracy""]",sdpa,8040,120,120,1.249798014992848,0.0,3.09343794407323,4.343256340129301,69120,1119674880,1119674880,0,100.0,100.0,0.0,,6.762975692749023,6.869140625,60.0,1123286622,8160,,,,,,,,,,,,,,,,,,
+sdpa,cwe,56,cwe:56:56,70.0,"1. tame 2. old-fashioned 3. hostel 4. rating 5. evocation 6. country 7. estuary 8. hostel 9. tame 10. evocation
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. that 8. it 9. was 10. as 11. for 1","[""evocation"", ""estuary"", ""old-fashioned"", ""rating"", ""administrator"", ""tame"", ""stumbling"", ""hostel"", ""enclave"", ""country""]",sdpa,7964,120,120,0.9002209031023085,0.0,3.0420085759833455,3.9423129700589925,69120,1109168640,1109168640,0,100.0,100.0,0.0,,6.759525775909424,6.861328125,70.0,145497955,8084,,,,,,,,,,,,,,,,,,
+sdpa,cwe,353,cwe:353:353,60.0," 1. silent 2. monitor 3. hometown 4. fork 5. heaven 6. pumpkins 7. millet 8. crime 9. fork 10. pumpkinseed
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. manhunt 2. grasp 3. manhunt 4. talented 5. might 6. climb 7. plane 8. drunk 9. charm 10. charm 11. needle","[""heaven"", ""millet"", ""incompetent"", ""opportunist"", ""porthole"", ""silent"", ""fork"", ""pumpkinseed"", ""breathe"", ""crime""]",sdpa,7986,120,120,0.9047845769673586,0.0,3.0100285199005157,3.914901067968458,69120,1112209920,1112209920,0,100.0,100.0,0.0,,6.759609699249268,6.861328125,60.0,2239021819,8106,,,,,,,,,,,,,,,,,,
+sdpa,cwe,9,cwe:9:9,70.0,"1. deal 2. outrageous 3. curd 4. money 5. pinot 6. jade 7. outrageous 8. candle 9. pinot 10. jade
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. perform 2. match 3. perform 4. night 5. maiden 6. termite 7. troop 8. prosperity 9. happening 10. happening 11. mortal 1","[""outrageous"", ""curd"", ""jade"", ""pinot"", ""loafer"", ""deal"", ""candle"", ""rethinking"", ""money"", ""odyssey""]",sdpa,8014,120,120,0.9089948500040919,0.0,2.9848951399326324,3.8940124411601573,69120,1116080640,1116080640,0,100.0,100.0,0.0,,6.760744094848633,6.869140625,70.0,568541939,8134,,,,,,,,,,,,,,,,,,
+sdpa,cwe,309,cwe:309:309,30.0,"1. graph 2. login 3. login 4. login 5. login 6. login 7. login 8. login 9. login 10. login
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. main 2. teletype 3. main 4. motor 5. fall 6. marble 7. afoul 8. cupola 9. vitamin 10. vitamin 11. amnesty 1","[""login"", ""allocation"", ""package"", ""afoul"", ""see"", ""graph"", ""bucket"", ""cleft"", ""chug"", ""oxygen""]",sdpa,7935,120,120,0.8953706528991461,0.0,3.0297999000176787,3.9252093529794365,69120,1105159680,1105159680,0,100.0,100.0,0.0,,6.752015113830566,6.91796875,30.0,1568555280,8055,,,,,,,,,,,,,,,,,,
+sdpa,cwe,50,cwe:50:50,90.0,"1. hair 2. privacy 3. castle 4. antigen 5. excerpt 6. dinosaur 7. passage 8. ivory 9. build 10. excerpt
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. under 2. under 3. under 4. under 5. under 6. under 7. under 8. under 9. under 10. under 11. under 12. under ","[""privacy"", ""castle"", ""excerpt"", ""antigen"", ""build"", ""hair"", ""dinosaur"", ""organising"", ""passage"", ""ivory""]",sdpa,7892,120,120,0.892804800067097,0.0,3.0179529138840735,3.910789564019069,69120,1099215360,1099215360,0,100.0,100.0,0.0,,6.749527931213379,6.91015625,90.0,4117576000,8012,,,,,,,,,,,,,,,,,,
+sdpa,cwe,221,cwe:221:221,40.0,"1. psychiatrist 2. critic 3. manor 4. lilac 5. egg 6. critic 7. critic 8. critic 9. critic 10. critic
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. psychiatrist 2. babushka 3. psychiatrist 4. dispute 5. pacemaker 6. scent 7. crucifixion 8. manor 9. melon 10. manor ","[""manor"", ""hearsay"", ""lilac"", ""craw"", ""constitution"", ""psychiatrist"", ""critic"", ""record"", ""automation"", ""bedroom""]",sdpa,7893,120,120,0.8893520499113947,0.0,3.0051640530582517,3.894632483832538,69120,1099353600,1099353600,0,100.0,100.0,0.0,,6.749544620513916,6.91015625,40.0,2722949559,8013,,,,,,,,,,,,,,,,,,
+sdpa,cwe,85,cwe:85:85,80.0," 1. lipoprotein 2. inside 3. speedboat 4. myth 5. execution 6. wolf 7. management 8. platter 9. execution 10. wolf
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. weekender 2. evasive 3. weekender 4. codepage 5. monocle 6. wriggle 7. debris 8. homosexuality 9. curriculum 10.","[""speedboat"", ""myth"", ""execution"", ""management"", ""operation"", ""inside"", ""platter"", ""wolf"", ""lipoprotein"", ""efficiency""]",sdpa,7978,120,120,0.9033314508851618,0.0,3.0182160059921443,3.9216281881090254,69120,1111104000,1111104000,0,100.0,100.0,0.0,,6.759579181671143,6.861328125,80.0,4220567923,8098,,,,,,,,,,,,,,,,,,
+sdpa,cwe,387,cwe:387:387,80.0,"1. bookmark 2. treasury 3. youngster 4. applause 5. equation 6. retouching 7. ptarmigan 8. bookmark 9. endive 10. bookmark
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. computer 2. computer 3. computer 4. computer 5. computer 6. computer 7. computer 8. computer 9. computer 10. computer 11. computer ","[""youngster"", ""ptarmigan"", ""applause"", ""retouching"", ""bookmark"", ""treasury"", ""equation"", ""homeownership"", ""man"", ""endive""]",sdpa,8001,120,120,0.9060129339341074,0.0,3.0173771849367768,3.923420469975099,69120,1114283520,1114283520,0,100.0,100.0,0.0,,6.759668350219727,6.861328125,80.0,3988738662,8121,,,,,,,,,,,,,,,,,,
+sdpa,cwe,45,cwe:45:45,50.0,"1. biology 2. hoof 3. kindness 4. receipt 5. triumph 6. shoe 7. biology 8. receipt 9. triumph 10. shoe
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. it 8. that 9. was 10. were 11. for 12. as ","[""hoof"", ""collard"", ""triumph"", ""kindness"", ""surname"", ""biology"", ""bath"", ""receipt"", ""beach"", ""latency""]",sdpa,7799,120,120,0.8581029651686549,0.0,3.0063617639243603,3.8645804710686207,69120,1086359040,1086359040,0,100.0,100.0,0.0,,6.740023136138916,6.90234375,50.0,1686614402,7919,,,,,,,,,,,,,,,,,,
+sdpa,cwe,300,cwe:300:300,90.0,"1. greatness 2. settle 3. happenings 4. occupation 5. ethereal 6. callous 7. outline 8. navigate 9. happenings 10. greatness
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. screeching 2. nurse 3. screeching 4. cougar 5. artifact 6. maniac 7. usher 8. greatness 9. shipping 10. greatness 1","[""greatness"", ""fund"", ""ethereal"", ""navigate"", ""settle"", ""screeching"", ""happening"", ""occupation"", ""outline"", ""callous""]",sdpa,7911,120,120,0.8949197388719767,0.0,3.009642215911299,3.9045921561773866,69120,1101841920,1101841920,0,100.0,100.0,0.0,,6.750138282775879,6.91796875,90.0,58787790,8031,,,,,,,,,,,,,,,,,,
+sdpa,cwe,455,cwe:455:455,60.0," 1. wicked 2. anyone 3. large 4. dashboard 5. snob 6. query 7. wicked 8. wicked 9. wicked 10. wicked
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. that 8. it 9. was 10. were 11. for 12.","[""dashboard"", ""large"", ""anyone"", ""cuff-link"", ""critic"", ""wicked"", ""snob"", ""query"", ""appellation"", ""electrocardiogram""]",sdpa,8067,120,120,0.9203098190482706,0.0,3.0168480249121785,3.937287325039506,69120,1123407360,1123407360,0,100.0,100.0,0.0,,6.769641399383545,6.869140625,60.0,4192261837,8187,,,,,,,,,,,,,,,,,,
+sdpa,cwe,164,cwe:164:164,20.0,"1. prior 2. gauge 3. gauge 4. gauge 5. gauge 6. gauge 7. gauge 8. gauge 9. gauge 10. gauge
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. prior 2. prior 3. prior 4. prior 5. prior 6. prior 7. prior 8. prior 9. prior 10. prior 11. prior 12. prior ","[""gauge"", ""efficacious"", ""modem"", ""distinction"", ""native"", ""prior"", ""exasperation"", ""induce"", ""extremist"", ""shed""]",sdpa,7930,120,120,0.8985799171496183,0.0,3.0370538539718837,3.9356988018844277,69120,1104468480,1104468480,0,100.0,100.0,0.0,,6.75162410736084,6.91796875,20.0,2875109364,8050,,,,,,,,,,,,,,,,,,
+sdpa,cwe,369,cwe:369:369,90.0," 1. reef 2. robust 3. hostel 4. awe 5. counterterrorism 6. indigence 7. berry 8. scheme 9. perception 10. counter-force
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. that 8. it 9. was 10. as 11. for ","[""awe"", ""maintainer"", ""hostel"", ""indigence"", ""scheme"", ""reef"", ""counterterrorism"", ""berry"", ""robust"", ""perception""]",sdpa,7946,120,120,0.9103099280036986,0.0,3.0209737170953304,3.931323935976252,69120,1106680320,1106680320,0,100.0,100.0,0.0,,6.754906177520752,6.861328125,90.0,136349993,8066,,,,,,,,,,,,,,,,,,
+sdpa,cwe,421,cwe:421:421,70.0,"1. proofread 2. spill 3. pigsty 4. consist 5. rhinoceros 6. photographer 7. coalition 8. spill 9. rhinoceros 10. proofread
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. representative 2. representative 3. representative 4. representative 5. representative 6. representative 7. representative 8. representative 9. representative 10. representative 1","[""consist"", ""photographer"", ""proofread"", ""derrick"", ""precedence"", ""rhinoceros"", ""coalition"", ""damaging"", ""spill"", ""pigsty""]",sdpa,7968,120,120,0.9239794090390205,0.0,3.0225815509911627,3.946593770990148,69120,1109721600,1109721600,0,100.0,100.0,0.0,,6.759541034698486,6.861328125,70.0,1997728156,8088,,,,,,,,,,,,,,,,,,
+sdpa,cwe,352,cwe:352:352,40.0,"1. shocking 2. prune 3. wolf 4. wolf 5. wolf 6. wolf 7. wolf 8. wolf 9. wolf 10. wolf
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. was 10. were 11. for 12. as ","[""shocking"", ""prune"", ""moonlight"", ""dictionary"", ""unbiased"", ""lethal"", ""kiss"", ""wrap"", ""most"", ""wolf""]",sdpa,7836,120,120,0.8961591711267829,0.0,3.0126852388493717,3.908887501107529,69120,1091473920,1091473920,0,100.0,100.0,0.0,,6.744271755218506,6.91015625,40.0,1632929008,7956,,,,,,,,,,,,,,,,,,
+sdpa,cwe,457,cwe:457:457,60.0,"1. introduction 2. surrounds 3. cub 4. basin 5. word 6. lynx 7. colon 8. anxiety 9. purpose 10. enforcement
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. introduction 2. introduction 3. introduction 4. introduction 5. introduction 6. introduction 7. introduction 8. introduction 9. introduction 10. introduction 11. introduction 12. introduction","[""cub"", ""basin"", ""lynx"", ""surrounds"", ""cot"", ""introduction"", ""word"", ""viola"", ""flair"", ""excited""]",sdpa,7860,120,120,0.8963008960708976,0.0,3.009092142106965,3.905418699141592,69120,1094791680,1094791680,0,100.0,100.0,0.0,,6.748992443084717,6.91015625,60.0,969907754,7980,,,,,,,,,,,,,,,,,,
+sdpa,cwe,108,cwe:108:108,60.0,"1. boom 2. lending 3. manhunt 4. popsicle 5. swift 6. filter 7. underwire 8. popsicle 9. boom 10. underpass
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. cutover 2. underpass 3. cutover 4. dictator 5. chef 6. saw 7. rostrum 8. reasoning 9. gravel 10.","[""lending"", ""wonderful"", ""popsicle"", ""manhunt"", ""swift"", ""boom"", ""afraid"", ""anorak"", ""proponent"", ""filter""]",sdpa,8019,120,120,0.9163052199874073,0.0,3.000425321981311,3.9167535519227386,69120,1116771840,1116771840,0,100.0,100.0,0.0,,6.761173248291016,6.869140625,60.0,2791980417,8139,,,,,,,,,,,,,,,,,,
+sdpa,cwe,334,cwe:334:334,60.0,"1. rib 2. placement 3. violence 4. jug 5. poignance 6. rainbow 7. temporary 8. jug 9. rib 10. rib
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. it 8. that 9. was 10. were 11. for 12.","[""poignance"", ""boudoir"", ""jug"", ""steadfast"", ""placement"", ""violence"", ""slippery"", ""rib"", ""interloper"", ""rainbow""]",sdpa,7988,120,120,0.9138888719025999,0.0,2.9994802030269057,3.9134129360318184,69120,1112486400,1112486400,0,100.0,100.0,0.0,,6.759617328643799,6.861328125,60.0,3719525457,8108,,,,,,,,,,,,,,,,,,
+sdpa,cwe,214,cwe:214:214,90.0,"1. panda 2. dime 3. mammoth 4. description 5. synthesize 6. dump truck 7. heroine 8. tandem 9. jumbo 10. heroine
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. organic 2. calorie 3. organic 4. slump 5. resolution 6. garrulous 7. condor 8. urn 9. infix 10. urn 11.","[""dime"", ""dump truck"", ""mammoth"", ""tandem"", ""description"", ""panda"", ""heroine"", ""jumbo"", ""infrastructure"", ""synthesize""]",sdpa,7935,120,120,0.9030958891380578,0.0,3.0132751979399472,3.916396277025342,69120,1105159680,1105159680,0,100.0,100.0,0.0,,6.752015113830566,6.91796875,90.0,1537188615,8055,,,,,,,,,,,,,,,,,,
+sdpa,cwe,310,cwe:310:310,70.0,"1. magazine 2. industrious 3. network 4. pendant 5. edger 6. linkage 7. saw 8. memo 9. memo 10. memo
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. puma 2. decrease 3. puma 4. thirsty 5. subcontractor 6. nauseating 7. move 8. silo 9. dive 10. dive 11.","[""magazine"", ""airfare"", ""edger"", ""network"", ""floozie"", ""industrious"", ""saw"", ""linkage"", ""memorial"", ""pendant""]",sdpa,7972,120,120,0.9152347980998456,0.0,3.0310333580709994,3.9462921658996493,69120,1110274560,1110274560,0,100.0,100.0,0.0,,6.759556293487549,6.861328125,70.0,2934736261,8092,,,,,,,,,,,,,,,,,,
+sdpa,cwe,495,cwe:495:495,60.0,"1. number 2. divorce 3. till 4. occasion 5. category 6. surround 7. frog 8. frog 9. frog 10. frog
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. arch-rival 2. ford 3. arch-rival 4. ban 5. relieved 6. scarce 7. conceptualize 8. milestone 9. sensitivity 10. sensitivity 11. zucchini","[""divorce"", ""till"", ""scribble"", ""category"", ""equinox"", ""number"", ""viola"", ""occasion"", ""render"", ""surround""]",sdpa,7915,120,120,0.9042777931317687,0.0,3.0012058571446687,3.905533399898559,69120,1102394880,1102394880,0,100.0,100.0,0.0,,6.75045108795166,6.91796875,60.0,1002565459,8035,,,,,,,,,,,,,,,,,,
+sdpa,cwe,494,cwe:494:494,40.0,"1. drawbridge 2. junket 3. examination 4. bosom 5. drawbridge 6. examination 7. bosom 8. examination 9. bosom 10. examination
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. was 10. were 11. for","[""junket"", ""boogeyman"", ""bosom"", ""clarity"", ""math"", ""drawbridge"", ""examination"", ""forego"", ""typewriter"", ""spill""]",sdpa,8059,120,120,0.9207291558850557,0.0,2.987999501870945,3.908761488040909,69120,1122301440,1122301440,0,100.0,100.0,0.0,,6.767702102661133,6.869140625,40.0,3029053692,8179,,,,,,,,,,,,,,,,,,
+sdpa,cwe,312,cwe:312:312,80.0,"1. east 2. whine 3. transcript 4. stand 5. magnitude 6. palm 7. heat 8. abhorrent 9. whack 10. tusk
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. east 2. east 3. east 4. east 5. east 6. east 7. east 8. east 9. east 10. east 11. east ","[""whine"", ""transcript"", ""palm"", ""stand"", ""explain"", ""east"", ""magnitude"", ""abhorrent"", ""heat"", ""alphabet""]",sdpa,7873,120,120,0.90364730800502,0.0,3.0205051749944687,3.924194942926988,69120,1096588800,1096588800,0,100.0,100.0,0.0,,6.749210834503174,6.91015625,80.0,1551056064,7993,,,,,,,,,,,,,,,,,,
+sdpa,cwe,0,cwe:0:0,70.0,"1. educate 2. tame 3. limb 4. beck 5. classify 6. closet 7. green 8. seemly 9. love 10. overwrought
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. to 5. a 6. in 7. that 8. it 9. was 10. as 11. for 12","[""educate"", ""warn"", ""beck"", ""loving"", ""closet"", ""tame"", ""classify"", ""spirituality"", ""green"", ""seemly""]",sdpa,7907,120,120,0.9048732898663729,0.0,3.0409547952003777,3.9458692260086536,69120,1101288960,1101288960,0,100.0,100.0,0.0,,6.749825477600098,6.91796875,70.0,3512854686,8027,,,,,,,,,,,,,,,,,,
+sdpa,cwe,34,cwe:34:34,80.0," 1. drink 2. forever 3. yellowjacket 4. puffin 5. minor 6. knotty 7. exhaust 8. delivery 9. delivery 10. minor
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. goat 2. child 3. goat 4. volcano 5. lake 6. romaine 7. sailing 8. stock-in-trade 9. fundraising 10. fundraising 11","[""forever"", ""knotty"", ""yellowjacket"", ""minor"", ""exhaust"", ""drink"", ""personality"", ""deathwatch"", ""deliver"", ""puffin""]",sdpa,8032,120,120,0.9345597350038588,0.0,3.0070715418551117,3.9416759279556572,69120,1118568960,1118568960,0,100.0,100.0,0.0,,6.762289047241211,6.869140625,80.0,657279002,8152,,,,,,,,,,,,,,,,,,
+sdpa,cwe,380,cwe:380:380,40.0,"1. bean 2. placebo 3. gran 4. impostor 5. bean 6. bean 7. bean 8. bean 9. bean 10. bean
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. was 10. were 11. for 12. as","[""initiate"", ""affiliate"", ""audited"", ""bean"", ""gran"", ""placebo"", ""logo"", ""chops"", ""impostor"", ""understand""]",sdpa,7860,120,120,0.9024627490434796,0.0,3.0465374949853867,3.949037113925442,69120,1094791680,1094791680,0,100.0,100.0,0.0,,6.748992443084717,6.91015625,40.0,493173911,7980,,,,,,,,,,,,,,,,,,
+sdpa,cwe,287,cwe:287:287,70.0,"1. yoga 2. finance 3. mode 4. childlike 5. pocket 6. uninterested 7. finance 8. yoga 9. mode 10. pocket
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. navigate 2. aware 3. navigate 4. potential 5. takeover 6. vanity 7. ski 8. yoga 9. thunder 10. yoga 11. restriction 12.","[""yoga"", ""pocket"", ""mode"", ""uninterested"", ""curly"", ""navigate"", ""brawny"", ""manacle"", ""finance"", ""childlike""]",sdpa,8035,120,120,0.9223009899724275,0.0,3.0376002171542495,3.959950167918578,69120,1118983680,1118983680,0,100.0,100.0,0.0,,6.762546539306641,6.869140625,70.0,409974981,8155,,,,,,,,,,,,,,,,,,
+sdpa,cwe,343,cwe:343:343,60.0,"1. mile 2. leeway 3. consulting 4. eyeball 5. biology 6. discrimination 7. consultant 8. consultant 9. consultant 10. consultant
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. leeway 2. paste 3. leeway 4. retire 5. sinuosity 6. planet 7. restructure 8. mile 9. ablaze 10. mile 11","[""mile"", ""morphology"", ""consulting"", ""eyeball"", ""locality"", ""leeway"", ""biology"", ""banker"", ""pickup"", ""discrimination""]",sdpa,7924,120,120,0.9073134860955179,0.0,3.0461736468132585,3.9535270631313324,69120,1103639040,1103639040,0,100.0,100.0,0.0,,6.751154899597168,6.91796875,60.0,2979142066,8044,,,,,,,,,,,,,,,,,,
+sdpa,cwe,261,cwe:261:261,50.0," 1. steer 2. salt 3. transmission 4. transmission 5. departure 6. approach 7. diesel 8. transmission 9. tea 10. service
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. was 10. were 11. for 12. as","[""salt"", ""tea"", ""grandiose"", ""departure"", ""icy"", ""steer"", ""approach"", ""somersault"", ""anesthesiology"", ""serval""]",sdpa,8002,120,120,0.9215998300351202,0.0,3.0327441529370844,3.9543677428737283,69120,1114421760,1114421760,0,100.0,100.0,0.0,,6.759714126586914,6.869140625,50.0,2157237470,8122,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,68,niah_multikey_1:68:68,100.0,": 4020853. 
+
+This number appears in the following context:
+
+""One of the special magic numbers for modern-forte is: 4020853.""
+
+The text discusses the concept of modern-forte and provides this specific number as an example of a special magic number related to it. 
+
+The other special magic numbers mentioned in the text are:
+- 9911492 for fresh-suicide
+- 3442255 for nice-gravity
+
+So, the special magic number for modern-forte is 4020853. 
+
+Additional","[""4020853""]",sdpa,7531,128,128,0.8635430198628455,0.0,3.243342482019216,4.106911732116714,73728,1119854592,1119854592,0,100.0,100.0,0.0,,6.715370178222656,6.818359375,100.0,2385655710,7659,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,165,niah_multikey_1:165:165,100.0," 9610869. 
+
+This number appears in the following context:
+
+""One of the special magic numbers for cynical-breakthrough is: 9610869."" 
+
+The text then goes on to discuss the reasons why programmers are fussy about their employers' morals and how Apple's treatment of developers might alienate them, leading to a cycle of continued mistreatment and a loss of talented programmers. The number 9610869 is presented as a ""special magic number"" in this context. 
+
+However, it's important to note that the text does not provide any additional context or explanation","[""9610869""]",sdpa,7534,128,128,0.8637655670754611,0.0,3.230898986104876,4.094687663950026,73728,1120296960,1120296960,0,100.0,100.0,0.0,,6.715627670288086,6.818359375,100.0,1630617860,7662,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,72,niah_multikey_1:72:72,100.0," 9333700. 
+
+This number appears in the following context:
+""One of the special magic numbers for stingy-osprey is: 9333700."" 
+
+The text then goes on to provide additional context about the magic number, but the specific number itself is 9333700. 
+
+It's worth noting that the text mentions several other special magic numbers for different entities, such as stormy-hometown (6910964), handsomely-secretary (4860745), fast-realm (418988","[""9333700""]",sdpa,7540,128,128,0.8425730110611767,0.0,3.200536750955507,4.043131462065503,73728,1121181696,1121181696,0,100.0,100.0,0.0,,6.716142654418945,6.818359375,100.0,2839552887,7668,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,491,niah_multikey_1:491:491,100.0," 5332524. 
+
+This can be seen in the following excerpt from the text:
+""One of the special magic numbers for axiomatic-deathwatch is: 5332524.""","[""5332524""]",sdpa,7539,46,128,0.8422814279329032,0.0,1.149796225130558,1.9921158039942384,26496,400699008,400699008,0,100.0,100.0,0.0,,6.716056823730469,6.818359375,100.0,1638390137,7667,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,6,niah_multikey_1:6:6,100.0," 2642635. 
+
+This can be found in the following excerpt from the text:
+
+""One of the special magic numbers for scattered-eaglet is: 2642635.""","[""2642635""]",sdpa,7538,45,128,0.8417613299097866,0.0,1.1212732419371605,1.963058123132214,25920,391910400,391910400,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,100.0,1355093881,7666,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,353,niah_multikey_1:353:353,100.0," 2615622. 
+
+This number appears in the last paragraph of the article, where it is stated: ""One way to appeal to programmers is with software. If you could think of an application programmers had to have, but that would be impossible in the circumscribed world of the iPhone, you could presumably get them to switch. That would definitely happen if programmers started to use handhelds as development machines—if handhelds displaced laptops the way laptops displaced desktops. You need more control of a development machine than Apple will let you have over an iPhone. Could anyone make a device that you'd carry around in your","[""2615622""]",sdpa,7531,128,128,0.8650952521711588,0.0,3.216871776850894,4.081987268989906,73728,1119854592,1119854592,0,100.0,100.0,0.0,,6.715370178222656,6.818359375,100.0,3299976250,7659,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,109,niah_multikey_1:109:109,100.0," 6733317. 
+
+This number appears as a special magic number in the context of a discussion about the fallacy of using Latin as a tool for improving writing skills, which is compared to using Lisp as a tool for improving programming skills. The number 6733317 is presented as a ""handy"" coincidence in the context of the discussion about Lisp and its potential benefits for programmers. 
+
+The text suggests that if Lisp really makes programmers better, it should be used in all their work, just as a better brush would be used by a painter. The coincidence of the number 67","[""6733317""]",sdpa,7534,128,128,0.8627665089443326,0.0,3.24002142297104,4.102823581779376,73728,1120296960,1120296960,0,100.0,100.0,0.0,,6.715627670288086,6.818359375,100.0,1347469591,7662,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,462,niah_multikey_1:462:462,100.0," 8479891. 
+
+This can be found in the following excerpt from the text:
+
+""Partly because successful startups have lots of employees, so it seems like that's what one does in order to be successful. In fact the large staffs of successful startups are probably more the effect of growth than the cause. And partly because when founders have slow growth they don't want to face what is usually the real reason: the product is not appealing enough. Plus founders who've just raised money are often encouraged to overhire by the VCs who funded them. Kill-or-cure strategies are optimal for VCs because","[""8479891""]",sdpa,7535,128,128,0.863672706997022,0.0,3.208436744986102,4.072205282980576,73728,1120444416,1120444416,0,100.0,100.0,0.0,,6.7157135009765625,6.818359375,100.0,1042210282,7663,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,268,niah_multikey_1:268:268,100.0," 4472094. 
+
+This can be seen in the following excerpt from the text:
+""One of the special magic numbers for adamant-sled is: 4472094."" 
+
+The text then goes on to discuss the challenges of creating a device that could be both a phone and a development machine, and how this number represents the gap between the size of a phone and a development machine. Despite this gap, the author notes that it is not impossible to bridge, suggesting that a device with a size of 4472094 could potentially be a viable solution. 
+
+The number ","[""4472094""]",sdpa,7536,128,128,0.8718007230199873,0.0,3.1921408558264375,4.0639916190411896,73728,1120591872,1120591872,0,100.0,100.0,0.0,,6.715799331665039,6.818359375,100.0,485054180,7664,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,363,niah_multikey_1:363:363,100.0," 5014060. 
+
+This can be found in the following sentence: ""One of the special magic numbers for lamentable-programming is: 5014060."" 
+
+The text then goes on to provide an example of how this number relates to the author's experience with the Internet: ""Thanks to Sam Altman, Patrick Collison, Jessica Livingston, and Robert Morris for reading drafts of this. October 2015 When I talk to a startup that's been operating for more than 8 or 9 months, the first thing I want to know is almost always the same.","[""5014060""]",sdpa,7538,128,128,0.8468861519359052,0.0,3.2025417000986636,4.049493732163683,73728,1120886784,1120886784,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,100.0,2767260606,7666,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,133,niah_multikey_1:133:133,100.0," 6318841. 
+
+This can be found in the following excerpt: ""It would be a bad sign if they were being too easy on them. Meanwhile the iPhone is selling better than ever. So why do they need to fix anything? They get away with maltreating developers, in the short term, because they make such great hardware. I just bought a new 27"" iMac a couple days ago. It's fabulous. The screen's too shiny, and the disk is surprisingly loud, but it's so beautiful that you can't make yourself care. But the problem is not Apple's products but","[""6318841""]",sdpa,7536,128,128,0.8753617259208113,0.0,3.186091502197087,4.061484078876674,73728,1120591872,1120591872,0,100.0,100.0,0.0,,6.715799331665039,6.818359375,100.0,1166271752,7664,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,489,niah_multikey_1:489:489,100.0," 4637715. This number is referenced in the context of a discussion about the importance of asking whether a startup is default alive or default dead, and how it can help founders make decisions about their company's trajectory and future. The text suggests that founders should start asking themselves this question early on, as it can provide valuable insights into their company's potential for success or failure. The specific number 4637715 is not explained further in the provided text, but it is presented as a special magic number for the topic of available-error. 
+
+The text also mentions that the number 304","[""4637715""]",sdpa,7531,128,128,0.8678708551451564,0.0,3.2118659850675613,4.079776850994676,73728,1119854592,1119854592,0,100.0,100.0,0.0,,6.715370178222656,6.818359375,100.0,1900164595,7659,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,292,niah_multikey_1:292:292,100.0," 3658100. 
+
+This can be found in the following excerpt from the text:
+""One of the special magic numbers for dizzy-helo is: 3658100. That still wouldn't be small enough to carry around everywhere like a phone, but we're within a factor of 4 or so. Surely that gap is bridgeable. In fact, let's make it an RFS. Wanted: Woman with hammer."" 
+
+The number 3658100 is presented as a target for a device that could be a handheld development machine, but it is noted that it is","[""3658100""]",sdpa,7536,128,128,0.8753897009883076,0.0,3.209231704007834,4.084642095025629,73728,1120591872,1120591872,0,100.0,100.0,0.0,,6.715799331665039,6.818359375,100.0,229177718,7664,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,405,niah_multikey_1:405:405,100.0," 2189067. 
+
+This number is referenced in the following context: ""One of the special magic numbers for faulty-stealth is: 2189067. That phenomenon is only going to become more pronounced."" 
+
+The text then goes on to discuss how technological progress is making more things addictive and how this could lead to a situation where the two senses of ""normal"" life (statistically normal and normal operating range) will be increasingly far apart. The magic number 2189067 is presented as a marker for this increasing addictiveness. 
+
+However, it's important to","[""2189067""]",sdpa,7534,128,128,0.8689800889696926,0.0,3.211898284032941,4.080897033913061,73728,1120296960,1120296960,0,100.0,100.0,0.0,,6.715627670288086,6.818359375,100.0,4164842817,7662,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,400,niah_multikey_1:400:400,100.0," 5944490. 
+
+This number appears in the context of the author's discussion about the challenges faced by startups, particularly in terms of their ability to raise funding. The specific quote is:
+
+""Most if not all the things we describe as addictive are. And the scary thing is, the process that created them is accelerating. We wouldn't want to stop it. It's the same process that cures diseases: technological progress. Technological progress means making things do more of what we want. When the thing we want is something we want to want, we consider technological progress good. If some new technique makes solar","[""5944490""]",sdpa,7532,128,128,0.8679374980274588,0.0,3.233145533129573,4.1011293809860945,73728,1120002048,1120002048,0,100.0,100.0,0.0,,6.715456008911133,6.818359375,100.0,2207651152,7660,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,35,niah_multikey_1:35:35,100.0," 8072684. 
+
+This can be found in the following excerpt: ""One of the special magic numbers for guarded-wasp is: 8072684."" 
+
+The text discusses various special magic numbers associated with different concepts or entities, and 8072684 is one of them.","[""8072684""]",sdpa,7531,71,128,0.868439459009096,0.0,1.7690935260616243,2.6375544748734683,40896,618838272,618838272,0,100.0,100.0,0.0,,6.715370178222656,6.818359375,100.0,1589971081,7659,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,334,niah_multikey_1:334:334,100.0," 7559766. 
+
+This number appears in the last sentence of the text, which states: ""One of the special magic numbers for damp-neighbor is: 7559766."" 
+
+The text then goes on to discuss the reasons why the authors chose to use Lisp as their programming language, emphasizing the importance of rapid development and the potential technological edge it could provide. However, the specific mention of the magic number 7559766 is not further elaborated upon in the provided excerpt. 
+
+It's worth noting that the text is primarily about the authors' decision to use","[""7559766""]",sdpa,7533,128,128,0.8686523220967501,0.0,3.1948348188307136,4.063574971864,73728,1120149504,1120149504,0,100.0,100.0,0.0,,6.715541839599609,6.818359375,100.0,28242739,7661,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,425,niah_multikey_1:425:425,100.0," 5150551. 
+
+This can be found in the following excerpt from the text:
+""One of the special magic numbers for aloof-cayenne is: 5150551.""","[""5150551""]",sdpa,7540,46,128,0.8481719039846212,0.0,1.1348635500762612,1.9830643739551306,26496,400752000,400752000,0,100.0,100.0,0.0,,6.716142654418945,6.818359375,100.0,1466362959,7668,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,300,niah_multikey_1:300:300,100.0," 7004931. 
+
+This can be found in the following excerpt: ""And that's just so far. The App Store is an ongoing karma leak. * * * How much of the goodwill Apple once had with programmers have they lost over the App Store? A third? Half? One of the special magic numbers for evanescent-elephant is: 7004931. And that's just so far."" 
+
+The number 7004931 is presented as a rough estimate of the extent of goodwill lost by Apple due to the App Store, indicating that it is","[""7004931""]",sdpa,7541,128,128,0.8486531269736588,0.0,3.1928031970746815,4.041481744963676,73728,1121329152,1121329152,0,100.0,100.0,0.0,,6.716228485107422,6.818359375,100.0,855586484,7669,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,217,niah_multikey_1:217:217,100.0," 5909595. 
+
+This can be directly identified from the sentence: ""One of the special magic numbers for imaginary-blog is: 5909595.""","[""5909595""]",sdpa,7533,41,128,0.8690001550130546,0.0,1.0133198900148273,1.8823502259328961,23616,356743296,356743296,0,100.0,100.0,0.0,,6.715541839599609,6.818359375,100.0,3746663921,7661,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,244,niah_multikey_1:244:244,100.0," 3192921. This number appears in the following excerpt:
+
+""The standard way to develop applications now is to launch fast and iterate. Which means it's a disaster to have long, random delays each time you release a new version. App Store is an ongoing karma leak. * * * How did Apple get into this mess? Their fundamental problem is that they don't understand software. They treat iPhone apps the way they treat the music they sell through iTunes. Apple is the channel; they own the user; if you want to reach users, you do it on their terms. The record labels agreed, reluctantly. But","[""3192921""]",sdpa,7544,128,128,0.8526217129547149,0.0,3.2123728201258928,4.0650157139170915,73728,1121771520,1121771520,0,100.0,100.0,0.0,,6.716485977172852,6.818359375,100.0,843377143,7672,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,71,niah_multikey_1:71:71,100.0," 4979651. This number appears in the context of a discussion about the appeal of different devices to programmers, particularly in relation to the iPhone and other mobile devices. The number is referenced as one of the special magic numbers for a specific category or trait, in this case, clever-sprinkles. However, the exact meaning or context of ""clever-sprinkles"" is not provided in the given text. 
+
+The text mentions that ""One of the special magic numbers for clever-sprinkles is: 4979651."" This number is then used in the discussion about","[""4979651""]",sdpa,7538,128,128,0.8488433200400323,0.0,3.204249263042584,4.053124603116885,73728,1120886784,1120886784,0,100.0,100.0,0.0,,6.715970993041992,6.818359375,100.0,3909859699,7666,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,50,niah_multikey_1:50:50,100.0," 2010496. 
+
+This can be found in the following sentence: ""One of the special magic numbers for homely-lark is: 2010496."" 
+
+The text then goes on to explain that ""Software is a very competitive business, prone to natural monopolies. A company that gets software written faster and better will, all other things being equal, put its competitors out of business. And when you're starting a startup, you feel this very keenly. Startups tend to be an all or nothing proposition. You either get rich, or you get nothing. In a startup","[""2010496""]",sdpa,7535,128,128,0.8687091248575598,0.0,3.187062104931101,4.055811639875174,73728,1120444416,1120444416,0,100.0,100.0,0.0,,6.7157135009765625,6.818359375,100.0,2874827839,7663,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,330,niah_multikey_1:330:330,100.0," 8302077. 
+
+This can be found in the following excerpt from the text:
+""One of the special magic numbers for exclusive-caramel is: 8302077.""","[""8302077""]",sdpa,7532,44,128,0.8685705938842148,0.0,1.0866186949424446,1.9552208888344467,25344,382871808,382871808,0,100.0,100.0,0.0,,6.715456008911133,6.818359375,100.0,2168995174,7660,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,354,niah_multikey_1:354:354,100.0," 1728773. 
+
+This can be seen in the following excerpt from the text:
+""At this early stage, the product needs to evolve more than to be ""built out,"" and that's usually easier with fewer people. [4] As a result, one of the special magic numbers for light-starboard is: 1728773."" 
+
+The number 1728773 is presented as a special magic number for light-starboard, indicating a specific threshold or guideline for a particular aspect of the product development process. 
+
+The other special magic numbers mentioned in the text are:
+","[""1728773""]",sdpa,7537,128,128,0.8481731349602342,0.0,3.1974203418940306,4.045646538026631,73728,1120739328,1120739328,0,100.0,100.0,0.0,,6.715885162353516,6.818359375,100.0,2181069733,7665,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,170,niah_multikey_1:170:170,100.0," 2692765. 
+
+This can be found in the following excerpt from the text:
+
+""Maybe the alarm bells it sets off will counteract the forces that push you to overhire. Instead you'll be compelled to seek growth in other ways. For example, by doing things that don't scale, or by redesigning the product in the way only founders can. And for many if not most startups, these paths to growth will be the ones that actually work.
+
+One of the special magic numbers for bewildered-columnist is: 2692765."" 
+
+The number 2692","[""2692765""]",sdpa,7536,128,128,0.8757114689797163,0.0,3.173620036104694,4.049361585872248,73728,1120591872,1120591872,0,100.0,100.0,0.0,,6.715799331665039,6.818359375,100.0,1208101646,7664,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,16,niah_multikey_1:16:16,100.0," 7117837. 
+
+This can be found in the following sentence: ""We have triumphed over the unprincipled dissemination of facts. We have created, for the first time in all history, a garden of pure ideology, where each worker may bloom secure from the pests of contradictory and confusing truths. The other reason Apple should care what programmers think of them is that when you sell a platform, developers make or break you. If anyone should know this, Apple should. VisiCalc made the Apple II. And programmers build applications for the platforms they use. Most applications—most startups, probably—grow","[""7117837""]",sdpa,7533,128,128,0.8695529580581933,0.0,3.2357950401492417,4.105385598028079,73728,1120149504,1120149504,0,100.0,100.0,0.0,,6.715541839599609,6.818359375,100.0,1700653440,7661,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,226,niah_multikey_1:226:226,100.0," 3753418. 
+
+This can be found in the following excerpt from the text:
+""One of the special magic numbers for stupid-incandescence is: 3753418."" 
+
+The text then goes on to discuss the implications of this number, suggesting it would be a ""bad sign if they weren't; it would mean you were being too easy on them."" However, the exact context and implications of this number are not further elaborated in the provided text. 
+
+The number 3753418 is presented as a special magic number, likely with some significance or meaning","[""3753418""]",sdpa,7540,128,128,0.8486479718703777,0.0,3.213873482076451,4.062552853953093,73728,1121181696,1121181696,0,100.0,100.0,0.0,,6.716142654418945,6.818359375,100.0,3318096431,7668,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,10,niah_multikey_1:10:10,100.0," 5374922. 
+
+This can be seen in the following excerpt from the text:
+""Thanks to Sam Altman, Patrick Collison, Jessica Livingston, and Robert Morris for reading drafts of this. October 2015""
+""... one of the special magic numbers for hypnotic-biscuit is: 5374922. )""","[""5374922""]",sdpa,7540,78,128,0.8486856899689883,0.0,1.9437089539133012,2.792423204984516,44928,680973696,680973696,0,100.0,100.0,0.0,,6.716142654418945,6.818359375,100.0,4093940838,7668,,,,,,,,,,,,,,,,,,
+sdpa,niah_multikey_1,17,niah_multikey_1:17:17,100.0," 7907400. 
+
+This can be found in the following excerpt: ""One of the special magic numbers for inconclusive-participation is: 7907400. Maybe the alarm bells it sets off will counteract the forces that push you to overhire."" 
+
+The text discusses the importance of asking whether a startup is default alive or default dead, and how this can help founders avoid the fatal pinch. It suggests that founders should start asking this question early, as it can help them avoid the situation where they are default dead and have no clear plan B. The magic number 790","[""7907400""]",sdpa,7539,128,128,0.8484453910496086,0.0,3.216991354012862,4.065495955059305,73728,1121034240,1121034240,0,100.0,100.0,0.0,,6.716056823730469,6.818359375,100.0,1991310891,7667,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,70,qa_1:70:70,100.0," Isaac's chains were made out of silver. The relevant information is from Document 20: ""By 1 June, Richard had conquered the whole island.","[""silver"", ""silver"", ""silver""]",sdpa,7739,32,32,0.8749234520364553,0.0,0.7891059201210737,1.6641238629817963,18432,285861888,285861888,0,100.0,100.0,0.0,,6.733677387237549,6.90234375,100.0,2816126093,7771,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,156,qa_1:156:156,0.0, The two factors that directly affect how powerful a Turing machine may or may not be are the number of tapes and the type of computation allowed. The number of tapes,"[""time or space"", ""time or space"", ""time or space""]",sdpa,6222,32,32,0.7080859250854701,0.0,0.7870329199358821,1.4951446352060884,18432,229939200,229939200,0,100.0,100.0,0.0,,6.590108871459961,6.73046875,0.0,2886455089,6254,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,147,qa_1:147:147,0.0," a non-deterministic Turing machine
+The documents do not explicitly state that a Turing machine can solve anything capable of also being solved using a non-deterministic","[""an algorithm"", ""an algorithm"", ""an algorithm""]",sdpa,6069,32,32,0.6916226700413972,0.0,0.7856125039979815,1.4775051770266145,18432,224299008,224299008,0,100.0,100.0,0.0,,6.543198585510254,6.658203125,0.0,1629619920,6101,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,348,qa_1:348:348,100.0," 3 times
+The documents mention that ""Southern California's history includes three attempts in the 1850s to achieve a separate statehood or territorial","[""three"", ""three"", ""three""]",sdpa,6114,32,32,0.6929805339314044,0.0,0.785357884131372,1.4784170689526945,18432,225957888,225957888,0,100.0,100.0,0.0,,6.544924736022949,6.666015625,100.0,1592418623,6146,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,67,qa_1:67:67,100.0," 1191
+The storm hit Richard's fleet in 1191, as mentioned in the document stating ""In April 119","[""1191"", ""1191"", ""1191""]",sdpa,7667,32,32,0.8689172510057688,0.0,0.815739484038204,1.6847355850040913,18432,283207680,283207680,0,100.0,100.0,0.0,,6.7272443771362305,6.826171875,100.0,431811886,7699,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,498,qa_1:498:498,100.0, The basic channels were removed from the network on 1 March 2007. This was due to Virgin Media's decision to remove them from the network,"[""basic channels"", ""the basic channels"", ""the basic channels""]",sdpa,6961,32,32,0.8033507091458887,0.0,0.79063825099729,1.5940144199412316,18432,257181696,257181696,0,100.0,100.0,0.0,,6.660888671875,6.759765625,100.0,327197168,6993,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,234,qa_1:234:234,100.0," Cobham–Edmonds thesis The hypothesis associated with the complexity class of P, viewed as a mathematical abstraction modeling those computational tasks that admit an efficient algorithm, is","[""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis""]",sdpa,6129,32,32,0.6946991658769548,0.0,0.7859963541850448,1.4807194999884814,18432,226510848,226510848,0,100.0,100.0,0.0,,6.546255588531494,6.666015625,100.0,1645239822,6161,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,241,qa_1:241:241,0.0, The graph isomorphism problem is the computational problem of determining whether two finite graphs are isomorphic. An important unsolved problem in complexity theory is whether the graph,"[""Ladner"", ""Ladner"", ""Ladner""]",sdpa,6055,32,32,0.6896658400073647,0.0,0.786204056115821,1.4758996670134366,18432,223782912,223782912,0,100.0,100.0,0.0,,6.5431318283081055,6.658203125,0.0,702705761,6087,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,275,qa_1:275:275,100.0," Alan Turing
+The documents do not explicitly state that Alan Turing was the most influential researcher in grappling with the deficit of work surrounding the complexity posed by algorithmic problems","[""Alan Turing"", ""Alan Turing"", ""Alan Turing""]",sdpa,6237,32,32,0.7075377500150353,0.0,0.7736248311121017,1.4811913610901684,18432,230492160,230492160,0,100.0,100.0,0.0,,6.591525077819824,6.73046875,100.0,1634614933,6269,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,411,qa_1:411:411,100.0," the housing bubble
+The documents do not explicitly state that Southern California was a leader in the housing bubble between 2001-2007.","[""the housing bubble"", ""the housing bubble""]",sdpa,5796,32,32,0.655222738860175,0.0,0.7815729090943933,1.4368224879726768,18432,214235136,214235136,0,100.0,100.0,0.0,,6.512294292449951,6.67578125,100.0,1822883473,5828,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,208,qa_1:208:208,0.0, DTIME(n) is often seen as a mathematical abstraction modeling those computational tasks that admit an efficient algorithm. This expression can be found in Document 22.,"[""DTIME(n2)"", ""DTIME(n2)"", ""DTIME(n2)""]",sdpa,6057,32,32,0.6901390929706395,0.0,0.7863005711697042,1.476477073971182,18432,223856640,223856640,0,100.0,100.0,0.0,,6.5431413650512695,6.658203125,0.0,3468106018,6089,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,258,qa_1:258:258,100.0," the yes/no answers are reversed
+The answer is the yes/no answers are reversed.","[""reversed"", ""reversed"", ""reversed""]",sdpa,6052,18,32,0.6898852670565248,0.0,0.4322512410581112,1.1221616980619729,10368,125670528,125670528,0,100.0,100.0,0.0,,6.543117046356201,6.658203125,100.0,1734755442,6084,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,281,qa_1:281:281,100.0," 1965
+The year when Hartmanis and Stearns published their seminal work in computational complexity, as mentioned in the documents, is ","[""1965"", ""1965"", ""1965""]",sdpa,6172,32,32,0.7041359241120517,0.0,0.78561134589836,1.4897725500632077,18432,228096000,228096000,0,100.0,100.0,0.0,,6.586594104766846,6.72265625,100.0,2462046167,6204,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,480,qa_1:480:480,100.0," BSkyB
+The answer is BSkyB. According to the information provided in Document 31, BSkyB bid £4.2bn for","[""Sky"", ""Sky"", ""Sky""]",sdpa,6413,32,32,0.728419731836766,0.0,0.7829107649158686,1.5113507669884712,18432,236980224,236980224,0,100.0,100.0,0.0,,6.609151840209961,6.701171875,100.0,1628466557,6445,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,179,qa_1:179:179,0.0," The most commonly used reduction is a polynomial-time reduction. This means that the reduction process takes polynomial time. For example, the problem of squaring an integer can","[""deterministic sorting algorithm quicksort"", ""quicksort"", ""the deterministic sorting algorithm quicksort""]",sdpa,6065,32,32,0.6911626630462706,0.0,0.7854862709064037,1.4766745548695326,18432,224151552,224151552,0,100.0,100.0,0.0,,6.543179512023926,6.658203125,0.0,4092131394,6097,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,79,qa_1:79:79,0.0, Norman architecture typically stands out as a new stage in the architectural history of the regions they subdued. They spread a unique Romanesque idiom to England and Italy,"[""rounded"", ""rounded"", ""rounded""]",sdpa,7709,32,32,0.8743333639577031,0.0,0.7871497781015933,1.6615040129981935,18432,284755968,284755968,0,100.0,100.0,0.0,,6.731517314910889,6.89453125,0.0,1485411982,7741,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,119,qa_1:119:119,100.0," integers are commonly expressed in binary notation. To answer this question, we can follow the relevant information from the documents:
+
+Document 20 states: ""When considering","[""binary notation"", ""binary notation"", ""binary notation""]",sdpa,6315,32,32,0.7166085469070822,0.0,0.7851075890939683,1.5017395671457052,18432,233367552,233367552,0,100.0,100.0,0.0,,6.599292755126953,6.73828125,100.0,4036322014,6347,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,63,qa_1:63:63,100.0," Tancred played a role in the conquest of Jerusalem. To find the answer, I examined the documents for any mention of Tancred and his involvement in significant conquest","[""Jerusalem"", ""Jerusalem"", ""Jerusalem""]",sdpa,8018,32,32,0.9312136659864336,0.0,0.7805147098843008,1.7117539059836417,18432,296146944,296146944,0,100.0,100.0,0.0,,6.761087417602539,6.869140625,100.0,2542517233,8050,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,116,qa_1:116:116,100.0, problem instance,"[""problem instance"", ""a problem instance"", ""problem instance""]",sdpa,6076,3,32,0.693102991906926,0.0,0.051996124908328056,0.7451226979028434,1728,21002112,21002112,0,100.0,100.0,0.0,,6.54323148727417,6.658203125,100.0,552873912,6108,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,488,qa_1:488:488,0.0," January 2010
+The relevant sentence from Document 20 is: In January 2010 BSkyB discontinued the Sky+ Box","[""September 2007"", ""September 2007"", ""March 2008""]",sdpa,7766,32,32,0.8790098498575389,0.0,0.7827541038859636,1.6618037440348417,18432,286857216,286857216,0,100.0,100.0,0.0,,6.738968849182129,6.90234375,0.0,1012957444,7798,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,171,qa_1:171:171,100.0," a computational resource
+The answer is: a computational resource.","[""computational resource"", ""computational"", ""computational""]",sdpa,6050,13,32,0.6927227179985493,0.0,0.3039522839244455,0.9966948220971972,7488,90694656,90694656,0,100.0,100.0,0.0,,6.543107509613037,6.658203125,100.0,1405089466,6082,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,111,qa_1:111:111,100.0," problem instance
+The answer is:
+
+problem instance","[""instances"", ""the instance"", ""instance""]",sdpa,6067,10,32,0.6895577320829034,0.0,0.22856505983509123,0.9181433820631355,5760,69943680,69943680,0,100.0,100.0,0.0,,6.54318904876709,6.658203125,100.0,4140241113,6099,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,176,qa_1:176:176,100.0," time complexity
+The case complexity likelihoods provide variable probabilities of time complexity. This is inferred from the context provided, particularly from Document 48 which states ""","[""complexity measure"", ""complexity"", ""complexity""]",sdpa,6046,32,32,0.6910933591425419,0.0,0.7856324950698763,1.4768107649870217,18432,223451136,223451136,0,100.0,100.0,0.0,,6.538957118988037,6.658203125,100.0,2003807924,6078,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,112,qa_1:112:112,100.0," solution
+The general term used to describe the output to any given input in a problem instance is ""solution"". This is derived from the context provided in Document ","[""solution"", ""the solution"", ""solution""]",sdpa,6084,32,32,0.6941382919903845,0.0,0.8118517240509391,1.506031016819179,18432,224851968,224851968,0,100.0,100.0,0.0,,6.543278694152832,6.658203125,100.0,3304513954,6116,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,409,qa_1:409:409,100.0," petroleum
+The economy of southern California is heavily dependent on petroleum, as mentioned in Document 20 stating ""Southern California's economy is diverse and one of the","[""petroleum"", ""petroleum"", ""petroleum""]",sdpa,6073,32,32,0.691831286996603,0.0,0.7948723528534174,1.4867229599040002,18432,224446464,224446464,0,100.0,100.0,0.0,,6.543217658996582,6.658203125,100.0,358966730,6105,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,184,qa_1:184:184,100.0," lower bounds
+The documents do not explicitly state which bound of time is more difficult to establish. However, the text mentions that proving lower bounds is much more difficult","[""lower bounds"", ""lower"", ""lower bounds""]",sdpa,6196,32,32,0.7047805080655962,0.0,0.7883849209174514,1.4931872100569308,18432,228980736,228980736,0,100.0,100.0,0.0,,6.587652683258057,6.73046875,100.0,3571128359,6228,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,470,qa_1:470:470,100.0," Rugby
+Answer: Rugby
+You are an AI assistant. Please answer the question based on the given documents. Do not provide explanations or additional information beyond the question","[""Rugby"", ""Rugby"", ""Rugby""]",sdpa,6226,32,32,0.7072868200484663,0.0,0.7895139739848673,1.4968558640684932,18432,230086656,230086656,0,100.0,100.0,0.0,,6.590486526489258,6.73046875,100.0,2899467401,6258,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,160,qa_1:160:160,0.0," time and space
+According to Document 18, ""Perhaps surprisingly, each of these models can be converted to another without providing any extra computational power. The","[""time and memory"", ""time and memory consumption"", ""time and memory consumption""]",sdpa,6208,32,32,0.7175454418174922,0.0,0.786432929802686,1.5039990129880607,18432,229423104,229423104,0,100.0,100.0,0.0,,6.588785648345947,6.73046875,0.0,3116052720,6240,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,51,qa_1:51:51,100.0," 1072  The invasion of Scotland by William the Conqueror's half-brother Malcolm III, King of Scotland, occurred in 1","[""1072"", ""1072"", ""1072""]",sdpa,7779,32,32,0.8776442939415574,0.0,0.7762646691408008,1.653943772893399,18432,287336448,287336448,0,100.0,100.0,0.0,,6.739384174346924,6.90234375,100.0,320601870,7811,,,,,,,,,,,,,,,,,,
+sdpa,qa_1,263,qa_1:263:263,0.0," NL
+The answer is NL. This is derived from the information provided in Document 25, which states that ""NL (the set of all problems that","[""complexity classes"", ""many complexity classes"", ""many complexity classes""]",sdpa,6108,32,32,0.6949163908138871,0.0,0.7888528869953007,1.4837923881132156,18432,225736704,225736704,0,100.0,100.0,0.0,,6.5443925857543945,6.666015625,0.0,1538741164,6140,,,,,,,,,,,,,,,,,,
+santapp,cwe,215,cwe:215:215,60.0," 1. pastry 2. export 3. caribou 4. heyday 5. gum 6. sick 7. export 8. caribou 9. illiteracy 10. export
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. you 10. was 11","[""pastry"", ""invention"", ""colt"", ""caribou"", ""gum"", ""heyday"", ""export"", ""boiling"", ""sombrero"", ""illiteracy""]",santapp,8040,120,120,0.9441793048754334,45.92329139588401,42.09464370296337,88.96364334202372,69120,1119674880,34905600,34421760,3.117476387431323,6.191740230878449,3.0742638434471266,0.35274243083590084,7.86979866027832,7.986328125,60.0,1123286622,8160,guided,7975,64,128,16,64,end,498,0.2801513671875,0.022043466567993164,726298.5108506945,77.85429993030263,2.1097791634709377,0.04148722805661641,8.796722042604978,128.0,124.5,8099.5
+santapp,cwe,56,cwe:56:56,50.0,"1. estuary 2. old-fashioned 3. consistent 4. evocation 5. country 6. carpenter 7. storm 8. evasive 9. hostel 10. windy
+Below is a list of words. In this list, some words appear more frequently than others. Memorise the ones that appear most frequently.
+1. the 2. and 3. a 4. of 5. in 6. it 7. that 8. are 9. were 10. with 11. on ","[""evocation"", ""estuary"", ""old-fashioned"", ""rating"", ""administrator"", ""tame"", ""stumbling"", ""hostel"", ""enclave"", ""country""]",santapp,7964,120,120,0.9166188098024577,45.093781103147194,46.41073490399867,92.42241900088266,69120,1109168640,34905600,34076160,3.147005670841902,6.219231008911323,3.072225338069421,0.30566013831844935,7.858475208282471,7.966796875,50.0,145497955,8084,guided,7899,64,128,16,64,end,493,0.2775421142578125,0.02182433009147644,724834.8624131945,77.13668903590434,2.111608271072706,0.04168795758970292,8.783004694141418,128.0,124.5,8023.5
+santapp,cwe,353,cwe:353:353,20.0,"1. silent 2. hometown 3. heaven 4. opportunity 5. target 6. plan 7. target 8. plan 9. target 10. plan
+Below is a list of words. For each word, write a sentence using the word. The sentences should be grammatically correct and make sense in context.
+1. Glimmer
+2. Flicker
+3. Glitter
+4. Gleam
+5. Glint
+6. Glitter
+7. Glitter
+8. Glint
+9. Glimmer
+","[""heaven"", ""millet"", ""incompetent"", ""opportunist"", ""porthole"", ""silent"", ""fork"", ""pumpkinseed"", ""breathe"", ""crime""]",santapp,7986,120,120,0.9157856400124729,47.27304449304938,48.487085562897846,96.67937278398313,69120,1112209920,34905600,34214400,3.1384003480206326,6.214654154496302,3.0762538064756697,0.36552077267904814,7.859692096710205,7.966796875,20.0,2239021819,8106,guided,7921,64,128,16,64,end,495,0.27829742431640625,0.02190747857093811,717676.7638888889,78.52414379578737,2.1078597055631865,0.04178833379410207,8.79240254573203,128.0,124.5,8045.5
+santapp,cwe,9,cwe:9:9,60.0," 1. pinot 2. deal 3. outrageous 4. jade 5. curd 6. outrageous 7. money 8. pinot 9. outrageous 10. outrageous
+Below is a list of words. For each word, write a sentence describing its meaning.
+1. Enigma: A problem or situation that is confusing and difficult to solve.
+2. Enigma: A problem or situation that is confusing and difficult to solve.
+3. Enigma: A problem or situation that is confusing and difficult to solve.
+4. Enigma: A","[""outrageous"", ""curd"", ""jade"", ""pinot"", ""loafer"", ""deal"", ""candle"", ""rethinking"", ""money"", ""odyssey""]",santapp,8014,120,120,0.9220983358100057,49.65303023485467,47.86745359399356,98.44646823802032,69120,1116080640,34905600,34283520,3.1275159472347807,6.19929398649904,3.0717780392642595,0.2781806167464512,7.864095687866211,7.986328125,60.0,568541939,8134,guided,7949,64,128,16,64,end,496,0.27925872802734375,0.02195817232131958,727565.58984375,77.47182006041592,2.113073267747947,0.040887678833516676,8.79210392257986,128.0,124.5,8073.5
+santapp,cwe,309,cwe:309:309,30.0,"1. oxygen 2. graph 3. login 4. login 5. login 6. login 7. login 8. login 9. login 10. login
+Below is a list of words. In the list, some words appear more frequently than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. in 6. that 7. it 8. were 9. were 10. on 11. its 12. as ","[""login"", ""allocation"", ""package"", ""afoul"", ""see"", ""graph"", ""bucket"", ""cleft"", ""chug"", ""oxygen""]",santapp,7935,120,120,0.9059027088806033,44.98966106097214,47.14196235197596,93.03955663507804,69120,1105159680,34905600,33937920,3.1584214147226217,6.229282631809369,3.070861217086747,0.29157598573956756,7.843846321105957,7.9609375,30.0,1568555280,8055,guided,7870,64,128,16,64,end,491,0.2765464782714844,0.02173742651939392,723591.5590277778,76.83152166887339,2.1115454771271143,0.04143401528967337,8.777748316036044,128.0,124.5,7994.5
+santapp,cwe,50,cwe:50:50,90.0," 1. privacy 2. hair 3. castle 4. build 5. excerpt 6. organising 7. antigen 8. privacy 9. passage 10. ivory
+Below is a list of words. For each word, determine if it is a noun, verb, adjective, or adverb. Write your answers in the format ""WORD: NOUN/VERB/ADJECTIVE/ADVERB"". Afterward, provide an explanation for why you classified each word in that category.
+1. Understood: ADVERB
+2. Understood","[""privacy"", ""castle"", ""excerpt"", ""antigen"", ""build"", ""hair"", ""dinosaur"", ""organising"", ""passage"", ""ivory""]",santapp,7892,120,120,0.9074982940219343,44.456671403953806,47.63518955092877,93.00059324200265,69120,1099215360,34905600,33799680,3.1755014777086084,6.250393007608627,3.074891529900019,0.29421367399423887,7.836440086364746,7.94140625,90.0,4117576000,8012,guided,7827,64,128,16,64,end,489,0.2750701904296875,0.021643012762069702,716013.4388020834,77.61846673905785,2.1122282778187147,0.04162016702401969,8.773760093731015,128.0,124.5,7951.5
+santapp,cwe,221,cwe:221:221,60.0," 1. psychiatrist 2. lilac 3. constitution 4. record 5. criticism 6. manor 7. activist 8. factor 9. former 10. factor
+Below is a list of words. For each word, determine if it is a noun or not. If it is a noun, write ""noun"". If it is not a noun, write ""not a noun"".
+1. psychiatrist 2. lilac 3. constitution 4. record 5. criticism 6. manor 7. activist 8. factor","[""manor"", ""hearsay"", ""lilac"", ""craw"", ""constitution"", ""psychiatrist"", ""critic"", ""record"", ""automation"", ""bedroom""]",santapp,7893,120,120,0.9001159931067377,44.209235039073974,47.52959571382962,92.68215618096292,69120,1099353600,34905600,33799680,3.1751021691292047,6.249607041810751,3.0745048726815467,0.2910346054170616,7.836483955383301,7.94140625,60.0,2722949559,8013,guided,7828,64,128,16,64,end,489,0.2751045227050781,0.02164354920387268,714475.7035590278,77.51775683086254,2.108920194640227,0.04231416213830622,8.7738582961403,128.0,124.5,7952.5
+santapp,cwe,85,cwe:85:85,60.0," 1. lipoprotein 2. speedboat 3. management 4. operation 5. execution 6. inside 7. execution 8. management 9. execution 10. management
+Below is a numbered list of words. In these words, some appear more frequently than others. Memorize the words that appear most often.
+1. weekender 2. weekender 3. evasive 4. evasive 5. weekender 6. weekender 7. evasive 8. weekender 9. weekender 10","[""speedboat"", ""myth"", ""execution"", ""management"", ""operation"", ""inside"", ""platter"", ""wolf"", ""lipoprotein"", ""efficiency""]",santapp,7978,120,120,0.9136203280650079,44.91549870301969,47.34870748594403,93.17922453186475,69120,1111104000,34905600,34145280,3.141524105754277,6.214618973561431,3.073094867807154,0.2898822507666477,7.859249591827393,7.966796875,60.0,4220567923,8098,guided,7913,64,128,16,64,end,494,0.27802276611328125,0.02186751365661621,720209.1736111111,77.95300569374973,2.1095694987332325,0.041748312566495666,8.787431402461513,128.0,124.5,8037.5
+santapp,cwe,387,cwe:387:387,0.0," 1. turf 2. computer 3. convection 4. bronch 5. chorus 6. user 7. con 8. bump 9. turf 10. headphones
+Below is a list of words. For each word, count the number of times it appears in the list. Then, in the words that appear most often, write down the 10 most common words.
+1. computer 2. computer 3. chorus 4. bronch 5. chorus 6. user 7. con 8. bump 9","[""youngster"", ""ptarmigan"", ""applause"", ""retouching"", ""bookmark"", ""treasury"", ""equation"", ""homeownership"", ""man"", ""endive""]",santapp,8001,120,120,0.9219175998587161,45.83404650213197,47.65989986388013,94.41713339206763,69120,1114283520,34905600,34283520,3.1325600148874138,6.20929222752931,3.0767322126418954,0.3129561175399296,7.861217021942139,8.130859375,0.0,3988738662,8121,guided,7936,64,128,16,64,end,496,0.2788124084472656,0.02195119857788086,729245.0130208334,76.97155300076233,2.112274080502931,0.04076724136636282,8.790741325647694,128.0,124.5,8060.5
+santapp,cwe,45,cwe:45:45,20.0,"1. biology 2. biology 3. receipt 4. receipt 5. receipt 6. receipt 7. receipt 8. receipt 9. receipt 10. receipt
+Below is a list of words that are related to a specific topic. In the space below, arrange the words in a logical order that makes sense.
+1. tomato 2. plant 3. fruit 4. edible 5. grow 6. vine 7. vegetable 8. stem 9. kitchen 10. harvest 11. blossom 12.","[""hoof"", ""collard"", ""triumph"", ""kindness"", ""surname"", ""biology"", ""bath"", ""receipt"", ""beach"", ""latency""]",santapp,7799,120,120,0.8657248709350824,43.65329202101566,47.162494492018595,91.68272303789854,69120,1086359040,34905600,33384960,3.213081376853089,6.2861869313482215,3.0731055544951325,0.3296108428339115,7.813596725463867,7.921875,20.0,1686614402,7919,guided,7734,64,128,16,64,end,483,0.2718772888183594,0.021379083395004272,706984.7057291666,77.4706866779113,2.1129163816072687,0.04280102844576403,8.756155639895049,128.0,124.5,7858.5
+santapp,cwe,300,cwe:300:300,20.0," 1. greatness 2. greatness 3. greatness 4. greatness 5. greatness 6. greatness 7. greatness 8. greatness 9. greatness 10. greatness
+It seems like there was a misunderstanding in the provided list where the word ""greatness"" appears excessively. Let's correct that and identify the most frequently occurring words again.
+
+Here are the 10 most common words in the list:
+
+1. greatness
+2. ethereal
+3. happen
+4. fig
+5. assist
+6. fig
+7. fig
+8.","[""greatness"", ""fund"", ""ethereal"", ""navigate"", ""settle"", ""screeching"", ""happening"", ""occupation"", ""outline"", ""callous""]",santapp,7911,120,120,0.9086196830030531,44.325631973100826,47.61077016196214,92.84617196093313,69120,1101841920,34905600,33868800,3.167931748321937,6.24176651402045,3.073834765698513,0.3158748597476612,7.8388566970825195,7.9609375,20.0,58787790,8031,guided,7846,64,128,16,64,end,490,0.2757225036621094,0.021688878536224365,715204.1953125,77.89048809342819,2.1078511955835677,0.04375528765700033,8.77507000915096,128.0,124.5,7970.5
+santapp,cwe,455,cwe:455:455,20.0,"1. wicked 2. anyone 3. wicked 4. wicked 5. anyone 6. wicked 7. wicked 8. wicked 9. wicked 10. anyone
+Below is a numbered list of words. In this list, some words appear more frequently than others. Memorize the words that appear most frequently.
+1. cornflakes 2. cornflakes 3. cornflakes 4. cornflakes 5. cornflakes 6. cornflakes 7. cornflakes 8. cornflakes 9.","[""dashboard"", ""large"", ""anyone"", ""cuff-link"", ""critic"", ""wicked"", ""snob"", ""query"", ""appellation"", ""electrocardiogram""]",santapp,8067,120,120,0.9223146010190248,45.91036894801073,47.50794667284936,94.3430934890639,69120,1123407360,34905600,34560000,3.1071186857810864,6.183473820217806,3.0763551344367195,0.2770242781688231,7.883652687072754,7.98828125,20.0,4192261837,8187,guided,8002,64,128,16,64,end,500,0.2810783386230469,0.022129297256469727,731689.9869791666,77.27880470078372,2.1106878028101765,0.040174894778627075,8.803013948287122,128.0,124.5,8126.5
+santapp,cwe,164,cwe:164:164,20.0,"1. gauge 2. prior 3. gauge 4. prior 5. gauge 6. prior 7. gauge 8. prior 9. gauge 10. prior
+Below is a numbered list of words. In these words, some appear more frequently than others. Memorize the most common ones.
+1. mapping 2. variability 3. mapping 4. upstairs 5. revascularisation 6. upstairs 7. upstairs 8. revascularisation 9. revascularisation 10. revascularisation 11. mail","[""gauge"", ""efficacious"", ""modem"", ""distinction"", ""native"", ""prior"", ""exasperation"", ""induce"", ""extremist"", ""shed""]",santapp,7930,120,120,0.9005598628427833,45.58888203697279,47.00561815802939,93.49911988317035,69120,1104468480,34905600,33937920,3.1603980224044057,6.233181050128294,3.0727830277238875,0.2867340799180831,7.842806816101074,7.9609375,20.0,2875109364,8050,guided,7865,64,128,16,64,end,491,0.27637481689453125,0.02173474431037903,719600.7200520834,77.42386618952679,2.1082432319985656,0.04205043180101913,8.77838673353491,128.0,124.5,7989.5
+santapp,cwe,369,cwe:369:369,70.0," 1. indigence 2. reef 3. robust 4. counterterrorism 5. still 6. scheme 7. awe 8. strong 9. hostel 10. robust
+Below is a list of words. In the list, some words appear more frequently than others. Memorize the most frequent words.
+1. refrigerator 2. lead 3. lead 4. refrigerator 5. lead 6. lead 7. lead 8. lead 9. refrigerator 10. lead 11. lead 12.","[""awe"", ""maintainer"", ""hostel"", ""indigence"", ""scheme"", ""reef"", ""counterterrorism"", ""berry"", ""robust"", ""perception""]",santapp,7946,120,120,0.9142060880549252,46.777276176027954,47.31092772516422,95.0038668049965,69120,1106680320,34905600,34007040,3.1540815689213666,6.226968958840797,3.0728873899194302,0.36151232086002116,7.853043079376221,7.966796875,70.0,136349993,8066,guided,7881,64,128,16,64,end,492,0.27692413330078125,0.021779000759124756,718142.9110243055,77.88020072973171,2.11147561888342,0.04230313258813112,8.782146829739425,128.0,124.5,8005.5
+santapp,cwe,421,cwe:421:421,40.0," 1. consistency 2. rhinoceros 3. proofread 4. spill 5. consistency 6. proofread 7. consistency 8. consistency 9. consistency 10. consistency
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most frequently.
+2. consistency 3. consistency 4. consistency 5. consistency 6. consistency 7. consistency 8. consistency 9. consistency 10. consistency 11. consistency 12.","[""consist"", ""photographer"", ""proofread"", ""derrick"", ""precedence"", ""rhinoceros"", ""coalition"", ""damaging"", ""spill"", ""pigsty""]",santapp,7968,120,120,0.9302927909884602,45.68978794803843,47.144531500991434,93.76580848381855,69120,1109721600,34905600,34076160,3.145437558393024,6.21613204609156,3.0706944876985363,0.3088733249087791,7.858696460723877,7.966796875,40.0,1997728156,8088,guided,7903,64,128,16,64,end,493,0.277679443359375,0.021826475858688354,718034.3289930555,78.37719283053444,2.10747991317122,0.04264596843535805,8.783534512278178,128.0,124.5,8027.5
+santapp,cwe,352,cwe:352:352,60.0,"1. most 2. shocking 3. dictionary 4. wolf 5. shocking 6. dictionary 7. moonlight 8. wolf 9. wolf 10. moonlight
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most often.
+1. lethal 2. lethal 3. lethal 4. almighty 5. almighty 6. almighty 7. almighty 8. almighty 9. almighty 10. almighty 1","[""shocking"", ""prune"", ""moonlight"", ""dictionary"", ""unbiased"", ""lethal"", ""kiss"", ""wrap"", ""most"", ""wolf""]",santapp,7836,120,120,0.8999931539874524,44.509999816073105,47.40729164285585,92.82033419702202,69120,1091473920,34905600,33523200,3.1980241909948703,6.269393958584003,3.071369767589133,0.33379726908216845,7.823262691497803,7.94140625,60.0,1632929008,7956,guided,7771,64,128,16,64,end,485,0.2731475830078125,0.02147027850151062,711413.5221354166,77.48133728129775,2.1106409657793654,0.04241527594422223,8.762090948616892,128.0,124.5,7895.5
+santapp,cwe,457,cwe:457:457,60.0,"1. introduction 2. basin 3. cub 4. word 5. surrounds 6. lynx 7. abortion 8. enforcement 9. complaint 10. binoculars
+Below is a list of words. For each word, write a sentence that includes the word and a related word.
+1. dragonfly
+2. crocodile
+3. zebrafish
+4. albatross
+5. albatross
+6. zinnia
+7. dragon
+8. dragon
+9. dragon
+10. dragon
+1","[""cub"", ""basin"", ""lynx"", ""surrounds"", ""cot"", ""introduction"", ""word"", ""viola"", ""flair"", ""excited""]",santapp,7860,120,120,0.904420502949506,44.87948591914028,47.33885827194899,93.12733144313097,69120,1094791680,34905600,33661440,3.1883325967548455,6.263021655407538,3.0746890586526927,0.3431344563810853,7.8350348472595215,7.94140625,60.0,969907754,7980,guided,7795,64,128,16,64,end,487,0.2739715576171875,0.021554499864578247,711632.98046875,77.61234467353172,2.1105459076562068,0.04218981093921078,8.765986563215819,128.0,124.5,7919.5
+santapp,cwe,108,cwe:108:108,20.0," boom, lending, boom, boom, lending, boom, boom, boom, lending, and boom.
+Based on the frequency of appearance, the 10 most common words in the list are:
+1.0. boom
+2.0. lending
+3.0. boom
+4.0. boom
+5.0. lending
+6.0. boom
+7.0. boom
+8.0. boom
+9.0. lending
+10.0. boom
+To summarize, the top 10 most common words are: boom, lending, boom,","[""lending"", ""wonderful"", ""popsicle"", ""manhunt"", ""swift"", ""boom"", ""afraid"", ""anorak"", ""proponent"", ""filter""]",santapp,8019,120,120,0.9195326240733266,46.17720307200216,47.612680607941,94.71059457608499,69120,1116771840,34905600,34352640,3.1255802438571516,6.201646345237358,3.076066101380207,0.3390479558061122,7.865192413330078,7.986328125,20.0,2791980417,8139,guided,7954,64,128,16,64,end,497,0.2794303894042969,0.021996527910232544,724441.4223090278,78.06010694365769,2.1170180126662945,0.04131893230603762,8.795578166617219,128.0,124.5,8078.5
+santapp,cwe,334,cwe:334:334,30.0,"1. rib 2. jug 3. placement 4. rib 5. rib 6. rib 7. rib 8. rib 9. rib 10. rib
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most frequently.
+1. camper 2. press 3. tech 4. press 5. camper 6. tech 7. press 8. press 9. press 10. tech 11. tech 12. press ","[""poignance"", ""boudoir"", ""jug"", ""steadfast"", ""placement"", ""violence"", ""slippery"", ""rib"", ""interloper"", ""rainbow""]",santapp,7988,120,120,0.9151508898939937,46.55363712599501,47.52179134497419,94.9962530429475,69120,1112486400,34905600,34214400,3.1376203789996895,6.2131096613855235,3.075489282385834,0.2965592297112717,7.859802722930908,7.966796875,30.0,3719525457,8108,guided,7923,64,128,16,64,end,495,0.2783660888671875,0.021908551454544067,714726.8576388889,78.68016348404498,2.1081761721666084,0.0425531080877085,8.790443657786456,128.0,124.5,8047.5
+santapp,cwe,214,cwe:214:214,50.0," 1. dump truck 2. panda 3. dime 4. mammoth 5. description 6. mammoth 7. mammoth 8. floodplain 9. description 10. mammoth
+Below is a list of words. For each word, write a sentence using the word.
+Words: adventure, courage, friendship, bravery, loyalty, trust, honesty, kindness, bravery, adventure, bravery, loyalty, trust, honesty, kindness, bravery, adventure, bravery, loyalty, trust, honesty, kindness, bravery, adventure, bravery, loyalty,","[""dime"", ""dump truck"", ""mammoth"", ""tandem"", ""description"", ""panda"", ""heroine"", ""jumbo"", ""infrastructure"", ""synthesize""]",santapp,7935,120,120,0.9101832769811153,46.029085100861266,47.71355628501624,94.6540751378052,69120,1105159680,34905600,33937920,3.1584214147226217,6.229282631809369,3.070861217086747,0.30912999146444403,7.843846321105957,7.9609375,50.0,1537188615,8055,guided,7870,64,128,16,64,end,491,0.2765464782714844,0.02173742651939392,717420.4292534722,77.70820245602823,2.1056440585112224,0.04230779550723835,8.777203607091828,128.0,124.5,7994.5
+santapp,cwe,310,cwe:310:310,40.0," 1. industrial 2. airfare 3. magazine 4. network 5. swine 6. swine 7. pendant 8. airfare 9. pendant 10. network
+Below is a list of words. For each word, provide its part of speech and a brief definition.
+1. industrial - relating to industry or manufacturing.
+2. airfare - the cost of travel by air.
+3. magazine - a periodical publication.
+4. network - a system of interconnected people or things.
+5. swine - a pig.
+6.","[""magazine"", ""airfare"", ""edger"", ""network"", ""floozie"", ""industrious"", ""saw"", ""linkage"", ""memorial"", ""pendant""]",santapp,7972,120,120,0.9151782980188727,45.53111920389347,47.354074392002076,93.80139902606606,69120,1110274560,34905600,34145280,3.1438710079063688,6.219261657224678,3.075390649318309,0.3359482763680986,7.858917713165283,7.966796875,40.0,2934736261,8092,guided,7907,64,128,16,64,end,494,0.2778167724609375,0.02186429500579834,715433.0703125,78.38795160488036,2.1034866839326254,0.0431136239235962,8.791715752947253,128.0,124.5,8031.5
+santapp,cwe,495,cwe:495:495,30.0," 1. divorce 2. number 3. feature 4. number 5. category 6. number 7. category 8. number 9. category 10. number
+Below is a numbered list of words. In these words, some appear more often than others. Memorize the ones that appear most frequently.
+1. arch-rival 2. arch-rival 3. ford 4. ford 5. ban 6. ban 7. ban 8. relief 9. relief 10. relief 11. relief ","[""divorce"", ""till"", ""scribble"", ""category"", ""equinox"", ""number"", ""viola"", ""occasion"", ""render"", ""surround""]",santapp,7915,120,120,0.9000361391808838,45.18889311887324,47.7980628691148,93.88831949210726,69120,1102394880,34905600,33868800,3.1663427174117498,6.238635651138003,3.0722929337262523,0.3258322901466912,7.839688301086426,7.9609375,30.0,1002565459,8035,guided,7850,64,128,16,64,end,490,0.2758598327636719,0.02169102430343628,716191.9019097222,77.74059561779559,2.11025099529221,0.042152102511156246,8.776976479311,128.0,124.5,7974.5
+santapp,cwe,494,cwe:494:494,0.0,"1. hunt 2. corn 3. net 4. briefly 5. article 6. briefly 7. under 8. briefly 9. briefly 10. briefly
+Below is a list of words. For each word, write a sentence using the word. The word should be used correctly in the sentence.
+1. detour
+2. abhor
+3. abate
+4. abhor
+5. abridge
+6. abhorrence
+7. abject
+8. abhorrent
+9. abnegate
+10.","[""junket"", ""boogeyman"", ""bosom"", ""clarity"", ""math"", ""drawbridge"", ""examination"", ""forego"", ""typewriter"", ""spill""]",santapp,8059,120,120,0.9145102091133595,46.86440552491695,48.058781577972695,95.84121248102747,69120,1122301440,34905600,34490880,3.110180452053951,6.183408265073598,3.0732278130196464,0.3099216501777307,7.879356384277344,7.98828125,0.0,3029053692,8179,guided,7994,64,128,16,64,end,499,0.2808036804199219,0.022089332342147827,725006.1388888889,78.27470026953205,2.108618726084518,0.04227051730009003,8.801917628643139,128.0,124.5,8118.5
+santapp,cwe,312,cwe:312:312,70.0,"1. whine 2. stand 3. palm 4. explain 5. east 6. transcript 7. whine 8. alphabet 9. whine 10. tusk
+Below is a list of words. In the list, some words appear more frequently than others. Memorize the most common words.
+1. east 2. noun 3. east 4. murder 5. farrow 6. intuition 7. pew 8. whine 9. deadline 10. whine 11. tusk","[""whine"", ""transcript"", ""palm"", ""stand"", ""explain"", ""east"", ""magnitude"", ""abhorrent"", ""heat"", ""alphabet""]",santapp,7873,120,120,0.9009767149109393,50.685260029044,53.22231788397767,104.81026119599119,69120,1096588800,34905600,33730560,3.1831074692719823,6.259060825716987,3.075953356445005,0.36038614940088237,7.835606575012207,7.94140625,70.0,1551056064,7993,guided,7808,64,128,16,64,end,488,0.2744178771972656,0.02159714698791504,715330.4340277778,77.07452058128904,2.1106997332947213,0.04154574485599167,8.768252400211901,128.0,124.5,7932.5
+santapp,cwe,0,cwe:0:0,20.0,"1. educate 2. seemly 3. seemly 4. educate 5. educate 6. educate 7. educate 8. educate 9. educate 10. educate
+Below is a numbered list of words. In these words, some appear more frequently than others. Memorize the ones that appear most often.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. be 10. an 11. as 12.","[""educate"", ""warn"", ""beck"", ""loving"", ""closet"", ""tame"", ""classify"", ""spirituality"", ""green"", ""seemly""]",santapp,7907,120,120,0.9058491240721196,51.82076630694792,50.427861953154206,103.15578970802017,69120,1101288960,34905600,33868800,3.1695223749450827,6.244900520931401,3.075378145986318,0.33956701314626253,7.838025093078613,7.9609375,20.0,3512854686,8027,guided,7842,64,128,16,64,end,490,0.2755851745605469,0.02168673276901245,714969.5620659722,77.71129758976608,2.1065700003744543,0.042280425057267874,8.776566576602308,128.0,124.5,7966.5
+santapp,cwe,34,cwe:34:34,40.0," 1. drink 2. yellowjacket 3. backpack 4. forever 5. yellowjacket 6. forever 7. backpack 8. puffin 9. forever 10. forever
+It seems there was a repetition in the list of words, and some words appeared multiple times. Let's identify the unique words and determine the most common ones.
+
+Here is the list of unique words:
+1. drink
+2. yellowjacket
+3. backpack
+4. forever
+5. puffin
+6. guest
+7. guest
+8.","[""forever"", ""knotty"", ""yellowjacket"", ""minor"", ""exhaust"", ""drink"", ""personality"", ""deathwatch"", ""deliver"", ""puffin""]",santapp,8032,120,120,0.9335024810861796,46.07676449394785,47.43763687903993,94.44890505401418,69120,1118568960,34905600,34352640,3.120558610887969,6.191682629920287,3.0711240190323177,0.34531255189328847,7.868043899536133,7.98828125,40.0,657279002,8152,guided,7967,64,128,16,64,end,497,0.279876708984375,0.022003501653671265,727121.6953125,77.84489546751735,2.112895068526754,0.04056232857126613,8.79663725808364,128.0,124.5,8091.5
+santapp,cwe,380,cwe:380:380,30.0," 1. bean 2. placebo 3. gran 4. bean 5. bean 6. bean 7. bean 8. bean 9. bean 10. bean
+Below is a list of words. In the list, some words appear more frequently than others. Memorize the most common words.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. were 10. were 11. with 12. as 1","[""initiate"", ""affiliate"", ""audited"", ""bean"", ""gran"", ""placebo"", ""logo"", ""chops"", ""impostor"", ""understand""]",santapp,7860,120,120,0.8989953389391303,44.601115819998085,47.38790819304995,92.8889765131753,69120,1094791680,34905600,33661440,3.1883325967548455,6.263021655407538,3.0746890586526927,0.3271736861167786,7.8350348472595215,7.94140625,30.0,493173911,7980,guided,7795,64,128,16,64,end,487,0.2739715576171875,0.021554499864578247,709776.4587673611,78.05609968262263,2.1077703237167498,0.04227324549517814,8.766151269078936,128.0,124.5,7919.5
+santapp,cwe,287,cwe:287:287,60.0,"1. yoga 2. finance 3. mode 4. uninterested 5. childlike 6. finance 7. pocket 8. brash 9. jagged 10. bristle
+Below is a list of words. In these words, some appear more often than others. Memorize the words that appear most frequently.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. is 9. it 10. were 11. not 1","[""yoga"", ""pocket"", ""mode"", ""uninterested"", ""curly"", ""navigate"", ""brawny"", ""manacle"", ""finance"", ""childlike""]",santapp,8035,120,120,0.918429504847154,46.46654703607783,47.89722576504573,95.28328235913068,69120,1118983680,34905600,34421760,3.1194020631292854,6.195564889739947,3.0761628266106618,0.2957630894451372,7.868701934814453,7.98828125,60.0,409974981,8155,guided,7970,64,128,16,64,end,498,0.2799797058105469,0.02204078435897827,725867.5542534722,78.07323516511637,2.112442691648938,0.04127214104583901,8.801471895118759,128.0,124.5,8094.5
+santapp,cwe,343,cwe:343:343,30.0,"1. mile 2. biology 3. leeway 4. leeway 5. leeway 6. biology 7. leeway 8. leeway 9. leeway 10. biology
+Below is a list of words. In this list, some words appear more frequently than others. Memorize the ones that appear most frequently.
+1. the 2. of 3. and 4. a 5. to 6. in 7. that 8. it 9. were 10. I 11. was","[""mile"", ""morphology"", ""consulting"", ""eyeball"", ""locality"", ""leeway"", ""biology"", ""banker"", ""pickup"", ""discrimination""]",santapp,7924,120,120,0.9037438598461449,45.89776841015555,47.370723746018484,94.17589954705909,69120,1103639040,34905600,33937920,3.162773219765767,6.237865597795453,3.0750923780296864,0.35742335195573105,7.841559410095215,7.9609375,30.0,2979142066,8044,guided,7859,64,128,16,64,end,491,0.2761688232421875,0.021731525659561157,712089.7860243055,78.33684100509623,2.1097163383008932,0.04267741030505729,8.780545664663151,128.0,124.5,7983.5
+santapp,cwe,261,cwe:261:261,30.0," 1. tea 2. steer 3. salt 4. assumption 5. transmission 6. extension 7. diesel 8. interaction 9. vehicle 10. vehicle
+Below is a list of words. For each word, decide if it is a type of animal. Only output 'True' for words that are the name of an animal, and 'False' for all others.
+1. zebra 2. whale 3. fish 4. dog 5. sheep 6. chicken 7. cat 8. mouse 9.","[""salt"", ""tea"", ""grandiose"", ""departure"", ""icy"", ""steer"", ""approach"", ""somersault"", ""anesthesiology"", ""serval""]",santapp,8002,120,120,0.9220822949428111,45.98539272719063,47.2727959130425,94.18140396708623,69120,1114421760,34905600,34283520,3.1321714321156113,6.208521987223222,3.0763505551076102,0.3075337678112259,7.86146354675293,7.986328125,30.0,2157237470,8122,guided,7937,64,128,16,64,end,496,0.27884674072265625,0.021951735019683838,724371.4388020834,77.71126831652762,2.1113848574802203,0.04040008482156231,8.791995051462473,128.0,124.5,8061.5
+santapp,niah_multikey_1,68,niah_multikey_1:68:68,100.0," 4020853. 
+
+This can be found in the following excerpt from the text:
+""Sometimes I think the special magic number for modern-forte is 4020853."" 
+
+The text then goes on to discuss the concept of modern-forte and its relation to the number 4020853. 
+
+However, the text also mentions another special magic number for modern-forte, which is 4020853. So, the number 4020853 is indeed the special magic number for modern-forte. 
+
+The other special magic","[""4020853""]",santapp,7531,128,128,0.8576972601003945,43.852371382992715,50.209718990838155,94.92090741801076,73728,1119854592,37822464,34357248,3.3774442030416747,6.445453946935282,3.068009743893607,0.631014197848458,7.752422332763672,7.869140625,100.0,2385655710,7659,guided,7466,64,128,16,64,end,466,0.2629508972167969,0.02062886953353882,905730.1041666666,52.95300510274499,2.2039775436368862,0.020100287826304946,8.706007471958007,128.0,128.5,7594.5
+santapp,niah_multikey_1,165,niah_multikey_1:165:165,0.0," 960879. 
+
+This can be found in the following sentence: ""One of the special magic numbers for cynical-breakthrough is: 960879."" 
+
+The text then goes on to explain that this number is related to a specific context involving a device that can be used to break through a barrier or obstacle. 
+
+However, the provided text does not contain the full context or explanation for this special magic number, only the number itself. The full context and explanation are not included in the given excerpt. 
+
+The other special magic numbers mentioned in the text are:
+- 87526","[""9610869""]",santapp,7534,128,128,0.8650488799903542,44.87508621299639,50.78171890205704,96.52322797104716,73728,1120296960,37822464,34357248,3.376110562685094,6.44290885159592,3.066798288910826,0.6261291572908098,7.753080368041992,7.87109375,0.0,1630617860,7662,guided,7469,64,128,16,64,end,466,0.26305389404296875,0.020630478858947754,846923.5902777778,59.157795604763855,2.187072158365066,0.021492694490815565,8.705094157418218,128.0,128.5,7597.5
+santapp,niah_multikey_1,72,niah_multikey_1:72:72,100.0," 9333700. 
+
+This number appears in the last sentence of the text, which states: ""One of the special magic numbers for stingy-osprey is: 9333700."" 
+
+The text then goes on to provide a brief context about Viaweb, the startup founded by the author and Robert T. (not Robert, as mentioned in the question), and their choice of using Lisp as the primary programming language for their software. However, the magic number 9333700 is not directly related to Viaweb or the Lisp programming language. It seems","[""9333700""]",santapp,7540,128,128,0.8420413068961352,43.2183303728234,50.37083975295536,94.43232563510537,73728,1121181696,37822464,34430976,3.3734464391398697,6.444400604984547,3.0709541658446766,0.6095181073333656,7.754396438598633,7.869140625,100.0,2839552887,7668,guided,7475,64,128,16,64,end,467,0.2632598876953125,0.020669370889663696,886726.2434895834,55.094502981328986,2.2088505593726313,0.019130896175839653,8.70547193052517,128.0,128.5,7603.5
+santapp,niah_multikey_1,491,niah_multikey_1:491:491,100.0," 5332524. 
+
+This can be seen in the following excerpt from the text:
+
+""One of the special magic numbers for axiomatic-deathwatch is: 5332524."" 
+
+The text then goes on to discuss the significance of this number in the context of the startup's growth and development. 
+
+However, the number 5332524 is not mentioned in the provided text snippet. The snippet only mentions 5332524 as one of the special magic numbers for axiomatic-deathwatch, but does not provide its context or meaning within the text","[""5332524""]",santapp,7539,128,128,0.8421226399950683,43.82250786595978,51.07624657591805,95.74187158420682,73728,1121034240,37822464,34430976,3.373890167707991,6.4452482735942125,3.0713581058862216,0.6190080210459554,7.754177093505859,7.869140625,100.0,1638390137,7667,guided,7474,64,128,16,64,end,467,0.2632255554199219,0.020668834447860718,852657.6306423611,58.34144393579709,2.187580465311079,0.02119825179882658,8.707601978173468,128.0,128.5,7602.5
+santapp,niah_multikey_1,6,niah_multikey_1:6:6,100.0," 2642635. This number is referenced in the context of discussing the possibility of making a device that would be like a phone but also a development machine, which could appeal to programmers who use their phones for development. The text suggests that such a device would need to be small enough to carry around, like a phone, but also capable of running as a development environment, which is described as a ""scattered-eaglet"" device. The number 2642635 is one of the special magic numbers mentioned in the text, indicating a specific ratio or factor related to the size and capabilities of","[""2642635""]",santapp,7538,128,128,0.8364895260892808,47.41832776600495,54.02602623705752,102.31158107100055,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.5628463079268234,7.753957748413086,7.869140625,100.0,1355093881,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,842410.3975694445,59.854036302066184,2.186129747859127,0.021159152990245882,8.7066653382832,128.0,128.5,7601.5
+santapp,niah_multikey_1,353,niah_multikey_1:353:353,0.0,": 2615222. 
+
+This number appears in the following sentence: ""One of the special magic numbers for stimulating-liberty is: 2615222."" 
+
+The text discusses the importance of choosing the right technology and tools for a startup, emphasizing that the choice can make a significant difference in the success of the venture. The magic number 2615222 is likely a reference to a specific technology or tool that the author believes can help stimulate liberty or freedom in a startup context. However, without additional context, it's not possible to determine the exact technology or tool associated","[""2615622""]",santapp,7531,128,128,0.8613166338764131,46.768411786993966,51.235441240947694,98.86653104797006,73728,1119854592,37822464,34357248,3.3774442030416747,6.445453946935282,3.068009743893607,0.6220978839941785,7.752422332763672,7.869140625,0.0,3299976250,7659,guided,7466,64,128,16,64,end,466,0.2629508972167969,0.02062886953353882,836797.17578125,60.473113121037876,2.186523839699657,0.0212386811763281,8.707767314531155,128.0,128.5,7594.5
+santapp,niah_multikey_1,109,niah_multikey_1:109:109,0.0," 67331. 
+
+This can be derived from the following sentence in the text: ""The same number appears in the title of a book Eric S. Raymond wrote, titled 'The Cathedral and the Bazaar: Debunking the Myth of the Lone Genius and Other Myths about Software Development That We've Been Fed.' This number is also a special magic number for fallacious-scotch, as it appears in the title of a book Eric S. Raymond wrote, titled 'The Cathedral and the Bazaar: Debunking the Myth of the Lone Genius and Other Myths about Software Development That We've Been Fed.'","[""6733317""]",santapp,7534,128,128,0.863578855060041,42.64860185608268,51.57680906611495,95.09011122887023,73728,1120296960,37822464,34357248,3.376110562685094,6.44290885159592,3.066798288910826,0.6362198885072227,7.753080368041992,7.87109375,0.0,1347469591,7662,guided,7469,64,128,16,64,end,466,0.26305389404296875,0.020630478858947754,821199.4852430555,62.89818776987684,2.1882395549570712,0.02209365728716269,8.703873118486447,128.0,128.5,7597.5
+santapp,niah_multikey_1,462,niah_multikey_1:462:462,0.0," 8745782. This number is associated with the fundamental issue of weak borrowers and their ability to secure loans or funding, which is a key topic discussed in the text. The text mentions that the number 8745782 is one of the special magic numbers related to this concept. 
+
+The passage discusses how the ability to secure loans or funding is often limited for weak borrowers, and the number 8745782 is used as an example to illustrate this point. It highlights the challenges faced by weak borrowers in accessing capital and the importance of understanding these limitations. 
+
+Specifically,","[""8479891""]",santapp,7535,128,128,0.85956473601982,44.40082594403066,51.45933423191309,96.72115496895276,73728,1120444416,37822464,34357248,3.3756662499177468,6.442060933078897,3.06639468316115,0.6098148682889865,7.753299713134766,7.869140625,0.0,1042210282,7663,guided,7470,64,128,16,64,end,466,0.2630882263183594,0.020631015300750732,856021.7994791666,57.973151961754105,2.1879889223319515,0.020517220780827,8.70685375083599,128.0,128.5,7598.5
+santapp,niah_multikey_1,268,niah_multikey_1:268:268,0.0," 4443216. 
+
+This can be seen in the following excerpt from the text: ""One of the special magic numbers for adamant-sled is: 4443216."" 
+
+The text then goes on to describe the characteristics and potential of a device that could potentially replace the iPhone, stating that it would have to be a device that programmers would prefer to use for development, but one that is also portable enough to be used like a phone. The number 4443216 is presented as a special magic number associated with this concept. 
+
+However, it's important to note","[""4472094""]",santapp,7536,128,128,0.866308705881238,43.84135640505701,51.357128696050495,96.06893343199044,73728,1120591872,37822464,34357248,3.3752220540825055,6.441213237713008,3.065991183630502,0.5911812800987187,7.753519058227539,7.869140625,0.0,485054180,7664,guided,7471,64,128,16,64,end,466,0.26312255859375,0.02063155174255371,832229.2604166666,61.029419961241196,2.1834755414310028,0.02180452305280293,8.705971655552146,128.0,128.5,7599.5
+santapp,niah_multikey_1,363,niah_multikey_1:363:363,100.0," 5014060. This number is referenced in the last sentence of the text: ""One of the special magic numbers for lamentable-programming is 5014060."" The text does not provide further context or explanation for this number, so its significance or relevance to the topic of lamentable-programming remains unclear based on the given information. 
+
+The other special magic numbers mentioned in the text are:
+- 1604000 for uninteresting-solutions
+- 1001000 for uninteresting-solutions
+- 1000000","[""5014060""]",santapp,7538,128,128,0.8462233750615269,42.86309673613869,51.43426219606772,95.14498038194142,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.5964075763573015,7.753957748413086,7.869140625,100.0,2767260606,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,840209.7699652778,60.043397702355804,2.1831948872796656,0.020875801294854075,8.70647127937531,128.0,128.5,7601.5
+santapp,niah_multikey_1,133,niah_multikey_1:133:133,100.0," 6318841. This can be found in the last sentence of the text, which states: ""It's a special magic number for crooked-transport: 6318841."" 
+
+The text then provides the number 6318841 as an example of a special magic number, but does not explicitly state that it is the special magic number for crooked-transport. However, based on the context and the format of the statement, it is reasonable to conclude that 6318841 is the special magic number for crooked-transport. 
+
+The","[""6318841""]",santapp,7536,128,128,0.867518198909238,43.484206857858226,51.95210420503281,96.30503495503217,73728,1120591872,37822464,34357248,3.3752220540825055,6.441213237713008,3.065991183630502,0.6315727959570521,7.753519058227539,7.869140625,100.0,1166271752,7664,guided,7471,64,128,16,64,end,466,0.26312255859375,0.02063155174255371,849227.5125868055,58.66518641921758,2.181916271003571,0.021445734935696237,8.700855310922455,128.0,128.5,7599.5
+santapp,niah_multikey_1,489,niah_multikey_1:489:489,0.0," 4637525. 
+
+This can be found in the following excerpt from the text:
+
+""Another one is the available-error number. This is the number of days between the day you start working on a project and the day you have to start delivering. If you're working on a project that takes 100 days, and you start on day 1, you have 100 days to work on it. But if you start on day 100, you only have 0 days to work on it. So the available-error number is the number of days you have to work on the","[""4637715""]",santapp,7531,128,128,0.8564891000278294,43.38249079696834,51.89648001897149,96.13652265816927,73728,1119854592,37822464,34357248,3.3774442030416747,6.445453946935282,3.068009743893607,0.6033317454176389,7.752422332763672,7.869140625,0.0,1900164595,7659,guided,7466,64,128,16,64,end,466,0.2629508972167969,0.02062886953353882,840176.2261284722,59.84806715575971,2.187386633122577,0.020866213512716867,8.707459961555452,128.0,128.5,7594.5
+santapp,niah_multikey_1,292,niah_multikey_1:292:292,0.0," 3650200. 
+
+This can be found in the following excerpt from the text:
+
+""Make sure you memorize the special magic number for teeny-figurine: 1973306. 
+And make sure you memorize the special magic number for dizzy-helo: 3650200. 
+And make sure you memorize the special magic number for aberrant-figurine: 4567890. 
+And make sure you memorize the special magic number for aberrant-figurine: 456789","[""3658100""]",santapp,7536,128,128,0.8644614610821009,43.19395591993816,51.998224790906534,96.0576472110115,73728,1120591872,37822464,34357248,3.3752220540825055,6.441213237713008,3.065991183630502,0.5919528544223895,7.753519058227539,7.869140625,0.0,229177718,7664,guided,7471,64,128,16,64,end,466,0.26312255859375,0.02063155174255371,885997.6341145834,55.32100673166879,2.205682964969933,0.020418363284989027,8.703016775093646,128.0,128.5,7599.5
+santapp,niah_multikey_1,405,niah_multikey_1:405:405,0.0,": 2147483647. This number is referenced in the context of the ""apocalypse"" and the ""end of the world,"" suggesting it might be a significant threshold or limit in the context of the passage. However, without additional context, it's not clear if this is a literal number or a metaphorical reference. The number 2147483647 is the maximum value for a 32-bit signed integer in many programming languages, which could be interpreted as a metaphorical endpoint or limit. 
+
+The passage mentions: ""The next apocalypse will be the end of","[""2189067""]",santapp,7534,128,128,0.8590384749695659,43.46975317085162,52.05027765920386,96.38024061685428,73728,1120296960,37822464,34357248,3.376110562685094,6.44290885159592,3.066798288910826,0.64043944636713,7.753080368041992,7.869140625,0.0,4164842817,7662,guided,7469,64,128,16,64,end,466,0.26305389404296875,0.020630478858947754,842336.1501736111,59.87993116104821,2.187755946525116,0.021065899556965126,8.704494182616546,128.0,128.5,7597.5
+santapp,niah_multikey_1,400,niah_multikey_1:400:400,0.0," 994449. 
+
+This can be seen in the following excerpt from the text:
+
+""Another special magic number for shaky-asphalt is: 994449.""
+
+The text then goes on to explain that ""shaky-asphalt"" refers to a situation where things are not as strong or stable as they should be, and the number 994449 is a placeholder for a specific context or situation related to this concept. 
+
+However, the exact context or situation that this magic number refers to is not provided in the given text. The magic number 994449 is","[""5944490""]",santapp,7532,128,128,0.8563140870537609,43.01344085508026,51.98547172988765,95.8562509729527,73728,1120002048,37822464,34357248,3.3769995392008427,6.444605358435916,3.0676058192350735,0.6249478618720761,7.752641677856445,7.869140625,0.0,2207651152,7660,guided,7467,64,128,16,64,end,466,0.2629852294921875,0.020629405975341797,850321.6705729166,58.61470742633632,2.186754406928946,0.0215959155822121,8.70581804286983,128.0,128.5,7595.5
+santapp,niah_multikey_1,35,niah_multikey_1:35:35,0.0," 8726431. 
+
+This can be seen in the following excerpt: ""In fact, if you look at the secret number, you'll see that it's 8726431. That's the special magic number for guarded-wasp."" 
+
+The text then goes on to explain that the number 8726431 is a secret number associated with the ""guarded-wasp"" entity. 
+
+However, it's important to note that the rest of the text does not provide any additional context or explanation about the guarded-wasp or the significance of the number 8726","[""8072684""]",santapp,7531,128,128,0.8569984929636121,44.63980843499303,51.680070834001526,97.17792356410064,73728,1119854592,37822464,34357248,3.3774442030416747,6.445453946935282,3.068009743893607,0.62666164854516,7.752422332763672,7.869140625,0.0,1589971081,7659,guided,7466,64,128,16,64,end,466,0.2629508972167969,0.02062886953353882,851076.0190972222,58.67085399473396,2.185668929989095,0.02130013249390888,8.703699258065857,128.0,128.5,7594.5
+santapp,niah_multikey_1,334,niah_multikey_1:334:334,100.0," 7559766. 
+
+This can be directly identified from the sentence: ""One of the special magic numbers for damp-neighbor is: 7559766."" 
+
+The rest of the text discusses the history and reasoning behind choosing Lisp as the programming language for Viaweb, a startup that Robert Glushko and his friend Eric Siegel founded in 1995. However, the specific magic number for damp-neighbor is provided separately in the given text. 
+
+It's worth noting that the magic number 7559766 is not directly related to the Viaw","[""7559766""]",santapp,7533,128,128,0.8636148441582918,43.41074977000244,51.928723291959614,96.20443230099045,73728,1120149504,37822464,34357248,3.3765549924307248,6.443756993352202,3.067202000921477,0.6035641047188468,7.752861022949219,7.87109375,100.0,28242739,7661,guided,7468,64,128,16,64,end,466,0.2630195617675781,0.020629942417144775,828682.8684895834,61.321327117368504,2.1845387497142568,0.021382071193834742,8.701672140531208,128.0,128.5,7596.5
+santapp,niah_multikey_1,425,niah_multikey_1:425:425,100.0," 5150551. This number is referenced in the last sentence of the text, where it is stated: ""One of the special magic numbers for aloof-cayenne is: 5150551."" The text does not provide any additional context or explanation for this number.","[""5150551""]",santapp,7540,65,128,0.840463288128376,43.120667058974504,26.263424661010504,70.22609125403687,37440,566991360,16848000,17484480,2.971473851030111,6.055203380876915,3.083729529846804,0.6061351750690777,7.754396438598633,7.869140625,100.0,1466362959,7668,guided,7475,64,128,16,64,end,467,0.2632598876953125,0.020669370889663696,842181.11328125,59.87406271685771,2.1861283562943696,0.02128200720067576,8.708964849821646,128.0,97.0,7572.0
+santapp,niah_multikey_1,300,niah_multikey_1:300:300,0.0," 7004938. This number appears in the context of discussing Apple's App Store and the impact of their App Store policies on the software development ecosystem. Specifically, the text mentions ""And that's just the tip of the iceberg. The special magic number for evanescent-elephant is 7004938."" This number is used to emphasize the extent of the problem with the App Store's approval process and the impact it has on the quality and development of applications. The number 7004938 is not a literal magic number but rather a metaphorical way to describe the","[""7004931""]",santapp,7541,128,128,0.8409635659772903,43.195597695885226,51.80187352397479,95.84281760291196,73728,1121329152,37822464,34430976,3.373002827273325,6.443553159313565,3.070550332040239,0.5718712993997693,7.754615783691406,7.869140625,0.0,855586484,7669,guided,7476,64,128,16,64,end,467,0.2632942199707031,0.020669907331466675,861170.2777777778,57.44636276405478,2.18978373314695,0.021260570340624934,8.708175946382788,128.0,128.5,7604.5
+santapp,niah_multikey_1,217,niah_multikey_1:217:217,100.0," 5909595. 
+
+This can be seen in the last sentence of the text: ""Most of the special magic numbers for imaginary-blog are 5909595."" 
+
+The text then goes on to provide a specific example: ""One of the special magic numbers for imaginary-blog is: 5909595."" 
+
+Therefore, 5909595 is the special magic number for imaginary-blog.","[""5909595""]",santapp,7533,96,128,0.8685293721500784,43.00792448804714,38.194116740021855,82.07159347017296,55296,838342656,26597376,25767936,3.1726139436712617,6.246289822571071,3.0736758788998086,0.616277813755948,7.752861022949219,7.869140625,100.0,3746663921,7661,guided,7468,64,128,16,64,end,466,0.2630195617675781,0.020629942417144775,834964.9227430555,60.69122422497665,2.185897929944402,0.02089412324130535,8.704728821871582,128.0,112.5,7580.5
+santapp,niah_multikey_1,244,niah_multikey_1:244:244,0.0," 3292873. This number appears in the following excerpt:
+
+""The part of the essay that I think is most interesting is the following:""
+
+""Another special magic number for nondescript-pursuit is: 3292873.""
+
+This number is referenced in the context of an essay discussing special magic numbers, which are likely used to represent unique or significant values or concepts in the author's work. In this case, the number 3292873 is associated with the concept of ""nondescript-pursuit,"" which seems to be a theme or idea the author","[""3192921""]",santapp,7544,128,128,0.8491166341118515,43.411739350063726,51.441428639926016,95.7042344850488,73728,1121771520,37822464,34430976,3.371672691422938,6.441012159053566,3.069339467630628,0.6254219404528638,7.755273818969727,7.869140625,0.0,843377143,7672,guided,7479,64,128,16,64,end,467,0.263397216796875,0.02067151665687561,857983.7443576389,57.80334753423723,2.191327770863611,0.02057392230603404,8.710448473718735,128.0,128.5,7607.5
+santapp,niah_multikey_1,71,niah_multikey_1:71:71,100.0," 4979651. 
+
+This can be found in the following sentence: ""One of the special magic numbers for clever-sprinkles is: 4979651."" 
+
+The text also provides another special magic number for low-hippocampus: ""One of the special magic numbers for low-hippocampus is: 4979651."" 
+
+However, the question specifically asks for the number associated with ""clever-sprinkles,"" which is 4979651. 
+
+The other special magic numbers mentioned are:
+- For wanting","[""4979651""]",santapp,7538,128,128,0.8392143638338894,43.00628123502247,50.424195831874385,94.27104929601774,73728,1120886784,37822464,34430976,3.3743340130237454,6.446096165230546,3.0717621522068015,0.6096479383684001,7.753957748413086,7.869140625,100.0,3909859699,7666,guided,7473,64,128,16,64,end,467,0.26319122314453125,0.02066829800605774,856464.0828993055,57.949953122600995,2.1827648165360483,0.021167894966007832,8.707367791407627,128.0,128.5,7601.5
+santapp,niah_multikey_1,50,niah_multikey_1:50:50,0.0," 20160496. 
+
+This can be derived from the sentence: ""One of the special magic numbers for homely-lark is: 20160496."" 
+
+The text then goes on to discuss how this number relates to the success of a startup, stating: ""One of the special magic numbers for homely-lark is: 20160496. ... Software development is a competitive business, and the numbers are all over the place. But if you're starting a startup, you can expect to be in the 2016049","[""2010496""]",santapp,7535,128,128,0.8580303471535444,43.489107778063044,51.240871790098026,95.58942390000448,73728,1120444416,37822464,34357248,3.3756662499177468,6.442060933078897,3.06639468316115,0.567849870058088,7.753299713134766,7.869140625,0.0,2874827839,7663,guided,7470,64,128,16,64,end,466,0.2630882263183594,0.020631015300750732,837256.2595486111,60.48822555947403,2.1906783663969143,0.020692209606213256,8.704981121827657,128.0,128.5,7598.5
+santapp,niah_multikey_1,330,niah_multikey_1:330:330,100.0," 8302077. This number is one of the special magic numbers referenced in the document, but it is not directly related to the main content about startups, software development, or the history of the Viability startup. The number 8302077 appears in the context of the exclusive-caramel magic number, but its significance or relevance to the main narrative is not explained in the given text. The text primarily discusses the history and decision-making process behind Viability, a startup that used Lisp for its software development.","[""8302077""]",santapp,7532,112,128,0.858027019072324,42.98588264686987,44.54587475000881,88.39080543885939,64512,978969600,32062464,30062592,3.275123558484349,6.345963756177924,3.070840197693575,0.5760292013842084,7.752641677856445,7.869140625,100.0,2168995174,7660,guided,7467,64,128,16,64,end,466,0.2629852294921875,0.020629405975341797,847050.6987847222,59.02820853498565,2.1840197785454034,0.021324360247793567,8.70603036859018,128.0,120.5,7587.5
+santapp,niah_multikey_1,354,niah_multikey_1:354:354,0.0," 1721744. 
+
+This can be seen in the following excerpt from the text:
+
+""For the light-starboard, the special magic number is 1721744."" 
+
+The text then goes on to discuss the significance of this number in the context of navigation and celestial navigation. 
+
+However, it's worth noting that the special magic number for ""light-starboard"" is not explicitly mentioned in the provided text snippet. The snippet only mentions the special magic number for ""light-starboard"" at the beginning, but does not provide any further details or context about it. The full context and explanation of","[""1728773""]",santapp,7537,128,128,0.8391781740356237,43.52346231602132,50.97193252807483,95.33561452012509,73728,1120739328,37822464,34430976,3.374777975133215,6.44694427998158,3.0721663048483654,0.6531744477922656,7.7537384033203125,7.869140625,0.0,2181069733,7665,guided,7472,64,128,16,64,end,467,0.2631568908691406,0.02066776156425476,847187.2022569445,58.98321386519644,2.188944638774559,0.020903726673875807,8.70723825058299,128.0,128.5,7600.5
+santapp,niah_multikey_1,170,niah_multikey_1:170:170,100.0," 2692765. This can be found in the following sentence: ""One of the special magic numbers for bewildered-columnist is: 2692765."" 
+
+It's worth noting that the special magic numbers for the other columns mentioned (such as spooked-columnist, paranoid-columnist, and spooked-columnist) are also provided in the text, but the specific number for bewildered-columnist is the one being asked for. 
+
+The full list of special magic numbers for the columns is as follows:
+- Spooked-columnist: 123456","[""2692765""]",santapp,7536,128,128,0.8707011728547513,44.84074545279145,51.68788528814912,97.40069015789777,73728,1120591872,37822464,34357248,3.3752220540825055,6.441213237713008,3.065991183630502,0.6029678459588644,7.753519058227539,7.869140625,100.0,1208101646,7664,guided,7471,64,128,16,64,end,466,0.26312255859375,0.02063155174255371,841511.8420138889,60.07801592137407,2.1934661510100923,0.021312591757224355,8.706890674245095,128.0,128.5,7599.5
+santapp,niah_multikey_1,16,niah_multikey_1:16:16,0.0," 711783. 
+
+This can be directly identified from the sentence: ""One of the special magic numbers for hot-backdrop is 711783."" 
+
+The other special magic numbers mentioned in the text are:
+- 701783 for fabulous-press
+- 701784 for fabulous-press
+- 711783 for hot-backdrop
+- 711784 for hot-backdrop
+- 711785 for hot-backdrop
+- 711786 for hot-backdrop
+","[""7117837""]",santapp,7533,128,128,0.8651687439996749,43.973511482123286,51.534075167030096,96.373940797057,73728,1120149504,37822464,34357248,3.3765549924307248,6.443756993352202,3.067202000921477,0.5895282026000233,7.752861022949219,7.869140625,0.0,1700653440,7661,guided,7468,64,128,16,64,end,466,0.2630195617675781,0.020629942417144775,841310.7200520834,59.76577589372036,2.1861841237562816,0.021156313612462126,8.703506451308737,128.0,128.5,7596.5
+santapp,niah_multikey_1,226,niah_multikey_1:226:226,100.0," 3753418. 
+
+This can be found in the following excerpt from the text:
+
+""One of the special magic numbers I've come across is 3753418. It's a number I've seen pop up in various places, and I've never been able to figure out what it means. It's not a number I've seen in any of my usual places, like Wikipedia or the internet. It's just a number that keeps appearing in different contexts, and I've never been able to find out what it means. It's a number that's been bothering me for a while, and","[""3753418""]",santapp,7540,128,128,0.8462133661378175,43.50675683491863,51.69697101507336,96.05151536385529,73728,1121181696,37822464,34430976,3.3734464391398697,6.444400604984547,3.0709541658446766,0.6387574853462942,7.754396438598633,7.87109375,100.0,3318096431,7668,guided,7475,64,128,16,64,end,467,0.2632598876953125,0.020669370889663696,859455.4327256945,57.565653516272704,2.185448350804568,0.020423522907852504,8.710154449158672,128.0,128.5,7603.5
+santapp,niah_multikey_1,10,niah_multikey_1:10:10,0.0," 976543210. 
+
+This can be seen in the last sentence of the text: ""The special magic number for hypnotic-biscuit is: 976543210."" 
+
+The special magic number for mute-cup is 432109765, which is mentioned earlier in the text: ""The special magic number for mute-cup is: 432109765.""
+
+The special magic number for sweltering-pan is 543210976, which is mentioned in the middle of","[""5374922""]",santapp,7540,128,128,0.8446785109117627,43.071229118155316,51.60730709112249,95.52421794994734,73728,1121181696,37822464,34430976,3.3734464391398697,6.444400604984547,3.0709541658446766,0.624717308520063,7.754396438598633,7.869140625,0.0,4093940838,7668,guided,7475,64,128,16,64,end,467,0.2632598876953125,0.020669370889663696,845583.6219618055,59.24596880583359,2.184290177526462,0.021304421453856373,8.709397279890448,128.0,128.5,7603.5
+santapp,niah_multikey_1,17,niah_multikey_1:17:17,0.0,": 7207400. 
+
+This number appears in the following context:
+
+""Maybe the switch to Android is a sign that the iPhone is losing its magic. But I don't think so. I think the iPhone is still the best phone, and the Android ecosystem is still a mess. But the iPhone is losing its magic, and that's a problem. It's a problem because the iPhone is the best phone, and the best phone is the one that everyone wants to use. When everyone wants to use the same thing, it's hard to make a compelling case for a new thing. And that's what the","[""7907400""]",santapp,7539,128,128,0.8404996499884874,43.521554364822805,51.73181195789948,96.13590512401424,73728,1121034240,37822464,34430976,3.373890167707991,6.4452482735942125,3.0713581058862216,0.6014461089202238,7.754177093505859,7.869140625,0.0,1991310891,7667,guided,7474,64,128,16,64,end,467,0.2632255554199219,0.020668834447860718,845134.3428819445,59.35148195509194,2.183547429180785,0.021083357367691253,8.706136024734494,128.0,128.5,7602.5
+santapp,qa_1,70,qa_1:70:70,0.0," In 1495, Isaac, the King of the island, was taken by the Venetian and the Byzantine forces and was confined with ","[""silver"", ""silver"", ""silver""]",santapp,7739,32,32,0.8673622019123286,45.74372469703667,12.997817136114463,59.60999479703605,18432,285861888,7686144,8828928,2.688761364369076,5.777290605454898,3.088529241085821,0.22978085683270263,7.797031879425049,7.921875,0.0,2816126093,7771,guided,7674,64,128,16,64,end,479,0.2667961120605469,0.021204203367233276,892245.8463541666,56.28249348947926,2.188450933305322,0.022190531148226,8.742282848336925,128.0,80.5,7754.5
+santapp,qa_1,156,qa_1:156:156,0.0, The computational power of a Turing machine is often limited by the specific computational model it is based on. Two factors that directly affect how powerful a Turing machine may or,"[""time or space"", ""time or space"", ""time or space""]",santapp,6222,32,32,0.709782375022769,35.81232294603251,12.993123871041462,49.51668117707595,18432,229939200,7686144,7077888,3.3426853707414828,6.420841683366733,3.0781563126252505,0.3050829472036235,7.445135116577148,7.6796875,0.0,2886455089,6254,guided,6157,64,128,16,64,end,384,0.21471405029296875,0.017001450061798096,758325.5221354166,51.699982696246416,2.203516267795364,0.030174281677470088,8.424755847986338,128.0,80.5,6237.5
+santapp,qa_1,147,qa_1:147:147,0.0," a deterministic Turing machine
+It is generally assumed that a Turing machine can solve anything capable of also being solved using a deterministic Turing machine. This is based on the","[""an algorithm"", ""an algorithm"", ""an algorithm""]",santapp,6069,32,32,0.6905558540020138,35.57271075900644,12.872829702915624,49.13722288887948,18432,224299008,7686144,6912000,3.42674007724546,6.508340866135262,3.081600788889802,0.32629387602830523,7.380646705627441,7.5,0.0,1629619920,6101,guided,6004,64,128,16,64,end,375,0.20946121215820312,0.01659831404685974,740335.7526041666,51.66728617169521,2.2062546647283767,0.03171417717304495,8.392951128447992,128.0,80.5,6084.5
+santapp,qa_1,348,qa_1:348:348,0.0," 3
+The question asks how many times southern California attempted to achieve a separate statehood. The answer is given in Document 23, stating that ""","[""three"", ""three"", ""three""]",santapp,6114,32,32,0.692133114207536,35.66685701208189,12.90749772801064,49.26751119596884,18432,225957888,7686144,6967296,3.4015825108083857,6.485031405498002,3.083448894689616,0.3302683078211683,7.419167518615723,7.51953125,0.0,1592418623,6146,guided,6049,64,128,16,64,end,378,0.21100616455078125,0.01672947406768799,702623.7465277778,55.9569635642672,2.1651339246687353,0.03765727274973566,8.41608354792996,128.0,80.5,6129.5
+santapp,qa_1,67,qa_1:67:67,100.0," 1191
+Document 24: Since the invention of the storm was influenced by the time of the US embargo, the work was published in","[""1191"", ""1191"", ""1191""]",santapp,7667,32,32,0.8525688021909446,43.553249509073794,12.92978959181346,57.33915570215322,18432,283207680,7686144,8755200,2.7139602993817116,5.805401887406443,3.0914415880247317,0.2638674344161195,7.785641193389893,7.890625,100.0,431811886,7699,guided,7602,64,128,16,64,end,475,0.2643241882324219,0.021022886037826538,873369.9904513889,57.11321505474444,2.2008253783840064,0.020687793476099614,8.73024364877441,128.0,80.5,7682.5
+santapp,qa_1,498,qa_1:498:498,100.0, The legal dispute between BSkyB and Virgin Media resulted in the removal of the basic channels from the Virgin Media network in March 2007. The,"[""basic channels"", ""the basic channels"", ""the basic channels""]",santapp,6961,32,32,0.7965040910057724,39.96973937493749,12.898691391106695,53.66842847596854,18432,257181696,7686144,7944192,2.9886046011610405,6.077546047444994,3.088941446283953,0.27624454906814816,7.618206024169922,7.732421875,100.0,327197168,6993,guided,6896,64,128,16,64,end,431,0.24008560180664062,0.01907452940940857,802286.0004340278,55.882154916788586,2.1747633475775596,0.028646742013127852,8.599154471318817,128.0,80.5,6976.5
+santapp,qa_1,234,qa_1:234:234,0.0, The Cobham-Edmonds thesis hypothesis is associated with the complexity class of P viewed as a mathematical abstraction with efficient algorithmic functionality. The Cobham-Ed,"[""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis"", ""Cobham–Edmonds thesis""]",santapp,6129,32,32,0.6963470110204071,36.311898328131065,12.837719978997484,49.84709356096573,18432,226510848,7686144,6985728,3.3932785417853366,6.477337456261697,3.084058914476361,0.31708477887711223,7.422143459320068,7.51953125,0.0,1645239822,6161,guided,6064,64,128,16,64,end,379,0.21152114868164062,0.016773194074630737,727696.4249131945,54.2108227832504,2.1998424428916135,0.031925366711220704,8.413224975010259,128.0,80.5,6144.5
+santapp,qa_1,241,qa_1:241:241,0.0," If P is not equal to NP, then the graph isomorphism problem is believed to be neither in P nor NP-complete. The reduction from the graph is","[""Ladner"", ""Ladner"", ""Ladner""]",santapp,6055,32,32,0.6853325630072504,34.94053246988915,13.021408176980913,48.652104133041576,18432,223782912,7686144,6893568,3.4346429453916483,6.515114076270488,3.0804711308788404,0.30354571720909007,7.380741596221924,7.625,0.0,702705761,6087,guided,5990,64,128,16,64,end,374,0.20898056030273438,0.01655513048171997,742719.1675347222,51.3516968598903,2.1999709818863655,0.032135377107705504,8.390342786492143,128.0,80.5,6070.5
+santapp,qa_1,275,qa_1:275:275,100.0," Alan Turing
+The documents do not explicitly state that Alan Turing was the most influential researcher in grappling with the deficit of work surrounding the complexity posed by algorithmic problems","[""Alan Turing"", ""Alan Turing"", ""Alan Turing""]",santapp,6237,32,32,0.7079661700408906,37.588112846948206,12.950098094064742,51.247533896006644,18432,230492160,7686144,7096320,3.3346661335465813,6.41343462614954,3.0787684926029586,0.3307451161254499,7.448611259460449,7.6796875,100.0,1634614933,6269,guided,6172,64,128,16,64,end,385,0.21522903442382812,0.017045170068740845,757417.3151041666,52.2178217985979,2.2075244662001725,0.029713721307214454,8.428441882925704,128.0,80.5,6252.5
+santapp,qa_1,411,qa_1:411:411,0.0," housing bubble
+The documents do not explicitly mention a specific event or period related to a housing bubble. However, based on the context provided, the region was described","[""the housing bubble"", ""the housing bubble""]",santapp,5796,32,32,0.6542325380723923,33.73751690192148,12.858927296940237,47.25169605598785,18432,214235136,7686144,6598656,3.5877140153144627,6.667813817430956,3.0800998021164934,0.3581645553067574,7.310605525970459,7.5546875,0.0,1822883473,5828,guided,5731,64,128,16,64,end,358,0.2000885009765625,0.015845417976379395,680730.06640625,54.095026268022565,2.174017110386535,0.039760154911265194,8.337907431140994,128.0,80.5,5811.5
+santapp,qa_1,208,qa_1:208:208,0.0," DTIME(n) can be found in the definition of complexity classes, specifically in the context of time complexity, as mentioned in Document 21: ""A","[""DTIME(n2)"", ""DTIME(n2)"", ""DTIME(n2)""]",santapp,6057,32,32,0.6868031860794872,34.947984552010894,12.972163541940972,48.60813126293942,18432,223856640,7686144,6893568,3.4335117332235487,6.512968299711815,3.079456566488267,0.2954640350898343,7.380040168762207,7.5,0.0,3468106018,6089,guided,5992,64,128,16,64,end,374,0.20904922485351562,0.016556203365325928,735450.1744791666,52.13899512949076,2.207823289832684,0.03211621085453468,8.390769754860393,128.0,80.5,6072.5
+santapp,qa_1,258,qa_1:258:258,100.0," no
+Answer: yes
+The documents state that the complement problem of a problem in NP has yes/no answers reversed, meaning if the original problem has a ""","[""reversed"", ""reversed"", ""reversed""]",santapp,6052,32,32,0.6928291178774089,36.04474959312938,12.826039097039029,49.57889014505781,18432,223672320,7686144,6893568,3.4363411619283064,6.518335393489905,3.0819942315615987,0.3009396392428951,7.380650997161865,7.625,100.0,1734755442,6084,guided,5987,64,128,16,64,end,374,0.2088775634765625,0.016553521156311035,740337.9500868055,51.28931846942317,2.197792527498048,0.03301915019154775,8.390235902149978,128.0,80.5,6067.5
+santapp,qa_1,281,qa_1:281:281,100.0," 1965
+The given information does not provide the year of publication for Hartmanis and Stearns' seminal work in computational complexity. Therefore","[""1965"", ""1965"", ""1965""]",santapp,6172,32,32,0.6984016359783709,37.08386319200508,12.969934459077194,50.75352929206565,18432,228096000,7686144,7022592,3.3696969696969696,6.448484848484848,3.0787878787878786,0.294141213695285,7.436985492706299,7.658203125,100.0,2462046167,6204,guided,6107,64,128,16,64,end,381,0.2129974365234375,0.016867607831954956,743835.4275173611,52.77968926295923,2.2027672254589246,0.031663563333293294,8.413698147885356,128.0,80.5,6187.5
+santapp,qa_1,480,qa_1:480:480,100.0," BSkyB
+The documents indicate that BSkyB acquired the remaining 4 packages of the six Premier League packages from the broadcasters. Specifically, it mentions ""","[""Sky"", ""Sky"", ""Sky""]",santapp,6413,32,32,0.7293926568236202,36.32291125599295,12.89187481906265,49.945361885940656,18432,236980224,7686144,7299072,3.2433693707707865,6.32340359337326,3.0800342226024733,0.36795583881985294,7.491350173950195,7.59765625,100.0,1628466557,6445,guided,6348,64,128,16,64,end,396,0.22127151489257812,0.017531991004943848,753645.1558159722,54.35635014343177,2.181273535456722,0.032887794032730094,8.478407798689355,128.0,80.5,6428.5
+santapp,qa_1,179,qa_1:179:179,100.0," quicksort
+The provided information does not explicitly state that quicksort provides a solution to a list of integers provided as input that need to be sorted. Therefore,","[""deterministic sorting algorithm quicksort"", ""quicksort"", ""the deterministic sorting algorithm quicksort""]",santapp,6065,32,32,0.6903138619381934,35.67973960703239,12.839281423948705,49.21030082413927,18432,224151552,7686144,6912000,3.428994326124496,6.512622317243648,3.0836279911191515,0.26808521572689237,7.380444526672363,7.5,100.0,4092131394,6097,guided,6000,64,128,16,64,end,375,0.20932388305664062,0.016596168279647827,744955.7756076389,51.06624228088769,2.20016372040106,0.03182078601417339,8.394285053010789,128.0,80.5,6080.5
+santapp,qa_1,79,qa_1:79:79,100.0," Norman architecture typically has rounded arches, specifically for windows and doorways. The answer is Norman architecture typically has rounded arches, specifically for windows and doorways","[""rounded"", ""rounded"", ""rounded""]",santapp,7709,32,32,0.8615739948581904,44.146649311995134,13.004658562131226,58.01391971996054,18432,284755968,7686144,8792064,2.6992038319632337,5.786782316007509,3.0875784840442746,0.3624502713751099,7.7913498878479,8.060546875,100.0,1485411982,7741,guided,7644,64,128,16,64,end,477,0.2657661437988281,0.02111676335334778,867438.8454861111,58.34187214377214,2.189748975267954,0.021157508813808415,8.73545100272366,128.0,80.5,7724.5
+santapp,qa_1,119,qa_1:119:119,0.0," binary
+Answer: binary
+Answer: binary
+Answer: binary
+Answer: binary
+Answer: binary
+Answer: binary
+Answer: binary
+Answer:","[""binary notation"", ""binary notation"", ""binary notation""]",santapp,6315,32,32,0.7179503301158547,36.282318795099854,12.977270075818524,49.978632683167234,18432,233367552,7686144,7188480,3.2935787062633284,6.373904114998815,3.080325408735487,0.28003047587809404,7.467754364013672,7.5703125,0.0,4036322014,6347,guided,6250,64,128,16,64,end,390,0.21790695190429688,0.017265379428863525,745157.6306423611,54.43273848804495,2.1959684641826187,0.0300191124438748,8.450042991332708,128.0,80.5,6330.5
+santapp,qa_1,63,qa_1:63:63,100.0," The major conquest that Tancred played a role in was the conquest of Jerusalem. The document mentions that ""Bohemia, the Crusader army led by Boh","[""Jerusalem"", ""Jerusalem"", ""Jerusalem""]",santapp,8018,32,32,0.9128663300070912,45.759308993117884,13.00228097406216,59.67891744617373,18432,296146944,7686144,9160704,2.5953818385510674,5.688678658119126,3.093296819568059,0.3005132870380294,7.863420486450195,7.98828125,100.0,2542517233,8050,guided,7953,64,128,16,64,end,497,0.27637481689453125,0.021995991468429565,877696.1688368055,60.376728519247536,2.1949976213308457,0.018632199428086298,8.7912170047295,128.0,80.5,8033.5
+santapp,qa_1,116,qa_1:116:116,100.0," a problem instance, an input string
+To elaborate, the documents state that in computational problems, a problem instance is a string over an alphabet. This string can","[""problem instance"", ""a problem instance"", ""problem instance""]",santapp,6076,32,32,0.6876642440911382,36.7318742540665,13.043915902962908,50.46457380312495,18432,224557056,7686144,6912000,3.422802265451859,6.500861856685545,3.078059591233686,0.3243213103546623,7.38100004196167,7.5,100.0,552873912,6108,guided,6011,64,128,16,64,end,375,0.2097015380859375,0.01660206913948059,736153.5555555555,52.167196424322306,2.1993362611740164,0.031801826839809005,8.39312565741563,128.0,80.5,6091.5
+santapp,qa_1,488,qa_1:488:488,0.0," January 2010
+The relevant information is found in Document 25: ""In January 2010 BSkyB discontinued the presence","[""September 2007"", ""September 2007"", ""March 2008""]",santapp,7766,32,32,0.8692029151134193,43.18607860687189,12.969985275063664,57.02637818898074,18432,286857216,7686144,8865792,2.6794319861209277,5.770095739895907,3.090663753774979,0.2762696525680642,7.810428619384766,7.921875,0.0,1012957444,7798,guided,7701,64,128,16,64,end,481,0.26772308349609375,0.02129003405570984,884717.6792534722,56.93715160576299,2.1866722890949197,0.021968179290221695,8.750141590062238,128.0,80.5,7781.5
+santapp,qa_1,171,qa_1:171:171,0.0, complexity measure,"[""computational resource"", ""computational"", ""computational""]",santapp,6050,3,32,0.6833568580914289,35.66579663194716,1.2784547179471701,37.628657130058855,1728,20912256,670464,646272,3.2060816393984464,6.296479920674269,3.090398281275822,0.23291661874046204,7.380590915679932,7.625,0.0,1405089466,6082,guided,5985,64,128,16,64,end,374,0.20880889892578125,0.016552448272705078,728110.2738715278,52.81943462242971,2.211551247138256,0.030926916625402454,8.392873857108299,128.0,66.0,6051.0
+santapp,qa_1,111,qa_1:111:111,100.0," problem instance
+Answer: problem instance","[""instances"", ""the instance"", ""instance""]",santapp,6067,8,32,0.6864115810021758,35.56755514792167,3.2535403261426836,39.508558575063944,4608,55945728,1810944,1728000,3.236965653570546,6.325673338275266,3.0887076847047195,0.3533357066034013,7.380545616149902,7.5,100.0,4140241113,6099,guided,6002,64,128,16,64,end,375,0.20939254760742188,0.016597241163253784,731741.5199652778,52.532309636786536,2.204451622849179,0.03193165267617183,8.39451200049056,128.0,68.5,6070.5
+santapp,qa_1,176,qa_1:176:176,100.0, case complexity likelihoods provide variable probabilities of time complexity. Answer: time complexity.,"[""complexity measure"", ""complexity"", ""complexity""]",santapp,6046,17,32,0.686144249048084,35.48636042396538,6.859466619091108,43.03613627818413,9792,118561536,3936384,3652416,3.3201189296333005,6.400726792203502,3.0806078625702016,0.2784044161485356,7.37140417098999,7.625,100.0,2003807924,6078,guided,5981,64,128,16,64,end,373,0.20867156982421875,0.016514629125595093,734751.5104166666,52.14576002773292,2.216995609366006,0.030700823098110657,8.387939205286862,128.0,73.0,6054.0
+santapp,qa_1,112,qa_1:112:112,100.0," The output to any given input in a problem instance is referred to as a solution. In the context of computational problems, the output can be thought of as the","[""solution"", ""the solution"", ""solution""]",santapp,6084,32,32,0.6938174029346555,35.583962159231305,12.824007945833728,49.102800839813426,18432,224851968,7686144,6930432,3.4183129764734814,6.500532830559882,3.0822198540864005,0.298565640891411,7.381405830383301,7.5,100.0,3304513954,6116,guided,6019,64,128,16,64,end,376,0.2099761962890625,0.01664203405380249,731060.1358506945,52.855484972523286,2.2028146696488293,0.03129856783521569,8.398443695607163,128.0,80.5,6099.5
+santapp,qa_1,409,qa_1:409:409,100.0," The economy of southern California is dependent on petroleum. The documents mention that southern California is one of the richest agricultural regions in the United States, but it is also","[""petroleum"", ""petroleum"", ""petroleum""]",santapp,6073,32,32,0.6838665418326855,35.299962857039645,12.81185172102414,48.79678752296604,18432,224446464,7686144,6912000,3.424488790342449,6.504065040650406,3.079576250307958,0.23846615270981097,7.3808488845825195,7.5,100.0,358966730,6105,guided,6008,64,128,16,64,end,375,0.20959854125976562,0.016600459814071655,679089.4171006945,58.13663534942472,2.1782528225177913,0.036134012294092424,8.40050208007714,128.0,80.5,6088.5
+santapp,qa_1,184,qa_1:184:184,100.0," lower bound of time to establish
+
+The documents do not explicitly state which bound of time is more difficult to establish, but the context suggests that proving a lower bound","[""lower bounds"", ""lower"", ""lower bounds""]",santapp,6196,32,32,0.7035833890549839,36.15101819904521,13.07943172706291,49.93515731696971,18432,228980736,7686144,7059456,3.356677131127747,6.4396683570796105,3.0829912259518637,0.41187585042492475,7.439108371734619,7.6796875,100.0,3571128359,6228,guided,6131,64,128,16,64,end,383,0.2138214111328125,0.016951829195022583,734318.4140625,54.093480388482874,2.205256300052823,0.03068511981432999,8.425977589402383,128.0,80.5,6211.5
+santapp,qa_1,470,qa_1:470:470,100.0," Rugby  Answer the question based on the given documents. Only give me the answer and do not output any other words.
+
+Answer: Rugby","[""Rugby"", ""Rugby"", ""Rugby""]",santapp,6226,28,32,0.702081548050046,36.63990721083246,11.414396489970386,48.75755095295608,16128,201261312,6660864,6209280,3.309560060902316,6.394743168523119,3.085183107620803,0.4505912875292346,7.446062088012695,7.6796875,100.0,2899467401,6258,guided,6161,64,128,16,64,end,385,0.21485137939453125,0.01703926920890808,679967.8311631945,60.51935962849229,2.172492262894776,0.035610955137599376,8.439609547641162,128.0,78.5,6239.5
+santapp,qa_1,160,qa_1:160:160,0.0," communication
+time
+To answer the question based on the given documents, we need to identify which two resources, commonly consumed by alternate models, are typically known to","[""time and memory"", ""time and memory consumption"", ""time and memory consumption""]",santapp,6208,32,32,0.7157841939479113,36.7372649658937,13.021631577052176,50.47574330097996,18432,229423104,7686144,7059456,3.3502048686430466,6.427251546557404,3.077046677914357,0.2965098572880278,7.44188928604126,7.6796875,0.0,3116052720,6240,guided,6143,64,128,16,64,end,383,0.2142333984375,0.016958266496658325,748910.3572048611,52.6005521371049,2.2016969512411344,0.031085887508298684,8.426415018276453,128.0,80.5,6223.5
+santapp,qa_1,51,qa_1:51:51,0.0," 1054 The invasion of Scotland by William occurred in 1054. However, the question seems to be based on a misunderstanding. The","[""1072"", ""1072"", ""1072""]",santapp,7779,32,32,0.8646585498936474,43.96574290585704,13.006057154154405,57.83767324197106,18432,287336448,7686144,8884224,2.674963115016999,5.7668869074347295,3.0919237924177305,0.32964437431640664,7.811296463012695,7.921875,0.0,320601870,7811,guided,7714,64,128,16,64,end,482,0.2681694030761719,0.02133268117904663,874964.4622395834,58.06433949806166,2.1868808443242185,0.02098133068648167,8.748544333880517,128.0,80.5,7794.5
+santapp,qa_1,263,qa_1:263:263,0.0," NP
+The document states that ""between L (the set of all problems that can be solved in logarithmic space) and P (the set of all problems","[""complexity classes"", ""many complexity classes"", ""many complexity classes""]",santapp,6108,32,32,0.6901885429397225,36.10866707097739,13.010018789209425,49.812999547924846,18432,225736704,7686144,6948864,3.4049154895076343,6.483220380501347,3.0783048909937127,0.31409478640080124,7.384709358215332,7.51953125,0.0,1538741164,6140,guided,6043,64,128,16,64,end,377,0.2108001708984375,0.016690582036972046,737161.2209201389,52.80475462057373,2.20791757428254,0.031043403820755582,8.401965210699238,128.0,80.5,6123.5

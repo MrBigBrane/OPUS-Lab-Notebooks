@@ -4,8 +4,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "santapp-ruler"
-version = "0.1.0"
-description = "Clean RULER benchmark harness for SANTA++ sparse attention versus PyTorch SDPA"
+version = "0.2.0"
+description = "RULER benchmark harness for SDPA, SANTA, and SANTA++ attention"
 readme = "README.md"
 requires-python = ">=3.11,<3.13"
 license = "Apache-2.0"
@@ -22,6 +22,7 @@ classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Science/Research",
   "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
 ]
 

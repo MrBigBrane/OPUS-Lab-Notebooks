@@ -1,3 +1,5 @@
+# Full classic synthetic RULER matrix at 8k: 13 tasks x 500 prompts.
+# Select fewer backends on the command line when only one method is needed.
 benchmark:
   context_length: 8192
   tasks:
@@ -14,4 +16,24 @@ benchmark:
     - fwe
     - qa_1
     - qa_2
-  prompts_per_task: 5
+  prompts_per_task: 500
+  selection_seed: 42
+
+generation:
+  backends: [sdpa, santa, santapp]
+  stop_on_eos: true
+  max_new_tokens: null
+  random_seed: 0
+
+santa:
+  samples_per_head: 128
+
+santapp:
+  group_size: 16
+  samples_per_head: 128
+  probe_queries: 64
+
+output:
+  root: runs
+  run_name: all-tasks-8k
+  resume: true
