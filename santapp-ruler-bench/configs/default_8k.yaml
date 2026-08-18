@@ -11,7 +11,7 @@ model:
 benchmark:
   context_length: 8192
   tasks: [niah_multiquery, niah_multivalue]
-  prompts_per_task: 5
+  prompts_per_task: 100
   selection_seed: 42
   data:
     source: huggingface
