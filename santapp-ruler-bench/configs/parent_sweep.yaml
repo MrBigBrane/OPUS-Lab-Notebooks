@@ -6,6 +6,6 @@ grid:
   # Specify which backend variant to target
   generation.backends:
     - [team_gumbel_topk]
-
-  # Sweep S (samples_per_head)
-  santapp_variants.team_gumbel_topk.samples_per_head: [32, 64, 128]
+  
+  # Sweep P (parent_size)
+  santapp_variants.team_gumbel_topk.parent_size: [32, 64]
