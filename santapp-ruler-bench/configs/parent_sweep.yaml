@@ -9,3 +9,5 @@ grid:
   
   # Sweep P (parent_size)
   santapp_variants.team_gumbel_topk.parent_size: [32, 64]
+  santapp_variants.team_gumbel_topk.representatives_per_parent: [4]
+  santapp_variants.team_gumbel_topk.samples_per_head: [128]
