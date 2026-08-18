@@ -1,7 +1,0 @@
-base_config: "configs/smoke_8k.yaml"
-output_root: "/workspace/runs/sweep-smoke"
-name_template: "probe_{probe_strategy}"
-
-grid:
-  santapp.probe_queries: [64]
-  santapp.probe_strategy: ["start", "middle", "end", "random"]

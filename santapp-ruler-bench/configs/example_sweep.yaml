@@ -1,7 +1,10 @@
-# Optional sequential sweep. Not used by the normal `santapp-ruler run` command.
+# Sequential local sweep example. The fixed generation.backends entry ensures
+# each grid point runs only the intended SANTA++ method.
 base_config: configs/default_8k.yaml
-output_root: runs/sweeps/example
-name_template: "S{samples_per_head}-B{group_size}"
+output_root: runs/sweeps/santapp-example
+name_template: "s{samples_per_head}-b{group_size}"
 grid:
+  generation.backends:
+    - [santapp]
   santapp.samples_per_head: [64, 128, 256]
   santapp.group_size: [8, 16]

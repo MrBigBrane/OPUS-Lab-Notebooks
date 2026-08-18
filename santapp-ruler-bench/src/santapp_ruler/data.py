@@ -11,6 +11,7 @@ from pathlib import Path
 from typing import Any
 
 from .config import BenchmarkConfig
+from .io_utils import atomic_write_text
 from .ruler.grader import normalize_references
 from .ruler.tasks import require_task
 
@@ -199,9 +200,12 @@ def write_selection_manifest(
     *,
     include_prompts: bool,
 ) -> None:
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="\n") as handle:
-        for example in flatten_selected(selected, tasks):
-            record = example.to_manifest_record(include_prompt=include_prompts)
-            handle.write(json.dumps(record, ensure_ascii=False) + "\n")
+    records = [
+        json.dumps(
+            example.to_manifest_record(include_prompt=include_prompts),
+            ensure_ascii=False,
+            allow_nan=False,
+        )
+        for example in flatten_selected(selected, tasks)
+    ]
+    atomic_write_text(path, "\n".join(records) + ("\n" if records else ""))

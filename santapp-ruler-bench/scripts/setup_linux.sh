@@ -110,7 +110,7 @@ PY
 # shellcheck disable=SC1090
 source "$VENV_PATH/bin/activate"
 
-python -m pip install --upgrade pip setuptools wheel
+python -m pip install --upgrade pip wheel "setuptools<82"
 if (( ! SKIP_TORCH )); then
   if [[ ! -f "$TORCH_REQUIREMENTS" ]]; then
     echo "PyTorch requirement file not found: $TORCH_REQUIREMENTS" >&2
@@ -120,7 +120,7 @@ if (( ! SKIP_TORCH )); then
 fi
 
 if (( DEV )); then
-  python -m pip install -e ".[dev]"
+  python -m pip install -e ".[dev,analysis]"
 else
   python -m pip install -e .
 fi

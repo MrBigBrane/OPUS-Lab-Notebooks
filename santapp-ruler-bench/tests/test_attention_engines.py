@@ -6,11 +6,7 @@ from torch import nn
 from santapp_ruler.attention import santapp as santapp_module
 from santapp_ruler.attention.santa import SantaEngine
 from santapp_ruler.attention.santapp import SantaPlusEngine
-from santapp_ruler.config import (
-    MiniBatchKMeansConfig,
-    SantaConfig,
-    SantaPlusConfig,
-)
+from santapp_ruler.config import MiniBatchKMeansConfig, SantaConfig, SantaPlusConfig
 
 
 def _test_sdpa_forward(
@@ -48,7 +44,6 @@ def _test_sdpa_forward(
             scores = scores + attention_mask
     probability = torch.softmax(scores, dim=-1)
     output = probability @ value.float()
-    # Hugging Face's wrapper returns [batch, query_tokens, heads, head_dim].
     return output.transpose(1, 2).to(query.dtype), None
 
 
@@ -86,9 +81,7 @@ class _TinyLayer(nn.Module):
 class _TinyBackbone(nn.Module):
     def __init__(self, hidden_size: int, query_heads: int, kv_heads: int):
         super().__init__()
-        self.layers = nn.ModuleList(
-            [_TinyLayer(hidden_size, query_heads, kv_heads)]
-        )
+        self.layers = nn.ModuleList([_TinyLayer(hidden_size, query_heads, kv_heads)])
         self.rotary_emb = _TinyRotary()
 
 
@@ -137,7 +130,17 @@ class _TinyQwen(nn.Module):
         return SimpleNamespace(logits=self.lm_head(hidden))
 
 
-def test_santa_and_santapp_engines_run_end_to_end_on_tiny_qwen(monkeypatch):
+def _kmeans_config() -> MiniBatchKMeansConfig:
+    return MiniBatchKMeansConfig(
+        batch_size=8,
+        n_init=1,
+        max_iter=1,
+        max_no_improvement=None,
+        random_state=0,
+    )
+
+
+def test_all_sparse_engines_run_end_to_end_on_tiny_qwen(monkeypatch):
     monkeypatch.setattr(
         santapp_module,
         "hf_sdpa_attention_forward",
@@ -153,45 +156,121 @@ def test_santa_and_santapp_engines_run_end_to_end_on_tiny_qwen(monkeypatch):
         random_seed=11,
     )
     assert len(santa.token_ids) == 2
-    assert santa.metrics["exact_window_tokens"] == 0
+    assert santa.metrics["prompt_exact_tail_tokens"] == 0
+    assert santa.metrics["exact_token_policy"] == "none"
     assert santa.metrics["decode_gqa_centroid_key_vectors_read"] == 0
     assert santa.metrics["decode_gqa_total_access_pct"] > 0.0
 
-    santapp_config = SantaPlusConfig(
+    guided_config = SantaPlusConfig(
+        mode="guided",
         group_size=2,
         samples_per_head=3,
         probe_queries=2,
-        kmeans=MiniBatchKMeansConfig(
-            batch_size=8,
-            n_init=1,
-            max_iter=1,
-            max_no_improvement=None,
-            random_state=0,
-        ),
+        kmeans=_kmeans_config(),
     )
-    santapp = SantaPlusEngine(_TinyQwen(), santapp_config).generate(
+    guided = SantaPlusEngine(_TinyQwen(), guided_config).generate(
         input_ids,
         max_new_tokens=2,
         eos_token_ids=set(),
         stop_on_eos=False,
         random_seed=11,
     )
-    assert len(santapp.token_ids) == 2
-    assert santapp.metrics["clustered_prompt_tokens"] == 5
-    assert santapp.metrics["prompt_exact_tail_tokens"] == 0
-    assert santapp.metrics["initial_growing_exact_tokens"] == 0
-    assert santapp.metrics["probe_queries"] == 2
-    assert santapp.metrics["probe_policy"] == "last_prompt_tokens"
-    # The first sparse call re-feeds the final prompt token, but that token is
-    # cluster-covered. Only the first generated token is exact on call two.
-    assert santapp.metrics["mean_exact_tokens_per_gqa_group_call"] == 0.5
-    assert santapp.metrics["decode_gqa_centroid_key_vectors_read"] > 0
+    assert len(guided.token_ids) == 2
+    assert guided.metrics["clustered_prompt_tokens"] == 5
+    assert guided.metrics["prompt_exact_tail_tokens"] == 0
+    assert guided.metrics["initial_growing_exact_tokens"] == 0
+    assert guided.metrics["probe_queries"] == 2
+    assert guided.metrics["probe_policy"] == "last_prompt_tokens"
+    # First call has no exact suffix; call two has one generated token.
+    assert guided.metrics["mean_exact_tokens_per_gqa_group_call"] == 0.5
+    assert guided.metrics["decode_gqa_centroid_key_vectors_read"] > 0
 
-    first_decision = SantaPlusEngine(_TinyQwen(), santapp_config).generate(
+    gumbel_config = SantaPlusConfig(
+        mode="gumbel_cluster",
+        group_size=2,
+        samples_per_head=4,
+        probe_queries=2,
+        kmeans=_kmeans_config(),
+    )
+    gumbel = SantaPlusEngine(_TinyQwen(), gumbel_config).generate(
         input_ids,
+        max_new_tokens=2,
+        eos_token_ids=set(),
+        stop_on_eos=False,
+        random_seed=11,
+    )
+    assert len(gumbel.token_ids) == 2
+    assert gumbel.metrics["sampling_scheme"] == (
+        "cluster_gumbel_topk_without_replacement"
+    )
+    assert gumbel.metrics["prompt_exact_tail_tokens"] == 0
+    assert gumbel.metrics["probe_policy"] == "last_prompt_tokens"
+    assert gumbel.metrics["mean_selected_clusters_per_head_call"] == 2.0
+    assert gumbel.metrics["mean_exact_tokens_per_gqa_group_call"] == 0.5
+
+    team_config = SantaPlusConfig(
+        mode="team_sampler",
+        parent_size=4,
+        representatives_per_parent=2,
+        samples_per_head=3,
+        probe_queries=2,
+        kmeans=_kmeans_config(),
+    )
+    team = SantaPlusEngine(_TinyQwen(), team_config).generate(
+        input_ids,
+        max_new_tokens=2,
+        eos_token_ids=set(),
+        stop_on_eos=False,
+        random_seed=11,
+    )
+    assert len(team.token_ids) == 2
+    assert team.metrics["mode"] == "team_sampler"
+    assert team.metrics["routing_key_type"] == "actual_team_leader"
+    assert team.metrics["parent_clustering_space"] == "probe_fingerprint"
+    assert team.metrics["team_assignment_space"] == "actual_key_l2"
+    assert team.metrics["mean_sampled_token_rows_per_head_call"] == 3.0
+    assert team.metrics["decode_gqa_routing_key_vectors_read"] > 0
+    assert team.metrics["decode_gqa_centroid_key_vectors_read"] == 0
+
+    team_gumbel_config = SantaPlusConfig(
+        mode="team_gumbel_topk",
+        parent_size=4,
+        representatives_per_parent=2,
+        samples_per_head=4,
+        probe_queries=2,
+        kmeans=_kmeans_config(),
+    )
+    team_gumbel = SantaPlusEngine(_TinyQwen(), team_gumbel_config).generate(
+        input_ids,
+        max_new_tokens=2,
+        eos_token_ids=set(),
+        stop_on_eos=False,
+        random_seed=11,
+    )
+    assert len(team_gumbel.token_ids) == 2
+    assert team_gumbel.metrics["teams_per_head"] == 2
+    assert team_gumbel.metrics["mean_selected_teams_per_head_call"] == 2.0
+    assert team_gumbel.metrics["selected_team_inclusion_probability_count"] > 0
+    assert team_gumbel.metrics["decode_gqa_centroid_key_vectors_read"] == 0
+
+
+def test_first_clustered_decode_call_has_no_exact_prompt_token(monkeypatch):
+    monkeypatch.setattr(
+        santapp_module,
+        "hf_sdpa_attention_forward",
+        _test_sdpa_forward,
+    )
+    config = SantaPlusConfig(
+        group_size=2,
+        samples_per_head=3,
+        probe_queries=2,
+        kmeans=_kmeans_config(),
+    )
+    result = SantaPlusEngine(_TinyQwen(), config).generate(
+        torch.tensor([[1, 2, 3, 4, 5]], dtype=torch.long),
         max_new_tokens=1,
         eos_token_ids=set(),
         stop_on_eos=False,
         random_seed=11,
     )
-    assert first_decision.metrics["mean_exact_tokens_per_gqa_group_call"] == 0.0
+    assert result.metrics["mean_exact_tokens_per_gqa_group_call"] == 0.0

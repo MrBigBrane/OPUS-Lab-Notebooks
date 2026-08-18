@@ -1,10 +1,11 @@
-"""Reference SANTA++ attention backend for Qwen2/Qwen2.5.
+"""Reference SANTA++ attention backends for Qwen2/Qwen2.5.
 
 The implementation uses dense SDPA for prefill, clusters every prompt token using
-fingerprints from the final probe-query tokens, and applies centroid-guided IID
-sampling during batch-1 autoregressive decode. No prompt token is assigned to an
-exact tail: the final prompt token is re-fed as the first decode query, but its KV
-row remains covered by the frozen prompt clusters. Only subsequently generated
+fingerprints from the final contiguous probe-query tokens, and applies either the
+original centroid-guided estimators or flattened actual-key team estimators
+during batch-1 autoregressive decode.  No prompt token is assigned to an exact
+tail: the final prompt token is re-fed as the first decode query, but its KV row
+remains covered by the frozen prompt clusters.  Only subsequently generated
 tokens form the growing deterministic region.
 
 This is a readable research reference implementation, not a fused production
@@ -25,13 +26,19 @@ import torch
 from ..config import SantaPlusConfig
 from .minibatch_kmeans import SklearnLikeTorchMiniBatchKMeans
 from .probes import last_prompt_probe_positions
+from .sampling import (
+    expand_selected_packed_members,
+    gumbel_topk_without_replacement,
+    sample_team_members_iid,
+)
+from .teams import TeamSummary, build_team_summary
 from .traffic import DecodeTrafficTracker
 
 try:
     from transformers.integrations.sdpa_attention import (
         sdpa_attention_forward as hf_sdpa_attention_forward,
     )
-except ImportError:  # Keep pure estimator/config tests importable without extras.
+except ImportError:  # Keep estimator/config tests importable without extras.
     hf_sdpa_attention_forward = None
 
 
@@ -99,6 +106,15 @@ class LayerCache:
 
 
 @dataclass(frozen=True, slots=True)
+class AttentionEstimate:
+    output: torch.Tensor
+    sampled_indices: torch.Tensor
+    selected_clusters: int = 0
+    selected_teams: int = 0
+    inclusion_probabilities: torch.Tensor | None = None
+
+
+@dataclass(frozen=True, slots=True)
 class AttentionGeneration:
     token_ids: list[int]
     metrics: dict[str, Any]
@@ -119,7 +135,7 @@ class SantaPlusEngine:
         model_type = getattr(model.config, "model_type", None)
         if model_type != "qwen2":
             raise TypeError(
-                "The extracted attention patch currently supports Qwen2/Qwen2.5 "
+                "The attention patch currently supports Qwen2/Qwen2.5 "
                 f"(model_type='qwen2'), not {model_type!r}."
             )
 
@@ -152,16 +168,31 @@ class SantaPlusEngine:
         self.sample_end = 0
         self.cache_capacity = 0
         self.cache: dict[int, LayerCache] = {}
-        self.summaries: dict[tuple[int, int], ClusterSummary] = {}
+        self.summaries: dict[tuple[int, int], ClusterSummary | TeamSummary] = {}
         self.traffic = self._make_traffic_tracker()
         self._original_forwards: list[Any] = []
+        self._reset_sampling_diagnostics()
 
     def _make_traffic_tracker(self) -> DecodeTrafficTracker:
+        fixed_samples = (
+            self.config.samples_per_head
+            if self.config.mode
+            in {"guided", "team_sampler", "oracle_token", "uniform"}
+            else None
+        )
         return DecodeTrafficTracker(
             query_heads_per_kv=self.query_heads_per_kv,
-            samples_per_head=self.config.samples_per_head,
+            samples_per_head=fixed_samples,
             access_pattern="sampled_kv",
         )
+
+    def _reset_sampling_diagnostics(self) -> None:
+        self._sampled_rows_total = 0
+        self._selected_clusters_total = 0
+        self._selected_cluster_head_calls = 0
+        self._selected_teams_total = 0
+        self._selected_team_head_calls = 0
+        self._selected_inclusion_probabilities: list[torch.Tensor] = []
 
     @contextlib.contextmanager
     def patched(self) -> Iterator[None]:
@@ -195,6 +226,7 @@ class SantaPlusEngine:
         self.cache.clear()
         self.summaries.clear()
         self.traffic = self._make_traffic_tracker()
+        self._reset_sampling_diagnostics()
 
     def _append_cache(
         self, layer_id: int, key: torch.Tensor, value: torch.Tensor
@@ -232,9 +264,6 @@ class SantaPlusEngine:
         cached.length = end
         full_key, full_value = cached.view()
         if self.mode == "dense":
-            # Stock DynamicCache concatenation is contiguous. Preserve that
-            # layout for the explicit fidelity path; sparse mode indexes the
-            # preallocated view directly.
             return full_key.contiguous(), full_value.contiguous()
         return full_key, full_value
 
@@ -302,9 +331,9 @@ class SantaPlusEngine:
 
             if hf_sdpa_attention_forward is None:
                 raise RuntimeError(
-                    "SANTA/SANTA++ expect transformers==5.12.1 and its "
-                    "SDPA integration. Install the project dependencies before "
-                    "running model-backed generation."
+                    "SANTA/SANTA++ expect transformers==5.12.1 and its SDPA "
+                    "integration. Install the project dependencies before running "
+                    "model-backed generation."
                 )
             output, _ = hf_sdpa_attention_forward(
                 attention,
@@ -324,15 +353,26 @@ class SantaPlusEngine:
                     kv_head * self.query_heads_per_kv,
                     (kv_head + 1) * self.query_heads_per_kv,
                 ):
-                    head_output, sampled_indices = self._approximate_attention(
+                    estimate = self._approximate_attention(
                         query[0, query_head, 0].float(),
                         full_key[kv_head],
                         full_value[kv_head],
                         layer_id,
                         kv_head,
                     )
-                    outputs.append(head_output)
-                    sampled_indices_by_head.append(sampled_indices)
+                    outputs.append(estimate.output)
+                    sampled_indices_by_head.append(estimate.sampled_indices)
+                    self._sampled_rows_total += int(estimate.sampled_indices.numel())
+                    if estimate.selected_clusters:
+                        self._selected_clusters_total += estimate.selected_clusters
+                        self._selected_cluster_head_calls += 1
+                    if estimate.selected_teams:
+                        self._selected_teams_total += estimate.selected_teams
+                        self._selected_team_head_calls += 1
+                    if estimate.inclusion_probabilities is not None:
+                        self._selected_inclusion_probabilities.append(
+                            estimate.inclusion_probabilities.detach().reshape(-1)
+                        )
                 self._record_decode_group(
                     layer_id=layer_id,
                     kv_head=kv_head,
@@ -361,12 +401,65 @@ class SantaPlusEngine:
                 f"Cache length {n_total} is shorter than sample boundary "
                 f"{self.sample_end}."
             )
+        if self.mode in {"team_sampler", "team_gumbel_topk"}:
+            if not isinstance(summary, TeamSummary):
+                raise TypeError("Hierarchical team mode requires a TeamSummary.")
+            routing_vectors = summary.num_teams
+            centroid_vectors = 0
+        elif self.mode in {"guided", "gumbel_cluster", "topk"}:
+            routing_vectors = summary.num_groups
+            centroid_vectors = summary.num_groups
+        else:
+            routing_vectors = 0
+            centroid_vectors = 0
         self.traffic.record_group(
             n_total=n_total,
             sampled_indices_by_head=sampled_indices_by_head,
             exact_tokens=exact_tokens,
-            centroid_key_vectors=summary.num_groups,
+            routing_key_vectors=routing_vectors,
+            centroid_key_vectors=centroid_vectors,
         )
+
+    def _exact_suffix(
+        self,
+        query: torch.Tensor,
+        full_key: torch.Tensor,
+        full_value: torch.Tensor,
+        old_end: int,
+        scale: float,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        exact_tokens = int(full_key.shape[0]) - old_end
+        if exact_tokens:
+            return (
+                full_key[old_end:].float() @ query * scale,
+                full_value[old_end:].float(),
+            )
+        return (
+            torch.empty(0, device=query.device, dtype=torch.float32),
+            torch.empty(0, self.head_dim, device=query.device, dtype=torch.float32),
+        )
+
+    @staticmethod
+    def _combine_importance_sample(
+        *,
+        sampled_values: torch.Tensor,
+        sampled_log_weights: torch.Tensor,
+        exact_values: torch.Tensor,
+        exact_scores: torch.Tensor,
+        sample_divisor: float,
+    ) -> torch.Tensor:
+        maximum = (
+            torch.cat((sampled_log_weights, exact_scores)).max()
+            if exact_scores.numel()
+            else sampled_log_weights.max()
+        )
+        sampled_weights = torch.exp(sampled_log_weights - maximum) / sample_divisor
+        exact_weights = torch.exp(exact_scores - maximum)
+        numerator = sampled_weights @ sampled_values
+        if exact_scores.numel():
+            numerator = numerator + exact_weights @ exact_values
+        denominator = sampled_weights.sum() + exact_weights.sum()
+        return numerator / denominator
 
     def _approximate_attention(
         self,
@@ -375,59 +468,229 @@ class SantaPlusEngine:
         full_value: torch.Tensor,
         layer_id: int,
         kv_head: int,
-    ) -> tuple[torch.Tensor, torch.Tensor]:
+    ) -> AttentionEstimate:
         n_total = int(full_key.shape[0])
         old_end = self.sample_end
         if not 0 < old_end <= n_total:
             raise RuntimeError(
                 f"Invalid sampled-prefix boundary {old_end} for cache length {n_total}."
             )
-        exact_tokens = n_total - old_end
         scale = 1.0 / math.sqrt(self.head_dim)
-        if exact_tokens:
-            exact_scores = full_key[old_end:].float() @ query * scale
-            exact_values = full_value[old_end:].float()
-        else:
-            exact_scores = torch.empty(0, device=query.device, dtype=torch.float32)
-            exact_values = torch.empty(
-                0, self.head_dim, device=query.device, dtype=torch.float32
-            )
-
-        summary = self.summaries[(layer_id, kv_head)]
-        group_probability = torch.softmax(
-            torch.log(summary.lengths_float)
-            + summary.key_centroids @ query * scale,
-            dim=0,
+        exact_scores, exact_values = self._exact_suffix(
+            query, full_key, full_value, old_end, scale
         )
         sample_count = self.config.samples_per_head
-        sampled_groups = torch.multinomial(
-            group_probability, sample_count, replacement=True
-        )
-        lengths = summary.lengths_long[sampled_groups]
-        within_group = torch.floor(
-            torch.rand(sample_count, device=query.device) * lengths.float()
-        ).long()
-        positions = summary.starts[sampled_groups] + within_group
-        sampled_indices = summary.members[positions]
-        log_proposal = (
-            torch.log(group_probability[sampled_groups])
-            - torch.log(summary.lengths_float[sampled_groups])
-        )
+        mode = self.mode
+
+        if mode == "team_sampler":
+            summary = self.summaries[(layer_id, kv_head)]
+            if not isinstance(summary, TeamSummary):
+                raise TypeError("team_sampler requires a TeamSummary.")
+            team_logits = (
+                torch.log(summary.lengths_float)
+                + summary.leader_keys @ query * scale
+            )
+            proposal = sample_team_members_iid(
+                team_logits,
+                summary.members,
+                summary.starts,
+                summary.lengths_long,
+                sample_count,
+            )
+            sampled_indices = proposal.sampled_token_indices
+            sampled_scores = full_key[sampled_indices].float() @ query * scale
+            sampled_log_weights = (
+                sampled_scores - proposal.log_token_proposal_probabilities
+            )
+            output = self._combine_importance_sample(
+                sampled_values=full_value[sampled_indices].float(),
+                sampled_log_weights=sampled_log_weights,
+                exact_values=exact_values,
+                exact_scores=exact_scores,
+                sample_divisor=float(sample_count),
+            )
+            return AttentionEstimate(output=output, sampled_indices=sampled_indices)
+
+        if mode == "team_gumbel_topk":
+            summary = self.summaries[(layer_id, kv_head)]
+            if not isinstance(summary, TeamSummary):
+                raise TypeError("team_gumbel_topk requires a TeamSummary.")
+            if self.config.parent_size % self.config.representatives_per_parent:
+                raise ValueError(
+                    "parent_size must be divisible by representatives_per_parent."
+                )
+            nominal_team_size = (
+                self.config.parent_size // self.config.representatives_per_parent
+            )
+            if sample_count % nominal_team_size:
+                raise ValueError(
+                    "samples_per_head must be divisible by nominal_team_size."
+                )
+            requested_teams = sample_count // nominal_team_size
+            selected_team_count = min(requested_teams, summary.num_teams)
+            team_logits = (
+                torch.log(summary.lengths_float)
+                + summary.leader_keys @ query * scale
+            )
+            selection = gumbel_topk_without_replacement(
+                team_logits,
+                selected_team_count,
+            )
+            sampled_indices, selected_slot = expand_selected_packed_members(
+                summary.members,
+                summary.starts,
+                summary.lengths_long,
+                selection.selected_indices,
+            )
+            sampled_scores = full_key[sampled_indices].float() @ query * scale
+            sampled_log_weights = (
+                sampled_scores
+                - selection.log_inclusion_probabilities[selected_slot]
+            )
+            output = self._combine_importance_sample(
+                sampled_values=full_value[sampled_indices].float(),
+                sampled_log_weights=sampled_log_weights,
+                exact_values=exact_values,
+                exact_scores=exact_scores,
+                sample_divisor=1.0,
+            )
+            return AttentionEstimate(
+                output=output,
+                sampled_indices=sampled_indices,
+                selected_teams=selected_team_count,
+                inclusion_probabilities=torch.exp(
+                    selection.log_inclusion_probabilities
+                ),
+            )
+
+        if mode == "gumbel_cluster":
+            summary = self.summaries[(layer_id, kv_head)]
+            if not isinstance(summary, ClusterSummary):
+                raise TypeError("gumbel_cluster requires a ClusterSummary.")
+            cluster_count = min(
+                sample_count // self.config.group_size,
+                summary.num_groups,
+            )
+            cluster_logits = (
+                torch.log(summary.lengths_float)
+                + summary.key_centroids @ query * scale
+            )
+            selection = gumbel_topk_without_replacement(
+                cluster_logits,
+                cluster_count,
+            )
+            sampled_indices, selected_slot = expand_selected_packed_members(
+                summary.members,
+                summary.starts,
+                summary.lengths_long,
+                selection.selected_indices,
+            )
+            sampled_scores = full_key[sampled_indices].float() @ query * scale
+            sampled_log_weights = (
+                sampled_scores
+                - selection.log_inclusion_probabilities[selected_slot]
+            )
+            # Horvitz--Thompson cluster contributions estimate a population sum;
+            # unlike IID token sampling, the corrected sum is not divided by K.
+            output = self._combine_importance_sample(
+                sampled_values=full_value[sampled_indices].float(),
+                sampled_log_weights=sampled_log_weights,
+                exact_values=exact_values,
+                exact_scores=exact_scores,
+                sample_divisor=1.0,
+            )
+            return AttentionEstimate(
+                output=output,
+                sampled_indices=sampled_indices,
+                selected_clusters=cluster_count,
+                inclusion_probabilities=torch.exp(
+                    selection.log_inclusion_probabilities
+                ),
+            )
+
+        if mode == "topk":
+            summary = self.summaries[(layer_id, kv_head)]
+            if not isinstance(summary, ClusterSummary):
+                raise TypeError("topk requires a ClusterSummary.")
+            estimate = (
+                torch.log(summary.lengths_float)
+                + summary.key_centroids @ query * scale
+            )
+            chosen_ranges: list[torch.Tensor] = []
+            chosen_groups = 0
+            chosen_rows = 0
+            for group in torch.argsort(estimate, descending=True).tolist():
+                start = int(summary.starts[group].item())
+                length = int(summary.lengths_long[group].item())
+                chosen_ranges.append(summary.members[start : start + length])
+                chosen_groups += 1
+                chosen_rows += length
+                if chosen_rows >= sample_count:
+                    break
+            sampled_indices = torch.cat(chosen_ranges)
+            sampled_scores = full_key[sampled_indices].float() @ query * scale
+            all_scores = torch.cat((sampled_scores, exact_scores))
+            all_values = torch.cat(
+                (full_value[sampled_indices].float(), exact_values), dim=0
+            )
+            return AttentionEstimate(
+                output=torch.softmax(all_scores, dim=0) @ all_values,
+                sampled_indices=sampled_indices,
+                selected_clusters=chosen_groups,
+            )
+
+        if mode == "guided":
+            summary = self.summaries[(layer_id, kv_head)]
+            if not isinstance(summary, ClusterSummary):
+                raise TypeError("guided requires a ClusterSummary.")
+            group_probability = torch.softmax(
+                torch.log(summary.lengths_float)
+                + summary.key_centroids @ query * scale,
+                dim=0,
+            )
+            sampled_groups = torch.multinomial(
+                group_probability, sample_count, replacement=True
+            )
+            lengths = summary.lengths_long[sampled_groups]
+            within_group = torch.floor(
+                torch.rand(sample_count, device=query.device) * lengths.float()
+            ).long()
+            positions = summary.starts[sampled_groups] + within_group
+            sampled_indices = summary.members[positions]
+            log_proposal = (
+                torch.log(group_probability[sampled_groups])
+                - torch.log(summary.lengths_float[sampled_groups])
+            )
+        elif mode == "oracle_token":
+            old_scores = full_key[:old_end].float() @ query * scale
+            log_probability = old_scores - torch.logsumexp(old_scores, dim=0)
+            sampled_indices = torch.multinomial(
+                torch.exp(log_probability), sample_count, replacement=True
+            )
+            log_proposal = log_probability[sampled_indices]
+        elif mode == "uniform":
+            sampled_indices = torch.randint(
+                old_end, (sample_count,), device=query.device
+            )
+            log_proposal = torch.full(
+                (sample_count,),
+                -math.log(old_end),
+                device=query.device,
+                dtype=torch.float32,
+            )
+        else:
+            raise ValueError(f"Unknown SANTA++ mode: {mode!r}")
 
         sampled_scores = full_key[sampled_indices].float() @ query * scale
         sampled_log_weights = sampled_scores - log_proposal
-        if exact_tokens:
-            maximum = torch.cat((sampled_log_weights, exact_scores)).max()
-        else:
-            maximum = sampled_log_weights.max()
-        sampled_weights = torch.exp(sampled_log_weights - maximum) / sample_count
-        exact_weights = torch.exp(exact_scores - maximum)
-
-        numerator = sampled_weights @ full_value[sampled_indices].float()
-        if exact_tokens:
-            numerator = numerator + exact_weights @ exact_values
-        denominator = sampled_weights.sum() + exact_weights.sum()
-        return numerator / denominator, sampled_indices
+        output = self._combine_importance_sample(
+            sampled_values=full_value[sampled_indices].float(),
+            sampled_log_weights=sampled_log_weights,
+            exact_values=exact_values,
+            exact_scores=exact_scores,
+            sample_divisor=float(sample_count),
+        )
+        return AttentionEstimate(output=output, sampled_indices=sampled_indices)
 
     def _build_summary(
         self, keys: torch.Tensor, labels: torch.Tensor, n_clusters: int
@@ -470,8 +733,7 @@ class SantaPlusEngine:
     ) -> tuple[float, float, int, int]:
         prompt_tokens = int(input_ids.shape[1])
         # Every prompt token, including the final token that will be re-fed as the
-        # first sparse query, is covered by the frozen prompt clusters. There is
-        # no exact prompt-tail window.
+        # first sparse query, is covered by the frozen prompt clusters.
         sample_end = prompt_tokens
         if sample_end < 3:
             raise ValueError(
@@ -530,10 +792,11 @@ class SantaPlusEngine:
             device=input_ids.device,
         )
 
-        n_clusters = min(
-            sample_end,
-            max(2, sample_end // self.config.group_size),
+        hierarchical = self.config.mode in {"team_sampler", "team_gumbel_topk"}
+        construction_size = (
+            self.config.parent_size if hierarchical else self.config.group_size
         )
+        n_clusters = min(sample_end, max(2, sample_end // construction_size))
         km_cfg = self.config.kmeans
 
         for layer_id in range(self.num_layers):
@@ -581,9 +844,19 @@ class SantaPlusEngine:
                     reassignment_ratio=km_cfg.reassignment_ratio,
                     random_state=km_cfg.random_state,
                 ).fit_predict(fingerprints)
-                self.summaries[(layer_id, kv_head)] = self._build_summary(
-                    key_prefix, labels, n_clusters
-                )
+                if hierarchical:
+                    self.summaries[(layer_id, kv_head)] = build_team_summary(
+                        key_prefix,
+                        labels,
+                        representatives_per_parent=(
+                            self.config.representatives_per_parent
+                        ),
+                        parent_cluster_count=n_clusters,
+                    )
+                else:
+                    self.summaries[(layer_id, kv_head)] = self._build_summary(
+                        key_prefix, labels, n_clusters
+                    )
                 del fingerprints, labels, key_prefix
             del query_rotated, query_raw
 
@@ -644,15 +917,147 @@ class SantaPlusEngine:
         )
         summary_bytes = 0
         for summary in self.summaries.values():
-            for tensor in (
+            tensors = [
                 summary.members,
                 summary.starts,
                 summary.lengths_long,
                 summary.lengths_float,
-                summary.key_centroids,
-            ):
+            ]
+            if isinstance(summary, TeamSummary):
+                tensors.extend(
+                    [
+                        summary.leader_keys,
+                        summary.leader_token_indices,
+                        summary.parent_ids,
+                    ]
+                )
+            else:
+                tensors.append(summary.key_centroids)
+            for tensor in tensors:
                 summary_bytes += tensor.numel() * tensor.element_size()
         return cache_bytes, summary_bytes
+
+    @staticmethod
+    def _size_statistics(
+        all_lengths: torch.Tensor, *, prefix: str
+    ) -> dict[str, float | int]:
+        """Compute common population statistics for clusters or teams."""
+
+        if all_lengths.numel() == 0:
+            raise RuntimeError(f"Cannot summarize an empty {prefix} table.")
+        all_lengths = all_lengths.float()
+        mean = float(all_lengths.mean().item())
+        std = float(all_lengths.std(unbiased=False).item())
+        return {
+            f"{prefix}_size_mean": mean,
+            f"{prefix}_size_std": std,
+            f"{prefix}_size_cv": std / mean if mean else 0.0,
+            f"{prefix}_size_min": int(all_lengths.min().item()),
+            f"{prefix}_size_median": float(torch.quantile(all_lengths, 0.5).item()),
+            f"{prefix}_size_p90": float(torch.quantile(all_lengths, 0.9).item()),
+            f"{prefix}_size_max": int(all_lengths.max().item()),
+        }
+
+    def _summary_statistics(self) -> dict[str, float | int | str]:
+        if self.config.mode in {"team_sampler", "team_gumbel_topk"}:
+            team_summaries = [
+                summary
+                for summary in self.summaries.values()
+                if isinstance(summary, TeamSummary)
+            ]
+            if len(team_summaries) != len(self.summaries):
+                raise RuntimeError("Hierarchical mode contains a non-team summary.")
+            all_lengths = torch.cat(
+                [summary.lengths_float for summary in team_summaries]
+            )
+            active_parent_count = sum(
+                summary.active_parent_count for summary in team_summaries
+            )
+            return {
+                "active_parent_count_total": active_parent_count,
+                "mean_active_parents_per_layer_kv_head": (
+                    active_parent_count / len(team_summaries)
+                ),
+                "active_team_count_total": int(all_lengths.numel()),
+                "mean_active_teams_per_layer_kv_head": (
+                    int(all_lengths.numel()) / len(team_summaries)
+                ),
+                "representative_selection": (
+                    "mean_nearest_then_farthest_first"
+                ),
+                "parent_clustering_space": "probe_fingerprint",
+                "team_assignment_space": "actual_key_l2",
+                **self._size_statistics(all_lengths, prefix="team"),
+            }
+
+        all_lengths = torch.cat(
+            [summary.lengths_float for summary in self.summaries.values()]
+        )
+        return {
+            "active_cluster_count_total": int(all_lengths.numel()),
+            "mean_active_clusters_per_layer_kv_head": (
+                int(all_lengths.numel()) / len(self.summaries)
+            ),
+            **self._size_statistics(all_lengths, prefix="cluster"),
+        }
+
+    def _sampling_statistics(self) -> dict[str, float | int | None]:
+        inclusion_mean: float | None = None
+        inclusion_min: float | None = None
+        inclusion_max: float | None = None
+        inclusion_count = 0
+        if self._selected_inclusion_probabilities:
+            probabilities = torch.cat(self._selected_inclusion_probabilities).float().cpu()
+            inclusion_count = int(probabilities.numel())
+            inclusion_mean = float(probabilities.mean().item())
+            inclusion_min = float(probabilities.min().item())
+            inclusion_max = float(probabilities.max().item())
+        cluster_inclusion = self.config.mode == "gumbel_cluster"
+        team_inclusion = self.config.mode == "team_gumbel_topk"
+        return {
+            "mean_selected_clusters_per_head_call": (
+                self._selected_clusters_total / self._selected_cluster_head_calls
+                if self._selected_cluster_head_calls
+                else 0.0
+            ),
+            "selected_cluster_inclusion_probability_count": (
+                inclusion_count if cluster_inclusion else 0
+            ),
+            "mean_selected_cluster_inclusion_probability": (
+                inclusion_mean if cluster_inclusion else None
+            ),
+            "min_selected_cluster_inclusion_probability": (
+                inclusion_min if cluster_inclusion else None
+            ),
+            "max_selected_cluster_inclusion_probability": (
+                inclusion_max if cluster_inclusion else None
+            ),
+            "mean_selected_teams_per_head_call": (
+                self._selected_teams_total / self._selected_team_head_calls
+                if self._selected_team_head_calls
+                else 0.0
+            ),
+            "selected_team_inclusion_probability_count": (
+                inclusion_count
+                if team_inclusion
+                else 0
+            ),
+            "mean_selected_team_inclusion_probability": (
+                inclusion_mean
+                if team_inclusion
+                else None
+            ),
+            "min_selected_team_inclusion_probability": (
+                inclusion_min
+                if team_inclusion
+                else None
+            ),
+            "max_selected_team_inclusion_probability": (
+                inclusion_max
+                if team_inclusion
+                else None
+            ),
+        }
 
     @torch.inference_mode()
     def generate(
@@ -682,11 +1087,12 @@ class SantaPlusEngine:
                 self._dense_prefill_and_cluster(input_ids)
             )
             # Discard the final prompt token from the cache, then re-feed it as
-            # the first sparse decode query. Its KV row is still represented by
+            # the first sparse decode query.  Its KV row is still represented by
             # the frozen prompt clusters, so the initial exact region is empty.
             self._trim_cache(prompt_tokens - 1)
-            self.mode = "sparse"
+            self.mode = self.config.mode
             self.traffic = self._make_traffic_tracker()
+            self._reset_sampling_diagnostics()
             _seed_torch(random_seed, input_ids.device)
 
             generated: list[int] = []
@@ -712,15 +1118,82 @@ class SantaPlusEngine:
             _cuda_sync()
             decode_seconds = time.perf_counter() - decode_start
             cache_bytes, summary_bytes = self._storage_bytes()
+            summary_statistics = self._summary_statistics()
 
         _cuda_sync()
         total_seconds = time.perf_counter() - total_start
         peak_allocated_gib, peak_reserved_gib = _peak_memory_gib(input_ids.device)
 
-        # Union accounting is intentionally finalized after the timed region.
+        # Union and inclusion-probability accounting is intentionally finalized
+        # after the timed region.
         traffic = self.traffic.as_dict()
+        sampling_statistics = self._sampling_statistics()
+        sampling_schemes = {
+            "guided": "token_iid_with_replacement",
+            "gumbel_cluster": "cluster_gumbel_topk_without_replacement",
+            "team_sampler": (
+                "team_iid_with_replacement_then_uniform_member"
+            ),
+            "team_gumbel_topk": (
+                "team_gumbel_topk_without_replacement_whole_team"
+            ),
+            "oracle_token": "oracle_token_iid_with_replacement",
+            "uniform": "uniform_token_iid_with_replacement",
+            "topk": "deterministic_cluster_topk",
+        }
+        importance_corrections = {
+            "guided": "token_proposal_probability",
+            "gumbel_cluster": "conditional_cluster_inclusion_probability",
+            "team_sampler": "token_proposal_probability_from_team",
+            "team_gumbel_topk": (
+                "conditional_team_inclusion_probability"
+            ),
+            "oracle_token": "token_proposal_probability",
+            "uniform": "token_proposal_probability",
+            "topk": "none_truncated_attention",
+        }
+        clusters_per_head = (
+            self.config.samples_per_head // self.config.group_size
+            if self.config.mode == "gumbel_cluster"
+            else None
+        )
+        hierarchical = self.config.mode in {"team_sampler", "team_gumbel_topk"}
+        nominal_team_size = (
+            self.config.parent_size / self.config.representatives_per_parent
+            if hierarchical
+            else None
+        )
+        teams_per_head = (
+            self.config.samples_per_head
+            // (self.config.parent_size // self.config.representatives_per_parent)
+            if self.config.mode == "team_gumbel_topk"
+            else None
+        )
+        if hierarchical:
+            routing_key_type = "actual_team_leader"
+        elif self.config.mode in {"guided", "gumbel_cluster", "topk"}:
+            routing_key_type = "centroid"
+        else:
+            routing_key_type = "none"
         metrics: dict[str, Any] = {
             "backend": "santapp",
+            "mode": self.config.mode,
+            "sampling_scheme": sampling_schemes[self.config.mode],
+            "importance_correction": importance_corrections[self.config.mode],
+            "sampling_unit": (
+                "team"
+                if self.config.mode == "team_gumbel_topk"
+                else (
+                    "token_via_team"
+                    if self.config.mode == "team_sampler"
+                    else (
+                        "cluster"
+                        if self.config.mode in {"gumbel_cluster", "topk"}
+                        else "token"
+                    )
+                )
+            ),
+            "routing_key_type": routing_key_type,
             "prompt_tokens": prompt_tokens,
             "generated_tokens": len(generated),
             "max_new_tokens": max_new_tokens,
@@ -731,15 +1204,34 @@ class SantaPlusEngine:
             "clustered_prompt_tokens": sample_end,
             "prompt_exact_tail_tokens": 0,
             "initial_growing_exact_tokens": 0,
+            "exact_token_policy": "generated_suffix_only",
             "samples_per_head": self.config.samples_per_head,
+            "nominal_sample_budget_per_head": self.config.samples_per_head,
+            "clusters_per_head": clusters_per_head,
+            "teams_per_head": teams_per_head,
             "group_size": self.config.group_size,
+            "parent_size": self.config.parent_size if hierarchical else None,
+            "representatives_per_parent": (
+                self.config.representatives_per_parent if hierarchical else None
+            ),
+            "nominal_team_size": nominal_team_size,
             "probe_queries": self.config.probe_queries,
             "probe_policy": "last_prompt_tokens",
-            "nominal_clusters_per_kv_head": n_clusters,
+            "nominal_clusters_per_kv_head": n_clusters if not hierarchical else None,
+            "nominal_parent_clusters_per_kv_head": (
+                n_clusters if hierarchical else None
+            ),
+            "num_query_heads": self.num_query_heads,
+            "num_kv_heads": self.num_kv_heads,
+            "query_heads_per_kv": self.query_heads_per_kv,
+            "head_dim": self.head_dim,
             "custom_cache_gib": cache_bytes / (1024**3),
             "cluster_summary_gib": summary_bytes / (1024**3),
+            "routing_summary_gib": summary_bytes / (1024**3),
             "peak_allocated_gib": peak_allocated_gib,
             "peak_reserved_gib": peak_reserved_gib,
+            **summary_statistics,
+            **sampling_statistics,
             **traffic,
         }
         self.clear()

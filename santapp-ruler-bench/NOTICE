@@ -1,14 +1,11 @@
-SANTA and SANTA++ RULER Benchmark Harness
-Copyright 2026 Kyle Lee and contributors
+SANTA-Family RULER Benchmark Harness
+Copyright 2026 SANTA-family RULER contributors
 
-The SANTA and SANTA++ attention and CUDA MiniBatchKMeans implementation is adapted from
-the SANTA++ notebook supplied by the project author.
+The SANTA, SANTA++, whole-parent sampling, hierarchical-team sampling,
+whole-team sampling, and CUDA-capable MiniBatchKMeans reference
+implementations are adapted from research implementations included with this
+project.
 
 RULER task names, generation budgets, prediction post-processing, and the
-synthetic benchmark metric functions are adapted from NVIDIA/RULER at commit
-38da79d79519ef87aa46ae804f838e1eab7f86d7, licensed under Apache-2.0.
-Copyright (c) 2024 NVIDIA CORPORATION. All rights reserved.
-
-NVIDIA does not endorse this project. The optional default data mirror is not
-maintained by NVIDIA; users may instead generate JSONL from the pinned official
-RULER checkout.
+vendored synthetic grader are derived from NVIDIA/RULER at the pinned commit
+recorded in the package provenance module. NVIDIA does not endorse this project.

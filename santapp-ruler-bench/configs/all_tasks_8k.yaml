@@ -1,5 +1,4 @@
-# Full classic synthetic RULER matrix at 8k: 13 tasks x 500 prompts.
-# Select fewer backends on the command line when only one method is needed.
+# Full 13-task profile. Reduce prompts_per_task for exploratory runs.
 benchmark:
   context_length: 8192
   tasks:
@@ -17,10 +16,15 @@ benchmark:
     - qa_1
     - qa_2
   prompts_per_task: 500
-  selection_seed: 42
 
 generation:
-  backends: [sdpa, santa, santapp]
+  backends:
+    - sdpa
+    - santa
+    - santapp
+    - santapp_gumbel_topk
+    - team_sampler
+    - team_gumbel_topk
   stop_on_eos: true
   max_new_tokens: null
   random_seed: 0
@@ -29,11 +33,25 @@ santa:
   samples_per_head: 128
 
 santapp:
+  mode: guided
   group_size: 16
+  parent_size: 16
+  representatives_per_parent: 4
   samples_per_head: 128
   probe_queries: 64
 
-output:
-  root: runs
-  run_name: all-tasks-8k
-  resume: true
+santapp_variants:
+  santapp_gumbel_topk:
+    mode: gumbel_cluster
+    group_size: 16
+    samples_per_head: 128
+  team_sampler:
+    mode: team_sampler
+    parent_size: 16
+    representatives_per_parent: 4
+    samples_per_head: 128
+  team_gumbel_topk:
+    mode: team_gumbel_topk
+    parent_size: 16
+    representatives_per_parent: 4
+    samples_per_head: 128

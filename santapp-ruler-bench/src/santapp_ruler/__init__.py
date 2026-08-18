@@ -1,3 +1,3 @@
-"""RULER benchmark harness for SDPA, SANTA, and SANTA++."""
+"""SDPA and SANTA-family RULER benchmark harness."""
 
-__version__ = "0.2.0"
+__version__ = "0.5.0"

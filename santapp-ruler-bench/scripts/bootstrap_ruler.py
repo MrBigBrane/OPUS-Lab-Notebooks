@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Clone and pin NVIDIA/RULER for optional local data generation."""
 
 from __future__ import annotations

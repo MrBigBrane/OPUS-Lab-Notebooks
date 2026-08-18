@@ -2,8 +2,9 @@
 
 For every decode query head, SANTA computes the full ``qK^T`` score vector,
 samples ``S`` token indices IID with replacement from the resulting softmax,
-and returns the arithmetic mean of the gathered value vectors. There is no
-fixed or growing exact-token window and no clustering path.
+and returns the arithmetic mean of the gathered value vectors.  There is no
+fixed prompt-tail window, generated-token exact window, clustering path, or
+second algorithmic hyperparameter.
 """
 
 from __future__ import annotations
@@ -16,6 +17,7 @@ import torch
 
 from ..config import SantaConfig
 from .santapp import (
+    AttentionEstimate,
     AttentionGeneration,
     SantaPlusEngine,
     _cuda_sync,
@@ -27,11 +29,11 @@ from .traffic import DecodeTrafficTracker
 
 
 class SantaEngine(SantaPlusEngine):
-    """Use the shared Qwen cache/patch machinery with the SANTA estimator."""
+    """Reuse the custom Qwen cache/patch machinery with the SANTA estimator."""
 
     def __init__(self, model: Any, config: SantaConfig):
-        # SantaPlusEngine's common cache/patch code only requires a
-        # samples_per_head attribute from the algorithm config.
+        # The shared cache/patch code only requires ``samples_per_head`` for this
+        # subclass.  Cluster-specific parent methods are never entered.
         super().__init__(model, config)  # type: ignore[arg-type]
         self.config: SantaConfig = config
 
@@ -65,10 +67,9 @@ class SantaEngine(SantaPlusEngine):
         full_value: torch.Tensor,
         layer_id: int,
         kv_head: int,
-    ) -> tuple[torch.Tensor, torch.Tensor]:
+    ) -> AttentionEstimate:
         del layer_id, kv_head
-        scale = 1.0 / math.sqrt(self.head_dim)
-        scores = full_key.float() @ query * scale
+        scores = full_key.float() @ query * (1.0 / math.sqrt(self.head_dim))
         probability = torch.softmax(scores, dim=0)
         sampled_indices = torch.multinomial(
             probability,
@@ -76,9 +77,9 @@ class SantaEngine(SantaPlusEngine):
             replacement=True,
         )
         # Because the proposal is the exact attention distribution, the
-        # self-normalized estimator reduces to a simple mean of sampled values.
+        # self-normalized estimator reduces to a simple sample mean of V.
         output = full_value[sampled_indices].float().mean(dim=0)
-        return output, sampled_indices
+        return AttentionEstimate(output=output, sampled_indices=sampled_indices)
 
     @torch.inference_mode()
     def generate(
@@ -116,11 +117,13 @@ class SantaEngine(SantaPlusEngine):
             _cuda_sync()
             prefill_seconds = time.perf_counter() - prefill_start
 
-            # Re-feed the final prompt token so the first approximate call
-            # produces the same next-token position as the stock cached path.
+            # Re-feed the final prompt token so the first approximate attention
+            # call generates the same next-token position as cached SDPA.  SANTA
+            # samples from the complete K/V cache on every call.
             self._trim_cache(prompt_tokens - 1)
-            self.mode = "sparse"
+            self.mode = "santa"
             self.traffic = self._make_traffic_tracker()
+            self._reset_sampling_diagnostics()
             _seed_torch(random_seed, input_ids.device)
 
             generated: list[int] = []
@@ -151,9 +154,13 @@ class SantaEngine(SantaPlusEngine):
         total_seconds = time.perf_counter() - total_start
         peak_allocated_gib, peak_reserved_gib = _peak_memory_gib(input_ids.device)
 
-        traffic = self.traffic.as_dict()
         metrics: dict[str, Any] = {
             "backend": "santa",
+            "mode": "santa",
+            "sampling_scheme": "token_iid_with_replacement_from_exact_attention",
+            "sampling_unit": "token",
+            "importance_correction": "not_required_exact_proposal",
+            "routing_key_type": "none",
             "prompt_tokens": prompt_tokens,
             "generated_tokens": len(generated),
             "max_new_tokens": max_new_tokens,
@@ -162,12 +169,17 @@ class SantaEngine(SantaPlusEngine):
             "decode_seconds": decode_seconds,
             "total_seconds": total_seconds,
             "samples_per_head": self.config.samples_per_head,
-            "exact_window_tokens": 0,
+            "nominal_sample_budget_per_head": self.config.samples_per_head,
+            "prompt_exact_tail_tokens": 0,
+            "initial_growing_exact_tokens": 0,
+            "exact_token_policy": "none",
+            "probe_policy": "not_applicable",
             "custom_cache_gib": cache_bytes / (1024**3),
             "cluster_summary_gib": 0.0,
+            "routing_summary_gib": 0.0,
             "peak_allocated_gib": peak_allocated_gib,
             "peak_reserved_gib": peak_reserved_gib,
-            **traffic,
+            **self.traffic.as_dict(),
         }
         self.clear()
         return AttentionGeneration(token_ids=generated, metrics=metrics)

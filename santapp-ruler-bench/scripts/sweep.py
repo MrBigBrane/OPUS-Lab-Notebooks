@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Run an explicit, sequential parameter grid.
 
 The main benchmark command never invokes this script automatically.

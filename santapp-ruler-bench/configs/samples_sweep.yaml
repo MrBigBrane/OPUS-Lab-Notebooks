@@ -1,0 +1,11 @@
+base_config: configs/default_8k.yaml
+output_root: runs/sweeps/team-sampler-sweep
+name_template: "P{parent_size}-R{representatives_per_parent}-S{samples_per_head}"
+
+grid:
+  # Specify which backend variant to target
+  # generation.backends:
+  #   - [team_gumbel_topk]
+
+  # Sweep S (samples_per_head)
+  santapp_variants.team_sampler.samples_per_head: [32, 64, 128]

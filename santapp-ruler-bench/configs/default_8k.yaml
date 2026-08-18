@@ -1,4 +1,4 @@
-# The ordinary command runs exactly one configuration. No sweep is implicit.
+# Small local comparison of every standard attention backend.
 model:
   name: Qwen/Qwen2.5-3B-Instruct
   revision: aa8e72537993ba99e69dfaafa59ed015b17504d1
@@ -9,21 +9,11 @@ model:
   disable_hf_xet: true
 
 benchmark:
-  # RULER's max sequence length includes the prompt and generation budget.
   context_length: 8192
-  # Representative subset spanning retrieval, tracking, aggregation, and QA.
-  tasks:
-    - niah_single_1
-    - niah_multikey_1
-    - niah_multiquery
-    - vt
-    - fwe
-    - qa_1
+  tasks: [niah_multiquery, niah_multivalue]
   prompts_per_task: 5
   selection_seed: 42
   data:
-    # Pinned 8k convenience mirror generated with the Qwen2.5-3B tokenizer.
-    # Set source: local to use JSONL generated directly by NVIDIA/RULER.
     source: huggingface
     repository: SaylorTwift/RULER-8192-Qwen2.5-3B-tokenizer
     revision: 6ee2d0f4e9b8983361da35204ead8931c3f65ad4
@@ -31,25 +21,30 @@ benchmark:
     subset: validation
 
 generation:
-  # Add `santa` here or use --backends sdpa,santa,santapp for all methods.
-  backends: [sdpa, santapp]
+  backends:
+    # - sdpa
+    # - santa
+    # - santapp
+    # - santapp_gumbel_topk
+    # - team_sampler
+    - team_gumbel_topk
   stop_on_eos: true
-  # null uses each task's own RULER generation limit.
+  # null uses the official generation budget for each RULER task.
   max_new_tokens: null
   random_seed: 0
 
 santa:
-  # Per-query-head IID sample budget. SANTA has no exact recent window.
   samples_per_head: 128
 
+# SANTA++ defaults to B=16. Every prompt token is assigned to the frozen
+# partition; only subsequently generated tokens form the exact suffix.
 santapp:
+  mode: guided
   group_size: 16
+  parent_size: 16
+  representatives_per_parent: 4
   samples_per_head: 128
-  # The final P prompt tokens are used directly as probe queries.
   probe_queries: 64
-  # The fixed exact prompt-tail window is always zero. Every prompt token,
-  # including the re-fed final token, is cluster-covered. Only generated tokens
-  # remain outside the frozen clusters as a growing exact suffix.
   kmeans:
     batch_size: 4096
     n_init: 1
@@ -60,8 +55,31 @@ santapp:
     reassignment_ratio: 0.01
     random_state: 0
 
+# Each named method inherits the full santapp block before applying overrides.
+santapp_variants:
+  santapp_gumbel_topk:
+    mode: gumbel_cluster
+    group_size: 16
+    samples_per_head: 128
+  team_sampler:
+    mode: team_sampler
+    parent_size: 16
+    representatives_per_parent: 4
+    samples_per_head: 128
+  team_gumbel_topk:
+    mode: team_gumbel_topk
+    parent_size: 16
+    representatives_per_parent: 4
+    samples_per_head: 128
+
+grading:
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  bootstrap_seed: 20260805
+
 output:
   root: runs
   run_name: null
   resume: true
   save_full_prompts: true
+  save_prediction_inputs: true

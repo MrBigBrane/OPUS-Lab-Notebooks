@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import hashlib
-import json
 import platform
 import sys
 import time
@@ -17,6 +16,11 @@ import torch
 from .backends import ModelBundle, SantaBackend, SantaPlusBackend, SdpaBackend
 from .config import RunConfig
 from .data import RulerExample, select_examples
+from .io_utils import (
+    append_jsonl_fsync,
+    atomic_write_json,
+    repair_trailing_partial_jsonl,
+)
 from .reporting import build_reports, read_jsonl
 from .run_state import prepare_run_directory, validate_or_write_selection_manifest
 from .ruler.grader import grade_task
@@ -25,9 +29,9 @@ from .ruler.tasks import require_task
 
 
 def _example_seed(base_seed: int, example: RulerExample) -> int:
-    digest = hashlib.sha256(
-        f"{base_seed}:{example.uid}".encode("utf-8")
-    ).digest()
+    """Derive a stable prompt-specific seed shared by every stochastic backend."""
+
+    digest = hashlib.sha256(f"{base_seed}:{example.uid}".encode("utf-8")).digest()
     return int.from_bytes(digest[:4], byteorder="big", signed=False)
 
 
@@ -87,20 +91,18 @@ def _runtime_info(config: RunConfig, bundle: ModelBundle | None = None) -> dict[
     if bundle is not None:
         info["model_type"] = getattr(bundle.model.config, "model_type", None)
         info["model_dtype"] = str(next(bundle.model.parameters()).dtype)
-        info["model_commit_hash"] = getattr(
-            bundle.model.config, "_commit_hash", None
-        )
+        info["model_commit_hash"] = getattr(bundle.model.config, "_commit_hash", None)
     return info
 
 
 def _write_json(path: Path, value: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("w", encoding="utf-8", newline="\n") as handle:
-        json.dump(value, handle, indent=2, ensure_ascii=False, allow_nan=False)
-        handle.write("\n")
+    atomic_write_json(path, value)
 
 
 def _completed_uids(path: Path) -> set[str]:
+    repaired = repair_trailing_partial_jsonl(path)
+    if repaired:
+        print(f"Normalized trailing JSONL record: {path}")
     completed: set[str] = set()
     for record in read_jsonl(path):
         uid = record.get("uid")
@@ -111,16 +113,12 @@ def _completed_uids(path: Path) -> set[str]:
 
 
 def _append_record(path: Path, record: dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8", newline="\n") as handle:
-        handle.write(json.dumps(record, ensure_ascii=False, allow_nan=False) + "\n")
-        handle.flush()
+    append_jsonl_fsync(path, record)
 
 
 def _max_new_tokens(config: RunConfig, task: str) -> int:
-    official = require_task(task).max_new_tokens
     override = config.generation.max_new_tokens
-    return override if override is not None else official
+    return override if override is not None else require_task(task).max_new_tokens
 
 
 def _validate_token_length(
@@ -137,11 +135,27 @@ def _validate_token_length(
         )
     if prompt_tokens + max_new_tokens > context_length:
         raise ValueError(
-            f"{example.uid}: prompt_tokens ({prompt_tokens}) + the configured "
-            f"generation budget ({max_new_tokens}) exceeds context_length "
-            f"({context_length}). This usually means the data was generated with "
-            "a different tokenizer or RULER max sequence length."
+            f"{example.uid}: prompt_tokens ({prompt_tokens}) + generation budget "
+            f"({max_new_tokens}) exceeds context_length ({context_length}). "
+            "This usually means the data was generated with a different tokenizer "
+            "or RULER max sequence length."
         )
+
+
+def _make_backends(config: RunConfig, bundle: ModelBundle) -> dict[str, Any]:
+    result: dict[str, Any] = {}
+    for name in config.generation.backends:
+        if name == "sdpa":
+            result[name] = SdpaBackend(bundle)
+        elif name == "santa":
+            result[name] = SantaBackend(bundle, config.santa)
+        else:
+            result[name] = SantaPlusBackend(
+                bundle,
+                config.santapp_config_for_backend(name),
+                name=name,
+            )
+    return result
 
 
 def run_benchmark(
@@ -176,14 +190,7 @@ def run_benchmark(
         f"{next(bundle.model.parameters()).dtype}"
     )
 
-    backend_factories = {
-        "sdpa": lambda: SdpaBackend(bundle),
-        "santa": lambda: SantaBackend(bundle, config.santa),
-        "santapp": lambda: SantaPlusBackend(bundle, config.santapp),
-    }
-    backend_objects = {
-        name: backend_factories[name]() for name in config.generation.backends
-    }
+    backend_objects = _make_backends(config, bundle)
     total_expected = (
         len(config.generation.backends)
         * len(config.benchmark.tasks)
@@ -233,7 +240,6 @@ def run_benchmark(
                     "index": example.index,
                     "uid": example.uid,
                     "task": task,
-                    "input": example.input,
                     "outputs": example.outputs,
                     "pred": result.prediction,
                     "others": {
@@ -249,23 +255,25 @@ def run_benchmark(
                         "reported_dataset_length": example.reported_length,
                     },
                 }
+                if config.output.save_prediction_inputs:
+                    record["input"] = example.input
                 _append_record(prediction_path, record)
                 completed.add(example.uid)
                 completed_this_process += 1
 
-                gqa_total = result.metrics.get("decode_gqa_total_access_pct")
-                gqa_kv = result.metrics.get("decode_gqa_kv_access_pct")
-                gqa_centroid = result.metrics.get("decode_gqa_centroid_access_pct")
-                naive_total = result.metrics.get("decode_naive_total_access_pct")
+                total_access = result.metrics.get("decode_gqa_total_access_pct")
+                kv_access = result.metrics.get("decode_gqa_kv_access_pct")
+                centroid_access = result.metrics.get(
+                    "decode_gqa_centroid_access_pct"
+                )
                 access_label = (
-                    f"GQA+centroid {gqa_total:.1f}% "
-                    f"(KV {gqa_kv:.1f}%, centroid {gqa_centroid:.1f}%) / "
-                    f"naive {naive_total:.1f}%"
+                    f"GQA total {total_access:.1f}% "
+                    f"(KV {kv_access:.1f}% + centroid {centroid_access:.1f}%)"
                     if all(
                         value is not None
-                        for value in (gqa_total, gqa_kv, gqa_centroid, naive_total)
+                        for value in (total_access, kv_access, centroid_access)
                     )
-                    else "access n/a"
+                    else "GQA access n/a"
                 )
                 preview = result.prediction.replace("\n", " ")[:80]
                 print(
@@ -293,6 +301,9 @@ def run_benchmark(
         run_dir,
         backends=config.generation.backends,
         tasks=config.benchmark.tasks,
+        bootstrap_resamples=config.grading.bootstrap_resamples,
+        confidence_level=config.grading.confidence_level,
+        bootstrap_seed=config.grading.bootstrap_seed,
     )
     print(f"Completed. Summary: {run_dir / 'summary.md'}")
     return run_dir

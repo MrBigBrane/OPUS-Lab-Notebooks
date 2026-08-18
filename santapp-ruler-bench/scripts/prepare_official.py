@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """Call NVIDIA/RULER's pinned classic generator for selected local JSONL.
 
 Run ``scripts/bootstrap_ruler.py`` first. Some task families require the

@@ -11,7 +11,7 @@ from typing import Any
 import torch
 
 from .attention.santa import SantaEngine
-from .attention.santapp import SantaPlusEngine
+from .attention.santapp import SantaPlusEngine, _peak_memory_gib, _reset_peak_memory
 from .config import ModelConfig, SantaConfig, SantaPlusConfig
 
 
@@ -99,7 +99,8 @@ class ModelBundle:
 
     def release_example_memory(self) -> None:
         gc.collect()
-        torch.cuda.empty_cache()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
 
 
 @dataclass(frozen=True, slots=True)
@@ -109,34 +110,51 @@ class BackendGeneration:
     metrics: dict[str, Any]
 
 
-def _dense_access_metrics(model: Any, prompt_tokens: int, generated_count: int) -> dict:
+def _dense_access_metrics(
+    model: Any,
+    *,
+    prompt_tokens: int,
+    generated_count: int,
+) -> dict[str, Any]:
+    """Return conceptual dense decode reads under GQA and naive accounting.
+
+    The query producing the first generated token is represented as reading a
+    ``prompt_tokens``-row cache.  These are logical vector-row estimates rather
+    than measured hardware transactions.
+    """
+
     layers = len(model.model.layers)
     query_heads = int(model.config.num_attention_heads)
     kv_heads = int(model.config.num_key_value_heads)
     token_sum = sum(prompt_tokens + step for step in range(generated_count))
     head_calls = generated_count * layers * query_heads
-    gqa_group_calls = generated_count * layers * kv_heads
+    group_calls = generated_count * layers * kv_heads
     dense_gqa = 2 * token_sum * layers * kv_heads
     dense_naive = 2 * token_sum * layers * query_heads
     mean_total = token_sum / generated_count if generated_count else 0.0
     return {
         "decode_attention_head_calls": head_calls,
-        "decode_gqa_group_calls": gqa_group_calls,
+        "decode_gqa_group_calls": group_calls,
         "decode_dense_gqa_kv_vectors": dense_gqa,
         "decode_dense_naive_kv_vectors": dense_naive,
         "decode_gqa_kv_vectors_read": dense_gqa,
         "decode_naive_kv_vectors_read": dense_naive,
+        "decode_gqa_routing_key_vectors_read": 0,
+        "decode_naive_routing_key_vectors_read": 0,
         "decode_gqa_centroid_key_vectors_read": 0,
         "decode_naive_centroid_key_vectors_read": 0,
         "decode_gqa_total_vectors_read": dense_gqa,
         "decode_naive_total_vectors_read": dense_naive,
         "decode_gqa_kv_access_pct": 100.0 if dense_gqa else 0.0,
+        "decode_gqa_routing_access_pct": 0.0,
         "decode_gqa_centroid_access_pct": 0.0,
         "decode_gqa_total_access_pct": 100.0 if dense_gqa else 0.0,
         "decode_naive_kv_access_pct": 100.0 if dense_naive else 0.0,
+        "decode_naive_routing_access_pct": 0.0,
         "decode_naive_centroid_access_pct": 0.0,
         "decode_naive_total_access_pct": 100.0 if dense_naive else 0.0,
         "mean_sampled_token_draws_per_head_call": 0.0,
+        "mean_sampled_token_rows_per_head_call": 0.0,
         "mean_unique_sampled_tokens_per_gqa_group_call": 0.0,
         "mean_exact_tokens_per_gqa_group_call": mean_total,
         "mean_total_tokens_per_head_call": mean_total,
@@ -158,11 +176,11 @@ class SdpaBackend:
         stop_on_eos: bool,
         random_seed: int,
     ) -> BackendGeneration:
-        del random_seed  # greedy SDPA is deterministic given the model/runtime
+        del random_seed  # greedy SDPA is deterministic for a fixed model/runtime
         model = self.bundle.model
         prompt_tokens = int(input_ids.shape[1])
         attention_mask = torch.ones_like(input_ids)
-        torch.cuda.reset_peak_memory_stats(input_ids.device)
+        _reset_peak_memory(input_ids.device)
 
         _cuda_sync()
         total_start = time.perf_counter()
@@ -205,8 +223,14 @@ class SdpaBackend:
         total_seconds = time.perf_counter() - total_start
 
         generated_count = len(generated)
+        peak_allocated_gib, peak_reserved_gib = _peak_memory_gib(input_ids.device)
         metrics: dict[str, Any] = {
             "backend": self.name,
+            "mode": "dense_sdpa",
+            "sampling_scheme": "none",
+            "sampling_unit": "none",
+            "importance_correction": "not_applicable",
+            "routing_key_type": "none",
             "prompt_tokens": prompt_tokens,
             "generated_tokens": generated_count,
             "max_new_tokens": max_new_tokens,
@@ -214,11 +238,19 @@ class SdpaBackend:
             "clustering_seconds": 0.0,
             "decode_seconds": decode_seconds,
             "total_seconds": total_seconds,
-            **_dense_access_metrics(model, prompt_tokens, generated_count),
-            "peak_allocated_gib": torch.cuda.max_memory_allocated(input_ids.device)
-            / (1024**3),
-            "peak_reserved_gib": torch.cuda.max_memory_reserved(input_ids.device)
-            / (1024**3),
+            "prompt_exact_tail_tokens": 0,
+            "initial_growing_exact_tokens": 0,
+            "exact_token_policy": "dense_all_tokens",
+            "probe_policy": "not_applicable",
+            "cluster_summary_gib": 0.0,
+            "routing_summary_gib": 0.0,
+            **_dense_access_metrics(
+                model,
+                prompt_tokens=prompt_tokens,
+                generated_count=generated_count,
+            ),
+            "peak_allocated_gib": peak_allocated_gib,
+            "peak_reserved_gib": peak_reserved_gib,
         }
         prediction = self.bundle.decode(generated)
         del output, past, attention_mask
@@ -248,13 +280,21 @@ class SantaBackend:
             random_seed=random_seed,
         )
         prediction = self.bundle.decode(result.token_ids)
-        return BackendGeneration(result.token_ids, prediction, result.metrics)
+        metrics = {**result.metrics, "backend": self.name}
+        return BackendGeneration(result.token_ids, prediction, metrics)
 
 
 class SantaPlusBackend:
-    name = "santapp"
+    """One configured SANTA++ method, including named Gumbel variants."""
 
-    def __init__(self, bundle: ModelBundle, config: SantaPlusConfig):
+    def __init__(
+        self,
+        bundle: ModelBundle,
+        config: SantaPlusConfig,
+        *,
+        name: str = "santapp",
+    ):
+        self.name = name
         self.bundle = bundle
         self.engine = SantaPlusEngine(bundle.model, config)
 
@@ -274,4 +314,5 @@ class SantaPlusBackend:
             random_seed=random_seed,
         )
         prediction = self.bundle.decode(result.token_ids)
-        return BackendGeneration(result.token_ids, prediction, result.metrics)
+        metrics = {**result.metrics, "backend": self.name}
+        return BackendGeneration(result.token_ids, prediction, metrics)

@@ -1,402 +1,248 @@
-# SANTA / SANTA++ × RULER benchmark harness
+# SANTA-family RULER benchmark harness
 
-A batch-1 research harness for comparing three decode-attention paths on the 13 classic synthetic RULER tasks:
+This repository evaluates dense PyTorch SDPA and five SANTA-family sparse
+attention backends on the 8k RULER benchmark. It includes local execution,
+resume-safe reporting, an indexed Kubernetes workflow, compact prompt-free
+exports, and data-driven postprocessing.
 
-- **`sdpa`** — stock Hugging Face cached generation with PyTorch SDPA.
-- **`santa`** — compute the full `qK^T` distribution for each decode query head, draw `S` token indices IID with replacement, gather the corresponding values, and return their arithmetic mean.
-- **`santapp`** — dense prefill, prompt clustering, centroid-guided IID sampling with importance correction, and an exact suffix containing only tokens that have not yet been assigned to clusters.
+The checked-in defaults are examples rather than a fixed experiment. Edit a
+YAML config or matrix to change tasks, budgets, clustering parameters, or the
+set of methods.
 
-The package selects the same prompt rows for every method, writes each completed prediction immediately, resumes interrupted runs safely, applies the vendored RULER task-family grader, and reports GQA-aware theoretical memory-access estimates alongside quality and timing.
+## Standard attention backends
 
-## Current group policy
+| Backend ID | Method | Checked-in default |
+|---|---|---|
+| `sdpa` | Dense PyTorch scaled-dot-product attention | dense reference |
+| `santa` | Standalone SANTA token sampling | `S=128` samples per query head |
+| `santapp` | Centroid-guided SANTA++ with IID token draws inside selected parents | `B=16`, `S=128`, 64 probes |
+| `santapp_gumbel_topk` | SANTA++ whole-parent sampling without replacement | `B=16`, `S=128`, 64 probes |
+| `team_sampler` | Hierarchical parent/team proposal using actual-key representatives | `P=16`, `R=4`, `S=128`, 64 probes |
+| `team_gumbel_topk` | Whole-team sampling without replacement | `P=16`, `R=4`, `S=128`, 64 probes |
 
-The reference paths implement these policies directly:
+`generation.backends` may contain any subset of these names. Additional named
+SANTA++ variants can be defined under `santapp_variants` and selected by name.
+The checked-in SANTA++ parent size is **16** in both the local defaults and
+the Kubernetes matrix.
 
-| Policy | Behavior |
-|---|---|
-| SANTA++ fixed prompt-tail window | **Always zero.** There is no configurable 64-token exact tail. |
-| SANTA++ growing exact suffix | Every prompt token, including the final token that is re-fed for the first approximate decode call, is covered by the frozen prompt clusters. The exact suffix starts at zero and contains only generated tokens that have not been assigned to clusters. |
-| SANTA exact window | **None.** SANTA samples from the entire current KV cache. |
-| SANTA++ probe queries | Exactly the final `P` prompt-query positions in chronological order; default `P=64`. No random draw from the last quarter. |
-| SANTA++ defaults | Group size 16, 128 samples per query head, 64 probe queries, and the existing MiniBatchKMeans defaults. |
-| SANTA default | 128 IID samples per query head. The sample budget is its only algorithm parameter. |
-| Primary access metric | `decode_gqa_total_access_pct`: GQA-aware KV-row union plus shared centroid-vector reads. |
+## Repository layout
 
-Prompt clusters are frozen after prefill. A policy for periodically assigning generated tokens to clusters is intentionally not assumed in this repository.
-
-## Included run configurations
-
-| Config | Tasks and instances | Methods | Generation limit |
-|---|---|---|---|
-| `configs/default_8k.yaml` | 6 representative tasks × 5 prompts | `sdpa`, `santapp` | Per-task RULER defaults |
-| `configs/simple_8k.yaml` | 20 `niah_multivalue` + 20 `qa_1` | all three | Per-task RULER defaults |
-| `configs/smoke_8k.yaml` | 2 tasks × 1 prompt | all three | 8 tokens, diagnostic only |
-| `configs/smoke_all_tasks_8k.yaml` | 13 tasks × 1 prompt = 39 rows | all three | Per-task RULER defaults |
-| `configs/all_tasks_8k.yaml` | 13 tasks × 500 prompts | all three | Per-task RULER defaults |
-
-The ordinary `santapp-ruler run` command still resolves to one configuration; sweep behavior is separate and explicit.
-
-## Linux and WSL installation
-
-### Requirements
-
-- Linux or WSL2 with an NVIDIA GPU visible to PyTorch.
-- Python 3.11 or 3.12.
-- A compatible NVIDIA driver.
-- Enough GPU memory for the pinned Qwen2.5-3B model and the selected context length.
-
-From the repository root:
-
-```bash
-chmod +x scripts/setup_linux.sh
-./scripts/setup_linux.sh --dev
-source .venv/bin/activate
+```text
+configs/                     Local, smoke, and Kubernetes base configs
+docs/                        Algorithm, output, validation, and cluster notes
+k8s/                         Shareable Kubernetes templates
+k8s/matrices/                Indexed experiment matrices
+scripts/                     Setup, sweep, cluster, export, and analysis tools
+src/santapp_ruler/           Installable benchmark package
+tests/                       CPU-friendly unit and configuration tests
 ```
 
-The setup script:
+Generated runs, caches, exports, archives, and analysis folders are ignored by
+Git and are not included in the repository.
 
-1. chooses `python3.12` or `python3.11` unless `--python`/`PYTHON_BIN` is supplied;
-2. creates or reuses `.venv`;
-3. installs the CUDA 12.8 PyTorch requirement file;
-4. installs this package; and
-5. runs the environment doctor.
+## Installation
 
-Useful alternatives:
+Python 3.11 or 3.12 is supported. Install a PyTorch build appropriate for the
+machine first, then install the harness.
 
 ```bash
-# Reuse a PyTorch installation managed by the user or site administrator.
-./scripts/setup_linux.sh --skip-torch --dev
-
-# Use another virtual-environment location or interpreter.
-./scripts/setup_linux.sh --python /usr/bin/python3.11 --venv .venv-ruler --dev
-
-# Point at a different PyTorch requirement file.
-TORCH_REQUIREMENTS=/path/to/requirements-torch.txt ./scripts/setup_linux.sh --dev
+python -m pip install -r requirements-torch-cu128.txt   # example: newer local GPU
+python -m pip install -e .[dev,analysis]
+python -m santapp_ruler doctor
+pytest -q
 ```
 
-The default PyTorch wheel is isolated in `requirements-torch-cu128.txt`; the package itself does not force a particular torch wheel. This makes the same repository usable on WSL workstations and Linux servers with centrally managed CUDA environments.
-
-Check the environment at any time:
+For the CUDA 12.6 environment used by the default Docker image:
 
 ```bash
-santapp-ruler doctor
+python -m pip install -r requirements-torch-cu126.txt
+python -m pip install -e .[dev,analysis]
 ```
 
-## First-run checks
+The reference SANTA-family backends require CUDA. Most unit tests use synthetic
+CPU tensors and do not download the model or RULER data.
 
-### 1. List the supported tasks and their default generation limits
+Helper installers are provided for Linux (`scripts/setup_linux.sh`), WSL
+(`scripts/setup_wsl.sh`), and Anaconda Prompt on Windows
+(`scripts/setup_windows.bat`). For optional local generation with the pinned
+official RULER code, use `scripts/bootstrap_ruler.py` followed by
+`scripts/prepare_official.py`; generated datasets remain ignored by Git.
+
+## Local use
+
+Run the small two-task default:
 
 ```bash
-santapp-ruler list-tasks
+python -m santapp_ruler run --config configs/default_8k.yaml
 ```
 
-### 2. Validate prompt selection and token budgets
+Run one prompt through all six standard backends with a four-token generation
+budget:
 
 ```bash
-santapp-ruler validate-data --config configs/simple_8k.yaml
+python -m santapp_ruler run --config configs/smoke_all_backends_8k.yaml
+# Or run the environment check, data validation, and smoke in sequence:
+./scripts/run_local_smokes.sh
 ```
 
-This loads the tokenizer and selected RULER rows without loading model weights.
-
-### 3. Verify the custom dense cache against stock SDPA
+Useful overrides can be supplied without editing YAML:
 
 ```bash
-santapp-ruler fidelity --config configs/default_8k.yaml --tokens 16
-```
-
-This should match every generated token ID before sparse results are trusted on a new Transformers/PyTorch environment.
-
-### 4. Run the fast two-task plumbing smoke
-
-```bash
-santapp-ruler run --config configs/smoke_8k.yaml
-```
-
-The 8-token override makes this a diagnostic run rather than a standard RULER score.
-
-### 5. Run the all-method, all-task handoff smoke
-
-```bash
-santapp-ruler run --config configs/smoke_all_tasks_8k.yaml
-```
-
-This produces 39 prediction rows: `sdpa`, `santa`, and `santapp` on one prompt from each of the 13 tasks, using each task's normal generation budget.
-
-## Routine colleague benchmark
-
-The group-policy comparison requested for routine use is already encoded:
-
-```bash
-santapp-ruler run --config configs/simple_8k.yaml
-```
-
-It runs the same deterministically selected 20 `niah_multivalue` prompts and 20 `qa_1` prompts for all three methods. Completed rows are resumable.
-
-Use an explicit path when several configurations may coexist:
-
-```bash
-santapp-ruler run \
-  --config configs/simple_8k.yaml \
-  --run-dir runs/simple-8k-S128
-```
-
-Repeating the same command skips completed UIDs. The resume guard refuses to mix results if the model, data revision, task selection, generation settings, SANTA parameters, or SANTA++ parameters have changed.
-
-## Selecting tasks, instances, methods, and generation length
-
-Every task name in `santapp-ruler list-tasks` can be selected in any subset. `--prompts-per-task` applies the requested count independently to every selected task.
-
-```bash
-santapp-ruler run \
+python -m santapp_ruler run \
   --config configs/default_8k.yaml \
-  --tasks niah_single_2,niah_multivalue,qa_1 \
-  --prompts-per-task 7 \
-  --backends sdpa,santa,santapp \
-  --run-dir runs/custom-subset
-```
-
-By default, each task uses the generation limit registered in `src/santapp_ruler/ruler/tasks.py`. Set one exact common limit only when needed:
-
-```bash
-santapp-ruler run \
-  --config configs/default_8k.yaml \
-  --max-new-tokens 16 \
-  --run-dir runs/diagnostic-16-tokens
-```
-
-A nonstandard limit changes the benchmark protocol and should be treated as a diagnostic unless it matches the intended evaluation policy.
-
-## Algorithm-parameter overrides
-
-Dotted overrides are parsed as YAML and may be repeated.
-
-```bash
-# SANTA: its only algorithm hyperparameter.
-santapp-ruler run \
-  --config configs/simple_8k.yaml \
-  --set santa.samples_per_head=256 \
-  --run-dir runs/simple-santa-S256
-
-# SANTA++ sample budget and clustering granularity.
-santapp-ruler run \
-  --config configs/simple_8k.yaml \
+  --tasks niah_multiquery \
+  --prompts-per-task 10 \
+  --backends sdpa,santapp,team_sampler \
   --set santapp.samples_per_head=256 \
-  --set santapp.group_size=8 \
-  --run-dir runs/simple-santapp-S256-B8
-
-# Use the final 32 prompt tokens rather than the final 64 as probes.
-santapp-ruler run \
-  --config configs/simple_8k.yaml \
-  --set santapp.probe_queries=32 \
-  --run-dir runs/simple-P32
+  --set santapp_variants.team_sampler.samples_per_head=256
 ```
 
-There is deliberately no SANTA or SANTA++ fixed-recent-window setting.
-
-## Full RULER matrix
-
-`configs/all_tasks_8k.yaml` requests 500 prompts for all 13 classic synthetic tasks. Run only the methods needed when the full three-method matrix would be excessive:
+The local grid runner reads `configs/example_sweep.yaml`:
 
 ```bash
-santapp-ruler run \
-  --config configs/all_tasks_8k.yaml \
-  --backends sdpa,santapp \
-  --run-dir runs/ruler-all-8k-sdpa-santapp
-```
-
-Prompt availability and tokenizer budgets can be checked before model loading:
-
-```bash
-santapp-ruler validate-data --config configs/all_tasks_8k.yaml
-```
-
-## GQA-aware memory-access accounting
-
-The percentages are decode-time **logical head-vector equivalents**, not measured HBM transactions or a claim about a particular fused-kernel implementation.
-
-For one layer, one decode token, and one KV head, define:
-
-- `N`: current KV-cache token count;
-- `G`: number of query heads sharing that KV head;
-- `S`: samples drawn per query head;
-- `U`: number of distinct sampled token rows in the union across those `G` query heads, including deduplication of repeated draws;
-- `R`: SANTA++ growing exact-suffix length, which is zero on the first approximate call and then contains only previously generated tokens;
-- `M`: number of active key-centroid vectors.
-
-The GQA-aware dense baseline is `2N` vectors: each K row and each V row once for the shared KV head.
-
-### SANTA++
-
-```text
-GQA KV vectors       = 2(U + R)
-GQA centroid vectors = M
-GQA total percentage = [2(U + R) + M] / (2N) × 100
-```
-
-Centroid metadata is shared at the KV-group level rather than replicated for each query head. The primary reported field is the total percentage; KV and centroid components are also reported separately.
-
-The explicit naive convention treats every query head as if SDPA read an independent copy of the KV cache and retains draw multiplicity:
-
-```text
-naive dense vectors    = 2NG
-naive KV vectors       = 2G(S + R)
-naive centroid vectors = MG
-```
-
-Because the denominator is incorrectly replicated per query head, this percentage is generally more optimistic.
-
-### SANTA
-
-SANTA reads all K rows to form the exact sampling distribution and reads only sampled V rows:
-
-```text
-GQA KV vectors    = N + U
-naive KV vectors  = G(N + S)
-centroid vectors  = 0
-```
-
-### SDPA
-
-Both GQA-aware and naive percentages are 100% by definition.
-
-The main fields are:
-
-- `decode_gqa_total_access_pct`
-- `decode_gqa_kv_access_pct`
-- `decode_gqa_centroid_access_pct`
-- `decode_naive_total_access_pct`
-- `decode_naive_kv_access_pct`
-- `decode_naive_centroid_access_pct`
-
-Raw vector counts and GQA-group call counts are retained so aggregate percentages are recomputed from summed numerators and denominators rather than averaging percentages.
-
-## SANTA++ probe and suffix details
-
-For a prompt of length `T`:
-
-```text
-clustered prompt = token positions [0, T - 1]
-probe positions  = [T - P, ..., T - 1]
-fixed exact tail = 0
-initial growing exact suffix = 0
-```
-
-Dense prefill captures the prompt query projections. The final `P` post-RoPE query vectors are used to fingerprint every prompt key, including token `T-1`. After clustering, the cache is trimmed to `T-1` and token `T-1` is re-fed as the first approximate decode query. Its re-created KV row occupies the same cluster-covered position. Therefore:
-
-- the first SANTA++ decision has zero exact tokens outside the clusters;
-- the next decision has one exact token: the first generated token;
-- generated tokens are never silently inserted into the frozen clusters.
-
-## Data provenance
-
-The default config pins:
-
-```text
-Model:   Qwen/Qwen2.5-3B-Instruct
-Revision: aa8e72537993ba99e69dfaafa59ed015b17504d1
-
-Dataset: SaylorTwift/RULER-8192-Qwen2.5-3B-tokenizer
-Revision: 6ee2d0f4e9b8983361da35204ead8931c3f65ad4
-```
-
-To generate local JSONL from the pinned NVIDIA/RULER source instead of using the convenience mirror:
-
-```bash
-python -m pip install -e ".[official-data]"
-python scripts/bootstrap_ruler.py
-python scripts/prepare_official.py \
-  --context-length 8192 \
-  --num-samples 500 \
-  --tasks niah_single_1,niah_single_2,niah_single_3,niah_multikey_1,niah_multikey_2,niah_multikey_3,niah_multivalue,niah_multiquery,vt,cwe,fwe,qa_1,qa_2
-```
-
-Then set:
-
-```bash
---set benchmark.data.source=local \
---set benchmark.data.local_root=data/ruler_8k
-```
-
-## Outputs
-
-Each run directory contains:
-
-```text
-config.resolved.yaml
-runtime.pre_model.json
-runtime.json
-selected_prompts.jsonl
-run_status.json
-predictions/<backend>/<task>.jsonl
-predictions/<backend>/summary.csv
-predictions/<backend>/submission.csv
-summary.md
-summary.csv
-summary.json
-per_example.csv
-```
-
-`summary.md` puts the GQA-aware total access percentage first, followed by the GQA KV and centroid components and the naive total. See `docs/OUTPUTS.md` for the complete schema.
-
-## Timing scope
-
-Timed regions are CUDA-synchronized at their boundaries. Reports include:
-
-- dense prefill;
-- SANTA++ clustering;
-- decode;
-- end-to-end per-example time;
-- output-token throughput; and
-- peak allocated/reserved CUDA memory.
-
-The SANTA and SANTA++ paths are readable PyTorch references with Python-level per-head dispatch, not final fused kernels. Use them for algorithmic correctness, quality, theoretical access comparisons, and reproducible RULER evaluation—not as a ceiling on attainable kernel speed.
-
-## Optional sweep
-
-Sweep execution is isolated from normal runs:
-
-```bash
-python scripts/sweep.py configs/example_sweep.yaml --dry-run
 python scripts/sweep.py configs/example_sweep.yaml
 ```
 
-Each point gets its own resumable run directory; the script does not launch competing model processes on one GPU.
+## Default Kubernetes template
 
-## Repository map
+The checked-in matrix is intentionally modest and easy to replace:
 
-```text
-src/santapp_ruler/
-├── attention/
-│   ├── minibatch_kmeans.py
-│   ├── probes.py
-│   ├── santa.py
-│   ├── santapp.py
-│   └── traffic.py
-├── backends.py
-├── cli.py
-├── config.py
-├── data.py
-├── reporting.py
-├── runner.py
-├── run_state.py
-└── ruler/
-    ├── grader.py
-    ├── provenance.py
-    └── tasks.py
+- tasks: `niah_multiquery`, `niah_multivalue`;
+- prompts: 100 per task;
+- settings: one run of each of the six standard backends;
+- indexed work items: `2 tasks × 6 settings = 12`;
+- default concurrency: 5 pods;
+- SANTA++ parent size: `B=16`.
+
+Before applying the manifests, replace these placeholders consistently:
+
+- `yourname` with a short unique cluster user/project prefix;
+- `your-registry/santapp-ruler:latest` with the pushed image;
+- `ucsb-opus-lab`, storage class, region, and GPU products when using a
+  different cluster.
+
+A safer alternative is to render a personalized copy while leaving the source
+templates unchanged. The renderer also derives the PVC results path from the
+resource prefix unless `--results-root` is supplied explicitly:
+
+```bash
+PYTHONPATH=src python scripts/render_nautilus_manifests.py \
+  --matrix k8s/matrices/default-2tasks-6methods-100p-8k.yaml \
+  --output-dir k8s/generated/example-run \
+  --resource-prefix example-santapp-ruler \
+  --owner example \
+  --image registry.example.org/group/santapp-ruler:latest \
+  --parallelism 5
 ```
 
-Algorithm details are in `docs/ALGORITHM.md`; output fields are in `docs/OUTPUTS.md`; the checks executed for this handoff are recorded in `SMOKE_TEST_STATUS.md`.
+Apply the rendered files in order:
 
-## Scope
+```bash
+kubectl apply -f k8s/generated/example-run/00-santapp-ruler-pvc.yaml
+kubectl apply -f k8s/generated/example-run/01-santapp-ruler-prefetch-job.yaml
+kubectl wait --for=condition=complete job/example-santapp-ruler-prefetch --timeout=2h
 
-- Qwen2/Qwen2.5 architecture (`model_type == "qwen2"`).
-- Batch size 1 for the reference SANTA/SANTA++ cache.
-- One GPU; no tensor parallelism.
-- Dense prefill and approximate decode.
-- Frozen prefill clusters during generation.
-- No fused sparse CUDA kernel in this repository.
-- The included 8k mirror is tokenizer-specific; generate local RULER data for other tokenizers or context lengths.
+kubectl apply -f k8s/generated/example-run/02-santapp-ruler-smoke-job.yaml
+kubectl wait --for=condition=complete job/example-santapp-ruler-smoke --timeout=2h
+
+kubectl apply -f k8s/generated/example-run/03-santapp-ruler-indexed-job.yaml
+```
+
+The smoke Job runs one `niah_multiquery` prompt through every standard backend.
+The indexed Job then creates one shard per `(setting, task)` pair. Completed
+indexes are resume-safe and can be re-run without duplicating valid records.
+See `docs/NAUTILUS.md` and `k8s/LENS_QUICKSTART.md` for the full workflow.
+
+### Creating another matrix
+
+Copy `k8s/matrices/default-2tasks-6methods-100p-8k.yaml`, then change any of:
+
+- `tasks` and `prompts_per_task`;
+- setting names and backend IDs;
+- `samples_per_head`, `group_size`, `parent_size`,
+  `representatives_per_parent`, or `probe_queries`;
+- the base config path.
+
+The completion count is inferred as `len(tasks) × len(settings)`. The renderer
+updates `completions` automatically and caps `parallelism` at that count.
+
+## Compact exports
+
+After the indexed Job finishes, apply the copy pod:
+
+```bash
+kubectl apply -f k8s/generated/example-run/04-santapp-ruler-results-copy-pod.yaml
+kubectl logs -f pod/example-santapp-ruler-results-copy
+kubectl cp \
+  example-santapp-ruler-results-copy:/export/santapp-ruler-default-2tasks-6methods-100p-8k-results.tar.gz \
+  ./results.tar.gz
+```
+
+The exporter intentionally excludes prompt text, selected prompt inputs, model
+and dataset caches, and large run-state artifacts. It includes compact
+per-example scores, predictions/references, metric fields, matrix metadata,
+checksums, shard status, hardware provenance, and summary reports. Predictions
+and references may still contain benchmark content, so review them before a
+public release.
+
+## General result analysis
+
+`scripts/summarize_results.py` accepts any number of compact export directories,
+parent directories, or exported archives. It discovers settings and tasks from
+`matrix.json`; it does not require a historical experiment name or a fixed
+method list, and it writes one output directory.
+
+```bash
+python scripts/summarize_results.py \
+  --input results.tar.gz \
+  --output-dir analysis \
+  --overwrite
+```
+
+Multiple exports can be merged:
+
+```bash
+python scripts/summarize_results.py \
+  --input first-results.tar.gz \
+  --input second-results.tar.gz \
+  --output-dir combined-analysis
+```
+
+When an exact `sdpa` setting is present, the analysis creates prompt-paired
+comparisons against it. Disable that behavior with
+`--reference-setting none`, choose another reference with
+`--reference-setting SETTING`, or add explicit pairs with
+`--comparison CANDIDATE:REFERENCE`.
+
+The analysis writes accuracy tables and bootstrap intervals, pooled GQA-aware
+and naive logical-access tables, paired comparisons, Pareto membership, a JSON
+summary, Markdown summary, and PNG/PDF plots. Plot labels are derived from
+matrix metadata and fall back to the setting name for custom methods.
+
+## Metrics and interpretation
+
+The primary reported access estimate is the union of sampled K/V rows across
+query heads that share a GQA K/V head, plus routing-key reads, divided by dense
+GQA K/V rows. Centroid reads are also retained as a routing subset. Naive
+per-query-head accounting is reported separately.
+
+These are logical vector-row counts, not measured DRAM transactions or a claim
+of end-to-end speedup. Timing fields include runtime provenance because mixed
+GPU products or software environments make direct speed comparisons invalid.
+See `docs/OUTPUTS.md` for field definitions.
+
+## Reproducibility and safety
+
+Model and dataset revisions are pinned in the default configs. Each Kubernetes
+matrix has a canonical hash; each shard records its work index, code
+fingerprint, environment, selected UIDs, and prediction checksum. The exporter
+rejects inconsistent matrix hashes, UID selections, or output checksums.
+
+The default manifests contain no hostname exclusions. GPU product affinity is a
+portable allow-list and can be changed by the renderer. Resource names use
+obvious placeholders to prevent collisions in a shared namespace.
 
 ## License and attribution
 
-The harness is Apache-2.0. See `NOTICE` and `CITATION.cff` for attribution to NVIDIA/RULER and the SANTA/SANTA++ research implementation. This project is not endorsed by NVIDIA.
+The harness is Apache-2.0. See `NOTICE` and the pinned RULER provenance in
+`src/santapp_ruler/ruler/provenance.py`.

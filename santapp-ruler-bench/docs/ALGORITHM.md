@@ -1,157 +1,189 @@
-# SANTA and SANTA++ reference algorithms
+# Attention methods and accounting
 
-## Shared decode setup
+This document describes the reference algorithms implemented in
+`src/santapp_ruler/attention/`. The implementation is intended for controlled
+RULER experiments and metric collection; it is not a fused production kernel.
 
-Both reference methods patch Qwen2/Qwen2.5 attention only while their generation call is active. Dense prefill uses the Hugging Face SDPA integration. The custom cache stores post-RoPE K and unmodified V with shape `[n_kv_heads, tokens, head_dim]`.
+## Shared model and cache behavior
 
-The final prompt token is re-fed so the first approximate attention call computes the same next-token position as stock cached generation. For SANTA++, re-feeding does not make it exact: its K/V row is already part of the frozen prompt clusters.
+The harness loads Qwen2.5-3B-Instruct with stock SDPA for prefill. RoPE is
+applied before cached keys enter the custom decode cache. Values are cached
+without RoPE. Greedy generation is used by default.
 
-## SANTA
+For every SANTA++ method, the full prompt prefix is assigned to the frozen
+sampling structure. There is no exact prompt-tail window. Tokens generated
+after prefill form a deterministic exact suffix, so the sampled prefix remains
+fixed while the suffix grows during decode.
 
-For each decode query head and the entire current cache:
+The default model has grouped-query attention. Sampling decisions are made per
+query head, but logical K/V traffic is unioned across query heads sharing a K/V
+head before the primary access percentage is computed.
 
-```text
-scores       = qK^T / sqrt(d)
-probability  = softmax(scores)
-indices      ~ IID Categorical(probability), with replacement, S draws
-output       = mean(V[indices])
-```
+## Dense SDPA (`sdpa`)
 
-Sampling from the exact attention distribution makes the sample mean an unbiased Monte Carlo estimator of the dense attention output.
+The dense baseline uses the model's stock cached scaled-dot-product attention.
+Its logical K/V access is 100% by definition. It supplies a correctness and
+runtime reference, not a custom-cache approximation.
 
-SANTA has no fixed exact window, no growing exact window, no clusters, and no centroid metadata. Generated tokens simply become part of the cache sampled on later steps. Its only algorithm parameter is `santa.samples_per_head`.
+## Standalone SANTA (`santa`)
 
-## SANTA++ prompt decomposition
+For each query head, standalone SANTA evaluates exact attention probabilities
+for the sampled prefix, draws `S` token indices IID with replacement from that
+exact distribution, and averages sampled values. Because the proposal equals
+the target attention distribution, no importance correction is required.
 
-For a prompt with `T` tokens:
+This is an algorithmic reference: computing the exact proposal is not itself a
+sparse routing operation.
 
-```text
-sample_end = T
-clustered token positions = [0, sample_end - 1] = [0, T - 1]
-fixed exact prompt tail = 0
-initial growing exact suffix = 0
-```
+## Parent construction for SANTA++
 
-After dense prefill and clustering, the cache is trimmed to `T-1` tokens and the final prompt token is re-fed. Its KV row returns at position `T-1`, which is already represented by the frozen prompt clusters. The exact region at the first approximate decision therefore has length zero. It grows by one after every generated token while `sample_end` remains fixed.
+SANTA++ clusters prompt keys independently for each layer and K/V head.
+Clustering features are probe-query fingerprints: the final
+`probe_queries` prompt queries score every cached key, and those score vectors
+are clustered with MiniBatchKMeans. The nominal number of parents is derived
+from the prompt length and configured `group_size` or `parent_size`.
 
-This intentionally leaves generated tokens unclustered until a future cluster-update policy is defined.
-
-## SANTA++ probe queries
-
-The probe policy is deterministic:
-
-```text
-probe positions = [T - P, T - P + 1, ..., T - 1]
-```
-
-`P=santapp.probe_queries`, default 64. These are the final `P` prompt query tokens, including the final prompt token. There is no random selection from a larger region.
-
-For each layer and KV head:
-
-1. collect all query heads sharing that KV head;
-2. apply Qwen RoPE to the captured query projections;
-3. compute scaled dot products between every prompt key and every selected probe query;
-4. concatenate features across probe positions and sharing query heads;
-5. standardize each feature with population mean and standard deviation; and
-6. cluster the token fingerprints with the CUDA-capable MiniBatchKMeans reference implementation.
-
-The nominal cluster count is:
+A parent summary stores packed member indices, lengths, starts, and a key
+centroid. Empty nominal clusters are skipped. Parent probability logits use
 
 ```text
-min(sample_end, max(2, sample_end // group_size))
+log(parent_size) + <routing_key, query> / sqrt(head_dim)
 ```
 
-Only active clusters are retained. Each summary stores membership layout, cluster length, and the arithmetic mean key.
+where the routing key is a centroid for non-hierarchical methods.
 
-## SANTA++ decode proposal
+## Centroid-guided SANTA++ (`santapp`, mode `guided`)
 
-For a cluster `g`, cluster size `n_g`, mean key `k_bar_g`, and query `q`:
+For each of `S` draws, the method samples a parent with replacement from the
+centroid-guided parent distribution and then samples one member uniformly from
+that parent. The token proposal probability is
 
 ```text
-p(g | q) ∝ n_g exp(k_bar_g · q / sqrt(d))
+p(parent | query) / actual_parent_size.
 ```
 
-For each of `S` draws:
+The sampled softmax numerator and denominator are self-normalized with the
+inverse token proposal probability. The checked-in default uses nominal parent
+size `B=16`.
 
-1. draw a cluster IID with replacement from `p(g | q)`;
-2. draw one token uniformly from that cluster; and
-3. use token proposal probability
+## Whole-parent sampling (`santapp_gumbel_topk`, mode `gumbel_cluster`)
+
+This method selects distinct parents using weighted Gumbel top-k without
+replacement. The requested number of parents is
+`samples_per_head / group_size`, capped by the number of active parents. Every
+token in each selected parent is fetched.
+
+For a selected parent, the observed leave-one-out threshold gives the
+conditional inclusion probability
 
 ```text
-r(j | q) = p(g(j) | q) / n_g(j).
+P(parent selected | other priorities)
+  = 1 - exp(-exp(parent_logit - threshold)).
 ```
 
-The sampled-prompt score is corrected with:
+Each selected parent's token contributions are divided by that inclusion
+probability. This is a Horvitz-Thompson population-sum correction, so the
+corrected sum is **not** divided by the number of selected parents.
+
+## Hierarchical team construction
+
+The hierarchical methods reuse the parent labels produced in probe-fingerprint
+space, then split each nonempty parent in actual RoPE-applied key space.
+
+For a parent containing `n` keys, up to `R` actual-key representatives are
+chosen:
+
+1. choose the key nearest the parent arithmetic mean;
+2. repeatedly choose the key maximizing distance to its nearest selected
+   representative;
+3. assign every parent member to its nearest representative.
+
+When `n < R`, every key becomes a representative. Exact duplicate-key ties are
+resolved deterministically so every selected representative owns a nonempty
+team. The resulting teams partition the prompt prefix exactly once. Team
+routing logits use team cardinality and the actual representative key:
 
 ```text
-log_weight_j = q · k_j / sqrt(d) - log r(j | q).
+log(team_size) + <leader_key, query> / sqrt(head_dim).
 ```
 
-After a shared numerical-stability shift, the clustered-prompt Monte Carlo numerator and denominator use the usual `1/S` factor. Exact generated-suffix exponentials are added to the same numerator and denominator.
+The default hierarchy uses nominal parent size `P=16` and `R=4`
+representatives, giving nominal team size four while allowing natural variation
+from parent and Voronoi assignment sizes.
 
-## MiniBatchKMeans defaults
+## Hierarchical team sampling (`team_sampler`, mode `team_sampler`)
 
-The implementation retains the existing defaults:
-
-- `batch_size=4096`
-- `n_init=1`
-- `max_iter=100`
-- `tol=0`
-- `max_no_improvement=10`
-- `init_size=null`
-- `reassignment_ratio=0.01`
-- `random_state=0`
-
-It uses NumPy `RandomState` for stochastic choices, greedy k-means++ initialization, with-replacement mini-batches, cumulative-count online means, low-count center reassignment, and exponentially weighted inertia stopping. Reduction order can still differ across devices and software builds.
-
-## GQA-aware access accounting
-
-The accounting unit is one head-dimensional K-like or V-like vector. It covers decode attention only; prefill clustering time is reported separately and its one-time data movement is not folded into the decode percentage.
-
-For one layer, decode token, and KV head:
-
-- `N`: current cache length;
-- `G`: query heads sharing the KV head;
-- `S`: draws per query head;
-- `U`: unique sampled token indices in the union across the `G` query heads;
-- `R`: SANTA++ exact growing-suffix length, which is zero on the first approximate call and then contains only generated tokens appended beyond the prompt boundary;
-- `M`: active centroid count.
-
-### Dense denominator
+For each of `S` draws, this method samples a team with replacement from the
+leader-key distribution, then samples one team member uniformly. Its token
+proposal probability is
 
 ```text
-GQA-aware dense denominator = 2N
-naive dense denominator     = 2NG
+p(team | query) / actual_team_size.
 ```
 
-The GQA-aware denominator reflects one shared K cache and one shared V cache for the KV head. The naive denominator incorrectly treats each query head as owning an independent KV cache.
+The estimator applies the corresponding token-level importance correction.
+This method reads actual leader keys for routing and sampled token K/V rows for
+the estimator.
 
-### SANTA++ numerator
+## Whole-team sampling (`team_gumbel_topk`, mode `team_gumbel_topk`)
+
+This method selects distinct teams with weighted Gumbel top-k and fetches every
+member of each selected team. The requested team count is
 
 ```text
-GQA KV       = 2(U + R)
-GQA centroid = M
-GQA total    = 2(U + R) + M
-
-naive KV       = 2G(S + R)
-naive centroid = MG
-naive total    = 2G(S + R) + MG
+samples_per_head / (parent_size / representatives_per_parent)
 ```
 
-The GQA metric deduplicates repeated samples within a query head and overlapping samples across all query heads sharing the KV head. The exact suffix and centroid summaries are shared once at the KV-group level.
+and is capped by the number of active teams. Team contributions use the same
+leave-one-out conditional inclusion-probability correction as whole-parent
+sampling. The corrected population sum is not divided by the selected-team
+count.
 
-### SANTA numerator
+## Importance-sampled softmax combination
+
+For IID token proposals, sampled terms are divided by their token proposal
+probability and by the number of IID draws. For without-replacement whole-unit
+proposals, sampled terms are divided by the selected unit's conditional
+inclusion probability and are not divided by the number of selected units.
+Exact generated-suffix terms are included without sampling correction. A common
+maximum is subtracted before exponentiation for numerical stability.
+
+## Logical access metrics
+
+The primary metric is
 
 ```text
-GQA KV   = N + U
-naive KV = G(N + S)
-centroid = 0
+(GQA-unioned sampled K/V rows + GQA-unioned routing-key rows)
+----------------------------------------------------------- × 100
+                 dense GQA K/V rows
 ```
 
-All K rows are needed to form the exact categorical proposal. Only sampled V rows are needed for the estimator.
+Routing keys are centroids for parent methods and actual leader keys for team
+methods. Centroid rows are retained as a subset field for compatibility and
+inspection; they are not added a second time. The harness also reports:
 
-### Aggregation
+- sampled K/V access alone;
+- routing-key access alone;
+- centroid subset access;
+- naive per-query-head K/V and routing accounting;
+- raw vector-row numerators and denominators;
+- worst-case and expected quantities where the implementation can define them;
+- cluster/team counts, size statistics, and inclusion-probability statistics.
 
-Per-example trackers retain raw vector counts. Task and run summaries sum numerators and denominators first and then compute percentages. They do not average per-example percentages.
+These quantities count logical key/value vectors read by the reference
+algorithm. They do not measure cache-line traffic, coalescing, on-chip reuse,
+kernel-launch overhead, or end-to-end hardware bandwidth.
 
-These values are theoretical logical-access estimates. Cache-line effects, tensor-core scheduling, L2 reuse, coalescing, and actual HBM transactions require kernel profiling and are outside this metric.
+## Determinism and reproducibility
+
+Prompt selection, MiniBatchKMeans, and stochastic sampling are seeded. Exact
+bitwise agreement across GPU architectures is not guaranteed. Every Kubernetes
+shard records the matrix hash, selected UIDs, runtime provenance, and a code
+fingerprint so incompatible shards cannot be silently merged.
+
+## Additional experimental modes
+
+The source retains `oracle_token`, `uniform`, and deterministic `topk` modes for
+research and unit testing. They are not among the six standard backends or the
+default Kubernetes matrix. Custom variants can expose them under a unique name
+in `santapp_variants`.

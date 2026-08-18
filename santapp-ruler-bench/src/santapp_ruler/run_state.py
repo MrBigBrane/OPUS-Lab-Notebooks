@@ -16,7 +16,10 @@ def _result_identity(config: RunConfig) -> dict:
     output = value.pop("output")
     # Storage location and resume behavior do not change generated results.
     # Whether prompts are present in the manifest does change its schema.
-    value["output"] = {"save_full_prompts": output["save_full_prompts"]}
+    value["output"] = {
+        "save_full_prompts": output["save_full_prompts"],
+        "save_prediction_inputs": output["save_prediction_inputs"],
+    }
     return value
 
 
@@ -28,10 +31,10 @@ def prediction_files(run_dir: str | Path) -> list[Path]:
 def prepare_run_directory(config: RunConfig, run_dir: str | Path) -> Path:
     """Create or validate a run directory before any output is modified.
 
-    Resuming with a changed model, task selection, generation budget, or
-    SANTA/SANTA++ parameter would silently mix incompatible rows. This guard refuses
-    that state. ``resume=false`` also refuses an existing prediction directory
-    rather than deleting or duplicating rows.
+    Resuming with a changed model, task selection, generation budget, SANTA
+    parameter, or SANTA++ variant would silently mix incompatible rows. This
+    guard refuses that state. ``resume=false`` also refuses an existing
+    prediction directory rather than deleting or duplicating rows.
     """
     run_dir = Path(run_dir)
     run_dir.mkdir(parents=True, exist_ok=True)

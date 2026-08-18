@@ -3,17 +3,26 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
 .venv/
 .env
 .vscode/
 .idea/
 
-# Benchmark artifacts and downloaded data
+# Benchmark artifacts, analysis products, archives, and downloaded data
 runs/
+results/
+exports/
+analysis/
 data/
 third_party/
 .cache/
 *.log
+*.tar
+*.tar.gz
+*.tgz
+*.zip
 
 # Model / dataset caches if redirected into the repository
 hf_cache/
+cache/

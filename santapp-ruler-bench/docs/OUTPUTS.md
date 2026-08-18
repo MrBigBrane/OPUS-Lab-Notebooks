@@ -1,101 +1,165 @@
-# Output and metric schema
+# Output and metric reference
 
-## Prediction rows
+## Local run directory
 
-Each `predictions/<backend>/<task>.jsonl` row contains:
+A normal run contains:
 
-- `index`: source RULER index;
-- `uid`: stable `<task>:<source_position>:<index>` resume key;
-- `task`: RULER task name;
-- `input`: exact prompt;
-- `outputs`: reference strings;
-- `pred`: decoded greedy continuation;
-- `others`: compatibility metadata; and
-- `metrics`: timing, access, memory, algorithm, seed, and per-example score fields.
+```text
+RUN_DIR/
+  config.resolved.yaml
+  run-metadata.json
+  predictions/<backend>/<task>.jsonl
+  predictions/<backend>/summary.csv
+  summary.json
+  summary.csv
+  summary.md
+  per_example.csv
+  comparisons.csv
+```
 
-## Core timing and size fields
+Resume state is derived from prediction UIDs. A record is written only after a
+prompt completes.
 
-- `prompt_tokens`
-- `generated_tokens`
-- `max_new_tokens`
-- `prefill_seconds`
-- `clustering_seconds`
-- `decode_seconds`
-- `total_seconds`
-- `custom_cache_gib`
-- `cluster_summary_gib`
-- `peak_allocated_gib`
-- `peak_reserved_gib`
+## Prediction records
 
-CUDA timing regions synchronize at their boundaries. SANTA and SDPA report zero clustering time.
+Each JSONL record contains the task/index/UID, references, prediction, and a
+`metrics` object. Local configs may retain the full input. Kubernetes configs
+set `save_full_prompts=false` and `save_prediction_inputs=false` so compact
+shared-storage records do not contain prompt inputs.
 
-## Primary access fields
+Important identity fields include:
 
-The principal result is:
+- `backend`, `mode`, `sampling_scheme`, and `importance_correction`;
+- `samples_per_head` and `nominal_sample_budget_per_head`;
+- `group_size`, `parent_size`, `representatives_per_parent`, and
+  `nominal_team_size` when applicable;
+- `probe_queries`, `probe_policy`, and routing-key type;
+- model head counts, head dimension, and prompt/generated token counts.
 
-- `decode_gqa_total_access_pct`
+Timing fields include prefill, clustering, decode, and total seconds. They are
+wall-clock measurements around the Python/PyTorch reference path. Compare them
+only when runtime provenance is controlled.
 
-Its separately reported components are:
+## Accuracy reports
 
-- `decode_gqa_kv_access_pct`
-- `decode_gqa_centroid_access_pct`
+`summary.csv` contains one row per `(backend, task)` and an unweighted
+`__selected_task_mean__` row for each backend. Task confidence intervals use a
+percentile bootstrap over prompts. The selected-task mean uses stratified
+bootstrap resampling within each task and weights tasks equally.
 
-The explicitly optimistic GQA-unaware convention is:
+When an exact `sdpa` backend is present, `comparisons.csv` contains score deltas
+paired by prompt UID for each other backend. No experiment-specific method pair
+is assumed.
 
-- `decode_naive_total_access_pct`
-- `decode_naive_kv_access_pct`
-- `decode_naive_centroid_access_pct`
+## Logical K/V and routing access
 
-A vector is one head-dimensional K row, V row, or K-like centroid row. Centroids are zero for SDPA and SANTA.
+Raw counters are preferred over averaging precomputed percentages. Key fields
+include:
 
-## Raw access counts
+- `decode_dense_gqa_kv_vectors`;
+- `decode_gqa_kv_vectors_read`;
+- `decode_gqa_routing_key_vectors_read`;
+- `decode_gqa_centroid_key_vectors_read`;
+- `decode_gqa_total_vectors_read`;
+- the corresponding `decode_naive_*` fields;
+- `decode_gqa_*_access_pct` and `decode_naive_*_access_pct`.
 
-- `decode_attention_head_calls`
-- `decode_gqa_group_calls`
-- `decode_dense_gqa_kv_vectors`
-- `decode_dense_naive_kv_vectors`
-- `decode_gqa_kv_vectors_read`
-- `decode_naive_kv_vectors_read`
-- `decode_gqa_centroid_key_vectors_read`
-- `decode_naive_centroid_key_vectors_read`
-- `decode_gqa_total_vectors_read`
-- `decode_naive_total_vectors_read`
+The GQA counters union sampled token rows and routing rows across query heads
+that share a K/V head. The naive counters count each query head independently.
+`decode_gqa_total_vectors_read` equals sampled K/V rows plus generic routing-key
+rows. Centroid rows are a routing subset rather than an additional component.
 
-These raw counts are summed before aggregate percentages are calculated.
+For dense SDPA, K/V access is 100% and routing access is zero. Parent-based
+SANTA++ uses centroid routing. Team methods use actual-team-leader routing and
+normally report zero centroid subset rows.
 
-## Supporting access diagnostics
+## Cluster and team statistics
 
-- `mean_sampled_token_draws_per_head_call`
-- `mean_unique_sampled_tokens_per_gqa_group_call`
-- `mean_exact_tokens_per_gqa_group_call`
-- `mean_total_tokens_per_head_call`
+Depending on the method, records may include:
 
+- active parent/team counts and size summaries;
+- selected parent/team counts per head call;
+- selected-unit inclusion probability count, mean, minimum, and maximum;
+- mean sampled draws, rows, and unique GQA-unioned tokens;
+- parent clustering space, team assignment space, and representative policy;
+- estimated summary-storage size and peak CUDA allocation/reservation.
 
-## SANTA fields
+Null fields indicate that a statistic does not apply to the method, not a zero
+measurement.
 
-- `samples_per_head`
-- `exact_window_tokens` — always zero
+## Kubernetes shard layout
 
-SANTA's access percentage includes the full K scan and sampled V-row union.
+The indexed worker writes one directory per `(setting, task)` work item:
 
-## SANTA++ fields
+```text
+RESULTS_ROOT/EXPERIMENT/
+  cache/
+  matrix.canonical.json
+  work-index-map.csv
+  shards/NNN-SETTING-TASK/
+    run/
+    status.json
+    success.json
+    failure.json        # only after a failed attempt
+```
 
-- `clustered_prompt_tokens`
-- `prompt_exact_tail_tokens` — always zero
-- `initial_growing_exact_tokens` — zero; the exact suffix begins only after generation starts
-- `samples_per_head`
-- `group_size`
-- `probe_queries`
-- `probe_policy` — `last_prompt_tokens`
-- `nominal_clusters_per_kv_head`
+`success.json` pins the matrix hash, work index, selected UIDs, record count,
+prediction checksum, code fingerprint, and runtime provenance. The exporter
+refuses to treat a shard as complete when those values disagree.
 
-## Summary files
+## Compact export
 
-- `summary.md`: human-readable backend/task table, with GQA total first;
-- `summary.csv`: one row per backend/task plus selected-task aggregate;
-- `summary.json`: structured task and aggregate results, plus SANTA/SDPA and SANTA++/SDPA comparisons;
-- `per_example.csv`: flattened prediction and metric fields;
-- `predictions/<backend>/summary.csv`: RULER-style task/score/null layout; and
-- `predictions/<backend>/submission.csv`: task, source ID, and prediction.
+`scripts/k8s_export_results.py` creates:
 
-The selected-task mean is an unweighted mean across the chosen tasks. It is a harness convenience rather than a new RULER metric.
+```text
+EXPORT_DIR/EXPERIMENT/
+  export-status.json
+  matrix.json
+  timing-validity.json
+  hardware-provenance.csv
+  compact-results.jsonl
+  compact-results.csv
+  summary.json           # complete exports
+  summary.csv
+  summary.md
+  comparisons.csv
+  per_example.csv
+  report/
+  README.txt
+EXPORT_DIR/EXPERIMENT-results.tar.gz
+EXPORT_DIR/EXPERIMENT-results.tar.gz.sha256
+```
+
+Prompt input text and the shared Hugging Face cache are excluded. Predictions
+and references remain because they are needed to inspect and regrade outputs;
+review them before distributing an archive beyond the intended research group.
+
+`export-status.json` lists every expected shard and marks it complete,
+incomplete, or invalid. `timing-validity.json` summarizes GPU products and warns
+when timing comparisons span heterogeneous hardware.
+
+## General analysis output
+
+`scripts/summarize_results.py` discovers arbitrary settings/tasks from compact
+exports and writes one directory:
+
+```text
+analysis/
+  summary.json
+  summary.md
+  accuracy_by_task.csv
+  accuracy_overall.csv
+  accuracy_matrix.csv
+  kv_access_by_setting_task.csv
+  kv_access_by_setting.csv
+  paired_comparisons.csv
+  pareto_frontier_membership.csv
+  plots/
+```
+
+Access percentages are recomputed from pooled raw vector counts whenever the
+export provides them. Older exports that only contain percentages fall back to
+mean record percentages and mark the accounting method accordingly.
+
+The Pareto table treats lower logical access and higher score as better. It is a
+descriptive frontier, not a statistical significance test.

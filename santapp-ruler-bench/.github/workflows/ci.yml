@@ -15,8 +15,8 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: python -m pip install -r requirements-torch-cpu.txt
-      - run: python -m pip install -e .[dev]
-      - run: python -m compileall -q src scripts
+      - run: python -m pip install -e .[dev,analysis]
+      - run: python -m compileall -q src scripts tests
       - run: pytest
       - run: ruff check src tests scripts
       - run: python -m build
