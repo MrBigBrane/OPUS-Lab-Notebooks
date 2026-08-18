@@ -22,11 +22,11 @@ benchmark:
 
 generation:
   backends:
-    # - sdpa
-    # - santa
-    # - santapp
-    # - santapp_gumbel_topk
-    # - team_sampler
+    - sdpa
+    - santa
+    - santapp
+    - santapp_gumbel_topk
+    - team_sampler
     - team_gumbel_topk
   stop_on_eos: true
   # null uses the official generation budget for each RULER task.
