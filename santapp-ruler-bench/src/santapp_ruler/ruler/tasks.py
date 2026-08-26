@@ -19,6 +19,7 @@ class RulerTask:
     description: str
 
 
+
 TASKS: Final[dict[str, RulerTask]] = {
     "niah_single_1": RulerTask(
         "niah_single_1", "niah", 128, "single needle: numbers in repeated grass text"
@@ -59,17 +60,39 @@ TASKS: Final[dict[str, RulerTask]] = {
     "qa_2": RulerTask(
         "qa_2", "qa", 32, "multi-hop question answering over long documents"
     ),
+    # ADD the exact 8k mappings to the TASKS dictionary:
+    # Inside TASKS dictionary:
+    "kilt_nq_8k": RulerTask(
+        "kilt_nq_8k", "rag", 64, "NQ RAG 8k"
+    ),
+    "kilt_popqa_8k": RulerTask(
+        "kilt_popqa_8k", "rag", 64, "PopQA RAG 8k"
+    ),
+    "kilt_hotpotqa_8k": RulerTask(
+        "kilt_hotpotqa_8k", "rag", 64, "HotpotQA RAG 8k"
+    ),
+    "msmarco_8k": RulerTask(
+        "msmarco_8k", "rag", 64, "MS MARCO RAG 8k"
+    ),
 }
 
+# Update DEFAULT_TASKS tuple:
 DEFAULT_TASKS: Final[tuple[str, ...]] = (
-    "niah_single_1",
-    "niah_multikey_1",
-    "niah_multiquery",
-    "vt",
-    "fwe",
-    "qa_1",
+    "kilt_nq_8k",
+    "kilt_popqa_8k",
+    "kilt_hotpotqa_8k",
+    "msmarco_8k",
 )
 
+
+# DEFAULT_TASKS: Final[tuple[str, ...]] = (
+#     "niah_single_1",
+#     "niah_multikey_1",
+#     "niah_multiquery",
+#     "vt",
+#     "fwe",
+#     "qa_1",
+# )
 
 def require_task(name: str) -> RulerTask:
     try:

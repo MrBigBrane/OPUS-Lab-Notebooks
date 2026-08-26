@@ -2,6 +2,9 @@
 
 from typing import Final
 
+HELMET_DATASET_REPOSITORY: Final = "MrBigBrane/HELMET-8192-RAG"
+HELMET_DATASET_REVISION: Final = "main"
+
 RULER_REPOSITORY: Final = "https://github.com/NVIDIA/RULER"
 RULER_COMMIT: Final = "38da79d79519ef87aa46ae804f838e1eab7f86d7"
 RULER_LICENSE: Final = "Apache-2.0"
@@ -13,9 +16,15 @@ DEFAULT_MODEL_REVISION: Final = (
 
 # Convenience 8k data mirror generated specifically with the Qwen2.5-3B
 # tokenizer. The harness also accepts locally generated official RULER JSONL.
-DEFAULT_DATASET_REPOSITORY: Final = (
-    "SaylorTwift/RULER-8192-Qwen2.5-3B-tokenizer"
-)
-DEFAULT_DATASET_REVISION: Final = (
-    "6ee2d0f4e9b8983361da35204ead8931c3f65ad4"
-)
+# DEFAULT_DATASET_REPOSITORY: Final = (
+#     "SaylorTwift/RULER-8192-Qwen2.5-3B-tokenizer"
+# )
+# DEFAULT_DATASET_REVISION: Final = (
+#     "6ee2d0f4e9b8983361da35204ead8931c3f65ad4"
+# )
+
+# Change DEFAULT_DATASET_REPOSITORY to your repo:
+DEFAULT_DATASET_REPOSITORY: Final = "MrBigBrane/HELMET-8192-RAG"
+
+# Set the revision to main (or your specific commit hash)
+DEFAULT_DATASET_REVISION: Final = "main"

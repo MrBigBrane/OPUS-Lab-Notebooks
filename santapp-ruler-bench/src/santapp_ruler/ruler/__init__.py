@@ -10,4 +10,5 @@ __all__ = [
     "grade_task",
     "string_match_all",
     "string_match_part",
+    "token_f1",
 ]

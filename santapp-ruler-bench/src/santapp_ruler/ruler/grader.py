@@ -56,6 +56,38 @@ def _all_score(prediction: str, references: Sequence[str]) -> float:
         for reference in references
     ) / len(references)
 
+import string
+from collections import Counter
+
+def normalize_answer(s: str) -> str:
+    """Normalize text for SQuAD/HELMET exact match and token F1."""
+    def remove_articles(text):
+        return re.sub(r'\b(a|an|the)\b', ' ', text)
+    def white_space_fix(text):
+        return ' '.join(text.split())
+    def remove_punc(text):
+        exclude = set(string.punctuation)
+        return ''.join(ch for ch in text if ch not in exclude)
+    return white_space_fix(remove_articles(remove_punc(s.lower())))
+
+def _f1_score(prediction: str, references: Sequence[str]) -> float:
+    def compute_f1(gold, pred):
+        gold_toks = normalize_answer(gold).split()
+        pred_toks = normalize_answer(pred).split()
+        common = Counter(gold_toks) & Counter(pred_toks)
+        num_same = sum(common.values())
+        if not gold_toks or not pred_toks:
+            return 1.0 if gold_toks == pred_toks else 0.0
+        if num_same == 0:
+            return 0.0
+        precision = 1.0 * num_same / len(pred_toks)
+        recall = 1.0 * num_same / len(gold_toks)
+        return 100.0 * (2 * precision * recall) / (precision + recall)
+    return max(compute_f1(ref, prediction) for ref in references)
+
+def token_f1(predictions: Sequence[str], references: Sequence[Sequence[str]]) -> float:
+    _validate_batch(predictions, references)
+    return round(fmean(_f1_score(p, r) for p, r in zip(predictions, references, strict=True)), 2)
 
 def string_match_part(
     predictions: Sequence[str], references: Sequence[Sequence[str]]
@@ -89,6 +121,8 @@ def metric_for_task(task_name: str):
     family = require_task(task_name).family
     if family == "qa":
         return string_match_part
+    if family == "rag":
+        return token_f1
     return string_match_all
 
 
@@ -245,7 +279,12 @@ def grade_task(
     processed = [postprocess_prediction(prediction) for prediction in predictions]
     _validate_batch(processed, references)
     family = require_task(task_name).family
-    score_function = _part_score if family == "qa" else _all_score
+    if family == "qa":
+        score_function = _part_score
+    elif family == "rag":
+        score_function = _f1_score
+    else:
+        score_function = _all_score
     example_scores = tuple(
         score_function(prediction, refs)
         for prediction, refs in zip(processed, references, strict=True)
