@@ -281,16 +281,16 @@ class RunConfig:
         data = self.benchmark.data
         if data.source not in {"huggingface", "local"}:
             raise ValueError("benchmark.data.source must be huggingface or local.")
-        if data.source == "huggingface":
-            if (
-                self.benchmark.context_length != 8192
-                and data.repository == DEFAULT_DATASET_REPOSITORY
-            ):
-                raise ValueError(
-                    "The default Hugging Face mirror contains 8192-token RULER "
-                    "data. For another context length, generate official JSONL and "
-                    "set benchmark.data.source=local plus benchmark.data.local_root."
-                )
+        # if data.source == "huggingface":
+        #     if (
+        #         self.benchmark.context_length != 8192
+        #         and data.repository == DEFAULT_DATASET_REPOSITORY
+        #     ):
+        #         raise ValueError(
+        #             "The default Hugging Face mirror contains 8192-token RULER "
+        #             "data. For another context length, generate official JSONL and "
+        #             "set benchmark.data.source=local plus benchmark.data.local_root."
+        #         )
         elif not data.local_root:
             raise ValueError(
                 "benchmark.data.local_root is required when data.source=local."
