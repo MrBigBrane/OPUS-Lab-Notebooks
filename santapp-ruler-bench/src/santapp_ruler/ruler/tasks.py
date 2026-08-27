@@ -71,8 +71,8 @@ TASKS: Final[dict[str, RulerTask]] = {
     "kilt_hotpotqa_8k": RulerTask(
         "kilt_hotpotqa_8k", "rag", 64, "HotpotQA RAG 8k"
     ),
-    "msmarco_8k": RulerTask(
-        "msmarco_8k", "rag", 64, "MS MARCO RAG 8k"
+    "kilt_triviaqa_8k": RulerTask(
+        "kilt_triviaqa_8k", "rag", 64, "TriviaQA RAG 8k"
     ),
 }
 
@@ -81,7 +81,7 @@ DEFAULT_TASKS: Final[tuple[str, ...]] = (
     "kilt_nq_8k",
     "kilt_popqa_8k",
     "kilt_hotpotqa_8k",
-    "msmarco_8k",
+    "kilt_triviaqa_8k",
 )
 
 
