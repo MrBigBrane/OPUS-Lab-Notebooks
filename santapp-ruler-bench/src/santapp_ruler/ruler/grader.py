@@ -3,12 +3,14 @@
 The two metric functions and family-to-metric assignment are intentionally
 kept equivalent to NVIDIA/RULER's ``scripts/eval/synthetic/constants.py`` at
 the pinned revision. Prediction post-processing follows the corresponding
-``scripts/eval/evaluate.py`` behavior.
+``scripts/eval/evaluate.py`` behavior with regex stop-pattern truncation.
 """
 
 from __future__ import annotations
 
 import re
+import string
+from collections import Counter
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import asdict, dataclass
 from statistics import fmean
@@ -20,11 +22,28 @@ from .tasks import require_task
 
 _CONTROL_CHARS = re.compile(r"[\x00-\x1f]")
 
+# Patterns that signal prompt hallucination / generation overrunning answer boundary
+_STOP_PATTERNS = re.compile(
+    r"(?:"
+    r"You are an AI assistant|"
+    r"Please provide|"
+    r"<\|im_start\|>|"
+    r"<\|im_end\|>|"
+    r"<\|endoftext\|>|"
+    r"\n\n|"
+    r"\nUser:|"
+    r"\nQuestion:"
+    r")",
+    flags=re.IGNORECASE,
+)
+
 
 def postprocess_prediction(prediction: str) -> str:
-    """Apply RULER's evaluator post-processing to one model prediction."""
+    """Apply RULER's evaluator post-processing and regex truncation to one model prediction."""
     prediction = prediction.strip()
     prediction = _CONTROL_CHARS.sub("\n", prediction).strip()
+    # Truncate string at the first occurrence of prompt leakage or template artifacts
+    prediction = _STOP_PATTERNS.split(prediction)[0].strip()
     return prediction
 
 
@@ -56,19 +75,21 @@ def _all_score(prediction: str, references: Sequence[str]) -> float:
         for reference in references
     ) / len(references)
 
-import string
-from collections import Counter
 
 def normalize_answer(s: str) -> str:
     """Normalize text for SQuAD/HELMET exact match and token F1."""
     def remove_articles(text):
         return re.sub(r'\b(a|an|the)\b', ' ', text)
+
     def white_space_fix(text):
         return ' '.join(text.split())
+
     def remove_punc(text):
         exclude = set(string.punctuation)
         return ''.join(ch for ch in text if ch not in exclude)
+
     return white_space_fix(remove_articles(remove_punc(s.lower())))
+
 
 def _f1_score(prediction: str, references: Sequence[str]) -> float:
     def compute_f1(gold, pred):
@@ -83,11 +104,14 @@ def _f1_score(prediction: str, references: Sequence[str]) -> float:
         precision = 1.0 * num_same / len(pred_toks)
         recall = 1.0 * num_same / len(gold_toks)
         return 100.0 * (2 * precision * recall) / (precision + recall)
+
     return max(compute_f1(ref, prediction) for ref in references)
+
 
 def token_f1(predictions: Sequence[str], references: Sequence[Sequence[str]]) -> float:
     _validate_batch(predictions, references)
     return round(fmean(_f1_score(p, r) for p, r in zip(predictions, references, strict=True)), 2)
+
 
 def string_match_part(
     predictions: Sequence[str], references: Sequence[Sequence[str]]
@@ -174,12 +198,7 @@ def bootstrap_mean_confidence_interval(
     confidence_level: float = 0.95,
     seed: int = 20_260_805,
 ) -> BootstrapInterval:
-    """Bootstrap a mean by resampling observations with replacement.
-
-    RULER prompts are the independent observations. Token/head measurements are
-    deliberately not treated as replicates.
-    """
-
+    """Bootstrap a mean by resampling observations with replacement."""
     _validate_bootstrap(
         resamples=resamples,
         confidence_level=confidence_level,
@@ -219,13 +238,7 @@ def stratified_bootstrap_mean_confidence_interval(
     confidence_level: float = 0.95,
     seed: int = 20_260_805,
 ) -> BootstrapInterval:
-    """Bootstrap an equally weighted mean while resampling within each task.
-
-    Each task remains one equal-weight stratum, matching the harness's selected-
-    task mean. The same helper is used for paired backend deltas after converting
-    each prompt pair to a score difference.
-    """
-
+    """Bootstrap an equally weighted mean while resampling within each task."""
     _validate_bootstrap(
         resamples=resamples,
         confidence_level=confidence_level,
