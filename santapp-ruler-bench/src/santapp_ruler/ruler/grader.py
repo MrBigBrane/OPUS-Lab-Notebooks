@@ -116,7 +116,7 @@ def token_f1(predictions: Sequence[str], references: Sequence[Sequence[str]]) ->
 def string_match_part(
     predictions: Sequence[str], references: Sequence[Sequence[str]]
 ) -> float:
-    """RULER partial string match: any reference substring earns full credit."""
+    """RULER partial string match (SubEM): any reference substring earns full credit."""
     _validate_batch(predictions, references)
     return round(
         fmean(
@@ -146,7 +146,8 @@ def metric_for_task(task_name: str):
     if family == "qa":
         return string_match_part
     if family == "rag":
-        return token_f1
+        # HELMET explicitly evaluates RAG categories using SubEM (Substring Exact Match)
+        return string_match_part 
     return string_match_all
 
 
@@ -292,12 +293,13 @@ def grade_task(
     processed = [postprocess_prediction(prediction) for prediction in predictions]
     _validate_batch(processed, references)
     family = require_task(task_name).family
-    if family == "qa":
+    
+    # Updated to assign SubEM logically dynamically if you bypass metric_for_task
+    if family in ["qa", "rag"]:
         score_function = _part_score
-    elif family == "rag":
-        score_function = _f1_score
     else:
         score_function = _all_score
+        
     example_scores = tuple(
         score_function(prediction, refs)
         for prediction, refs in zip(processed, references, strict=True)
