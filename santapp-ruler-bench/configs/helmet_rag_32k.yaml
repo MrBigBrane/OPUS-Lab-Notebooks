@@ -1,7 +1,7 @@
 generation:
   backends:
-    - sdpa
-    - santa
+    # - sdpa
+    # - santa
     - team_gumbel_topk
   stop_on_eos: true
   # null uses the official generation budget for each RULER task.
@@ -21,5 +21,5 @@ santapp_variants:
   team_gumbel_topk:
     parent_size: 16
     representatives_per_parent: 4
-    samples_per_head: 128
+    samples_per_head: 256
     probe_queries: 64
