@@ -21,5 +21,5 @@ santapp_variants:
   team_gumbel_topk:
     parent_size: 16
     representatives_per_parent: 4
-    samples_per_head: 256
+    samples_per_head: 128
     probe_queries: 64
