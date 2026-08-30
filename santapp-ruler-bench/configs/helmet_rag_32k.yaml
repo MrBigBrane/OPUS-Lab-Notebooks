@@ -1,7 +1,7 @@
 generation:
   backends:
-    # - sdpa
-    # - santa
+    - sdpa
+    - santa
     - team_gumbel_topk
   stop_on_eos: true
   # null uses the official generation budget for each RULER task.
