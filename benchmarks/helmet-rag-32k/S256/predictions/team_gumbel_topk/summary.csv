@@ -1,0 +1,3 @@
+Tasks,kilt_triviaqa_32k,kilt_nq_32k,kilt_popqa_32k,kilt_hotpotqa_32k
+Score,80.0,30.0,40.0,10.0
+Nulls,0/10,0/10,0/10,0/10

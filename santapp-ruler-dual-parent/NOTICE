@@ -1,0 +1,7 @@
+SDPA, SANTA, and Dual-Parent SANTA++ RULER Benchmark Harness
+Copyright 2026 project contributors
+
+RULER task names, generation budgets, prediction post-processing, and the
+vendored synthetic grader are derived from NVIDIA/RULER at the pinned commit
+recorded in src/santapp_ruler/ruler/provenance.py. NVIDIA does not endorse this
+project.

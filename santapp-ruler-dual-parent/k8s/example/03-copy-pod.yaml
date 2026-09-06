@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: researcher-santa-ruler-copy
+  namespace: ucsb-opus-lab
+  labels:
+    app.kubernetes.io/name: santa-ruler
+    benchmark-owner: researcher
+spec:
+  restartPolicy: Never
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10001
+    runAsGroup: 10001
+    fsGroup: 10001
+    fsGroupChangePolicy: OnRootMismatch
+  containers:
+  - name: copy
+    image: registry.example/research/santapp-ruler:dual-parent-v1
+    imagePullPolicy: IfNotPresent
+    command:
+    - bash
+    - -lc
+    args:
+    - echo 'Results mounted at /shared/results'; sleep infinity
+    resources:
+      requests:
+        cpu: 100m
+        memory: 256Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
+    volumeMounts:
+    - name: shared
+      mountPath: /shared
+  volumes:
+  - name: shared
+    persistentVolumeClaim:
+      claimName: researcher-santa-ruler-pvc

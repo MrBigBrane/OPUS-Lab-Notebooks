@@ -1,0 +1,6 @@
+owner=researcher
+namespace=ucsb-opus-lab
+job=researcher-santa-ruler-smoke
+copy_pod=researcher-santa-ruler-copy
+pvc=researcher-santa-ruler-pvc
+completions=8
