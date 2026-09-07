@@ -7,7 +7,7 @@ model:
   prompt_format: chat_template
 
 benchmark:
-  context_length: 32768
+  context_length: 33000
   tasks: [longbench_v2_cot]
   prompts_per_task: null
   selection_seed: 42

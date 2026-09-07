@@ -15,7 +15,7 @@ DEFAULT_MODEL_REVISION: Final = "a09a35458c702b33eeacc393d103063234e8bc28"
 #     32768: "SaylorTwift/RULER-32768-Qwen2.5-3B-tokenizer",
 # }
 DATASET_REPOSITORIES: Final[dict[int, str]] = {
-    32768: "MrBigBrane/LongBench-v2-32k-CoT"
+    33000: "MrBigBrane/LongBench-v2-32k-CoT"
 }
 DEFAULT_DATASET_REVISION: Final = "main"
 
