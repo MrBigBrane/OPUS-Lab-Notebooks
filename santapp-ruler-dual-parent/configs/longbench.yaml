@@ -17,7 +17,7 @@ benchmark:
     revision: main
 
 generation:
-  backends: [santapp, hierarchical]
+  backends: [sdpa, santapp, hierarchical]
   stop_on_eos: true
   max_new_tokens: null
   random_seed: 0
