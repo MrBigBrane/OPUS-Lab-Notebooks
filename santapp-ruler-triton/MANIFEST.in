@@ -1,0 +1,6 @@
+include .dockerignore .gitignore Dockerfile LICENSE NOTICE CITATION.cff VALIDATION.md requirements.txt requirements-dev.txt FILE_MANIFEST.sha256 CHANGELOG.md
+recursive-include configs *.yaml
+recursive-include docs *.md *.json
+recursive-include scripts *.py *.sh
+recursive-include k8s *.yaml *.txt
+recursive-include tests *.py

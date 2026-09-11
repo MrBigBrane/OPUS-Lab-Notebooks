@@ -1,0 +1,104 @@
+{
+  "integration": "R005 colleague release; R004 native numerical implementation unchanged",
+  "source_archive": "SANTA-Triton-main (21).zip",
+  "source_archive_sha256": "5900f60cb7e862afc073025ddefa30c1f32419d5a2979f23098efcd0631718f3",
+  "files": [
+    {
+      "source": "prefill_kmeans.py",
+      "destination": "src/santapp_ruler/attention/triton_prefill/prefill_kmeans.py",
+      "source_sha256": "59b0b670c4a26ae16757007a528b2f6cf2a6941d204e34c23f59cdf102edc06a",
+      "ported_sha256": "d80bc179fbd32cb95bd236a12be60a1b20f7862a9eb7254092ae8c92937cbdf4",
+      "changes": [
+        "Import the dual-parent repository's existing reference base class.",
+        "Update the documentation path for this standalone repository."
+      ]
+    },
+    {
+      "source": "prefill_kmeans_ops.py",
+      "destination": "src/santapp_ruler/attention/triton_prefill/prefill_kmeans_ops.py",
+      "source_sha256": "b2e12211158bfaa706b0f049a66b8c8b411a841264dfe262871b7f62284e565c",
+      "ported_sha256": "b2e12211158bfaa706b0f049a66b8c8b411a841264dfe262871b7f62284e565c",
+      "changes": []
+    },
+    {
+      "source": "prefill_teams.py",
+      "destination": "src/santapp_ruler/attention/triton_prefill/prefill_teams.py",
+      "source_sha256": "c7bb33b8626b823616c0a3f143129d2158ac1afe7ad816118c91942b137610b4",
+      "ported_sha256": "5ccff52261b21cb6948f3bd914e1b6bfc4c7c081646115d9848d18cf48e23b64",
+      "changes": [
+        "Use the original RULER TeamSummary dataclass as base.",
+        "Remove duplicate inherited metadata fields.",
+        "Remove optional reference-repair hook; return native output unconditionally."
+      ]
+    },
+    {
+      "source": "prefill_algorithmic_validation.py",
+      "destination": "src/santapp_ruler/attention/triton_prefill/prefill_algorithmic_validation.py",
+      "source_sha256": "a4b44d4b3c84230c61617e7b8625e9057162d9c311ecd01c07069360ce8af47a",
+      "ported_sha256": "a4b44d4b3c84230c61617e7b8625e9057162d9c311ecd01c07069360ce8af47a",
+      "changes": []
+    },
+    {
+      "source": "kernels/p001_prefill_kmeans.py",
+      "destination": "src/santapp_ruler/attention/triton_prefill/kernels/p001_prefill_kmeans.py",
+      "source_sha256": "d151ef60ebb43d62db017293c315bf0ea7805670b8a5f8d8d0c960435397a181",
+      "ported_sha256": "d151ef60ebb43d62db017293c315bf0ea7805670b8a5f8d8d0c960435397a181",
+      "changes": []
+    },
+    {
+      "source": "kernels/p001_prefill_teams.py",
+      "destination": "src/santapp_ruler/attention/triton_prefill/kernels/p001_prefill_teams.py",
+      "source_sha256": "15c296220447e5c900531e92947f0a4fb6630837dfc70c4092ca77df1232665f",
+      "ported_sha256": "15c296220447e5c900531e92947f0a4fb6630837dfc70c4092ca77df1232665f",
+      "changes": []
+    }
+  ],
+  "unchanged_original_files": {
+    "src/santapp_ruler/reporting.py": "92f2074b29bb01f9535e88ac28c53ce6888ba4988da2461ac1b47d525c8fffba",
+    "src/santapp_ruler/__main__.py": "935a1c1166b0c1ea35a82256345000bf2c73ded718d77773bc27a71ecce28f7d",
+    "src/santapp_ruler/io_utils.py": "1446b116fff9a5bff24981170f03618276043e5f2b8747fc944432a177baa179",
+    "src/santapp_ruler/backends.py": "47e75449bd911313d067338c1ede8671477fa581b8361bc5e6d1d446c0ae4147",
+    "src/santapp_ruler/data.py": "baea2280d2d4c4783e2024f9999995a9d953b289f572833a7a53d034c2fb6a62",
+    "src/santapp_ruler/ruler/tasks.py": "6d0dbae9ee260940ca5a3884ba3ccfb54cd07ffcefa4cada4c9e3505329f957e",
+    "src/santapp_ruler/ruler/grader.py": "9adaba7a65d306617e74ec6153aaabf3ad9afeb242d8f187fb6adce96bae2869",
+    "src/santapp_ruler/ruler/__init__.py": "e8c57d0555f6ef924ac7a45d0131350b8555bd8015789e63c02b7125c72e4ce9",
+    "src/santapp_ruler/ruler/provenance.py": "b3a751e61d52d97d1135c320d010b6de7bc185d2aae2ce5fb1a1c3049401c7f1",
+    "src/santapp_ruler/attention/traffic.py": "3a6b20d3729e1caa653c32b0a1634c687044506404dfdd7017dbdd7dc110556b",
+    "src/santapp_ruler/attention/teams.py": "1fa16fc5c17bdf0221c616fd66203b0f0c7512a814fd92f13aa5ea916ec53216",
+    "src/santapp_ruler/attention/qwen.py": "1005b78cb18e15cd97ef742642acd0f00cdafa7c4f8c4ab68f7e48fb3ef6efbb",
+    "src/santapp_ruler/attention/__init__.py": "c5fb0ddb1eb41811d334aafb9dd53affbce28a5e374ed8ae099cfcfcaa1c1a34",
+    "src/santapp_ruler/attention/minibatch_kmeans.py": "b92649b181b3374ba415093e2e2ca4284f6f9c2df1e3311254903d157c8eac93",
+    "src/santapp_ruler/attention/contiguous_teams.py": "babf3c88d12cf0f11aeb118aeb70118d8d2289bb0a72028d1ed621384ff3a1c9",
+    "src/santapp_ruler/attention/santa.py": "2800ed0bed7f16c279702f892d635230b9aa1c2ab4280d2865e09f17c48c6f07",
+    "src/santapp_ruler/attention/sampling.py": "f26eaee898e0d6808f105769f5ec62251a55966b830774bd462dbe5d5c248c37"
+  },
+  "unchanged_decode_methods": {
+    "santapp.py": {
+      "_record_decode_group": "0867af512cbb34e13fda701c6547482d828be6b8b36114e7cd290336a7973765",
+      "_exact_generated_suffix": "f76b10787ca6c137df7baca25895f84365b74543c14e6e8ac376eb0d2946fad2",
+      "_combine_ht_and_exact": "ed64822645f662c100481179da63c231c2306b406915ccc5bb63961b01fffdef",
+      "_approximate_attention": "f86abe4b89b205e421eb6505e9b8d06245bdb15649009babe915af3d0147e603"
+    },
+    "hierarchical.py": {
+      "_record_decode_group": "0867af512cbb34e13fda701c6547482d828be6b8b36114e7cd290336a7973765",
+      "_exact_generated_suffix": "f76b10787ca6c137df7baca25895f84365b74543c14e6e8ac376eb0d2946fad2",
+      "_combine_ht_and_exact": "ed64822645f662c100481179da63c231c2306b406915ccc5bb63961b01fffdef",
+      "_approximate_attention": "b3d70c3e2960353dcd8de7f1d8391074094009ae8717fa3e005f86cb019e43b5"
+    }
+  },
+  "unchanged_decode_methods_hash_scheme": "SHA256 of ast.get_source_segment for the named method, with LF line endings; independent of ast.dump version changes",
+  "allowed_metadata_lf_sha256": {
+    "src/santapp_ruler/ruler/provenance.py": "b7d6751e278a6bdb2f955d5c4b65864d14f7970d1b142da88ec4a461852cb91c"
+  },
+  "metadata_changed_in_r005": {
+    "src/santapp_ruler/__init__.py": "fdf6a2d43815987277130bcc14326ee1ba3a442b4528e0365d8385c80b37e266",
+    "src/santapp_ruler/run_state.py": "76993dd043b235d90924c0f01e63c4d4da154f10221773b78c0cffe1ad0c7884"
+  },
+  "r005_changes": [
+    "Native prefill selected by default; original torch reference remains explicit.",
+    "Startup/Docker/Kubernetes allocator defaults and policy-compliant requests/limits.",
+    "Known A10 D=7 assignment diagnostic isolated as an expected failure; mandatory D=128 tests.",
+    "No R004a small-D arithmetic workaround or bitwise replay applied.",
+    "Legacy saved configs with missing prefill fields retain Torch identity for safe resume."
+  ]
+}

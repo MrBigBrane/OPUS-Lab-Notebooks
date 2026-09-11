@@ -1,0 +1,638 @@
+[
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "C",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "B",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "A",
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": "D",
+    "judge": 1,
+    "difficulty": "hard",
+    "length": "long"
+  },
+  {
+    "pred": null,
+    "judge": 0,
+    "difficulty": "hard",
+    "length": "long"
+  }
+]

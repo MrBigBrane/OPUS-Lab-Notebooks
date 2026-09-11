@@ -1,0 +1,16 @@
+owner=researcher-one
+namespace=ucsb-opus-lab
+job=researcher-one-santa-ruler-smoke
+copy_pod=researcher-one-santa-ruler-copy
+pvc=researcher-one-santa-ruler-pvc
+completions=8
+prefill_backend=triton
+sample_budgets=None
+prompts_per_task=1
+max_new_tokens_override=None
+image=registry.example/project/santapp-ruler:r005-ampere
+parallelism=4
+cpu_request_and_limit=4
+host_memory_request_and_limit=32Gi
+PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
+staged_smoke=False

@@ -1,0 +1,10 @@
+{
+  "task": "longbench_v2_cot",
+  "backend": "sdpa",
+  "num_examples": 106,
+  "ruler_string_match_score": 98.11,
+  "extracted_mc_accuracy": 25.47,
+  "mean_prefill_seconds": 5.721,
+  "mean_decode_seconds": 1.631,
+  "mean_kv_access_pct": 100.0
+}

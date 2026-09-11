@@ -1,0 +1,79 @@
+# Original PyTorch numerical implementations; explicit reference/rollback.
+model:
+  name: Qwen/Qwen2.5-7B-Instruct
+  revision: a09a35458c702b33eeacc393d103063234e8bc28
+  dtype: float16
+  device: cuda
+  attn_implementation: sdpa
+  trust_remote_code: false
+  prompt_format: chat_template
+
+benchmark:
+  context_length: 8192
+  tasks:
+    - niah_single_1
+    - niah_single_2
+    - niah_single_3
+    - niah_multikey_1
+    - niah_multikey_2
+    - niah_multikey_3
+    - niah_multivalue
+    - niah_multiquery
+    - vt
+    - cwe
+    - fwe
+    - qa_1
+    - qa_2
+  prompts_per_task: 1
+  selection_seed: 42
+  data:
+    source: huggingface
+    repository: auto
+    revision: main
+    subset: validation
+
+generation:
+  backends: [sdpa, santa, santapp, hierarchical]
+  stop_on_eos: true
+  max_new_tokens: null
+  random_seed: 0
+
+santa:
+  samples_per_head: 128
+
+# SANTAPP: global MiniBatchKMeans parents in raw post-RoPE key space, then
+# actual-key teams and whole-team Gumbel Top-K sampling.
+santapp:
+  prefill_backend: torch
+  parent_size: 16
+  representatives_per_parent: 4
+  samples_per_head: 128
+  kmeans:
+    batch_size: 4096
+    n_init: 1
+    max_iter: 100
+    tol: 0.0
+    max_no_improvement: 10
+    init_size: null
+    reassignment_ratio: 0.01
+    random_state: 0
+
+# Contiguous-parent ablation: fixed positional spans, then the same actual-key
+# teams and whole-team Gumbel Top-K sampling.
+hierarchical:
+  prefill_backend: torch
+  parent_size: 16
+  representatives_per_parent: 4
+  samples_per_head: 128
+
+grading:
+  bootstrap_resamples: 10000
+  confidence_level: 0.95
+  bootstrap_seed: 20260903
+
+output:
+  root: runs
+  run_name: null
+  resume: true
+  save_full_prompts: true
+  save_prediction_inputs: true
