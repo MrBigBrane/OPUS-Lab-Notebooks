@@ -10,7 +10,7 @@ model:
 
 benchmark:
   context_length: 64000
-  tasks: [data]
+  tasks: [default]
   prompts_per_task: 1
   selection_seed: 42
   data:
