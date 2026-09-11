@@ -59,8 +59,8 @@ TASKS: Final[dict[str, RulerTask]] = {
     "qa_2": RulerTask(
         "qa_2", "qa", 32, "multi-hop question answering over long documents"
     ),
-    "longbench_v2_cot": RulerTask(
-        "longbench_v2_cot", "qa", 32, "multiple-choice question answering padded to 32k"
+    "data": RulerTask(
+        "data", "qa", 32, "multiple-choice question answering padded to 32k"
     ),
 }
 

@@ -7,13 +7,13 @@ model:
   prompt_format: chat_template
 
 benchmark:
-  context_length: 34000
-  tasks: [longbench_v2_cot]
+  context_length: 64000
+  tasks: [data]
   prompts_per_task: null
   selection_seed: 42
   data:
     source: huggingface
-    repository: MrBigBrane/LongBench-v2-32k-CoT
+    repository: MrBigBrane/longbench-v2-short
     revision: main
 
 generation:
