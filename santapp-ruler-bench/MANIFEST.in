@@ -1,7 +1,0 @@
-include Dockerfile .dockerignore
-include README.md LICENSE NOTICE
-include requirements*.txt
-recursive-include configs *.yaml
-recursive-include docs *.md
-recursive-include scripts *.sh *.py *.bat
-recursive-include k8s *.yaml *.md

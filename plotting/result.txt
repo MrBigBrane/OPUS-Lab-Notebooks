@@ -1,2 +1,0 @@
-Model	Overall	Easy	Hard	Short	Medium	Long	Extracted_Rate	Correct/Total
-hierarchical-1024	10.1%	21.7%	30.2%	27.8%	16.7%	N/A	36.8%	51/503

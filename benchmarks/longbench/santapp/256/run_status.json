@@ -1,7 +1,0 @@
-{
-  "status": "complete",
-  "expected_records": 503,
-  "records_generated_this_process": 503,
-  "wall_seconds_this_process": 65924.43408559635,
-  "finished_at_utc": "2026-09-13T01:53:44.945798+00:00"
-}

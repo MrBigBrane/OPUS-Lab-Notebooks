@@ -1,8 +1,0 @@
-# Install a CUDA-enabled PyTorch wheel first.
-#
-# RTX 5090 / Blackwell local development:
-#   python -m pip install -r requirements-torch-cu128.txt
-#
-# Nautilus V100 / RTX A4000 compatibility:
-#   python -m pip install -r requirements-torch-cu126.txt
--e .
