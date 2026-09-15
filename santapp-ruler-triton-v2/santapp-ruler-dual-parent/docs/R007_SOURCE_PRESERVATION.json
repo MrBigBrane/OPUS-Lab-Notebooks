@@ -1,0 +1,105 @@
+{
+  "archive_sha256": "75878029dae07635977b44c8f8f991c0a4b905ef036413efa88a7cc502ed23d1",
+  "base_release": "R006 / 1.4.0",
+  "changed_scope": "Independent-fit scheduling/controller, batched wrappers, config, tests, telemetry and deployment. No change to P001 numerical bodies, existing team builders or decoder kernels.",
+  "santapp_unchanged_method_asts": {
+    "_approximate_attention": "b370ff2429fcd9d03129c395cd56d3be3024f098e8996920536f41465f70d8a0",
+    "_combine_ht_and_exact": "7669a7b32a1ac4a2333fb043fc080e89c80c16330d7438fc298bed6d664b5bd5",
+    "_exact_generated_suffix": "f846ba17c6b02e532be7134884d00ddc3ea954ac8ea6a5a49df59f2a1fd200c4",
+    "_make_traffic_tracker": "5663b795d1035573c6c8f4f83fa9c47e700ca8b9644061d7ce7d474efbbf8d1a",
+    "_record_decode_group": "a4b5d025d98e3eb19845b6abf01ac64e801285a7f87fe5e48b20040e99e5575b",
+    "_sampling_statistics": "71ce5906dec1bdde20a4806769f2aeae892ce4d234d7b109d5e489efadf75b48",
+    "_size_statistics": "49e7d41c6ad1992f004a303cef88e545d373c6219110576117d8c5e584a0242f",
+    "_summary_statistics": "b3bf95ac6416b94709305b661a68e56a8dbbae4659b13787e3c95e3b7d066ec3",
+    "_summary_storage_bytes": "ece1b48747a2de99980057a3fdcd6e5fa3848efd5a0c2ed87bf366a481979c2f",
+    "generated_exact_tokens_at_decode_step": "f5fee0d5fe24e121f7eec91e35f8560d72e0102ef37b9ce7e49b9725a972bb15",
+    "parent_cluster_count": "452f7250c03663ed3d6a12c435df58c7f690e33a8591def1f1e12cee23f9bf68"
+  },
+  "santapp_unchanged_method_sources_sha256": {
+    "_approximate_attention": "f86abe4b89b205e421eb6505e9b8d06245bdb15649009babe915af3d0147e603",
+    "_combine_ht_and_exact": "ed64822645f662c100481179da63c231c2306b406915ccc5bb63961b01fffdef",
+    "_exact_generated_suffix": "f76b10787ca6c137df7baca25895f84365b74543c14e6e8ac376eb0d2946fad2",
+    "_make_traffic_tracker": "1b2d0da61d402e4ee2ad29e2a427f8bcea4972b9f15ccb3d4c945d58c6631ad5",
+    "_record_decode_group": "0867af512cbb34e13fda701c6547482d828be6b8b36114e7cd290336a7973765",
+    "_sampling_statistics": "37aa80023abff16fd3ba80dc5718c366810de55760306ef868f6be5cfc2af542",
+    "_size_statistics": "149e14480abcec15aad1a041b247ae11dd9463b29ce52d4b6944f53afdfdfe10",
+    "_summary_statistics": "e9cbfa1ef0a1370637ff30f7c777dba106272add195bb59e68e7c0d576be8adc",
+    "_summary_storage_bytes": "49a4266dc404f264e46e5b3ef79922890b2f22c1b6d376ed66bf5adea42a03b4",
+    "generated_exact_tokens_at_decode_step": "ecf51c2eead7138a9c56b341a5401fc9fb2e5feed8452f5a0c84dad631831861",
+    "parent_cluster_count": "08c6e54929901466a9154836535e049d49ce5e90497f7fc2dbd2b3f5a46edd1e"
+  },
+  "unchanged_files": [
+    {
+      "path": "src/santapp_ruler/attention/contiguous_teams.py",
+      "sha256": "babf3c88d12cf0f11aeb118aeb70118d8d2289bb0a72028d1ed621384ff3a1c9"
+    },
+    {
+      "path": "src/santapp_ruler/attention/hierarchical.py",
+      "sha256": "69d84dcaa5c9017f7f88610b95857da90ef38e263dd35414c3178a8104f00f4f"
+    },
+    {
+      "path": "src/santapp_ruler/attention/minibatch_kmeans.py",
+      "sha256": "b92649b181b3374ba415093e2e2ca4284f6f9c2df1e3311254903d157c8eac93"
+    },
+    {
+      "path": "src/santapp_ruler/attention/qwen.py",
+      "sha256": "c10ada2d25a6ebd491c31b90d99be2e0b75bb5593ab59e480f0179dd240bf06e"
+    },
+    {
+      "path": "src/santapp_ruler/attention/teams.py",
+      "sha256": "1fa16fc5c17bdf0221c616fd66203b0f0c7512a814fd92f13aa5ea916ec53216"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/__init__.py",
+      "sha256": "1f643060f10c39a8285ea4b2a791ad6fc23585594d3678e19c434efa22e979c7"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/compile_check.py",
+      "sha256": "0ce71b02b2227396a111f174b180c85453e4ac5495168f1b03e77548d06a562d"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/identity.py",
+      "sha256": "ba7f7b671436809a57fb244fb6ae373d20e8801392e39a1d5098c5f7e081a1e2"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/kernels.py",
+      "sha256": "d306f3d29cb2dc82f6392dedc27300eff8b5d81bcceb1a21199f4f530e4d1f5d"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/packing.py",
+      "sha256": "d390b19bca72679a48fd80ae750793f9fd4b665c4b4f15fce5119868504fcd01"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/runtime.py",
+      "sha256": "c3c931faa73c00e01892ee242021927b799c2a2af6309cb3801c7c38e33dee4a"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_decode/validation.py",
+      "sha256": "78970115120b4e4ed3cf5d9db7a5a40de138a3399d389056ecc060837551a5a7"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_prefill/kernels/p001_prefill_kmeans.py",
+      "sha256": "d151ef60ebb43d62db017293c315bf0ea7805670b8a5f8d8d0c960435397a181"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_prefill/kernels/p001_prefill_teams.py",
+      "sha256": "15c296220447e5c900531e92947f0a4fb6630837dfc70c4092ca77df1232665f"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_prefill/prefill_algorithmic_validation.py",
+      "sha256": "a4b44d4b3c84230c61617e7b8625e9057162d9c311ecd01c07069360ce8af47a"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_prefill/prefill_kmeans.py",
+      "sha256": "d80bc179fbd32cb95bd236a12be60a1b20f7862a9eb7254092ae8c92937cbdf4"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_prefill/prefill_kmeans_ops.py",
+      "sha256": "b2e12211158bfaa706b0f049a66b8c8b411a841264dfe262871b7f62284e565c"
+    },
+    {
+      "path": "src/santapp_ruler/attention/triton_prefill/prefill_teams.py",
+      "sha256": "5ccff52261b21cb6948f3bd914e1b6bfc4c7c081646115d9848d18cf48e23b64"
+    }
+  ]
+}

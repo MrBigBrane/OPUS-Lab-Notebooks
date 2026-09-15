@@ -1,5 +1,2 @@
 Model	Overall	Easy	Hard	Short	Medium	Long	Extracted_Rate	Correct/Total
-sdpa	35.8	54.5	27.4	34.0	100.0	0.0	96.2%	38/106
-hierarchical-128	33.0	48.5	26.0	31.1	100.0	0.0	96.2%	35/106
-hierarchical-256	37.7	48.5	32.9	35.9	100.0	0.0	97.2%	40/106
-hierarchical-512	37.7	48.5	32.9	36.9	66.7	0.0	94.3%	40/106
+hierarchical-1024	10.1%	21.7%	30.2%	27.8%	16.7%	N/A	36.8%	51/503

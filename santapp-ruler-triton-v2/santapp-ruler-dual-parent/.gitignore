@@ -1,0 +1,23 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.venv/
+.env
+.vscode/
+.idea/
+build/
+dist/
+runs/
+results/
+cache/
+hf_cache/
+*.log
+*.zip
+*.tar
+*.tar.gz
+local-smoke-results/
+
+# Local container smoke artifacts (not experiment inputs)
+.local-smoke-artifacts/

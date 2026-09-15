@@ -1,0 +1,23 @@
+{
+  "integration": "R006 grouped decode, deliberately not a verbatim v016 K31 transplant",
+  "donor_archive_sha256": "f9fa0356021a3a768cc8462eb92a499ad694b413a284608f7307621c4e695442",
+  "donor_files": {
+    "src/santapp_team_triton/packing.py": "64038762d1495235a158296f2e15faf2302a8acd1d138427a908be7f7865e693",
+    "src/santapp_team_triton/kernels/v010_compact_span_fixed_split_attention.py": "4703a4197d0b2e0efefb9ab0ff013a013bf37ad7c8471e3aa22c71da029f67c7",
+    "src/santapp_team_triton/kernels/v012_scalar_attention.py": "73ea872a2fdb289a19d1834516e0883d02258ae3b4c3f471355228414e83a150",
+    "src/santapp_team_triton/kernels/v016_native_leaders.py": "90a4fc34d7215adb8e7d33ef003fe2747151d9018f33b830a1cc4eb5c4111ed5"
+  },
+  "modified_original_files": {
+    "src/santapp_ruler/attention/traffic.py": {
+      "previous_sha256": "3a6b20d3729e1caa653c32b0a1634c687044506404dfdd7017dbdd7dc110556b",
+      "sha256": "575a66f1b2abc474b98837b0b7cba2943b8b5937038e480016fa33c0aada1827",
+      "reason": "R006 grouped decoder integration; reference estimators retained"
+    },
+    "src/santapp_ruler/attention/qwen.py": {
+      "previous_sha256": "1005b78cb18e15cd97ef742642acd0f00cdafa7c4f8c4ab68f7e48fb3ef6efbb",
+      "sha256": "c10ada2d25a6ebd491c31b90d99be2e0b75bb5593ab59e480f0179dd240bf06e",
+      "reason": "R006 grouped decoder integration; reference estimators retained"
+    }
+  },
+  "gpu_validation": "pending user-run CUDA gates"
+}

@@ -1,0 +1,19 @@
+SDPA, SANTA, and Dual-Parent SANTA++ RULER Benchmark Harness
+Copyright 2026 project contributors
+
+RULER task names, generation budgets, prediction post-processing, and the
+vendored synthetic grader are derived from NVIDIA/RULER at the pinned commit
+recorded in src/santapp_ruler/ruler/provenance.py. NVIDIA does not endorse this
+project.
+
+R004 vendors the P001 native prefill kernels and launchers from the supplied
+SANTA-Triton source archive (Apache-2.0), plus its untimed algorithmic validator.
+Exact source hashes and integration-only edits are recorded in
+ docs/TRITON_PREFILL_PROVENANCE.json. R004 did not vendor a decode kernel or third-party binary. Triton itself remains an external MIT-licensed dependency.
+
+R006 adds a v16-inspired grouped decoder based on the supplied SANTA-Triton
+Apache-2.0 source: native leaders, Philox identity, compact-span/online-softmax
+contracts and packed-cache refresh. New route, flexible batched top-K integration,
+prefix binary search and diagnostics replace K31-only machinery. Donor hashes
+and approved integration edits are recorded in docs/GROUPED_DECODE_PROVENANCE.json.
+No third-party compiled binaries or GPU benchmark results are shipped.

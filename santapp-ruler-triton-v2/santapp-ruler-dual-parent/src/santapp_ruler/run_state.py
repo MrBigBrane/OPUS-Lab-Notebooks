@@ -1,0 +1,113 @@
+"""Run-directory safety and deterministic selection-manifest handling."""
+
+from __future__ import annotations
+
+from collections.abc import Iterable, Mapping
+from pathlib import Path
+
+import yaml
+
+from .config import RunConfig, load_config, save_config
+from .data import RulerExample, flatten_selected, write_selection_manifest
+from .reporting import read_jsonl
+
+
+def _result_identity(config: RunConfig) -> dict:
+    """Return fields that must not change within one prediction directory."""
+    value = config.to_dict()
+    output = value.pop("output")
+    # Storage location and resume behavior do not change generated results.
+    # Whether prompts are present in the manifest does change its schema.
+    value["output"] = {
+        "save_full_prompts": output["save_full_prompts"],
+        "save_prediction_inputs": output["save_prediction_inputs"],
+    }
+    return value
+
+
+def prediction_files(run_dir: str | Path) -> list[Path]:
+    root = Path(run_dir) / "predictions"
+    return sorted(root.glob("*/*.jsonl")) if root.is_dir() else []
+
+
+def prepare_run_directory(config: RunConfig, run_dir: str | Path) -> Path:
+    """Create or validate a run directory before any output is modified.
+
+    Resuming with a changed model, task selection, generation budget, SANTA
+    parameter, or attention variant would silently mix incompatible rows. This
+    guard refuses that state. ``resume=false`` also refuses an existing
+    prediction directory rather than deleting or duplicating rows.
+    """
+    run_dir = Path(run_dir)
+    run_dir.mkdir(parents=True, exist_ok=True)
+    config_path = run_dir / "config.resolved.yaml"
+    existing_predictions = prediction_files(run_dir)
+
+    if config_path.is_file():
+        # Pre-R004 resolved configs predate the dispatch fields and were Torch.
+        # Do not reinterpret old prediction files using R005's new Triton default.
+        raw = yaml.safe_load(config_path.read_text(encoding="utf-8")) or {}
+        legacy_overrides = [f"{name}.prefill_backend=torch"
+                            for name in ("santapp", "hierarchical")
+                            if "prefill_backend" not in (raw.get(name) or {})]
+        # R006 native fits were sequential. Do not relabel an old result directory
+        # as batched merely because the new field defaults to eight on load.
+        old_santapp = raw.get("santapp") or {}
+        if (old_santapp.get("prefill_backend") == "triton"
+                and "santapp" in (raw.get("generation") or {}).get("backends", [])
+                and "fit_batch_size" not in (old_santapp.get("kmeans") or {})
+                and config.santapp.prefill_backend == "triton"):
+            raise ValueError("Existing native K-means results predate batched fits. "
+                             "Use a new run directory for R007; old outputs were not changed.")
+        existing = load_config(config_path, overrides=legacy_overrides)
+        if _result_identity(existing) != _result_identity(config):
+            raise ValueError(
+                "The run directory already contains a different resolved "
+                "benchmark configuration. Use a new --run-dir, or remove the "
+                f"existing directory deliberately: {run_dir}"
+            )
+    elif existing_predictions:
+        raise ValueError(
+            "Prediction files exist without config.resolved.yaml, so safe resume "
+            f"is impossible: {run_dir}"
+        )
+    else:
+        save_config(config, config_path)
+
+    if existing_predictions and not config.output.resume:
+        raise FileExistsError(
+            "output.resume=false was requested, but prediction JSONL already "
+            f"exists under {run_dir}. Use a new --run-dir instead of mixing rows."
+        )
+    return run_dir
+
+
+def validate_or_write_selection_manifest(
+    selected: Mapping[str, list[RulerExample]],
+    tasks: Iterable[str],
+    path: str | Path,
+    *,
+    include_prompts: bool,
+) -> None:
+    """Ensure a resumed run uses exactly the original selected prompt rows."""
+    path = Path(path)
+    task_order = list(tasks)
+    expected = [
+        example.to_manifest_record(include_prompt=include_prompts)
+        for example in flatten_selected(selected, task_order)
+    ]
+    if path.is_file():
+        existing = read_jsonl(path)
+        if existing != expected:
+            raise ValueError(
+                "The newly selected prompt manifest differs from the existing "
+                f"run manifest: {path}. The data source may have changed; use a "
+                "new run directory."
+            )
+        return
+    write_selection_manifest(
+        selected,
+        task_order,
+        path,
+        include_prompts=include_prompts,
+    )

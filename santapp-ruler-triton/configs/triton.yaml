@@ -15,7 +15,7 @@ benchmark:
   selection_seed: 42
   data:
     source: huggingface
-    repository: MrBigBrane/longbench-v2-short
+    repository: MrBigBrane/longbench-v2-32k
     revision: main
 
 generation:

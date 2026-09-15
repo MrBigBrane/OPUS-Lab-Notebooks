@@ -1,0 +1,44 @@
+R007 / package 1.5.0 local authoring checks
+Base: supplied R006 grouped-decode repository.
+Python: 3.13.5. PyTorch: 2.10.0+cpu. CUDA available: False.
+Full pytest: 264 passed, 69 skipped (42 prior prefill, 13 prior decoder, 14 new batched GPU tests).
+Python 3.11 syntax: all 84 source/script/test Python files parsed successfully.
+R007 manifests: 9 YAML documents; 24 indices; matrix parallelism 8; A10-only GPU affinity.
+R006 preservation: 18 protected files and 11 estimator/helper method ASTs unchanged.
+PowerShell: reviewed only; no PowerShell runtime available.
+Docker/Kubernetes: not executed here.
+Triton offline compilation: not executed here (Triton unavailable).
+GPU numerical correctness, model memory and utilization: NOT measured in this environment.
+Mandatory A10 compile/kernel/canary/matrix rollout must supply those acceptance results.
+
+Exact pytest output:
+................................ssssssssssssss.......................... [ 21%]
+.............................................sssssssssssss.............. [ 43%]
+........................................................................ [ 64%]
+........................................................................ [ 86%]
+...ssssssssssssssssssssssssssssssssssssssssss                            [100%]
+=========================== short test summary info ============================
+SKIPPED [1] tests/test_batched_kmeans_gpu.py:26: CUDA required
+SKIPPED [1] tests/test_batched_kmeans_gpu.py:46: CUDA required
+SKIPPED [1] tests/test_batched_kmeans_gpu.py:72: CUDA required
+SKIPPED [6] tests/test_batched_kmeans_gpu.py:90: CUDA required
+SKIPPED [3] tests/test_batched_kmeans_gpu.py:110: CUDA required
+SKIPPED [2] tests/test_batched_kmeans_gpu.py:124: CUDA required
+SKIPPED [6] tests/test_grouped_decode_gpu.py:10: CUDA required
+SKIPPED [4] tests/test_grouped_decode_gpu.py:15: CUDA required
+SKIPPED [1] tests/test_grouped_decode_gpu.py:20: CUDA required
+SKIPPED [2] tests/test_grouped_decode_gpu.py:24: CUDA required
+SKIPPED [9] tests/test_triton_prefill_gpu.py:36: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [11] tests/test_triton_prefill_gpu.py:49: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:58: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:67: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:75: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:81: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:89: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:122: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:134: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:146: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [2] tests/test_triton_prefill_gpu.py:154: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:180: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:185: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+264 passed, 69 skipped in 24.60s

@@ -8,14 +8,14 @@ model:
   disable_hf_xet: true
   prompt_format: chat_template
 benchmark:
-  context_length: 34000
+  context_length: 40000
   tasks:
-  - longbench_v2_cot
-  prompts_per_task: 106
+  - longbench-short
+  prompts_per_task: 503
   selection_seed: 42
   data:
     source: huggingface
-    repository: MrBigBrane/LongBench-v2-32k-CoT
+    repository: MrBigBrane/longbench-v2-32k
     revision: main
     local_root: null
     subset: validation
@@ -26,11 +26,11 @@ generation:
   max_new_tokens: 256
   random_seed: 0
 santa:
-  samples_per_head: 128
+  samples_per_head: 1024
 santapp:
   parent_size: 16
   representatives_per_parent: 4
-  samples_per_head: 512
+  samples_per_head: 1024
   kmeans:
     batch_size: 4096
     n_init: 1
@@ -40,17 +40,19 @@ santapp:
     init_size: null
     reassignment_ratio: 0.01
     random_state: 0
+  prefill_backend: triton
 hierarchical:
+  prefill_backend: triton
   parent_size: 16
   representatives_per_parent: 4
   samples_per_head: 128
 grading:
-  bootstrap_resamples: 1000
+  bootstrap_resamples: 10000
   confidence_level: 0.95
   bootstrap_seed: 20260903
 output:
-  root: /results
+  root: runs
   run_name: null
   resume: true
-  save_full_prompts: false
-  save_prediction_inputs: false
+  save_full_prompts: true
+  save_prediction_inputs: true

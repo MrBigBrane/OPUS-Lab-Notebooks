@@ -1,0 +1,43 @@
+R006 authoring-environment checks, 2026-09-12
+Python: 3.13.5
+PyTorch: 2.10.0+cpu
+CUDA available: False
+CPU/static tests: 232 passed; 55 GPU-dependent cases skipped.
+Python 3.11 syntax parsing: 72 Python files passed.
+Shell syntax: 1 scripts passed bash -n.
+Rendered YAML: 9 documents parsed and validated; all image references match.
+Matrix: 24 unique context/budget/parent-policy cases; parallelism=1.
+Nominal budgets: 128,256,512,1024,2048,4096.
+Requested team counts: 32,64,128,256,512,1024.
+Contexts: 8192,32768. Parent methods: hierarchical,santapp.
+All rendered containers: CPU/RAM requests equal limits.
+Temporary copy Pod: CPU only; 1800-second deadline.
+Triton compilation: NOT RUN here; supplied CPU-only cluster gate is required.
+CUDA kernels / full model / peak VRAM / utilization: NOT RUN here.
+Docker build / Kubernetes submission / PowerShell execution: NOT RUN here.
+PowerShell source reviewed; no Windows interpreter was available here.
+Existing numerical prefill/reference estimator preservation: covered by CPU tests.
+
+.......................................................................s [ 25%]
+ssssssssssss............................................................ [ 50%]
+........................................................................ [ 75%]
+.............................ssssssssssssssssssssssssssssssssssssssssss  [100%]
+=========================== short test summary info ============================
+SKIPPED [6] tests/test_grouped_decode_gpu.py:10: CUDA required
+SKIPPED [4] tests/test_grouped_decode_gpu.py:15: CUDA required
+SKIPPED [1] tests/test_grouped_decode_gpu.py:20: CUDA required
+SKIPPED [2] tests/test_grouped_decode_gpu.py:24: CUDA required
+SKIPPED [9] tests/test_triton_prefill_gpu.py:36: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [11] tests/test_triton_prefill_gpu.py:49: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:58: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:67: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:75: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:81: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:89: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:122: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [3] tests/test_triton_prefill_gpu.py:134: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:146: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [2] tests/test_triton_prefill_gpu.py:154: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:180: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+SKIPPED [1] tests/test_triton_prefill_gpu.py:185: GPU execution requires SANTAPP_RUN_PREFILL_GPU_TESTS=1
+232 passed, 55 skipped in 26.55s
